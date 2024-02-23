@@ -139,7 +139,6 @@ Partial Class temporaryFrmReceipt
         '
         Me.colTotalPaid.HeaderText = "Total Paid"
         Me.colTotalPaid.Name = "colTotalPaid"
-        Me.colTotalPaid.ReadOnly = True
         '
         'colBalance
         '
@@ -159,7 +158,6 @@ Partial Class temporaryFrmReceipt
         '
         Me.colDiscountAmt.HeaderText = "Discount Amont"
         Me.colDiscountAmt.Name = "colDiscountAmt"
-        Me.colDiscountAmt.ReadOnly = True
         '
         'colDiscount
         '
@@ -320,7 +318,6 @@ Partial Class temporaryFrmReceipt
         'cmbPaymentMode
         '
         Me.cmbPaymentMode.FormattingEnabled = True
-        Me.cmbPaymentMode.Items.AddRange(New Object() {"Cash", "Card", "ManagerCash"})
         Me.cmbPaymentMode.Location = New System.Drawing.Point(129, 73)
         Me.cmbPaymentMode.Name = "cmbPaymentMode"
         Me.cmbPaymentMode.Size = New System.Drawing.Size(160, 21)
@@ -516,7 +513,7 @@ Partial Class temporaryFrmReceipt
         'txtT_ID
         '
         Me.txtT_ID.BackColor = System.Drawing.Color.LightSteelBlue
-        Me.txtT_ID.Location = New System.Drawing.Point(819, 473)
+        Me.txtT_ID.Location = New System.Drawing.Point(959, 447)
         Me.txtT_ID.Name = "txtT_ID"
         Me.txtT_ID.Size = New System.Drawing.Size(93, 20)
         Me.txtT_ID.TabIndex = 34
@@ -616,6 +613,12 @@ Partial Class temporaryFrmReceipt
     Friend WithEvents lblCusRemBal As Label
     Friend WithEvents Label14 As Label
     Friend WithEvents lblPending As Label
+    Friend WithEvents btnGetData As Button
+    Friend WithEvents btnDelete As Button
+    Friend WithEvents btnUpdate As Button
+    Friend WithEvents txtT_ID As TextBox
+    Friend WithEvents txtTempAmt As TextBox
+    Friend WithEvents Button1 As Button
     Friend WithEvents colBillNo As DataGridViewTextBoxColumn
     Friend WithEvents colBillDate As DataGridViewTextBoxColumn
     Friend WithEvents colTotalBillAmount As DataGridViewTextBoxColumn
@@ -625,10 +628,4 @@ Partial Class temporaryFrmReceipt
     Friend WithEvents colPay As DataGridViewCheckBoxColumn
     Friend WithEvents colDiscountAmt As DataGridViewTextBoxColumn
     Friend WithEvents colDiscount As DataGridViewCheckBoxColumn
-    Friend WithEvents btnGetData As Button
-    Friend WithEvents btnDelete As Button
-    Friend WithEvents btnUpdate As Button
-    Friend WithEvents txtT_ID As TextBox
-    Friend WithEvents txtTempAmt As TextBox
-    Friend WithEvents Button1 As Button
 End Class

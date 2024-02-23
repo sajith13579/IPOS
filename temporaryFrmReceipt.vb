@@ -6,9 +6,11 @@ Public Class temporaryFrmReceipt
         If txtCustID IsNot Nothing Then
             txtCustID.Visible = False
         End If
-        cmbPaymentMode.SelectedIndex = 0
+
         txtTransactionAmount.Text = "0"
         toal_pend = 0
+        fillPaymentMode(cmbPaymentMode)
+        cmbPaymentMode.SelectedIndex = 0
     End Sub
 
     Private Sub bttnSelection_Click(sender As Object, e As EventArgs) Handles bttnSelection.Click
@@ -109,7 +111,7 @@ Public Class temporaryFrmReceipt
         End If
         DataGridView1.Rows.Clear()
         Dim conn As New SqlConnection(connection)
-        Dim query As String = "SELECT LedgerNo, Date, Debit FROM ledgerBookNew   WHERE PartyID = @PartyID"
+        Dim query As String = "SELECT LedgerNo, Date, Debit FROM ledgerBookNew   WHERE PartyID = @PartyID and LedgerGroup='Current Asset'"
 
         conn.Open()
         Dim cmd As New SqlCommand(query, conn)
@@ -129,7 +131,10 @@ Public Class temporaryFrmReceipt
             Dim accountNumber As String = txtAccountNo.Text
             Dim numericPart As Integer = accountNumber.Substring(accountNumber.IndexOf("_") + 1)
 
-            Dim queryy As String = "select Amount,Discount from CreditCustomerPayment WHERE CreditCustomer_ID=" & numericPart & " "
+            Dim queryy As String = "SELECT ab.Amount, abd.Discount " &
+                       "FROM AgainstBilltb ab " &
+                       "JOIN AgainstBillDiscount abd ON ab.InvoiceNo = abd.InvoiceNo " &
+                       "WHERE ab.InvoiceNo ='" & _billno & "' "
             Dim cmdd As New SqlCommand(queryy, conn)
             Dim readerr As SqlDataReader = cmdd.ExecuteReader()
             While readerr.Read()
@@ -147,6 +152,7 @@ Public Class temporaryFrmReceipt
             DataGridView1.Rows(rowIndex).Cells("colTotalAmount").Value = pend_amt
         End While
         conn.Close()
+        txtT_ID.Text = cusId
     End Sub
 
     Public Sub checkbx_already()
@@ -189,7 +195,7 @@ Public Class temporaryFrmReceipt
 
             ' Check if the pay checkbox is checked
             If Convert.ToBoolean(cell.Value) Then
-                DataGridView1.Rows(e.RowIndex).Cells("colTotalPaid").ReadOnly = False
+                'DataGridView1.Rows(e.RowIndex).Cells("colTotalPaid").ReadOnly = False
 
                 If Convert.ToDecimal(txtTransactionAmount.Text) = 0 Then
                     MessageBox.Show("Transation amount is zero check again")
@@ -289,7 +295,7 @@ Public Class temporaryFrmReceipt
             DataGridView1.CommitEdit(DataGridViewDataErrorContexts.Commit)
             ' Check if the Discount checkbox is checked
             If Convert.ToBoolean(cell.Value) Then
-                DataGridView1.Rows(e.RowIndex).Cells("colDiscountAmt").ReadOnly = False
+                'DataGridView1.Rows(e.RowIndex).Cells("colDiscountAmt").ReadOnly = False
                 DataGridView1.Rows(e.RowIndex).Cells("colDiscountAmt").Value = grid_col_dis_amt
                 ' Checkbox is checked, subtract the value from TextBox from "TotalAmount"
                 Dim total_di_bal As Decimal
@@ -384,11 +390,7 @@ Public Class temporaryFrmReceipt
 
             tran_id_get = txtAccountNo.Text + "-" + txtTransactionNo.Text
             'insert value into creditcustomerPayment
-            Dim query_cr_pay As String = "insert into CreditCustomerPayment(TransactionID,
-                                Date,PaymentMode, CreditCustomer_ID, Amount,Remarks,
-                                PaymentModeDetails,Discount,PaymentModeId) 
-                                VALUES (@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10)"
-            Execute_cr_pay(query_cr_pay)
+
 
             'Find total amount sum receipt datagridviewtable
             Dim total_sum As Decimal = 0
@@ -467,11 +469,18 @@ Public Class temporaryFrmReceipt
                     Dim AccountId As Object = cmd.ExecuteScalar()
                     con.Close()
 
+                    'insert value into creditcustomerpayment
+                    Dim query_cr_pay As String = "insert into CreditCustomerPayment(TransactionID,
+                                Date,PaymentMode, CreditCustomer_ID, Amount,Remarks,
+                                PaymentModeDetails,Discount,PaymentModeId) 
+                                VALUES (@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10)"
+                    Execute_cr_pay(query_cr_pay)
+
                     'insert value into AgainstBillTB
                     con = New SqlConnection(connection)
                     con.Open()
-                    Dim str6 As String = "Insert into AgainstBillTb(VoucherTypeId,AccountId,AccountName,Amount,BillId,VoucherDate,IsDelete,InvoiceNo,TransactionId) 
-                            VALUES (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9)"
+                    Dim str6 As String = "Insert into AgainstBillTb(VoucherTypeId,AccountId,AccountName,Amount,BillId,VoucherDate,IsDelete,InvoiceNo,TransactionId,vouchertype) 
+                            VALUES (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10)"
                     cmd = New SqlCommand(str6)
                     cmd.Parameters.AddWithValue("@d1", VoucherTypeID) 'Vouchertypeid
                     cmd.Parameters.AddWithValue("@d2", AccountId) 'Accountid
@@ -482,7 +491,8 @@ Public Class temporaryFrmReceipt
                     cmd.Parameters.AddWithValue("@d6", dtpTranactionDate.Value.Date) 'Voucher date
                     cmd.Parameters.AddWithValue("@d7", False)  'isdelete
                     cmd.Parameters.AddWithValue("@d8", bill_no) 'invoice number
-                    cmd.Parameters.AddWithValue("@d9", txtTransactionNo.Text) 'Transaction id
+                    cmd.Parameters.AddWithValue("@d9", tran_id_get) 'Transaction id
+                    cmd.Parameters.AddWithValue("@d10", "Credit Customer") 'Transaction id
                     cmd.CommandText = str6
                     cmd.Connection = con
                     cmd.ExecuteNonQuery()
@@ -490,22 +500,26 @@ Public Class temporaryFrmReceipt
 
                     'if the discout checkbox is checked insert value into AgainstDiscount
                     If CBool(row.Cells("colDiscount").Value) AndAlso grid_dic_amt > 0 Then
-                        Dim str5 As String = "Insert into AgainstBillDiscount(VoucherTypeId,AccountId,AccountName,Discount,BillId,VoucherDate,IsDelete,InvoiceNo,TransactionId) 
-                            VALUES (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9)"
+                        con = New SqlConnection(connection)
+                        con.Open()
+                        Dim str5 As String = "Insert into AgainstBillDiscount(VoucherTypeId,AccountId,AccountName,Discount,BillId,VoucherDate,IsDelete,InvoiceNo,TransactionId,vouchertype) 
+                            VALUES (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10)"
                         cmd = New SqlCommand(str5)
                         cmd.Parameters.AddWithValue("@d1", VoucherTypeID)
                         cmd.Parameters.AddWithValue("@d2", AccountId)
                         'cmd.Parameters.AddWithValue("@d2", 5)
                         cmd.Parameters.AddWithValue("@d3", txtCustomerName.Text)
-                        cmd.Parameters.AddWithValue("@d4", 0)
+                        cmd.Parameters.AddWithValue("@d4", grid_dic_amt)
                         cmd.Parameters.AddWithValue("@d5", billId)
                         cmd.Parameters.AddWithValue("@d6", dtpTranactionDate.Value.Date)
                         cmd.Parameters.AddWithValue("@d7", False)
                         cmd.Parameters.AddWithValue("@d8", bill_no)
-                        cmd.Parameters.AddWithValue("@d9", txtTransactionNo.Text)
+                        cmd.Parameters.AddWithValue("@d9", tran_id_get)
+                        cmd.Parameters.AddWithValue("@d10", "Credit Customer")
                         cmd.CommandText = str5
                         cmd.Connection = con
                         cmd.ExecuteNonQuery()
+                        con.Close()
                     End If
                     con = New SqlConnection(connection)
                     con.Open()
@@ -516,43 +530,20 @@ Public Class temporaryFrmReceipt
                     Dim PaymentModeAccountId As Integer = cmd.ExecuteScalar()
                     con.Close()
                     'insert ledgerbooknew credit part 0
-                    LedgerBookCreateNew(datee, pymode, name, "Receipt", bill_no, Deb_or_Cr_amt, 0, "", myBranchId, "CurrentAssets", PaymentModeAccountId, 5)
-                    LedgerBookCreateNew(datee, name, pymode, "Receipt", bill_no, 0, Deb_or_Cr_amt, txtAccountNo.Text, myBranchId, "SUNDRY DEBTORS", AccountId, 19)
+                    LedgerBookCreateNew(datee, pymode, name, "Receipt", tran_id_get, Deb_or_Cr_amt, 0, "", myBranchId, "CurrentAssets", PaymentModeAccountId, 5)
+                    LedgerBookCreateNew(datee, name, pymode, "Receipt", tran_id_get, 0, Deb_or_Cr_amt, txtAccountNo.Text, myBranchId, "SUNDRY DEBTORS", AccountId, 19)
 
                     If CBool(row.Cells("colDiscount").Value) AndAlso grid_dic_amt > 0 Then
-                        LedgerBookCreateNew(datee, "ReceiptDiscount", name, "Receipt", txtTransactionNo.Text, grid_dic_amt, 0, "", myBranchId, "Indirect Expense Account", "", 11)
-                        LedgerBookCreateNew(datee, "ReceiptDiscount", cmbPaymentMode.Text, "Receipt", txtTransactionNo.Text, 0, grid_dic_amt, AccountId, myBranchId, "OtherRevenue", 41, 40)
+                        LedgerBookCreateNew(datee, "ReceiptDiscount", name, "Receipt", tran_id_get, grid_dic_amt, 0, "", myBranchId, "Indirect Expense Account", 0, 11)
+                        LedgerBookCreateNew(datee, "ReceiptDiscount", cmbPaymentMode.Text, "Receipt", tran_id_get, 0, grid_dic_amt, AccountId, myBranchId, "OtherRevenue", 41, 40)
                     End If
-
-                    Dim query As String = "insert into ledgerBookNew" &
-                    "(Date,Name,AccLedger, Label,LedgerNo,Debit,Credit,BranchId,LedgerGroup,FinID,Operator,PartyID)" &
-                    "values('" & datee & "','" & pymode & "'," &
-                    " '" & name & "', '" & labell & "', '" & bill_no & "' , '" & Deb_or_Cr_amt & "' , " &
-                    " '" & zer_val & "', '" & MyBranch & "', '" & "Current Asset" & "', '" & finyearId & "','" & MyUserId & "','" & trans_num & "')"
-
-                        Executequery(query)
-                        Dim query2 As String = "insert into ledgerBookNew" &
-                    "(Date,Name,AccLedger,Label,LedgerNo,Debit,Credit,BranchId,LedgerGroup,FinID,Operator,PartyID)" &
-                    "values('" & datee & "','" & name & "'," &
-                     " '" & pymode & "', '" & labell & "', '" & bill_no & "' , '" & zer_val & "' , " &
-                     " '" & Deb_or_Cr_amt & "', '" & MyBranch & "', '" & "SUNDRY DEBTORS" & "' ,'" & finyearId & "','" & MyUserId & "','" & trans_num & "')"
-                        Executequery(query2)
-                        If grid_dic_amt > 0 Then
-                            'first row
-                            Dim query_dic1 As String = "insert into ledgerBookNew" &
-                        "(Date,Name,AccLedger,Label,LedgerNo,Debit,Credit,BranchId,LedgerGroup,FinID,Operator,PartyID)" &
-                        "values('" & datee & "','" & "CustomerDiscount" & "'," &
-                         " '" & pymode & "', '" & labell & "', '" & bill_no & "' , '" & zer_val & "' , " &
-                         " '" & grid_dic_amt & "', '" & MyBranch & "', '" & "Sales" & "' ,'" & finyearId & "','" & MyUserId & "','" & trans_num & "')"
-                            Executequery(query_dic1)
-                            'second row
-
-                        End If
-                    End If
+                End If
             Next
             'payment mode id fetch from accoun
         End If
         Reset()
+        LogFunc(Mode1Class.lbluser1, "Added the new Receipt having
+                            Transaction No " & txtTransactionNo.Text & " ")
         MessageBox.Show("Completed")
     End Sub
 

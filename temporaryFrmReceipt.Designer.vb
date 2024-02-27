@@ -24,6 +24,7 @@ Partial Class temporaryFrmReceipt
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(temporaryFrmReceipt))
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.bttnPaind = New System.Windows.Forms.Button()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.colBillNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -72,7 +73,6 @@ Partial Class temporaryFrmReceipt
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.txtT_ID = New System.Windows.Forms.TextBox()
         Me.txtTempAmt = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.Panel2.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpSupplierInfo.SuspendLayout()
@@ -82,11 +82,21 @@ Partial Class temporaryFrmReceipt
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.DodgerBlue
+        Me.Panel2.Controls.Add(Me.bttnPaind)
         Me.Panel2.Controls.Add(Me.Label12)
         Me.Panel2.Location = New System.Drawing.Point(-1, -1)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(1066, 41)
         Me.Panel2.TabIndex = 14
+        '
+        'bttnPaind
+        '
+        Me.bttnPaind.Location = New System.Drawing.Point(105, 6)
+        Me.bttnPaind.Name = "bttnPaind"
+        Me.bttnPaind.Size = New System.Drawing.Size(45, 23)
+        Me.bttnPaind.TabIndex = 1
+        Me.bttnPaind.Text = "bttnPaid"
+        Me.bttnPaind.UseVisualStyleBackColor = True
         '
         'Label12
         '
@@ -106,9 +116,9 @@ Partial Class temporaryFrmReceipt
         Me.DataGridView1.BackgroundColor = System.Drawing.Color.LightSteelBlue
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colBillNo, Me.colBillDate, Me.colTotalBillAmount, Me.colTotalAmount, Me.colTotalPaid, Me.colBalance, Me.colPay, Me.colDiscountAmt, Me.colDiscount})
-        Me.DataGridView1.Location = New System.Drawing.Point(303, 61)
+        Me.DataGridView1.Location = New System.Drawing.Point(300, 59)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(762, 382)
+        Me.DataGridView1.Size = New System.Drawing.Size(621, 382)
         Me.DataGridView1.TabIndex = 15
         '
         'colBillNo
@@ -461,7 +471,7 @@ Partial Class temporaryFrmReceipt
         '
         Me.lblPending.AutoSize = True
         Me.lblPending.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPending.Location = New System.Drawing.Point(792, 493)
+        Me.lblPending.Location = New System.Drawing.Point(740, 499)
         Me.lblPending.Name = "lblPending"
         Me.lblPending.Size = New System.Drawing.Size(0, 18)
         Me.lblPending.TabIndex = 30
@@ -528,22 +538,12 @@ Partial Class temporaryFrmReceipt
         Me.txtTempAmt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtTempAmt.Visible = False
         '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(919, 450)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(34, 23)
-        Me.Button1.TabIndex = 36
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'temporaryFrmReceipt
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.LightSteelBlue
-        Me.ClientSize = New System.Drawing.Size(1077, 520)
-        Me.Controls.Add(Me.Button1)
+        Me.ClientSize = New System.Drawing.Size(1012, 520)
         Me.Controls.Add(Me.txtTempAmt)
         Me.Controls.Add(Me.txtT_ID)
         Me.Controls.Add(Me.btnDelete)
@@ -618,7 +618,6 @@ Partial Class temporaryFrmReceipt
     Friend WithEvents btnUpdate As Button
     Friend WithEvents txtT_ID As TextBox
     Friend WithEvents txtTempAmt As TextBox
-    Friend WithEvents Button1 As Button
     Friend WithEvents colBillNo As DataGridViewTextBoxColumn
     Friend WithEvents colBillDate As DataGridViewTextBoxColumn
     Friend WithEvents colTotalBillAmount As DataGridViewTextBoxColumn
@@ -628,4 +627,5 @@ Partial Class temporaryFrmReceipt
     Friend WithEvents colPay As DataGridViewCheckBoxColumn
     Friend WithEvents colDiscountAmt As DataGridViewTextBoxColumn
     Friend WithEvents colDiscount As DataGridViewCheckBoxColumn
+    Friend WithEvents bttnPaind As Button
 End Class

@@ -268,7 +268,7 @@ Public Class temporaryFrmReceipt
 
 
 
-            ' Check if the pay checkbox is checked
+            ' Check if the pay_checkbox is checked
             If Convert.ToBoolean(cell.Value) Then
                 Dim paid_colm As Object = DataGridView1.Rows(e.RowIndex).Cells("colTotalPaid").Value
 
@@ -294,8 +294,10 @@ Public Class temporaryFrmReceipt
                         rem_bal = grid_col_total_amt - paidAmount
                         DataGridView1.Rows(e.RowIndex).Cells("colBalance").Value = rem_bal
                         'DataGridView1.Rows(e.RowIndex).Cells("colTotalPaid").Value = tamount
-                        tamount = tamount - paidAmount
-                        lblCusRemBal.Text = "Customer remaining amount is " + Convert.ToString(tamount)
+                        'tamount = tamount - paidAmount
+                        'lblCusRemBal.Text = "Customer remaining amount is " + Convert.ToString(tamount)
+                        tamount = rem_bal_sum()
+                        rem_bal_lbl(tamount)
                     End If
 
                 Else
@@ -314,60 +316,25 @@ Public Class temporaryFrmReceipt
 
                         DataGridView1.Rows(e.RowIndex).Cells("colBalance").Value = 0
                         DataGridView1.Rows(e.RowIndex).Cells("colTotalPaid").Value = pend_amt
-                        tamount = tamount - pend_amt
-                        lblCusRemBal.Text = "Customer remaining amount is " + Convert.ToString(tamount)
-                    End If
-                End If
-
-
-                'upd part 1 paycheckbox checked time
-                If receipt_upd Then
-                    tamount = Convert.ToDecimal(txtTransactionAmount.Text)
-                    'paid_col_upd = Convert.ToDecimal(paid_col_upd) + Convert.ToDecimal(DataGridView1.Rows(e.RowIndex).Cells("colTotalPaid").Value)
-                    'paid_colm = Convert.ToDecimal(paid_colm)
-                    Dim grid_paid As Decimal = rem_bal_sum()
-                    If tamount > grid_paid Then
-                        tamount = tamount - grid_paid
-                        rem_bal_lbl(tamount)
-                    Else
-                        tamount = grid_paid - tamount
+                        'tamount = tamount - pend_amt
+                        tamount = rem_bal_sum()
                         rem_bal_lbl(tamount)
                     End If
                 End If
 
                 ' Checkbox is checked, subtract the value from TextBox from "TotalAmount"
             Else
-                ' Checkbox is unchecked, you can handle this case if needed
+                'pay_checkbox_unchecked, you can handle this case if needed
                 Dim paid_colm As Object
-
-                'update part 2 paycheckbox uncheck time
-                If receipt_upd Then
-                    paid_colm = DataGridView1.Rows(e.RowIndex).Cells("colTotalPaid").Value
-                    paid_colm = Convert.ToDecimal(paid_colm)
-                    If tamount > paid_colm Then
-                        tamount = tamount - paid_colm
-                    Else
-                        tamount = paid_colm - tamount
-                    End If
-
-                    lblCusRemBal.Text = "Customer remaining amount is " + Convert.ToString(tamount)
-                    DataGridView1.Rows(e.RowIndex).Cells("colBalance").Value = String.Empty
-                    DataGridView1.Rows(e.RowIndex).Cells("colTotalPaid").Value = String.Empty
-                    DataGridView1.Rows(e.RowIndex).Cells("colDiscountAmt").Value = String.Empty
-                    DataGridView1.Rows(e.RowIndex).Cells("colDiscount").Value = False
-
-                Else
-                    paid_colm = DataGridView1.Rows(e.RowIndex).Cells("colTotalPaid").Value
-                    paid_colm = Convert.ToDecimal(paid_colm)
-                    tamount = tamount + paid_colm
-                    lblCusRemBal.Text = "Customer remaining amount is " + Convert.ToString(tamount)
-                    DataGridView1.Rows(e.RowIndex).Cells("colBalance").Value = String.Empty
-                    DataGridView1.Rows(e.RowIndex).Cells("colTotalPaid").Value = String.Empty
-                    DataGridView1.Rows(e.RowIndex).Cells("colDiscountAmt").Value = String.Empty
-                    DataGridView1.Rows(e.RowIndex).Cells("colDiscount").Value = False
-                End If
-
-
+                paid_colm = DataGridView1.Rows(e.RowIndex).Cells("colTotalPaid").Value
+                paid_colm = Convert.ToDecimal(paid_colm)
+                tamount = rem_bal_sum()
+                rem_bal_lbl(tamount)
+                lblCusRemBal.Text = "Customer remaining amount is " + Convert.ToString(tamount)
+                DataGridView1.Rows(e.RowIndex).Cells("colBalance").Value = String.Empty
+                DataGridView1.Rows(e.RowIndex).Cells("colTotalPaid").Value = String.Empty
+                DataGridView1.Rows(e.RowIndex).Cells("colDiscountAmt").Value = String.Empty
+                DataGridView1.Rows(e.RowIndex).Cells("colDiscount").Value = False
             End If
         End If
 
@@ -399,6 +366,7 @@ Public Class temporaryFrmReceipt
 
             If grid_col_tot_amt > grid_col_balance Then
                 tran_bal_dis_bal_sum = grid_col_tot_paid + grid_col_dis_amt
+                'tran_bal_dis_bal_sum = grid_col_tot_paid
 
             ElseIf grid_col_tot_paid = 0 Then
                 tran_bal_dis_bal_sum = 0
@@ -427,6 +395,8 @@ Public Class temporaryFrmReceipt
                         DataGridView1.Rows(e.RowIndex).Cells("colBalance").Value = totla_Balance_sub
                         'tamount = tamount - grid_col_dis_amt
                         'lblCusRemBal.Text = "Customer remaining amount is " + Convert.ToString(tamount)
+                        tamount = rem_bal_sum()
+                        rem_bal_lbl(tamount)
                     Else
                         MessageBox.Show("Insufficient balance for payment.")
                     End If
@@ -435,51 +405,21 @@ Public Class temporaryFrmReceipt
                     cell.Value = False
                 End If
 
-                'update part 1 Discount checkbox checked time
-                If receipt_upd Then
-                    tamount = Convert.ToDecimal(txtTransactionAmount.Text)
-                    'paid_col_upd = Convert.ToDecimal(paid_col_upd) + Convert.ToDecimal(DataGridView1.Rows(e.RowIndex).Cells("colTotalPaid").Value)
-                    'paid_colm = Convert.ToDecimal(paid_colm)
-                    Dim grid_disc As Decimal = rem_disc_sum()
-                    If tamount > grid_disc Then
-                        tamount = tamount - grid_disc
-                        rem_bal_lbl(tamount)
-                    Else
-                        tamount = grid_disc - tamount
-                        rem_bal_lbl(tamount)
-                    End If
-                End If
             Else
                 ' Checkbox is unchecked, you can handle this case if needed
                 'update bill part 2 discount uncheck time
                 Dim disc_colm As Decimal
-                If receipt_upd Then
-                    disc_colm = DataGridView1.Rows(e.RowIndex).Cells("colDiscount").Value
-                    disc_colm = Convert.ToDecimal(disc_colm)
-                    If tamount > disc_colm Then
-                        tamount = tamount - disc_colm
-                    Else
-                        tamount = disc_colm - tamount
-                    End If
+                'Normal type
+                disc_colm = DataGridView1.Rows(e.RowIndex).Cells("colTotalPaid").Value
+                disc_colm = Convert.ToDecimal(disc_colm)
+                'tamount = tamount + disc_colm
+                tamount = rem_bal_sum()
+                rem_bal_lbl(tamount)
 
-                    lblCusRemBal.Text = "Customer remaining amount is " + Convert.ToString(tamount)
-                    DataGridView1.Rows(e.RowIndex).Cells("colBalance").Value = String.Empty
-                    DataGridView1.Rows(e.RowIndex).Cells("colTotalPaid").Value = String.Empty
-                    DataGridView1.Rows(e.RowIndex).Cells("colDiscountAmt").Value = String.Empty
-                    DataGridView1.Rows(e.RowIndex).Cells("colDiscount").Value = False
-
-                Else
-                    'Normal type
-                    disc_colm = DataGridView1.Rows(e.RowIndex).Cells("colTotalPaid").Value
-                    disc_colm = Convert.ToDecimal(disc_colm)
-                    tamount = tamount + disc_colm
-                    lblCusRemBal.Text = "Customer remaining amount is " + Convert.ToString(tamount)
-                    DataGridView1.Rows(e.RowIndex).Cells("colBalance").Value = String.Empty
-                    DataGridView1.Rows(e.RowIndex).Cells("colTotalPaid").Value = String.Empty
-                    DataGridView1.Rows(e.RowIndex).Cells("colDiscountAmt").Value = String.Empty
-                    DataGridView1.Rows(e.RowIndex).Cells("colDiscount").Value = False
-                End If
-
+                DataGridView1.Rows(e.RowIndex).Cells("colBalance").Value = String.Empty
+                'DataGridView1.Rows(e.RowIndex).Cells("colTotalPaid").Value = String.Empty
+                DataGridView1.Rows(e.RowIndex).Cells("colDiscountAmt").Value = String.Empty
+                DataGridView1.Rows(e.RowIndex).Cells("colDiscount").Value = False
                 Dim Dis_colm As Decimal
                 Try
                     Dis_colm = Convert.ToDecimal(DataGridView1.Rows(e.RowIndex).Cells("colDiscountAmt").Value.ToString())
@@ -504,17 +444,29 @@ Public Class temporaryFrmReceipt
         lblCusRemBal.Text = "Customer remaining amount is " + Convert.ToString(tamount)
     End Sub
 
+    'tamout and remaing_balance_calculation
     Public Function rem_bal_sum() As Decimal
         Dim paid_col_upd As Decimal = 0
+        Dim disc_col_upd As Decimal = 0
+        Dim paid_disc_sum As Decimal = 0
         If DataGridView1.Rows.Count > 0 Then
 
             For Each row As DataGridViewRow In DataGridView1.Rows
                 If row.Cells(6).Value = True Then
-                    paid_col_upd = paid_col_upd + Convert.ToDecimal(row.Cells(4).Value)
+                    If row.Cells(8).Value = True Then
+                        paid_col_upd = paid_col_upd + Convert.ToDecimal(row.Cells(4).Value)
+                        disc_col_upd = paid_col_upd + Convert.ToDecimal(row.Cells(7).Value)
+                        'tamount = Convert.ToDecimal(txtTransactionAmount.Text) - disc_col_upd
+                        paid_disc_sum = tamount
+                    Else
+                        paid_col_upd = paid_col_upd + Convert.ToDecimal(row.Cells(4).Value)
+                        tamount = Convert.ToDecimal(txtTransactionAmount.Text) - paid_col_upd
+                        paid_disc_sum = tamount
+                    End If
                 End If
             Next
         End If
-        Return paid_col_upd
+        Return paid_disc_sum
     End Function
 
     Public Function rem_disc_sum() As Decimal
@@ -553,6 +505,7 @@ Public Class temporaryFrmReceipt
         tamount = 0
     End Sub
     Private Sub bttnSave_Click(sender As Object, e As EventArgs) Handles bttnSave.Click
+        crd_cust_insert = True
         For Each row As DataGridViewRow In DataGridView1.Rows
             Try
                 Dim dic As Decimal = Convert.ToDecimal(row.Cells("colDiscountAmt").Value)
@@ -607,6 +560,9 @@ Public Class temporaryFrmReceipt
 
             'payment save according bill number
             Dim tem_tran_amt = Convert.ToDecimal(txtTransactionAmount.Text)
+            Dim crd_cust_count As Decimal = 1
+
+            'check each datagridview rows and save
             For Each row As DataGridViewRow In DataGridView1.Rows
                 'if the transaction text box value greater than pending amount it will check validation
                 If tran_txt_box_amt > total_sum Then
@@ -621,7 +577,12 @@ Public Class temporaryFrmReceipt
                 'retrive paid amount
                 paid_amt = Convert.ToDecimal(row.Cells("colTotalPaid").Value)
                 'retrive discount amount
-                dic_amt = Convert.ToDecimal(row.Cells("colDiscountAmt").Value)
+                Try
+                    dic_amt = Convert.ToDecimal(row.Cells("colDiscountAmt").Value)
+                Catch ex As Exception
+                    dic_amt = 0
+                End Try
+
 
                 'if enter value into the paid amount in gridview it will check the validation is it greater than pending amount
                 If paid_amt > pend_amt Then
@@ -640,11 +601,14 @@ Public Class temporaryFrmReceipt
 
 
                 'insert value into creditcustomerpayment
-                Dim query_cr_pay As String = "insert into CreditCustomerPayment(TransactionID,
+                If crd_cust_count = 1 Then
+                    Dim query_cr_pay As String = "insert into CreditCustomerPayment(TransactionID,
                                 Date,PaymentMode, CreditCustomer_ID, Amount,Remarks,
                                 PaymentModeDetails,Discount,PaymentModeId) 
                                 VALUES (@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10)"
-                Execute_cr_pay(query_cr_pay)
+                    Execute_cr_pay(query_cr_pay)
+                End If
+
                 ' Check if the row is not a new row and is selected (checked)
                 If Not row.IsNewRow AndAlso CBool(row.Cells("colPay").Value) AndAlso row.Cells("colTotalPaid").Value.ToString() <> "0" Then
                     Dim grid_bal As Decimal = Convert.ToDecimal(row.Cells("colBalance").Value)
@@ -783,6 +747,7 @@ Public Class temporaryFrmReceipt
                         LedgerBookCreateNew(datee, "ReceiptDiscount", cmbPaymentMode.Text, "Receipt", tran_id_get, 0, grid_dic_amt, AccountId, myBranchId, "OtherRevenue", 41, 40)
                     End If
                 End If
+                crd_cust_count = crd_cust_count + 1
             Next
             'payment mode id fetch from accoun
         End If
@@ -796,18 +761,31 @@ Public Class temporaryFrmReceipt
     Public Sub Execute_cr_pay(ByVal query As String)
         Dim con As New SqlConnection(connection)
         Dim cmd As New SqlCommand(query, con)
-        'cmd.Parameters.AddWithValue("@d1", Val(txtT_ID.Text))
-        cmd.Parameters.AddWithValue("@d2", txtTransactionNo.Text)
-        cmd.Parameters.AddWithValue("@d3", dtpTranactionDate.Value.Date)
-        cmd.Parameters.AddWithValue("@d4", cmbPaymentMode.Text)
-        cmd.Parameters.AddWithValue("@d5", Val(txtCustID.Text))
-        cmd.Parameters.AddWithValue("@d6", Val(txtTransactionAmount.Text))
-        cmd.Parameters.AddWithValue("@d7", txtRemarks.Text)
-        cmd.Parameters.AddWithValue("@d8", txtPaymentModeDetails.Text)
-        cmd.Parameters.AddWithValue("@d9", grid_dic_amt)
-        cmd.Parameters.AddWithValue("@d10", If(cmbPaymentMode.SelectedValue IsNot Nothing, cmbPaymentMode.SelectedValue, DBNull.Value))
+        If crd_cust_insert = True Then
+            cmd.Parameters.AddWithValue("@d2", tran_id_get)
+            cmd.Parameters.AddWithValue("@d3", dtpTranactionDate.Value.Date)
+            cmd.Parameters.AddWithValue("@d4", cmbPaymentMode.Text)
+            cmd.Parameters.AddWithValue("@d5", Val(txtCustID.Text))
+            cmd.Parameters.AddWithValue("@d6", Val(txtTransactionAmount.Text))
+            cmd.Parameters.AddWithValue("@d7", txtRemarks.Text)
+            cmd.Parameters.AddWithValue("@d8", txtPaymentModeDetails.Text)
+            cmd.Parameters.AddWithValue("@d9", grid_dic_amt)
+            cmd.Parameters.AddWithValue("@d10", If(cmbPaymentMode.SelectedValue IsNot Nothing, cmbPaymentMode.SelectedValue, DBNull.Value))
 
-        'cmd.Parameters.AddWithValue("@d11", finyearId)
+            'credit customor  update and delete case
+        Else
+            'cmd.Parameters.AddWithValue("@d1", Val(txtT_ID.Text))
+            cmd.Parameters.AddWithValue("@d2", txtTransactionNo.Text)
+            cmd.Parameters.AddWithValue("@d3", dtpTranactionDate.Value.Date)
+            cmd.Parameters.AddWithValue("@d4", cmbPaymentMode.Text)
+            cmd.Parameters.AddWithValue("@d5", Val(txtCustID.Text))
+            cmd.Parameters.AddWithValue("@d6", Val(txtTransactionAmount.Text))
+            cmd.Parameters.AddWithValue("@d7", txtRemarks.Text)
+            cmd.Parameters.AddWithValue("@d8", txtPaymentModeDetails.Text)
+            cmd.Parameters.AddWithValue("@d9", grid_dic_amt)
+            cmd.Parameters.AddWithValue("@d10", If(cmbPaymentMode.SelectedValue IsNot Nothing, cmbPaymentMode.SelectedValue, DBNull.Value))
+            'cmd.Parameters.AddWithValue("@d11", finyearId)
+        End If
         con.Open()
         cmd.ExecuteNonQuery()
         con.Close()
@@ -848,42 +826,56 @@ Public Class temporaryFrmReceipt
                 Dim checked As Boolean = CBool(DataGridView1.Rows(e.RowIndex).Cells("colPay").Value)
                 If checked Then
                     ' Retrieve the total paid amount from the cell
-                    paid_amt = Convert.ToDecimal(DataGridView1.Rows(e.RowIndex).Cells("colTotalPaid").Value)
-                    ' Calculate the pending amount (remaining balance - paid amount)
-                    pend_amt = Convert.ToDecimal(DataGridView1.Rows(e.RowIndex).Cells("colTotalAmount").Value) - paid_amt
-                    ' Update the remaining balance in the respective cell
+                    Try
+                        paid_amt = Convert.ToDecimal(DataGridView1.Rows(e.RowIndex).Cells("colTotalPaid").Value)
+                        ' Calculate the pending amount (remaining balance - paid amount)
+                        pend_amt = Convert.ToDecimal(DataGridView1.Rows(e.RowIndex).Cells("colTotalAmount").Value) - paid_amt
+                        Dim actu_pend_amt As Decimal = Convert.ToDecimal(DataGridView1.Rows(e.RowIndex).Cells("colTotalAmount").Value)
+                        If paid_amt > actu_pend_amt Then
+                            MessageBox.Show($"You have entered paid amount {paid_amt} it is greater than pending amount {actu_pend_amt}")
+                        End If
+                        ' Update the remaining balance in the respective cell
+                    Catch ex As Exception
+                        paid_amt = 0
+                    End Try
+
 
                     If paid_amt = 0 Then
-                        tamount = Convert.ToDecimal(txtTransactionAmount.Text)
+                        'tamount = Convert.ToDecimal(txtTransactionAmount.Text)
+                        tamount = rem_bal_sum()
                         rem_bal_lbl(tamount)
                     Else
-                        tamount = tamount - paid_amt
-                        rem_bal_lbl(tamount)
+                        'tamount = tamount - paid_amt
+
+                        rem_bal_lbl(rem_bal_sum())
                     End If
                     DataGridView1.Rows(e.RowIndex).Cells("colBalance").Value = pend_amt
                 End If
             End If
-
-
-
             If e.ColumnIndex = DataGridView1.Columns("colDiscountAmt").Index AndAlso e.RowIndex >= 0 Then
                 ' Check if the "Pay" checkbox is checked for the current row
                 Dim checked As Boolean = CBool(DataGridView1.Rows(e.RowIndex).Cells("colDiscount").Value)
                 If checked Then
                     ' Retrieve the total paid amount from the cell
-                    paid_amt = Convert.ToDecimal(DataGridView1.Rows(e.RowIndex).Cells("colTotalPaid").Value)
-                    dis_amt = Convert.ToDecimal(DataGridView1.Rows(e.RowIndex).Cells("colDiscountAmt").Value)
-                    paid_dis_sum = paid_amt + dis_amt
-                    ' Calculate the pending amount (remaining balance - paid amount)
-                    pend_amt = Convert.ToDecimal(DataGridView1.Rows(e.RowIndex).Cells("colTotalAmount").Value) - paid_dis_sum
+                    Try
+                        paid_amt = Convert.ToDecimal(DataGridView1.Rows(e.RowIndex).Cells("colTotalPaid").Value)
+                        dis_amt = Convert.ToDecimal(DataGridView1.Rows(e.RowIndex).Cells("colDiscountAmt").Value)
+                        paid_dis_sum = paid_amt + dis_amt
+                        ' Calculate the pending amount (remaining balance - paid amount)
+                        pend_amt = Convert.ToDecimal(DataGridView1.Rows(e.RowIndex).Cells("colTotalAmount").Value) - paid_dis_sum
+                    Catch ex As Exception
+                        paid_amt = 0
+                        dis_amt = 0
+                    End Try
+
                     ' Update the remaining balance in the respective cell
 
                     If dis_amt = 0 Then
-                        tamount = paid_amt
-                        rem_bal_lbl(tamount)
+                        'tamount = paid_amt
+                        rem_bal_lbl(rem_bal_sum())
                     Else
-                        tamount = tamount - paid_dis_sum
-                        rem_bal_lbl(tamount)
+                        'tamount = tamount - paid_dis_sum
+                        rem_bal_lbl(rem_bal_sum())
                     End If
                     DataGridView1.Rows(e.RowIndex).Cells("colBalance").Value = pend_amt
                 End If
@@ -992,7 +984,7 @@ Public Class temporaryFrmReceipt
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-
+        crd_cust_insert = False
         For Each row As DataGridViewRow In DataGridView1.Rows
             Try
                 Dim dic As Decimal = Convert.ToDecimal(row.Cells("colDiscountAmt").Value)
@@ -1148,7 +1140,7 @@ Public Class temporaryFrmReceipt
                     If CBool(row.Cells("colDiscount").Value) AndAlso grid_dic_amt > 0 Then
                         con = New SqlConnection(connection)
                         con.Open()
-                        Dim str5 As String = "update AgainstBillDiscount set VoucherTypeId=@d1,set AccountId=@d2, AccountName=@d3, Discount=@d4,BillId=@d5,VoucherDate=@d6,IsDelete=@d7,set InvoiceNo=@d8,TransactionId=@d9,vouchertype=@d10 where TransactionId=@d9 and InvoiceNo=@d8"
+                        Dim str5 As String = "update AgainstBillDiscount set VoucherTypeId=@d1, AccountId=@d2, AccountName=@d3, Discount=@d4,BillId=@d5,VoucherDate=@d6,IsDelete=@d7,InvoiceNo=@d8,TransactionId=@d9,vouchertype=@d10 where TransactionId=@d9 and InvoiceNo=@d8"
 
                         cmd = New SqlCommand(str5)
                         cmd.Parameters.AddWithValue("@d1", VoucherTypeID)

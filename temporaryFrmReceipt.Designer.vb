@@ -24,18 +24,8 @@ Partial Class temporaryFrmReceipt
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(temporaryFrmReceipt))
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.bttnPaind = New System.Windows.Forms.Button()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.colBillNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colBillDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colTotalBillAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colTotalAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colTotalPaid = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colBalance = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colPay = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.colDiscountAmt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colDiscount = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.grpSupplierInfo = New System.Windows.Forms.GroupBox()
         Me.lblBalance = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -73,6 +63,16 @@ Partial Class temporaryFrmReceipt
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.txtT_ID = New System.Windows.Forms.TextBox()
         Me.txtTempAmt = New System.Windows.Forms.TextBox()
+        Me.colID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colBillNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colBillDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colTotalBillAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colTotalAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colTotalPaid = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colBalance = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colPay = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.colDiscountAmt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colDiscount = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.Panel2.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpSupplierInfo.SuspendLayout()
@@ -82,21 +82,11 @@ Partial Class temporaryFrmReceipt
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.DodgerBlue
-        Me.Panel2.Controls.Add(Me.bttnPaind)
         Me.Panel2.Controls.Add(Me.Label12)
         Me.Panel2.Location = New System.Drawing.Point(-1, -1)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(1066, 41)
+        Me.Panel2.Size = New System.Drawing.Size(1243, 41)
         Me.Panel2.TabIndex = 14
-        '
-        'bttnPaind
-        '
-        Me.bttnPaind.Location = New System.Drawing.Point(105, 6)
-        Me.bttnPaind.Name = "bttnPaind"
-        Me.bttnPaind.Size = New System.Drawing.Size(45, 23)
-        Me.bttnPaind.TabIndex = 1
-        Me.bttnPaind.Text = "bttnPaid"
-        Me.bttnPaind.UseVisualStyleBackColor = True
         '
         'Label12
         '
@@ -115,66 +105,11 @@ Partial Class temporaryFrmReceipt
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.BackgroundColor = System.Drawing.Color.LightSteelBlue
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colBillNo, Me.colBillDate, Me.colTotalBillAmount, Me.colTotalAmount, Me.colTotalPaid, Me.colBalance, Me.colPay, Me.colDiscountAmt, Me.colDiscount})
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colID, Me.colBillNo, Me.colBillDate, Me.colTotalBillAmount, Me.colTotalAmount, Me.colTotalPaid, Me.colBalance, Me.colPay, Me.colDiscountAmt, Me.colDiscount})
         Me.DataGridView1.Location = New System.Drawing.Point(300, 59)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(621, 382)
+        Me.DataGridView1.Size = New System.Drawing.Size(905, 382)
         Me.DataGridView1.TabIndex = 15
-        '
-        'colBillNo
-        '
-        Me.colBillNo.HeaderText = "Bill No"
-        Me.colBillNo.Name = "colBillNo"
-        Me.colBillNo.ReadOnly = True
-        '
-        'colBillDate
-        '
-        Me.colBillDate.HeaderText = "Bill Date"
-        Me.colBillDate.Name = "colBillDate"
-        Me.colBillDate.ReadOnly = True
-        '
-        'colTotalBillAmount
-        '
-        Me.colTotalBillAmount.HeaderText = "Total bill Amount"
-        Me.colTotalBillAmount.Name = "colTotalBillAmount"
-        Me.colTotalBillAmount.ReadOnly = True
-        '
-        'colTotalAmount
-        '
-        Me.colTotalAmount.HeaderText = "Total Pending Amount"
-        Me.colTotalAmount.Name = "colTotalAmount"
-        Me.colTotalAmount.ReadOnly = True
-        '
-        'colTotalPaid
-        '
-        Me.colTotalPaid.HeaderText = "Total Paid"
-        Me.colTotalPaid.Name = "colTotalPaid"
-        '
-        'colBalance
-        '
-        Me.colBalance.HeaderText = "Balance"
-        Me.colBalance.Name = "colBalance"
-        Me.colBalance.ReadOnly = True
-        Me.colBalance.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'colPay
-        '
-        Me.colPay.HeaderText = "Pay"
-        Me.colPay.Name = "colPay"
-        Me.colPay.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.colPay.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        '
-        'colDiscountAmt
-        '
-        Me.colDiscountAmt.HeaderText = "Discount Amont"
-        Me.colDiscountAmt.Name = "colDiscountAmt"
-        '
-        'colDiscount
-        '
-        Me.colDiscount.HeaderText = "Discount"
-        Me.colDiscount.Name = "colDiscount"
-        Me.colDiscount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.colDiscount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
         'grpSupplierInfo
         '
@@ -538,12 +473,76 @@ Partial Class temporaryFrmReceipt
         Me.txtTempAmt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtTempAmt.Visible = False
         '
+        'colID
+        '
+        Me.colID.HeaderText = "ID"
+        Me.colID.Name = "colID"
+        Me.colID.Visible = False
+        '
+        'colBillNo
+        '
+        Me.colBillNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
+        Me.colBillNo.FillWeight = 30.0!
+        Me.colBillNo.HeaderText = "Bill No"
+        Me.colBillNo.Name = "colBillNo"
+        Me.colBillNo.ReadOnly = True
+        Me.colBillNo.Width = 62
+        '
+        'colBillDate
+        '
+        Me.colBillDate.HeaderText = "Bill Date"
+        Me.colBillDate.Name = "colBillDate"
+        Me.colBillDate.ReadOnly = True
+        '
+        'colTotalBillAmount
+        '
+        Me.colTotalBillAmount.HeaderText = "Total bill Amount"
+        Me.colTotalBillAmount.Name = "colTotalBillAmount"
+        Me.colTotalBillAmount.ReadOnly = True
+        '
+        'colTotalAmount
+        '
+        Me.colTotalAmount.HeaderText = "Total Pending Amount"
+        Me.colTotalAmount.Name = "colTotalAmount"
+        Me.colTotalAmount.ReadOnly = True
+        '
+        'colTotalPaid
+        '
+        Me.colTotalPaid.HeaderText = "Total Paid"
+        Me.colTotalPaid.Name = "colTotalPaid"
+        '
+        'colBalance
+        '
+        Me.colBalance.HeaderText = "Balance"
+        Me.colBalance.Name = "colBalance"
+        Me.colBalance.ReadOnly = True
+        Me.colBalance.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'colPay
+        '
+        Me.colPay.HeaderText = "Pay"
+        Me.colPay.Name = "colPay"
+        Me.colPay.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.colPay.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        '
+        'colDiscountAmt
+        '
+        Me.colDiscountAmt.HeaderText = "Discount Amont"
+        Me.colDiscountAmt.Name = "colDiscountAmt"
+        '
+        'colDiscount
+        '
+        Me.colDiscount.HeaderText = "Discount"
+        Me.colDiscount.Name = "colDiscount"
+        Me.colDiscount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.colDiscount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        '
         'temporaryFrmReceipt
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.LightSteelBlue
-        Me.ClientSize = New System.Drawing.Size(1012, 520)
+        Me.ClientSize = New System.Drawing.Size(1239, 520)
         Me.Controls.Add(Me.txtTempAmt)
         Me.Controls.Add(Me.txtT_ID)
         Me.Controls.Add(Me.btnDelete)
@@ -618,6 +617,7 @@ Partial Class temporaryFrmReceipt
     Friend WithEvents btnUpdate As Button
     Friend WithEvents txtT_ID As TextBox
     Friend WithEvents txtTempAmt As TextBox
+    Friend WithEvents colID As DataGridViewTextBoxColumn
     Friend WithEvents colBillNo As DataGridViewTextBoxColumn
     Friend WithEvents colBillDate As DataGridViewTextBoxColumn
     Friend WithEvents colTotalBillAmount As DataGridViewTextBoxColumn
@@ -627,5 +627,4 @@ Partial Class temporaryFrmReceipt
     Friend WithEvents colPay As DataGridViewCheckBoxColumn
     Friend WithEvents colDiscountAmt As DataGridViewTextBoxColumn
     Friend WithEvents colDiscount As DataGridViewCheckBoxColumn
-    Friend WithEvents bttnPaind As Button
 End Class

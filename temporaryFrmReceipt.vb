@@ -271,17 +271,7 @@ Public Class temporaryFrmReceipt
         rem_bal_lbl(tamount)
         conn.Close()
 
-        Dim amounts(DataGridView1.Rows.Count - 1) As Integer
 
-        ' Iterate through the rows of the DataGridView
-        For rowIndex As Integer = 0 To DataGridView1.Rows.Count - 1
-            ' Retrieve the value from the "amount" column of the current row
-            Dim paid As Integer = Convert.ToInt32(DataGridView1.Rows(rowIndex).Cells("colTotalPaid").Value)
-            ' Store the amount in the array
-            amounts(rowIndex) = paid
-            Dim arrayAsString As String = String.Join(", ", amounts)
-            MessageBox.Show("Array values: " & arrayAsString, "Array Values", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        Next
     End Sub
 
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
@@ -1032,15 +1022,6 @@ Public Class temporaryFrmReceipt
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-        Dim amounts(DataGridView1.Rows.Count - 1) As Integer
-
-        ' Iterate through the rows of the DataGridView
-        For rowIndex As Integer = 0 To DataGridView1.Rows.Count - 1
-            ' Retrieve the value from the "amount" column of the current row
-            Dim amount As Integer = Convert.ToInt32(DataGridView1.Rows(rowIndex).Cells("amount").Value)
-            ' Store the amount in the array
-            amounts(rowIndex) = amount
-        Next
 
         crd_cust_insert = False
         For Each row As DataGridViewRow In DataGridView1.Rows
@@ -1092,6 +1073,7 @@ Public Class temporaryFrmReceipt
             'payment save according bill number
             Dim tem_tran_amt = Convert.ToDecimal(txtTransactionAmount.Text)
             For Each row As DataGridViewRow In DataGridView1.Rows
+                Dim total_pend_amount As Decimal = Convert.ToDecimal(row.Cells("colTotalAmount").Value)
                 If tran_txt_box_amt > total_sum Then
                     MessageBox.Show("The amount paid is not equal to transaction amount the customer gave amount is " + Convert.ToString(tran_txt_box_amt))
                     'txtTransactionAmount.Text = Convert.ToString(total_sum)
@@ -1170,12 +1152,33 @@ Public Class temporaryFrmReceipt
                     Dim AccountId As Object = cmd.ExecuteScalar()
                     con.Close()
 
+                    'retrive last previous pending amount
+                    con = New SqlConnection(connection)
+                    con.Open()
+                    Dim str_last As String = "select previous_pending_amt from AgainstBillTb where InvoiceNo='" & bill_no & "' and Id='" & ID & "' and AccountId='" & AccountId & "' "
+                    cmd = New SqlCommand(str_last, con)
+                    Dim read_pend_am = cmd.ExecuteReader()
+
+                    Dim last_previous_pending_amt As Decimal = 0
+                    While read_pend_am.Read()
+                        last_previous_pending_amt = read_pend_am("previous_pending_amt")
+                    End While
+
+                    'actual pending amount
+                    Dim actual_pend_amount As Decimal = 0
+                    If last_previous_pending_amt < total_pend_amount Then
+                        actual_pend_amount = last_previous_pending_amt - total_pend_amount
+                    ElseIf total_pend_amount < last_previous_pending_amt Then
+                        actual_pend_amount = total_pend_amount - last_previous_pending_amt
+                    End If
+
+
                     'update value into AgainstBillTB
                     con = New SqlConnection(connection)
                     con.Open()
                     Dim str6 As String = "update AgainstBillTb set VoucherTypeId=@d1 , AccountId=@d2, AccountName=@d3, Amount=@d4, BillId=@d5, VoucherDate=@d6, IsDelete=@d7, InvoiceNo=@d8, TransactionId=@d9, vouchertype=@d10 where TransactionId=@d9 and InvoiceNo=@d8"
 
-                    cmd = New SqlCommand(str6)
+                    cmd = New SqlCommand(str6, con)
                     cmd.Parameters.AddWithValue("@d1", VoucherTypeID) 'Vouchertypeid
                     cmd.Parameters.AddWithValue("@d2", AccountId) 'Accountid
                     'cmd.Parameters.AddWithValue("@d2", 5)
@@ -1194,7 +1197,27 @@ Public Class temporaryFrmReceipt
                     con.Close()
 
                     'update previous pending balance
-                    Dim str_pre As String = "update AgainstBillTb set   Amount=@d4"
+
+                    If last_previous_pending_amt < total_pend_amount Then
+                        con = New SqlConnection(connection)
+                        con.Open()
+                        Dim prev_id As Decimal = ID - 1
+                        'Dim str_pre1 As String = "UPDATE AgainstBillTb SET previous_pending_amt = previous_pending_amt + " & actual_pend_amount & " WHERE InvoiceNo = '" & bill_no & "' AND Id <>'" & prev_id & "' AND Id='" & ID & "' AND AccountId='" & AccountId & "' And AccountId ='" & AccountId & "' "
+                        'Dim str_pre1 As String = "UPDATE AgainstBillTb SET previous_pending_amt = previous_pending_amt + " & actual_pend_amount & " WHERE InvoiceNo = '" & bill_no & "' AND Id = '" & prev_id & "' AND AccountId = '" & AccountId & "'"
+                        Dim str_pre1 As String = "UPDATE AgainstBillTb SET previous_pending_amt = previous_pending_amt + " & actual_pend_amount & " WHERE InvoiceNo = '" & bill_no & "' AND Id <> " & prev_id & " AND Id=" & ID & " AND AccountId = " & AccountId & ""
+                        cmd = New SqlCommand(str_pre1, con)
+                        cmd.ExecuteNonQuery()
+                        con.Close()
+                    ElseIf total_pend_amount < last_previous_pending_amt Then
+                        con = New SqlConnection(connection)
+                        con.Open()
+                        Dim prev_id As Decimal = ID - 1
+                        Dim str_pre2 As String = "update AgainstBillTb set   previous_pending_amt=previous_pending_amt - " & actual_pend_amount & " where InvoiceNo='" & bill_no & "' AND Id <>" & prev_id & "  and Id=" & ID & " and AccountId=" & AccountId & " "
+
+                        cmd = New SqlCommand(str_pre2, con)
+                        cmd.ExecuteNonQuery()
+                        con.Close()
+                    End If
 
                     'Get id from AgainstBillTb last inserted row
                     Dim query_last_row As String = "SELECT TOP 1 *FROM AgainstBillTb ORDER BY ID DESC"
@@ -1209,7 +1232,7 @@ Public Class temporaryFrmReceipt
                         con.Open()
                         Dim str5 As String = "update AgainstBillDiscount set VoucherTypeId=@d1, AccountId=@d2, AccountName=@d3, Discount=@d4,BillId=@d5,VoucherDate=@d6,IsDelete=@d7,InvoiceNo=@d8,TransactionId=@d9,vouchertype=@d10 where TransactionId=@d9 and InvoiceNo=@d8"
 
-                        cmd = New SqlCommand(str5)
+                        cmd = New SqlCommand(str5, con)
                         cmd.Parameters.AddWithValue("@d1", VoucherTypeID)
                         cmd.Parameters.AddWithValue("@d2", AccountId)
                         'cmd.Parameters.AddWithValue("@d2", 5)

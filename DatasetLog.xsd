@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DatasetLog" targetNamespace="http://tempuri.org/DatasetLog.xsd" xmlns:mstns="http://tempuri.org/DatasetLog.xsd" xmlns="http://tempuri.org/DatasetLog.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DatasetLog" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DatasetLog" msprop:Generator_UserDSName="DatasetLog">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="RateChangeLog" msprop:Generator_TableClassName="RateChangeLogDataTable" msprop:Generator_TableVarName="tableRateChangeLog" msprop:Generator_TablePropName="RateChangeLog" msprop:Generator_RowDeletingName="RateChangeLogRowDeleting" msprop:Generator_RowChangingName="RateChangeLogRowChanging" msprop:Generator_RowEvHandlerName="RateChangeLogRowChangeEventHandler" msprop:Generator_RowDeletedName="RateChangeLogRowDeleted" msprop:Generator_UserTableName="RateChangeLog" msprop:Generator_RowChangedName="RateChangeLogRowChanged" msprop:Generator_RowEvArgName="RateChangeLogRowChangeEvent" msprop:Generator_RowClassName="RateChangeLogRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BillNO" msprop:Generator_ColumnVarNameInTable="columnBillNO" msprop:Generator_ColumnPropNameInRow="BillNO" msprop:Generator_ColumnPropNameInTable="BillNOColumn" msprop:Generator_UserColumnName="BillNO" type="xs:string" minOccurs="0" />
+              <xs:element name="ChangedDate" msprop:Generator_ColumnVarNameInTable="columnChangedDate" msprop:Generator_ColumnPropNameInRow="ChangedDate" msprop:Generator_ColumnPropNameInTable="ChangedDateColumn" msprop:Generator_UserColumnName="ChangedDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Original_Rate" msprop:Generator_ColumnVarNameInTable="columnOriginal_Rate" msprop:Generator_ColumnPropNameInRow="Original_Rate" msprop:Generator_ColumnPropNameInTable="Original_RateColumn" msprop:Generator_UserColumnName="Original_Rate" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Changed_Rate" msprop:Generator_ColumnVarNameInTable="columnChanged_Rate" msprop:Generator_ColumnPropNameInRow="Changed_Rate" msprop:Generator_ColumnPropNameInTable="Changed_RateColumn" msprop:Generator_UserColumnName="Changed_Rate" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Operator" msprop:Generator_ColumnVarNameInTable="columnOperator" msprop:Generator_ColumnPropNameInRow="_Operator" msprop:Generator_ColumnPropNameInTable="OperatorColumn" msprop:Generator_UserColumnName="Operator" type="xs:string" minOccurs="0" />
+              <xs:element name="Permission" msprop:Generator_ColumnVarNameInTable="columnPermission" msprop:Generator_ColumnPropNameInRow="Permission" msprop:Generator_ColumnPropNameInTable="PermissionColumn" msprop:Generator_UserColumnName="Permission" type="xs:string" minOccurs="0" />
+              <xs:element name="Remarks" msprop:Generator_ColumnVarNameInTable="columnRemarks" msprop:Generator_ColumnPropNameInRow="Remarks" msprop:Generator_ColumnPropNameInTable="RemarksColumn" msprop:Generator_UserColumnName="Remarks" type="xs:string" minOccurs="0" />
+              <xs:element name="companyId" msprop:Generator_ColumnVarNameInTable="columncompanyId" msprop:Generator_ColumnPropNameInRow="companyId" msprop:Generator_ColumnPropNameInTable="companyIdColumn" msprop:Generator_UserColumnName="companyId" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -7,13 +7,8 @@ Public Class frmDishRateChangeLog
 
     Private Sub txtBillNumber_TextChanged(sender As Object, e As EventArgs) Handles txtBillNumber.TextChanged
         If txtBillNumber.Text = "" Then
-            If cmbOperator.SelectedItem.ToString() = "All" Then
-                operator_all()
-            Else
-                'SearchRadio.Checked = False
-                'SearchRadio.PerformClick()
-                bttnSearch.PerformClick()
-            End If
+            ALL_ROW()
+
         Else
             searchbillno()
         End If
@@ -21,22 +16,29 @@ Public Class frmDishRateChangeLog
     End Sub
 
     Public Sub searchbillno()
+        cmd_operator_select = False
+        cmb_bill_select = False
+        cmb_permission_select = False
+        cmbPermission.SelectedItem = Nothing
+        cmbOperator.SelectedItem = Nothing
+        CmbBillType.SelectedItem = Nothing
         Dim searchQuery As String = txtBillNumber.Text.Trim()
         'Dim fromDate As Date = dtpDateFrom.Value
         'Dim toDate As Date = dtpDateTo.Value
 
         'Dim query As String = "SELECT Id,BillNo,ChangedDate,OrgRate,ChangedRate,OperatorId,PermissionGrantedId,Remarks FROM RateChangeLog WHERE BillNo LIKE @SearchQuery AND ChangedDate >= @FromDate AND ChangedDate <= @ToDate"
 
-
-
-        Dim query As String = "SELECT RCL.Id, RCL.BillNo, RCL.ChangedDate, RCL.OrgRate, RCL.ChangedRate, 
+        Dim query As String = "SELECT RCL.Id, RCL.BillNo,dsh.DishName ,RCL.ChangedDate, RCL.OrgRate, RCL.ChangedRate,RCL.BillType, 
                              ER_Operator.EmployeeName AS OperatorName, 
                              ER_PermissionGranted.EmployeeName AS PermissionGrantedName, 
                              RCL.Remarks,RCL.companyId ,RCL.Branchid 
                       FROM RateChangeLog AS RCL
                       INNER JOIN EmployeeRegistration AS ER_Operator ON RCL.OperatorId = ER_Operator.EmpId
                       INNER JOIN EmployeeRegistration AS ER_PermissionGranted ON RCL.PermissionGrantedId = ER_PermissionGranted.EmpId
+                        INNER JOIN Dish AS dsh ON RCL.DishId = dsh.DishID
                       WHERE BillNo LIKE @SearchQuery"
+
+
 
         Dim conn As New SqlConnection(connection)
         Dim cmd As New SqlCommand(query, conn)
@@ -46,30 +48,17 @@ Public Class frmDishRateChangeLog
 
         Try
             conn.Open()
-            Dim adapter As New SqlDataAdapter(cmd)
-            Dim datatable As New DataTable
-            adapter.Fill(datatable)
-
-            ' Clear existing rows in DataGridView
+            Dim read As SqlDataReader = cmd.ExecuteReader()
             DatagridView1.Rows.Clear()
 
-            ' Loop through DataTable rows
-            For Each row As DataRow In datatable.Rows
-                ' Create an array to store column values for the current row
-                Dim rowData(datatable.Columns.Count - 1) As String
+            While (read.Read())
+                Dim value1 As Double = CDec(read(4)) ' Convert to Double or appropriate numerical type
+                Dim value2 As Double = CDec(read(5)) ' Convert to Double or appropriate numerical type
+                Dim result As Double = value1 - value2
+                DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), result, read(5), read(6), read(7), read(8), read(9), read(10), read(11))
+            End While
+            read.Close()
 
-                ' Loop through DataTable columns
-                For i As Integer = 0 To datatable.Columns.Count - 1
-                    ' Add the value of each column to the array
-                    rowData(i) = row(i).ToString()
-                Next
-
-                ' Add the row data to the DataGridView
-                DatagridView1.Rows.Add(rowData)
-            Next
-
-            ' Autofill columns according to DataGridView width
-            DatagridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells)
         Catch ex As Exception
             MessageBox.Show("Error", ex.Message)
         Finally
@@ -87,11 +76,12 @@ Public Class frmDishRateChangeLog
         'cmbOperator.SelectedIndex = 0
         txtBillNumber.Text = ""
         DatagridView1.Rows.Clear()
+        cmd_operator_select = False
+        cmb_bill_select = False
+        cmb_permission_select = False
+        cmbPermission.SelectedItem = Nothing
         cmbOperator.SelectedItem = Nothing
         CmbBillType.SelectedItem = Nothing
-        cmbPermission.SelectedItem = Nothing
-        cmb_bill_select = False
-        cmd_operator_select = False
     End Sub
     Private Sub frmDishRateChangeLog_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'load operators to combobox
@@ -101,6 +91,7 @@ Public Class frmDishRateChangeLog
         fillBilltype()
         cmd_operator_select = False
         cmb_bill_select = False
+        cmb_permission_select = False
     End Sub
 
     Public Sub GetOperatorData()
@@ -149,7 +140,7 @@ Public Class frmDishRateChangeLog
                     Dim value1 As Double = CDec(read(4)) ' Convert to Double or appropriate numerical type
                     Dim value2 As Double = CDec(read(5)) ' Convert to Double or appropriate numerical type
                     Dim result As Double = value1 - value2
-                    DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), result, read(5), read(6), read(7), read(8), read(9), read(10))
+                    DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), result, read(5), read(6), read(7), read(8), read(9), read(10), read(11))
                 End While
                 read.Close()
 
@@ -277,6 +268,7 @@ Public Class frmDishRateChangeLog
         txtBillNumber.Text = ""
 
         cmb_bill_select = False
+        cmb_permission_select = False
         Dim selectedOperator As String
         Try
             selectedOperator = cmbOperator.SelectedItem.ToString()
@@ -320,7 +312,7 @@ Public Class frmDishRateChangeLog
                     Dim value1 As Double = CDec(read(4)) ' Convert to Double or appropriate numerical type
                     Dim value2 As Double = CDec(read(5)) ' Convert to Double or appropriate numerical type
                     Dim result As Double = value1 - value2
-                    DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), result, read(5), read(6), read(7), read(8), read(9), read(10))
+                    DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), result, read(5), read(6), read(7), read(8), read(9), read(10), read(11))
                 End While
                 read.Close()
 
@@ -339,9 +331,11 @@ Public Class frmDishRateChangeLog
         cmbOperator.SelectedItem = selectedOperator
     End Sub
 
-    Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles BtnPrint.Click
+    'print all operator, billtype , permisssion
+    Public Sub all_print()
         Dim CN As New SqlConnection(connection)
-
+        Dim fromDate As Date = dtpDateFrom.Value
+        Dim toDate As Date = dtpDateTo.Value
 
         Dim MyCommand1 As New SqlCommand()
         Dim myDA1 As New SqlDataAdapter()
@@ -354,43 +348,59 @@ Public Class frmDishRateChangeLog
         MyCommand1.CommandType = CommandType.Text
         myDA1.SelectCommand = MyCommand1
         myDA1.Fill(ds, "Hotel")
+        CN.Open()
+        ' Call the stored procedure
+        Dim cmd2 As New SqlCommand("GetRateChangeLog_all_data", CN)
+        cmd2.CommandType = CommandType.StoredProcedure
+        cmd2.Parameters.AddWithValue("@FromDate", fromDate)
+        cmd2.Parameters.AddWithValue("@ToDate", toDate)
+        Dim adapter2 As New SqlDataAdapter(cmd2)
+        Dim datatable2 As New DataTable
+        adapter2.Fill(ds, "RateChangeLog")
+        ' Merge the new DataTable into the existing DataSet
+        'ds.Tables.Add(datatable.Copy())
+
+        ' Load the Crystal Report
+        Dim rpt2 As New RptRatechangeLog
+        rpt2.Load(Application.StartupPath & "\Reports\RptRatechangeLog.rpt")
+
+        ' Set the DataSource of the Crystal Report to the DataTable
+        'rpt.SetDataSource(dataTable)
+        rpt2.SetDataSource(ds)
+        ' Show the report
+        frmReport.CrystalReportViewer1.ReportSource = rpt2
+        frmReport.ShowDialog()
+
+        ' Clean up
+        rpt2.Close()
+        rpt2.Dispose()
+        CN.Close()
+    End Sub
+
+    Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles BtnPrint.Click
+        Dim CN As New SqlConnection(connection)
+
+
+
 
         Dim fromDate As Date = dtpDateFrom.Value
         Dim toDate As Date = dtpDateTo.Value
         If txtBillNumber.Text = "" Then
-            If cmbOperator.SelectedItem.ToString() = "All" Then
-                CN.Open()
-                ' Call the stored procedure
-                Dim cmd2 As New SqlCommand("GetRateChangeLog_Operator_all", CN)
-                cmd2.CommandType = CommandType.StoredProcedure
-                cmd2.Parameters.AddWithValue("@FromDate", fromDate)
-                cmd2.Parameters.AddWithValue("@ToDate", toDate)
-                Dim adapter2 As New SqlDataAdapter(cmd2)
-                Dim datatable2 As New DataTable
-                adapter2.Fill(ds, "RateChangeLog")
-                ' Merge the new DataTable into the existing DataSet
-                'ds.Tables.Add(datatable.Copy())
+            If cmbOperator.SelectedItem <> Nothing AndAlso cmbOperator.SelectedItem.ToString() = "All" Then
+                all_print()
 
-                ' Load the Crystal Report
-                Dim rpt2 As New RptRatechangeLog
-                rpt2.Load(Application.StartupPath & "\Reports\RptRatechangeLog.rpt")
+            ElseIf cmbPermission.SelectedItem <> Nothing AndAlso cmbPermission.SelectedItem.ToString() = "All" Then
+                all_print()
 
-                ' Set the DataSource of the Crystal Report to the DataTable
-                'rpt.SetDataSource(dataTable)
-                rpt2.SetDataSource(ds)
-                ' Show the report
-                frmReport.CrystalReportViewer1.ReportSource = rpt2
-                frmReport.ShowDialog()
+            ElseIf CmbBillType.SelectedItem <> Nothing AndAlso CmbBillType.SelectedItem.ToString() = "All" Then
+                all_print()
 
-                ' Clean up
-                rpt2.Close()
-                rpt2.Dispose()
-                CN.Close()
-            Else
+                'it is check all avalue cmboperator except all
+            ElseIf cmbOperator.SelectedItem.ToString() <> "All" Then
                 CN.Open()
                 ' Call the stored procedure
                 Dim operator1 As String = cmbOperator.SelectedItem.ToString()
-                Dim cmd2 As New SqlCommand("GetRateChangeLogReportBySearch_OP", CN)
+                Dim cmd2 As New SqlCommand("GetRateChangeLogByOperatorAndDate", CN)
                 cmd2.CommandType = CommandType.StoredProcedure
                 cmd2.Parameters.AddWithValue("@FromDate", fromDate)
                 cmd2.Parameters.AddWithValue("@ToDate", toDate)
@@ -416,7 +426,71 @@ Public Class frmDishRateChangeLog
                 rpt2.Close()
                 rpt2.Dispose()
                 CN.Close()
+
+            ElseIf CmbBillType.SelectedItem.ToString() <> "All" Then
+
+                CN.Open()
+                ' Call the stored procedure
+                Dim bill_type As String = CmbBillType.SelectedItem.ToString()
+                Dim cmd2 As New SqlCommand("GetRateChangeLogByBillTypeAndDate", CN)
+                cmd2.CommandType = CommandType.StoredProcedure
+                cmd2.Parameters.AddWithValue("@FromDate", fromDate)
+                cmd2.Parameters.AddWithValue("@ToDate", toDate)
+                cmd2.Parameters.AddWithValue("@BillType", bill_type)
+                Dim adapter2 As New SqlDataAdapter(cmd2)
+                Dim datatable2 As New DataTable
+                adapter2.Fill(ds, "RateChangeLog")
+                ' Merge the new DataTable into the existing DataSet
+                'ds.Tables.Add(datatable.Copy())
+
+                ' Load the Crystal Report
+                Dim rpt2 As New RptRatechangeLog
+                rpt2.Load(Application.StartupPath & "\Reports\RptRatechangeLog.rpt")
+
+                ' Set the DataSource of the Crystal Report to the DataTable
+                'rpt.SetDataSource(dataTable)
+                rpt2.SetDataSource(ds)
+                ' Show the report
+                frmReport.CrystalReportViewer1.ReportSource = rpt2
+                frmReport.ShowDialog()
+
+                ' Clean up
+                rpt2.Close()
+                rpt2.Dispose()
+                CN.Close()
+
+            ElseIf cmbPermission.SelectedItem <> "All" Then
+                CN.Open()
+                ' Call the stored procedure
+                Dim permission As String = cmbPermission.SelectedItem.ToString()
+                Dim cmd2 As New SqlCommand("GetRateChangeLogByPermissionAndDate", CN)
+                cmd2.CommandType = CommandType.StoredProcedure
+                cmd2.Parameters.AddWithValue("@FromDate", fromDate)
+                cmd2.Parameters.AddWithValue("@ToDate", toDate)
+                cmd2.Parameters.AddWithValue("@permissionGrant", permission)
+                Dim adapter2 As New SqlDataAdapter(cmd2)
+                Dim datatable2 As New DataTable
+                adapter2.Fill(ds, "RateChangeLog")
+                ' Merge the new DataTable into the existing DataSet
+                'ds.Tables.Add(datatable.Copy())
+
+                ' Load the Crystal Report
+                Dim rpt2 As New RptRatechangeLog
+                rpt2.Load(Application.StartupPath & "\Reports\RptRatechangeLog.rpt")
+
+                ' Set the DataSource of the Crystal Report to the DataTable
+                'rpt.SetDataSource(dataTable)
+                rpt2.SetDataSource(ds)
+                ' Show the report
+                frmReport.CrystalReportViewer1.ReportSource = rpt2
+                frmReport.ShowDialog()
+
+                ' Clean up
+                rpt2.Close()
+                rpt2.Dispose()
+                CN.Close()
             End If
+
         Else
             CN.Open()
             ' Call the stored procedure
@@ -524,11 +598,11 @@ Public Class frmDishRateChangeLog
     End Sub
     Public Sub GetBillData()
         txtBillNumber.Text = ""
-
+        Dim select_bill_type As String
         If CmbBillType.SelectedItem <> Nothing OrElse CmbBillType.SelectedItem <> "All" Then
             cmb_bill_select = True
         End If
-        Dim select_bill_type As String
+
         Dim selectedItem As String
         Try
             select_bill_type = CmbBillType.SelectedItem.ToString()
@@ -585,7 +659,7 @@ Public Class frmDishRateChangeLog
                 Dim value1 As Double = CDec(read(4)) ' Convert to Double or appropriate numerical type
                 Dim value2 As Double = CDec(read(5)) ' Convert to Double or appropriate numerical type
                 Dim result As Double = value1 - value2
-                DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), result, read(5), read(6), read(7), read(8), read(9))
+                DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), result, read(5), read(6), read(7), read(8), read(9), read(10), read(11))
             End While
             read.Close()
 
@@ -599,6 +673,74 @@ Public Class frmDishRateChangeLog
         cmbPermission.SelectedItem = Nothing
         cmbOperator.SelectedItem = Nothing
         CmbBillType.SelectedItem = select_bill_type
+    End Sub
+
+    Public Sub GetPermissionData()
+        If cmbPermission.SelectedItem <> Nothing OrElse cmbPermission.SelectedItem <> "All" Then
+            cmb_permission_select = True
+        End If
+        txtBillNumber.Text = ""
+        cmb_bill_select = False
+        cmd_operator_select = False
+        Dim selectedPermission As String
+        Try
+            selectedPermission = cmbPermission.SelectedItem.ToString()
+        Catch ex As Exception
+            selectedPermission = Nothing
+        End Try
+
+        ' Check if "All" is selected
+        If selectedPermission = "All" Then
+            ALL_ROW()
+        Else
+            ' Filter the search results in DataGridView based on the selected operator name
+
+            Dim fromDate As Date = dtpDateFrom.Value
+            Dim toDate As Date = dtpDateTo.Value
+
+
+            Dim query As String = "SELECT RCL.Id, RCL.BillNo,dsh.DishName , RCL.ChangedDate, RCL.OrgRate, RCL.ChangedRate,RCL.BillType, 
+                             ER_Operator.EmployeeName AS OperatorName, 
+                             ER_PermissionGranted.EmployeeName AS PermissionGrantedName, 
+                             RCL.Remarks,RCL.companyId ,RCL.Branchid 
+                      FROM RateChangeLog AS RCL
+                      INNER JOIN EmployeeRegistration AS ER_Operator ON RCL.OperatorId = ER_Operator.EmpId
+                      INNER JOIN EmployeeRegistration AS ER_PermissionGranted ON RCL.PermissionGrantedId = ER_PermissionGranted.EmpId
+                        INNER JOIN Dish AS dsh ON RCL.DishId = dsh.DishID
+                      WHERE RCL.PermissionGrantedId IN (SELECT EmpId FROM EmployeeRegistration WHERE EmployeeName = @permissionGrant) AND
+                      RCL.ChangedDate >= @FromDate AND RCL.ChangedDate <= @ToDate"
+
+            Dim conn As New SqlConnection(connection)
+            Dim cmd As New SqlCommand(query, conn)
+            cmd.Parameters.AddWithValue("@permissionGrant", selectedPermission)
+            cmd.Parameters.AddWithValue("@FromDate", fromDate)
+            cmd.Parameters.AddWithValue("@ToDate", toDate)
+            Try
+                conn.Open()
+                Dim read As SqlDataReader = cmd.ExecuteReader()
+                ' Clear existing rows in DataGridView
+                DatagridView1.Rows.Clear()
+                'DatagridView1.DataSource = datatable
+                While (read.Read())
+                    Dim value1 As Double = CDec(read(4)) ' Convert to Double or appropriate numerical type
+                    Dim value2 As Double = CDec(read(5)) ' Convert to Double or appropriate numerical type
+                    Dim result As Double = value1 - value2
+                    DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), result, read(5), read(6), read(7), read(8), read(9), read(10), read(11))
+                End While
+                read.Close()
+
+
+            Catch ex As Exception
+
+
+            Finally
+                conn.Close()
+            End Try
+        End If
+
+        cmbOperator.SelectedItem = Nothing
+        CmbBillType.SelectedItem = Nothing
+        cmbPermission.SelectedItem = selectedPermission
     End Sub
 
     Private Sub dtpDateFrom_ValueChanged(sender As Object, e As EventArgs) Handles dtpDateFrom.ValueChanged
@@ -616,6 +758,9 @@ Public Class frmDishRateChangeLog
 
         ElseIf CmbBillType.SelectedItem <> "All" AndAlso CmbBillType.SelectedItem <> Nothing AndAlso cmb_bill_select = True Then
             GetBillData()
+
+        ElseIf cmbPermission.SelectedItem <> "All" AndAlso cmbPermission.SelectedItem <> Nothing AndAlso cmb_permission_select = True Then
+            GetPermissionData()
         Else
             bttnSearch.PerformClick()
         End If
@@ -700,13 +845,14 @@ Public Class frmDishRateChangeLog
         Dim fromDate As Date = dtpDateFrom.Value
         Dim toDate As Date = dtpDateTo.Value
 
-        Dim query As String = "SELECT RCL.Id, RCL.BillNo, RCL.ChangedDate, RCL.OrgRate, RCL.ChangedRate,RCL.BillType, 
+        Dim query As String = "SELECT RCL.Id, RCL.BillNo,dsh.DishName ,RCL.ChangedDate, RCL.OrgRate, RCL.ChangedRate,RCL.BillType, 
                              ER_Operator.EmployeeName AS OperatorName, 
                              ER_PermissionGranted.EmployeeName AS PermissionGrantedName, 
                              RCL.Remarks,RCL.companyId ,RCL.Branchid 
                       FROM RateChangeLog AS RCL
                       INNER JOIN EmployeeRegistration AS ER_Operator ON RCL.OperatorId = ER_Operator.EmpId
                       INNER JOIN EmployeeRegistration AS ER_PermissionGranted ON RCL.PermissionGrantedId = ER_PermissionGranted.EmpId
+                        INNER JOIN Dish AS dsh ON RCL.DishId = dsh.DishID
                       WHERE RCL.ChangedDate >= @FromDate AND RCL.ChangedDate <= @ToDate"
 
 
@@ -740,10 +886,10 @@ Public Class frmDishRateChangeLog
             '    DatagridView1.Rows.Add(rowData)
             'Next
             While (read.Read())
-                Dim value1 As Double = CDec(read(3)) ' Convert to Double or appropriate numerical type
-                Dim value2 As Double = CDec(read(4)) ' Convert to Double or appropriate numerical type
+                Dim value1 As Double = CDec(read(4)) ' Convert to Double or appropriate numerical type
+                Dim value2 As Double = CDec(read(5)) ' Convert to Double or appropriate numerical type
                 Dim result As Double = value1 - value2
-                DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), result, read(5), read(6), read(7), read(8), read(9))
+                DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), result, read(5), read(6), read(7), read(8), read(9), read(10), read(11))
             End While
             read.Close()
         Catch ex As Exception
@@ -806,7 +952,7 @@ Public Class frmDishRateChangeLog
                 Dim value1 As Double = CDec(read(4)) ' Convert to Double or appropriate numerical type
                 Dim value2 As Double = CDec(read(5)) ' Convert to Double or appropriate numerical type
                 Dim result As Double = value1 - value2
-                DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), result, read(5), read(6), read(7), read(8), read(9), read(10))
+                DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), result, read(5), read(6), read(7), read(8), read(9), read(10), read(11))
             End While
             read.Close()
         Catch ex As Exception
@@ -828,7 +974,7 @@ Public Class frmDishRateChangeLog
 
     Private Sub CmbBillType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbBillType.SelectedIndexChanged
         txtBillNumber.Text = ""
-
+        cmb_permission_select = False
         cmd_operator_select = False
         If CmbBillType.SelectedItem <> Nothing OrElse CmbBillType.SelectedItem <> "All" Then
             cmb_bill_select = True
@@ -840,8 +986,7 @@ Public Class frmDishRateChangeLog
             selectedItem = CmbBillType.SelectedItem.ToString().ToUpper()
             If selectedItem = "EXPRESS BILL" Then
                 selectedItem = "TAEB"
-            ElseIf selectedItem = "ALL" Then
-                bllAll()
+
             Else
                 selectedItem = CmbBillType.SelectedItem.ToString().ToUpper()
                 Dim words() As String = selectedItem.Split(" "c)
@@ -860,12 +1005,14 @@ Public Class frmDishRateChangeLog
         ' Check if "All" is selected
 
         ' Filter the search results in DataGridView based on the selected operator name
-
-        Dim fromDate As Date = dtpDateFrom.Value
+        If select_bill_type = "All" Then
+            ALL_ROW()
+        Else
+            Dim fromDate As Date = dtpDateFrom.Value
             Dim toDate As Date = dtpDateTo.Value
 
 
-        Dim query As String = "SELECT RCL.Id, RCL.BillNo,dsh.DishName , RCL.ChangedDate, RCL.OrgRate, RCL.ChangedRate,RCL.BillType, 
+            Dim query As String = "SELECT RCL.Id, RCL.BillNo,dsh.DishName , RCL.ChangedDate, RCL.OrgRate, RCL.ChangedRate,RCL.BillType, 
                              ER_Operator.EmployeeName AS OperatorName, 
                              ER_PermissionGranted.EmployeeName AS PermissionGrantedName, 
                              RCL.Remarks,RCL.companyId ,RCL.Branchid 
@@ -876,7 +1023,7 @@ Public Class frmDishRateChangeLog
                       WHERE RCL.BillType=@BillType AND
                       RCL.ChangedDate >= @FromDate AND RCL.ChangedDate <= @ToDate"
 
-        Dim conn As New SqlConnection(connection)
+            Dim conn As New SqlConnection(connection)
             Dim cmd As New SqlCommand(query, conn)
             cmd.Parameters.AddWithValue("@BillType", selectedItem)
             cmd.Parameters.AddWithValue("@FromDate", fromDate)
@@ -888,11 +1035,11 @@ Public Class frmDishRateChangeLog
                 DatagridView1.Rows.Clear()
                 'DatagridView1.DataSource = datatable
                 While (read.Read())
-                Dim value1 As Double = CDec(read(4)) ' Convert to Double or appropriate numerical type
-                Dim value2 As Double = CDec(read(5)) ' Convert to Double or appropriate numerical type
-                Dim result As Double = value1 - value2
-                DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), result, read(5), read(6), read(7), read(8), read(9), read(10))
-            End While
+                    Dim value1 As Double = CDec(read(4)) ' Convert to Double or appropriate numerical type
+                    Dim value2 As Double = CDec(read(5)) ' Convert to Double or appropriate numerical type
+                    Dim result As Double = value1 - value2
+                    DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), result, read(5), read(6), read(7), read(8), read(9), read(10), read(11))
+                End While
                 read.Close()
 
 
@@ -902,10 +1049,79 @@ Public Class frmDishRateChangeLog
             Finally
                 conn.Close()
             End Try
+        End If
 
         cmbPermission.SelectedItem = Nothing
         cmbOperator.SelectedItem = Nothing
         CmbBillType.SelectedItem = select_bill_type
 
+    End Sub
+
+    Private Sub cmbPermission_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPermission.SelectedIndexChanged
+        If cmbPermission.SelectedItem <> Nothing OrElse cmbPermission.SelectedItem <> "All" Then
+            cmb_permission_select = True
+        End If
+        txtBillNumber.Text = ""
+        cmb_bill_select = False
+        cmd_operator_select = False
+        Dim selectedPermission As String
+        Try
+            selectedPermission = cmbPermission.SelectedItem.ToString()
+        Catch ex As Exception
+            selectedPermission = Nothing
+        End Try
+
+        ' Check if "All" is selected
+        If selectedPermission = "All" Then
+            ALL_ROW()
+        Else
+            ' Filter the search results in DataGridView based on the selected operator name
+
+            Dim fromDate As Date = dtpDateFrom.Value
+            Dim toDate As Date = dtpDateTo.Value
+
+
+            Dim query As String = "SELECT RCL.Id, RCL.BillNo,dsh.DishName , RCL.ChangedDate, RCL.OrgRate, RCL.ChangedRate,RCL.BillType, 
+                             ER_Operator.EmployeeName AS OperatorName, 
+                             ER_PermissionGranted.EmployeeName AS PermissionGrantedName, 
+                             RCL.Remarks,RCL.companyId ,RCL.Branchid 
+                      FROM RateChangeLog AS RCL
+                      INNER JOIN EmployeeRegistration AS ER_Operator ON RCL.OperatorId = ER_Operator.EmpId
+                      INNER JOIN EmployeeRegistration AS ER_PermissionGranted ON RCL.PermissionGrantedId = ER_PermissionGranted.EmpId
+                        INNER JOIN Dish AS dsh ON RCL.DishId = dsh.DishID
+                      WHERE RCL.PermissionGrantedId IN (SELECT EmpId FROM EmployeeRegistration WHERE EmployeeName = @permissionGrant) AND
+                      RCL.ChangedDate >= @FromDate AND RCL.ChangedDate <= @ToDate"
+
+            Dim conn As New SqlConnection(connection)
+            Dim cmd As New SqlCommand(query, conn)
+            cmd.Parameters.AddWithValue("@permissionGrant", selectedPermission)
+            cmd.Parameters.AddWithValue("@FromDate", fromDate)
+            cmd.Parameters.AddWithValue("@ToDate", toDate)
+            Try
+                conn.Open()
+                Dim read As SqlDataReader = cmd.ExecuteReader()
+                ' Clear existing rows in DataGridView
+                DatagridView1.Rows.Clear()
+                'DatagridView1.DataSource = datatable
+                While (read.Read())
+                    Dim value1 As Double = CDec(read(4)) ' Convert to Double or appropriate numerical type
+                    Dim value2 As Double = CDec(read(5)) ' Convert to Double or appropriate numerical type
+                    Dim result As Double = value1 - value2
+                    DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), result, read(5), read(6), read(7), read(8), read(9), read(10), read(11))
+                End While
+                read.Close()
+
+
+            Catch ex As Exception
+
+
+            Finally
+                conn.Close()
+            End Try
+        End If
+
+        cmbOperator.SelectedItem = Nothing
+        CmbBillType.SelectedItem = Nothing
+        cmbPermission.SelectedItem = selectedPermission
     End Sub
 End Class

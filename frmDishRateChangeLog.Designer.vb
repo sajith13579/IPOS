@@ -25,6 +25,12 @@ Partial Class frmDishRateChangeLog
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDishRateChangeLog))
         Me.DatagridView1 = New System.Windows.Forms.DataGridView()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.cmbPermission = New System.Windows.Forms.ComboBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.btnExportExcel = New System.Windows.Forms.Button()
+        Me.CmbBillType = New System.Windows.Forms.ComboBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.bttnSearch = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.BtnPrint = New System.Windows.Forms.Button()
         Me.btnReset = New System.Windows.Forms.Button()
@@ -36,14 +42,9 @@ Partial Class frmDishRateChangeLog
         Me.txtBillNumber = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.SearchRadio = New System.Windows.Forms.RadioButton()
-        Me.bttnSearch = New System.Windows.Forms.Button()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.CmbBillType = New System.Windows.Forms.ComboBox()
-        Me.btnExportExcel = New System.Windows.Forms.Button()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.cmbPermission = New System.Windows.Forms.ComboBox()
         Me.colID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colBillNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colDishName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colChangedDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colOriginalRate = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colChangedRate = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -67,7 +68,7 @@ Partial Class frmDishRateChangeLog
         Me.DatagridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DatagridView1.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
         Me.DatagridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DatagridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colID, Me.colBillNumber, Me.colChangedDate, Me.colOriginalRate, Me.colChangedRate, Me.colDiffrence, Me.colBillType, Me.colOperator, Me.colPermission, Me.colRemarks, Me.colComapnyId, Me.colBranchId})
+        Me.DatagridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colID, Me.colBillNumber, Me.colDishName, Me.colChangedDate, Me.colOriginalRate, Me.colChangedRate, Me.colDiffrence, Me.colBillType, Me.colOperator, Me.colPermission, Me.colRemarks, Me.colComapnyId, Me.colBranchId})
         Me.DatagridView1.Location = New System.Drawing.Point(1, 181)
         Me.DatagridView1.Name = "DatagridView1"
         Me.DatagridView1.ReadOnly = True
@@ -104,6 +105,65 @@ Partial Class frmDishRateChangeLog
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Serach by date"
+        '
+        'cmbPermission
+        '
+        Me.cmbPermission.FormattingEnabled = True
+        Me.cmbPermission.Location = New System.Drawing.Point(568, 134)
+        Me.cmbPermission.Name = "cmbPermission"
+        Me.cmbPermission.Size = New System.Drawing.Size(145, 28)
+        Me.cmbPermission.TabIndex = 142
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(413, 142)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(96, 20)
+        Me.Label6.TabIndex = 141
+        Me.Label6.Text = "Permission"
+        '
+        'btnExportExcel
+        '
+        Me.btnExportExcel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnExportExcel.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnExportExcel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExportExcel.ForeColor = System.Drawing.SystemColors.InfoText
+        Me.btnExportExcel.Image = CType(resources.GetObject("btnExportExcel.Image"), System.Drawing.Image)
+        Me.btnExportExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnExportExcel.Location = New System.Drawing.Point(791, 110)
+        Me.btnExportExcel.Name = "btnExportExcel"
+        Me.btnExportExcel.Size = New System.Drawing.Size(178, 34)
+        Me.btnExportExcel.TabIndex = 140
+        Me.btnExportExcel.Text = "Export Excel"
+        Me.btnExportExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnExportExcel.UseVisualStyleBackColor = True
+        '
+        'CmbBillType
+        '
+        Me.CmbBillType.FormattingEnabled = True
+        Me.CmbBillType.Location = New System.Drawing.Point(568, 100)
+        Me.CmbBillType.Name = "CmbBillType"
+        Me.CmbBillType.Size = New System.Drawing.Size(145, 28)
+        Me.CmbBillType.TabIndex = 139
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(413, 100)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(76, 20)
+        Me.Label5.TabIndex = 138
+        Me.Label5.Text = "Bill Type"
+        '
+        'bttnSearch
+        '
+        Me.bttnSearch.Location = New System.Drawing.Point(114, 118)
+        Me.bttnSearch.Name = "bttnSearch"
+        Me.bttnSearch.Size = New System.Drawing.Size(195, 26)
+        Me.bttnSearch.TabIndex = 137
+        Me.bttnSearch.Text = "Search"
+        Me.bttnSearch.UseVisualStyleBackColor = True
         '
         'Label2
         '
@@ -218,65 +278,6 @@ Partial Class frmDishRateChangeLog
         Me.SearchRadio.UseVisualStyleBackColor = False
         Me.SearchRadio.Visible = False
         '
-        'bttnSearch
-        '
-        Me.bttnSearch.Location = New System.Drawing.Point(114, 118)
-        Me.bttnSearch.Name = "bttnSearch"
-        Me.bttnSearch.Size = New System.Drawing.Size(195, 26)
-        Me.bttnSearch.TabIndex = 137
-        Me.bttnSearch.Text = "Search"
-        Me.bttnSearch.UseVisualStyleBackColor = True
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(413, 100)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(76, 20)
-        Me.Label5.TabIndex = 138
-        Me.Label5.Text = "Bill Type"
-        '
-        'CmbBillType
-        '
-        Me.CmbBillType.FormattingEnabled = True
-        Me.CmbBillType.Location = New System.Drawing.Point(568, 100)
-        Me.CmbBillType.Name = "CmbBillType"
-        Me.CmbBillType.Size = New System.Drawing.Size(145, 28)
-        Me.CmbBillType.TabIndex = 139
-        '
-        'btnExportExcel
-        '
-        Me.btnExportExcel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnExportExcel.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnExportExcel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnExportExcel.ForeColor = System.Drawing.SystemColors.InfoText
-        Me.btnExportExcel.Image = CType(resources.GetObject("btnExportExcel.Image"), System.Drawing.Image)
-        Me.btnExportExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnExportExcel.Location = New System.Drawing.Point(791, 110)
-        Me.btnExportExcel.Name = "btnExportExcel"
-        Me.btnExportExcel.Size = New System.Drawing.Size(178, 34)
-        Me.btnExportExcel.TabIndex = 140
-        Me.btnExportExcel.Text = "Export Excel"
-        Me.btnExportExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnExportExcel.UseVisualStyleBackColor = True
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(413, 142)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(96, 20)
-        Me.Label6.TabIndex = 141
-        Me.Label6.Text = "Permission"
-        '
-        'cmbPermission
-        '
-        Me.cmbPermission.FormattingEnabled = True
-        Me.cmbPermission.Location = New System.Drawing.Point(568, 134)
-        Me.cmbPermission.Name = "cmbPermission"
-        Me.cmbPermission.Size = New System.Drawing.Size(145, 28)
-        Me.cmbPermission.TabIndex = 142
-        '
         'colID
         '
         Me.colID.HeaderText = "ID"
@@ -289,6 +290,12 @@ Partial Class frmDishRateChangeLog
         Me.colBillNumber.HeaderText = "Bill Number"
         Me.colBillNumber.Name = "colBillNumber"
         Me.colBillNumber.ReadOnly = True
+        '
+        'colDishName
+        '
+        Me.colDishName.HeaderText = "Dish Name"
+        Me.colDishName.Name = "colDishName"
+        Me.colDishName.ReadOnly = True
         '
         'colChangedDate
         '
@@ -387,8 +394,11 @@ Partial Class frmDishRateChangeLog
     Friend WithEvents CmbBillType As ComboBox
     Friend WithEvents Label5 As Label
     Friend WithEvents btnExportExcel As Button
+    Friend WithEvents cmbPermission As ComboBox
+    Friend WithEvents Label6 As Label
     Friend WithEvents colID As DataGridViewTextBoxColumn
     Friend WithEvents colBillNumber As DataGridViewTextBoxColumn
+    Friend WithEvents colDishName As DataGridViewTextBoxColumn
     Friend WithEvents colChangedDate As DataGridViewTextBoxColumn
     Friend WithEvents colOriginalRate As DataGridViewTextBoxColumn
     Friend WithEvents colChangedRate As DataGridViewTextBoxColumn
@@ -399,6 +409,4 @@ Partial Class frmDishRateChangeLog
     Friend WithEvents colRemarks As DataGridViewTextBoxColumn
     Friend WithEvents colComapnyId As DataGridViewTextBoxColumn
     Friend WithEvents colBranchId As DataGridViewTextBoxColumn
-    Friend WithEvents cmbPermission As ComboBox
-    Friend WithEvents Label6 As Label
 End Class

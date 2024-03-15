@@ -50,15 +50,19 @@ Public Class frmDishRateChangeLog
             conn.Open()
             Dim read As SqlDataReader = cmd.ExecuteReader()
             DatagridView1.Rows.Clear()
-
+            Dim original_rate_sum As Decimal = 0
+            Dim rate_diff_sum As Decimal = 0
             While (read.Read())
                 Dim value1 As Double = CDec(read(4)) ' Convert to Double or appropriate numerical type
                 Dim value2 As Double = CDec(read(5)) ' Convert to Double or appropriate numerical type
                 Dim result As Double = value1 - value2
+                rate_diff_sum = rate_diff_sum + Math.Abs(result)
+                original_rate_sum = original_rate_sum + value2
                 DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), result, read(5), read(6), read(7), read(8), read(9), read(10), read(11))
             End While
             read.Close()
-
+            txtRateDiffSum.Text = rate_diff_sum
+            txtOrgRateSum.Text = original_rate_sum
         Catch ex As Exception
             MessageBox.Show("Error", ex.Message)
         Finally
@@ -136,14 +140,21 @@ Public Class frmDishRateChangeLog
                 ' Clear existing rows in DataGridView
                 DatagridView1.Rows.Clear()
                 'DatagridView1.DataSource = datatable
+                Dim original_rate_sum As Decimal = 0
+                Dim rate_diff_sum As Decimal = 0
+
                 While (read.Read())
                     Dim value1 As Double = CDec(read(4)) ' Convert to Double or appropriate numerical type
                     Dim value2 As Double = CDec(read(5)) ' Convert to Double or appropriate numerical type
                     Dim result As Double = value1 - value2
+                    rate_diff_sum = rate_diff_sum + Math.Abs(result)
+                    original_rate_sum = original_rate_sum + value2
+
                     DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), result, read(5), read(6), read(7), read(8), read(9), read(10), read(11))
                 End While
                 read.Close()
-
+                txtRateDiffSum.Text = rate_diff_sum
+                txtOrgRateSum.Text = original_rate_sum
 
             Catch ex As Exception
 
@@ -308,14 +319,19 @@ Public Class frmDishRateChangeLog
                 ' Clear existing rows in DataGridView
                 DatagridView1.Rows.Clear()
                 'DatagridView1.DataSource = datatable
+                Dim original_rate_sum As Decimal = 0
+                Dim rate_diff_sum As Decimal = 0
                 While (read.Read())
                     Dim value1 As Double = CDec(read(4)) ' Convert to Double or appropriate numerical type
                     Dim value2 As Double = CDec(read(5)) ' Convert to Double or appropriate numerical type
                     Dim result As Double = value1 - value2
+                    rate_diff_sum = rate_diff_sum + Math.Abs(result)
+                    original_rate_sum = original_rate_sum + value2
                     DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), result, read(5), read(6), read(7), read(8), read(9), read(10), read(11))
                 End While
                 read.Close()
-
+                txtRateDiffSum.Text = rate_diff_sum
+                txtOrgRateSum.Text = original_rate_sum
 
             Catch ex As Exception
 
@@ -378,9 +394,6 @@ Public Class frmDishRateChangeLog
     End Sub
 
     Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles BtnPrint.Click
-        Dim CN As New SqlConnection(connection)
-
-
 
 
         Dim fromDate As Date = dtpDateFrom.Value
@@ -389,15 +402,32 @@ Public Class frmDishRateChangeLog
             If cmbOperator.SelectedItem <> Nothing AndAlso cmbOperator.SelectedItem.ToString() = "All" Then
                 all_print()
 
+
+
+
             ElseIf cmbPermission.SelectedItem <> Nothing AndAlso cmbPermission.SelectedItem.ToString() = "All" Then
                 all_print()
 
             ElseIf CmbBillType.SelectedItem <> Nothing AndAlso CmbBillType.SelectedItem.ToString() = "All" Then
                 all_print()
+            ElseIf cmbOperator.SelectedItem = Nothing AndAlso CmbBillType.SelectedItem = Nothing AndAlso cmbPermission.SelectedItem = Nothing Then
+                all_print()
 
-                'it is check all avalue cmboperator except all
-            ElseIf cmbOperator.SelectedItem.ToString() <> "All" Then
+                'it is check all value cmboperator except all
+            ElseIf cmbOperator.SelectedItem <> Nothing AndAlso cmbOperator.SelectedItem.ToString() <> "All" Then
+                Dim CN As New SqlConnection(connection)
                 CN.Open()
+                Dim MyCommand1 As New SqlCommand()
+                Dim myDA1 As New SqlDataAdapter()
+                Dim ds As New DataSet ' The DataSet you created.
+
+                MyCommand1.Connection = CN
+                MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
+                                "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
+                                "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
+                MyCommand1.CommandType = CommandType.Text
+                myDA1.SelectCommand = MyCommand1
+                myDA1.Fill(ds, "Hotel")
                 ' Call the stored procedure
                 Dim operator1 As String = cmbOperator.SelectedItem.ToString()
                 Dim cmd2 As New SqlCommand("GetRateChangeLogByOperatorAndDate", CN)
@@ -427,11 +457,38 @@ Public Class frmDishRateChangeLog
                 rpt2.Dispose()
                 CN.Close()
 
-            ElseIf CmbBillType.SelectedItem.ToString() <> "All" Then
-
+            ElseIf CmbBillType.SelectedItem <> Nothing AndAlso CmbBillType.SelectedItem.ToString() <> "All" Then
+                Dim CN As New SqlConnection(connection)
                 CN.Open()
+                Dim MyCommand1 As New SqlCommand()
+                Dim myDA1 As New SqlDataAdapter()
+                Dim ds As New DataSet ' The DataSet you created.
+
+                MyCommand1.Connection = CN
+                MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
+                                "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
+                                "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
+                MyCommand1.CommandType = CommandType.Text
+                myDA1.SelectCommand = MyCommand1
+                myDA1.Fill(ds, "Hotel")
+
                 ' Call the stored procedure
                 Dim bill_type As String = CmbBillType.SelectedItem.ToString()
+                If bill_type = "Dine In" Then
+                    bill_type = "DI"
+                End If
+                If bill_type = "Take Away" Then
+                    bill_type = "TA"
+                End If
+                If bill_type = "Home Delivery" Then
+                    bill_type = "HD"
+                End If
+                If bill_type = "Third Party" Then
+                    bill_type = "TP"
+                End If
+                If bill_type = "Express Bill" Then
+                    bill_type = "TAEB"
+                End If
                 Dim cmd2 As New SqlCommand("GetRateChangeLogByBillTypeAndDate", CN)
                 cmd2.CommandType = CommandType.StoredProcedure
                 cmd2.Parameters.AddWithValue("@FromDate", fromDate)
@@ -459,8 +516,20 @@ Public Class frmDishRateChangeLog
                 rpt2.Dispose()
                 CN.Close()
 
-            ElseIf cmbPermission.SelectedItem <> "All" Then
+            ElseIf cmbPermission.SelectedItem <> Nothing AndAlso cmbPermission.SelectedItem <> "All" Then
+                Dim CN As New SqlConnection(connection)
                 CN.Open()
+                Dim MyCommand1 As New SqlCommand()
+                Dim myDA1 As New SqlDataAdapter()
+                Dim ds As New DataSet ' The DataSet you created.
+
+                MyCommand1.Connection = CN
+                MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
+                                "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
+                                "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
+                MyCommand1.CommandType = CommandType.Text
+                myDA1.SelectCommand = MyCommand1
+                myDA1.Fill(ds, "Hotel")
                 ' Call the stored procedure
                 Dim permission As String = cmbPermission.SelectedItem.ToString()
                 Dim cmd2 As New SqlCommand("GetRateChangeLogByPermissionAndDate", CN)
@@ -492,9 +561,21 @@ Public Class frmDishRateChangeLog
             End If
 
         Else
+            Dim CN As New SqlConnection(connection)
             CN.Open()
+            Dim MyCommand1 As New SqlCommand()
+            Dim myDA1 As New SqlDataAdapter()
+            Dim ds As New DataSet ' The DataSet you created.
+
+            MyCommand1.Connection = CN
+            MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
+                                "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
+                                "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
+            MyCommand1.CommandType = CommandType.Text
+            myDA1.SelectCommand = MyCommand1
+            myDA1.Fill(ds, "Hotel")
             ' Call the stored procedure
-            Dim operator1 As String = cmbOperator.SelectedItem.ToString()
+
             Dim cmd2 As New SqlCommand("Get_Rate_Change_log_bill_num", CN)
             cmd2.CommandType = CommandType.StoredProcedure
             Dim searchquery As String = txtBillNumber.Text.Trim()
@@ -655,14 +736,21 @@ Public Class frmDishRateChangeLog
             ' Clear existing rows in DataGridView
             DatagridView1.Rows.Clear()
             'DatagridView1.DataSource = datatable
+            Dim original_rate_sum As Decimal = 0
+            Dim rate_diff_sum As Decimal = 0
+
             While (read.Read())
                 Dim value1 As Double = CDec(read(4)) ' Convert to Double or appropriate numerical type
                 Dim value2 As Double = CDec(read(5)) ' Convert to Double or appropriate numerical type
                 Dim result As Double = value1 - value2
+
+                rate_diff_sum = rate_diff_sum + Math.Abs(result)
+                original_rate_sum = original_rate_sum + value2
                 DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), result, read(5), read(6), read(7), read(8), read(9), read(10), read(11))
             End While
             read.Close()
-
+            txtRateDiffSum.Text = rate_diff_sum
+            txtOrgRateSum.Text = original_rate_sum
 
         Catch ex As Exception
 
@@ -721,15 +809,20 @@ Public Class frmDishRateChangeLog
                 ' Clear existing rows in DataGridView
                 DatagridView1.Rows.Clear()
                 'DatagridView1.DataSource = datatable
+                Dim original_rate_sum As Decimal = 0
+                Dim rate_diff_sum As Decimal = 0
                 While (read.Read())
                     Dim value1 As Double = CDec(read(4)) ' Convert to Double or appropriate numerical type
                     Dim value2 As Double = CDec(read(5)) ' Convert to Double or appropriate numerical type
                     Dim result As Double = value1 - value2
+                    rate_diff_sum = rate_diff_sum + Math.Abs(result)
+                    original_rate_sum = original_rate_sum + value2
                     DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), result, read(5), read(6), read(7), read(8), read(9), read(10), read(11))
                 End While
                 read.Close()
 
-
+                txtRateDiffSum.Text = rate_diff_sum
+                txtOrgRateSum.Text = original_rate_sum
             Catch ex As Exception
 
 
@@ -762,7 +855,8 @@ Public Class frmDishRateChangeLog
         ElseIf cmbPermission.SelectedItem <> "All" AndAlso cmbPermission.SelectedItem <> Nothing AndAlso cmb_permission_select = True Then
             GetPermissionData()
         Else
-            bttnSearch.PerformClick()
+            ' bttnSearch.PerformClick()
+            data_all()
         End If
     End Sub
 
@@ -832,11 +926,26 @@ Public Class frmDishRateChangeLog
 
     Private Sub dtpDateTo_ValueChanged(sender As Object, e As EventArgs) Handles dtpDateTo.ValueChanged
         'filter_data()
+        'SearchRadio.Checked = False
+        'SearchRadio.PerformClick()
         txtBillNumber.Text = ""
-        cmbOperator.SelectedItem = Nothing
-        CmbBillType.SelectedItem = Nothing
-        cmbPermission.SelectedItem = Nothing
-        bttnSearch.PerformClick()
+        'cmbOperator.SelectedItem = Nothing
+        'CmbBillType.SelectedItem = Nothing
+        'cmbPermission.SelectedItem = Nothing
+        If cmbOperator.SelectedItem = "All" OrElse CmbBillType.SelectedItem = "All" OrElse cmbPermission.SelectedItem = "All" Then
+            ALL_ROW()
+        ElseIf cmbOperator.SelectedItem <> "All" AndAlso cmbOperator.SelectedItem <> Nothing AndAlso cmd_operator_select = True Then
+            GetOperatorData()
+
+        ElseIf CmbBillType.SelectedItem <> "All" AndAlso CmbBillType.SelectedItem <> Nothing AndAlso cmb_bill_select = True Then
+            GetBillData()
+
+        ElseIf cmbPermission.SelectedItem <> "All" AndAlso cmbPermission.SelectedItem <> Nothing AndAlso cmb_permission_select = True Then
+            GetPermissionData()
+        Else
+            'bttnSearch.PerformClick()
+            data_all()
+        End If
     End Sub
 
     Public Sub ALL_ROW()
@@ -885,13 +994,19 @@ Public Class frmDishRateChangeLog
             '    ' Add the row data to the DataGridView
             '    DatagridView1.Rows.Add(rowData)
             'Next
+            Dim original_rate_sum As Decimal = 0
+            Dim rate_diff_sum As Decimal = 0
             While (read.Read())
                 Dim value1 As Double = CDec(read(4)) ' Convert to Double or appropriate numerical type
                 Dim value2 As Double = CDec(read(5)) ' Convert to Double or appropriate numerical type
                 Dim result As Double = value1 - value2
+                rate_diff_sum = rate_diff_sum + Math.Abs(result)
+                original_rate_sum = original_rate_sum + value2
                 DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), result, read(5), read(6), read(7), read(8), read(9), read(10), read(11))
             End While
             read.Close()
+            txtRateDiffSum.Text = rate_diff_sum
+            txtOrgRateSum.Text = original_rate_sum
         Catch ex As Exception
             MessageBox.Show("Error", ex.Message)
 
@@ -900,13 +1015,13 @@ Public Class frmDishRateChangeLog
         End Try
     End Sub
 
-    Private Sub bttnSearch_Click_1(sender As Object, e As EventArgs) Handles bttnSearch.Click
+    Public Sub data_all()
         txtBillNumber.Text = ""
 
         'Dim selectedOperator As String = cmbOperator.SelectedItem.ToString()
         Dim conn As New SqlConnection(connection)
-            Dim fromDate As Date = dtpDateFrom.Value
-            Dim toDate As Date = dtpDateTo.Value
+        Dim fromDate As Date = dtpDateFrom.Value
+        Dim toDate As Date = dtpDateTo.Value
 
         Dim query As String = "SELECT RCL.Id, RCL.BillNo,dsh.DishName ,RCL.ChangedDate, RCL.OrgRate, RCL.ChangedRate,RCL.BillType, 
                              ER_Operator.EmployeeName AS OperatorName, 
@@ -920,8 +1035,8 @@ Public Class frmDishRateChangeLog
 
 
         Dim cmd As New SqlCommand(query, conn)
-            cmd.Parameters.AddWithValue("@FromDate", fromDate)
-            cmd.Parameters.AddWithValue("@ToDate", toDate)
+        cmd.Parameters.AddWithValue("@FromDate", fromDate)
+        cmd.Parameters.AddWithValue("@ToDate", toDate)
 
         'cmd.Parameters.AddWithValue("@OperatorName", selectedOperator)
 
@@ -948,19 +1063,30 @@ Public Class frmDishRateChangeLog
             '    ' Add the row data to the DataGridView
             '    DatagridView1.Rows.Add(rowData)
             'Next
+            Dim original_rate_sum As Decimal = 0
+            Dim rate_diff_sum As Decimal = 0
             While (read.Read())
                 Dim value1 As Double = CDec(read(4)) ' Convert to Double or appropriate numerical type
                 Dim value2 As Double = CDec(read(5)) ' Convert to Double or appropriate numerical type
                 Dim result As Double = value1 - value2
+                rate_diff_sum = rate_diff_sum + Math.Abs(result)
+                original_rate_sum = original_rate_sum + value2
                 DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), result, read(5), read(6), read(7), read(8), read(9), read(10), read(11))
             End While
             read.Close()
+            txtRateDiffSum.Text = rate_diff_sum
+            txtOrgRateSum.Text = original_rate_sum
         Catch ex As Exception
             MessageBox.Show("Error", ex.Message)
 
         Finally
             conn.Close()
         End Try
+
+    End Sub
+
+
+    Private Sub bttnSearch_Click_1(sender As Object, e As EventArgs)
 
     End Sub
 
@@ -1034,14 +1160,20 @@ Public Class frmDishRateChangeLog
                 ' Clear existing rows in DataGridView
                 DatagridView1.Rows.Clear()
                 'DatagridView1.DataSource = datatable
+                Dim original_rate_sum As Decimal = 0
+                Dim rate_diff_sum As Decimal = 0
                 While (read.Read())
                     Dim value1 As Double = CDec(read(4)) ' Convert to Double or appropriate numerical type
                     Dim value2 As Double = CDec(read(5)) ' Convert to Double or appropriate numerical type
                     Dim result As Double = value1 - value2
+                    rate_diff_sum = rate_diff_sum + Math.Abs(result)
+                    original_rate_sum = original_rate_sum + value2
                     DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), result, read(5), read(6), read(7), read(8), read(9), read(10), read(11))
                 End While
                 read.Close()
 
+                txtRateDiffSum.Text = rate_diff_sum
+                txtOrgRateSum.Text = original_rate_sum
 
             Catch ex As Exception
 
@@ -1103,14 +1235,19 @@ Public Class frmDishRateChangeLog
                 ' Clear existing rows in DataGridView
                 DatagridView1.Rows.Clear()
                 'DatagridView1.DataSource = datatable
+                Dim original_rate_sum As Decimal = 0
+                Dim rate_diff_sum As Decimal = 0
                 While (read.Read())
                     Dim value1 As Double = CDec(read(4)) ' Convert to Double or appropriate numerical type
                     Dim value2 As Double = CDec(read(5)) ' Convert to Double or appropriate numerical type
                     Dim result As Double = value1 - value2
+                    rate_diff_sum = rate_diff_sum + Math.Abs(result)
+                    original_rate_sum = original_rate_sum + value2
                     DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), result, read(5), read(6), read(7), read(8), read(9), read(10), read(11))
                 End While
                 read.Close()
-
+                txtRateDiffSum.Text = rate_diff_sum
+                txtOrgRateSum.Text = original_rate_sum
 
             Catch ex As Exception
 
@@ -1123,5 +1260,9 @@ Public Class frmDishRateChangeLog
         cmbOperator.SelectedItem = Nothing
         CmbBillType.SelectedItem = Nothing
         cmbPermission.SelectedItem = selectedPermission
+    End Sub
+
+    Private Sub Label8_Click(sender As Object, e As EventArgs) Handles Label8.Click
+
     End Sub
 End Class

@@ -30,7 +30,6 @@ Partial Class frmDishRateChangeLog
         Me.btnExportExcel = New System.Windows.Forms.Button()
         Me.CmbBillType = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.bttnSearch = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.BtnPrint = New System.Windows.Forms.Button()
         Me.btnReset = New System.Windows.Forms.Button()
@@ -55,8 +54,14 @@ Partial Class frmDishRateChangeLog
         Me.colRemarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colComapnyId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colBranchId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.txtRateDiffSum = New System.Windows.Forms.TextBox()
+        Me.txtOrgRateSum = New System.Windows.Forms.TextBox()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label7 = New System.Windows.Forms.Label()
         CType(Me.DatagridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
+        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'DatagridView1
@@ -72,7 +77,8 @@ Partial Class frmDishRateChangeLog
         Me.DatagridView1.Location = New System.Drawing.Point(1, 181)
         Me.DatagridView1.Name = "DatagridView1"
         Me.DatagridView1.ReadOnly = True
-        Me.DatagridView1.Size = New System.Drawing.Size(1003, 334)
+        Me.DatagridView1.RowHeadersVisible = False
+        Me.DatagridView1.Size = New System.Drawing.Size(1003, 293)
         Me.DatagridView1.TabIndex = 0
         '
         'GroupBox1
@@ -85,7 +91,6 @@ Partial Class frmDishRateChangeLog
         Me.GroupBox1.Controls.Add(Me.btnExportExcel)
         Me.GroupBox1.Controls.Add(Me.CmbBillType)
         Me.GroupBox1.Controls.Add(Me.Label5)
-        Me.GroupBox1.Controls.Add(Me.bttnSearch)
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.BtnPrint)
         Me.GroupBox1.Controls.Add(Me.btnReset)
@@ -155,15 +160,6 @@ Partial Class frmDishRateChangeLog
         Me.Label5.Size = New System.Drawing.Size(76, 20)
         Me.Label5.TabIndex = 138
         Me.Label5.Text = "Bill Type"
-        '
-        'bttnSearch
-        '
-        Me.bttnSearch.Location = New System.Drawing.Point(114, 118)
-        Me.bttnSearch.Name = "bttnSearch"
-        Me.bttnSearch.Size = New System.Drawing.Size(195, 26)
-        Me.bttnSearch.TabIndex = 137
-        Me.bttnSearch.Text = "Search"
-        Me.bttnSearch.UseVisualStyleBackColor = True
         '
         'Label2
         '
@@ -335,7 +331,7 @@ Partial Class frmDishRateChangeLog
         '
         'colPermission
         '
-        Me.colPermission.HeaderText = "Permission"
+        Me.colPermission.HeaderText = "PermissionGranted"
         Me.colPermission.Name = "colPermission"
         Me.colPermission.ReadOnly = True
         '
@@ -359,11 +355,62 @@ Partial Class frmDishRateChangeLog
         Me.colBranchId.ReadOnly = True
         Me.colBranchId.Visible = False
         '
+        'Label8
+        '
+        Me.Label8.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(17, 11)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(176, 13)
+        Me.Label8.TabIndex = 4
+        Me.Label8.Text = "Grand Total of Rate Diffrence"
+        '
+        'txtRateDiffSum
+        '
+        Me.txtRateDiffSum.Location = New System.Drawing.Point(199, 8)
+        Me.txtRateDiffSum.Name = "txtRateDiffSum"
+        Me.txtRateDiffSum.ReadOnly = True
+        Me.txtRateDiffSum.Size = New System.Drawing.Size(154, 20)
+        Me.txtRateDiffSum.TabIndex = 5
+        '
+        'txtOrgRateSum
+        '
+        Me.txtOrgRateSum.Location = New System.Drawing.Point(771, 8)
+        Me.txtOrgRateSum.Name = "txtOrgRateSum"
+        Me.txtOrgRateSum.ReadOnly = True
+        Me.txtOrgRateSum.Size = New System.Drawing.Size(154, 20)
+        Me.txtOrgRateSum.TabIndex = 6
+        '
+        'Panel1
+        '
+        Me.Panel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel1.Controls.Add(Me.Label7)
+        Me.Panel1.Controls.Add(Me.Label8)
+        Me.Panel1.Controls.Add(Me.txtOrgRateSum)
+        Me.Panel1.Controls.Add(Me.txtRateDiffSum)
+        Me.Panel1.Location = New System.Drawing.Point(1, 480)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(1003, 32)
+        Me.Panel1.TabIndex = 7
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(544, 11)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(169, 13)
+        Me.Label7.TabIndex = 7
+        Me.Label7.Text = "Grand Total Of Original Rate"
+        '
         'frmDishRateChangeLog
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1004, 513)
+        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.DatagridView1)
         Me.Name = "frmDishRateChangeLog"
@@ -373,6 +420,8 @@ Partial Class frmDishRateChangeLog
         CType(Me.DatagridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -390,7 +439,6 @@ Partial Class frmDishRateChangeLog
     Friend WithEvents cmbOperator As ComboBox
     Friend WithEvents Label4 As Label
     Friend WithEvents SearchRadio As RadioButton
-    Friend WithEvents bttnSearch As Button
     Friend WithEvents CmbBillType As ComboBox
     Friend WithEvents Label5 As Label
     Friend WithEvents btnExportExcel As Button
@@ -409,4 +457,9 @@ Partial Class frmDishRateChangeLog
     Friend WithEvents colRemarks As DataGridViewTextBoxColumn
     Friend WithEvents colComapnyId As DataGridViewTextBoxColumn
     Friend WithEvents colBranchId As DataGridViewTextBoxColumn
+    Friend WithEvents Label8 As Label
+    Friend WithEvents txtRateDiffSum As TextBox
+    Friend WithEvents txtOrgRateSum As TextBox
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents Label7 As Label
 End Class

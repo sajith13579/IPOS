@@ -58,7 +58,15 @@ Public Class frmDishRateChangeLog
                 Dim result As Double = value1 - value2
                 rate_diff_sum = rate_diff_sum + Math.Abs(result)
                 original_rate_sum = original_rate_sum + value2
-                DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), result, read(5), read(6), read(7), read(8), read(9), read(10), read(11))
+                Dim status As String = ""
+                If value2 < value1 Then
+                    status = "Less"
+                ElseIf value2 > value1 Then
+                    status = "High"
+                ElseIf value1 = value2 Then
+                    status = "Equal"
+                End If
+                DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), read(5), Math.Abs(result), status, read(6), read(7), read(8), read(9), read(10), read(11))
             End While
             read.Close()
             txtRateDiffSum.Text = rate_diff_sum
@@ -327,7 +335,15 @@ Public Class frmDishRateChangeLog
                     Dim result As Double = value1 - value2
                     rate_diff_sum = rate_diff_sum + Math.Abs(result)
                     original_rate_sum = original_rate_sum + value2
-                    DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), result, read(5), read(6), read(7), read(8), read(9), read(10), read(11))
+                    Dim status As String = ""
+                    If value2 < value1 Then
+                        status = "Less"
+                    ElseIf value2 > value1 Then
+                        status = "High"
+                    ElseIf value1 = value2 Then
+                        status = "Equal"
+                    End If
+                    DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), read(5), Math.Abs(result), status, read(6), read(7), read(8), read(9), read(10), read(11))
                 End While
                 read.Close()
                 txtRateDiffSum.Text = rate_diff_sum
@@ -999,10 +1015,19 @@ Public Class frmDishRateChangeLog
             While (read.Read())
                 Dim value1 As Double = CDec(read(4)) ' Convert to Double or appropriate numerical type
                 Dim value2 As Double = CDec(read(5)) ' Convert to Double or appropriate numerical type
+
                 Dim result As Double = value1 - value2
                 rate_diff_sum = rate_diff_sum + Math.Abs(result)
+                Dim status As String = ""
+                If value2 < value1 Then
+                    status = "Less"
+                ElseIf value2 > value1 Then
+                    status = "High"
+                ElseIf value1 = value2 Then
+                    status = "Equal"
+                End If
                 original_rate_sum = original_rate_sum + value2
-                DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), result, read(5), read(6), read(7), read(8), read(9), read(10), read(11))
+                DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), read(5), Math.Abs(result), status, read(6), read(7), read(8), read(9), read(10), read(11))
             End While
             read.Close()
             txtRateDiffSum.Text = rate_diff_sum
@@ -1071,7 +1096,16 @@ Public Class frmDishRateChangeLog
                 Dim result As Double = value1 - value2
                 rate_diff_sum = rate_diff_sum + Math.Abs(result)
                 original_rate_sum = original_rate_sum + value2
-                DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), result, read(5), read(6), read(7), read(8), read(9), read(10), read(11))
+
+                Dim status As String = ""
+                If value2 < value1 Then
+                    status = "Less"
+                ElseIf value2 > value1 Then
+                    status = "High"
+                ElseIf value1 = value2 Then
+                    status = "Equal"
+                End If
+                DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), read(5), Math.Abs(result), status, read(6), read(7), read(8), read(9), read(10), read(11))
             End While
             read.Close()
             txtRateDiffSum.Text = rate_diff_sum
@@ -1168,7 +1202,15 @@ Public Class frmDishRateChangeLog
                     Dim result As Double = value1 - value2
                     rate_diff_sum = rate_diff_sum + Math.Abs(result)
                     original_rate_sum = original_rate_sum + value2
-                    DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), result, read(5), read(6), read(7), read(8), read(9), read(10), read(11))
+                    Dim status As String = ""
+                    If value2 < value1 Then
+                        status = "Less"
+                    ElseIf value2 > value1 Then
+                        status = "High"
+                    ElseIf value1 = value2 Then
+                        status = "Equal"
+                    End If
+                    DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), read(5), Math.Abs(result), status, read(6), read(7), read(8), read(9), read(10), read(11))
                 End While
                 read.Close()
 
@@ -1243,7 +1285,15 @@ Public Class frmDishRateChangeLog
                     Dim result As Double = value1 - value2
                     rate_diff_sum = rate_diff_sum + Math.Abs(result)
                     original_rate_sum = original_rate_sum + value2
-                    DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), result, read(5), read(6), read(7), read(8), read(9), read(10), read(11))
+                    Dim status As String = ""
+                    If value2 < value1 Then
+                        status = "Less"
+                    ElseIf value2 > value1 Then
+                        status = "High"
+                    ElseIf value1 = value2 Then
+                        status = "Equal"
+                    End If
+                    DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), read(5), Math.Abs(result), status, read(6), read(7), read(8), read(9), read(10), read(11))
                 End While
                 read.Close()
                 txtRateDiffSum.Text = rate_diff_sum
@@ -1263,6 +1313,10 @@ Public Class frmDishRateChangeLog
     End Sub
 
     Private Sub Label8_Click(sender As Object, e As EventArgs) Handles Label8.Click
+
+    End Sub
+
+    Private Sub Label7_Click(sender As Object, e As EventArgs) Handles Label7.Click
 
     End Sub
 End Class

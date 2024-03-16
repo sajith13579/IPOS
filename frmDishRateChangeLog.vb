@@ -70,7 +70,7 @@ Public Class frmDishRateChangeLog
             End While
             read.Close()
             txtRateDiffSum.Text = rate_diff_sum
-            txtOrgRateSum.Text = original_rate_sum
+            txtChangeRateSum.Text = original_rate_sum
         Catch ex As Exception
             MessageBox.Show("Error", ex.Message)
         Finally
@@ -148,7 +148,7 @@ Public Class frmDishRateChangeLog
                 ' Clear existing rows in DataGridView
                 DatagridView1.Rows.Clear()
                 'DatagridView1.DataSource = datatable
-                Dim original_rate_sum As Decimal = 0
+                Dim changed_rate_sum As Decimal = 0
                 Dim rate_diff_sum As Decimal = 0
 
                 While (read.Read())
@@ -156,13 +156,13 @@ Public Class frmDishRateChangeLog
                     Dim value2 As Double = CDec(read(5)) ' Convert to Double or appropriate numerical type
                     Dim result As Double = value1 - value2
                     rate_diff_sum = rate_diff_sum + Math.Abs(result)
-                    original_rate_sum = original_rate_sum + value2
+                    changed_rate_sum = changed_rate_sum + value2
 
                     DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), result, read(5), read(6), read(7), read(8), read(9), read(10), read(11))
                 End While
                 read.Close()
                 txtRateDiffSum.Text = rate_diff_sum
-                txtOrgRateSum.Text = original_rate_sum
+                txtChangeRateSum.Text = changed_rate_sum
 
             Catch ex As Exception
 
@@ -327,14 +327,14 @@ Public Class frmDishRateChangeLog
                 ' Clear existing rows in DataGridView
                 DatagridView1.Rows.Clear()
                 'DatagridView1.DataSource = datatable
-                Dim original_rate_sum As Decimal = 0
+                Dim changed_rate_sum As Decimal = 0
                 Dim rate_diff_sum As Decimal = 0
                 While (read.Read())
                     Dim value1 As Double = CDec(read(4)) ' Convert to Double or appropriate numerical type
                     Dim value2 As Double = CDec(read(5)) ' Convert to Double or appropriate numerical type
                     Dim result As Double = value1 - value2
                     rate_diff_sum = rate_diff_sum + Math.Abs(result)
-                    original_rate_sum = original_rate_sum + value2
+                    changed_rate_sum = changed_rate_sum + value2
                     Dim status As String = ""
                     If value2 < value1 Then
                         status = "Less"
@@ -347,7 +347,7 @@ Public Class frmDishRateChangeLog
                 End While
                 read.Close()
                 txtRateDiffSum.Text = rate_diff_sum
-                txtOrgRateSum.Text = original_rate_sum
+                txtChangeRateSum.Text = changed_rate_sum
 
             Catch ex As Exception
 
@@ -752,7 +752,7 @@ Public Class frmDishRateChangeLog
             ' Clear existing rows in DataGridView
             DatagridView1.Rows.Clear()
             'DatagridView1.DataSource = datatable
-            Dim original_rate_sum As Decimal = 0
+            Dim changed_rate_sum As Decimal = 0
             Dim rate_diff_sum As Decimal = 0
 
             While (read.Read())
@@ -761,12 +761,12 @@ Public Class frmDishRateChangeLog
                 Dim result As Double = value1 - value2
 
                 rate_diff_sum = rate_diff_sum + Math.Abs(result)
-                original_rate_sum = original_rate_sum + value2
+                changed_rate_sum = changed_rate_sum + value2
                 DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), result, read(5), read(6), read(7), read(8), read(9), read(10), read(11))
             End While
             read.Close()
             txtRateDiffSum.Text = rate_diff_sum
-            txtOrgRateSum.Text = original_rate_sum
+            txtChangeRateSum.Text = changed_rate_sum
 
         Catch ex As Exception
 
@@ -825,20 +825,28 @@ Public Class frmDishRateChangeLog
                 ' Clear existing rows in DataGridView
                 DatagridView1.Rows.Clear()
                 'DatagridView1.DataSource = datatable
-                Dim original_rate_sum As Decimal = 0
+                Dim changed_rate_sum As Decimal = 0
                 Dim rate_diff_sum As Decimal = 0
                 While (read.Read())
                     Dim value1 As Double = CDec(read(4)) ' Convert to Double or appropriate numerical type
                     Dim value2 As Double = CDec(read(5)) ' Convert to Double or appropriate numerical type
                     Dim result As Double = value1 - value2
                     rate_diff_sum = rate_diff_sum + Math.Abs(result)
-                    original_rate_sum = original_rate_sum + value2
-                    DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), result, read(5), read(6), read(7), read(8), read(9), read(10), read(11))
+                    changed_rate_sum = changed_rate_sum + value2
+                    Dim status As String = ""
+                    If value2 < value1 Then
+                        status = "Less"
+                    ElseIf value2 > value1 Then
+                        status = "High"
+                    ElseIf value1 = value2 Then
+                        status = "Equal"
+                    End If
+                    DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), read(5), Math.Abs(result), status, read(6), read(7), read(8), read(9), read(10), read(11))
                 End While
                 read.Close()
-
                 txtRateDiffSum.Text = rate_diff_sum
-                txtOrgRateSum.Text = original_rate_sum
+                txtChangeRateSum.Text = changed_rate_sum
+
             Catch ex As Exception
 
 
@@ -1010,7 +1018,7 @@ Public Class frmDishRateChangeLog
             '    ' Add the row data to the DataGridView
             '    DatagridView1.Rows.Add(rowData)
             'Next
-            Dim original_rate_sum As Decimal = 0
+            Dim changed_rate_sum As Decimal = 0
             Dim rate_diff_sum As Decimal = 0
             While (read.Read())
                 Dim value1 As Double = CDec(read(4)) ' Convert to Double or appropriate numerical type
@@ -1026,12 +1034,12 @@ Public Class frmDishRateChangeLog
                 ElseIf value1 = value2 Then
                     status = "Equal"
                 End If
-                original_rate_sum = original_rate_sum + value2
+                changed_rate_sum = changed_rate_sum + value2
                 DatagridView1.Rows.Add(read(0), read(1), read(2), read(3), read(4), read(5), Math.Abs(result), status, read(6), read(7), read(8), read(9), read(10), read(11))
             End While
             read.Close()
             txtRateDiffSum.Text = rate_diff_sum
-            txtOrgRateSum.Text = original_rate_sum
+            txtChangeRateSum.Text = changed_rate_sum
         Catch ex As Exception
             MessageBox.Show("Error", ex.Message)
 
@@ -1109,7 +1117,7 @@ Public Class frmDishRateChangeLog
             End While
             read.Close()
             txtRateDiffSum.Text = rate_diff_sum
-            txtOrgRateSum.Text = original_rate_sum
+            txtChangeRateSum.Text = original_rate_sum
         Catch ex As Exception
             MessageBox.Show("Error", ex.Message)
 
@@ -1194,14 +1202,14 @@ Public Class frmDishRateChangeLog
                 ' Clear existing rows in DataGridView
                 DatagridView1.Rows.Clear()
                 'DatagridView1.DataSource = datatable
-                Dim original_rate_sum As Decimal = 0
+                Dim changed_rate_sum As Decimal = 0
                 Dim rate_diff_sum As Decimal = 0
                 While (read.Read())
                     Dim value1 As Double = CDec(read(4)) ' Convert to Double or appropriate numerical type
                     Dim value2 As Double = CDec(read(5)) ' Convert to Double or appropriate numerical type
                     Dim result As Double = value1 - value2
                     rate_diff_sum = rate_diff_sum + Math.Abs(result)
-                    original_rate_sum = original_rate_sum + value2
+                    changed_rate_sum = changed_rate_sum + value2
                     Dim status As String = ""
                     If value2 < value1 Then
                         status = "Less"
@@ -1215,7 +1223,7 @@ Public Class frmDishRateChangeLog
                 read.Close()
 
                 txtRateDiffSum.Text = rate_diff_sum
-                txtOrgRateSum.Text = original_rate_sum
+                txtChangeRateSum.Text = changed_rate_sum
 
             Catch ex As Exception
 
@@ -1277,14 +1285,14 @@ Public Class frmDishRateChangeLog
                 ' Clear existing rows in DataGridView
                 DatagridView1.Rows.Clear()
                 'DatagridView1.DataSource = datatable
-                Dim original_rate_sum As Decimal = 0
+                Dim changed_rate_sum As Decimal = 0
                 Dim rate_diff_sum As Decimal = 0
                 While (read.Read())
                     Dim value1 As Double = CDec(read(4)) ' Convert to Double or appropriate numerical type
                     Dim value2 As Double = CDec(read(5)) ' Convert to Double or appropriate numerical type
                     Dim result As Double = value1 - value2
                     rate_diff_sum = rate_diff_sum + Math.Abs(result)
-                    original_rate_sum = original_rate_sum + value2
+                    changed_rate_sum = changed_rate_sum + value2
                     Dim status As String = ""
                     If value2 < value1 Then
                         status = "Less"
@@ -1297,7 +1305,7 @@ Public Class frmDishRateChangeLog
                 End While
                 read.Close()
                 txtRateDiffSum.Text = rate_diff_sum
-                txtOrgRateSum.Text = original_rate_sum
+                txtChangeRateSum.Text = changed_rate_sum
 
             Catch ex As Exception
 

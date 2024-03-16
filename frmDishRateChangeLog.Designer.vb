@@ -22,9 +22,23 @@ Partial Class frmDishRateChangeLog
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDishRateChangeLog))
         Me.DatagridView1 = New System.Windows.Forms.DataGridView()
+        Me.colID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colBillNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colDishName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colChangedDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colOriginalRate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colChangedRate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colDiffrence = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colBillType = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colOperator = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colPermission = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colRemarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colComapnyId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colBranchId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.cmbPermission = New System.Windows.Forms.ComboBox()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -44,23 +58,9 @@ Partial Class frmDishRateChangeLog
         Me.SearchRadio = New System.Windows.Forms.RadioButton()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.txtRateDiffSum = New System.Windows.Forms.TextBox()
-        Me.txtOrgRateSum = New System.Windows.Forms.TextBox()
+        Me.txtChangeRateSum = New System.Windows.Forms.TextBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.colID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colBillNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colDishName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colChangedDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colOriginalRate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colChangedRate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colDiffrence = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colBillType = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colOperator = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colPermission = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colRemarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colComapnyId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colBranchId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DatagridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -74,14 +74,14 @@ Partial Class frmDishRateChangeLog
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DatagridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DatagridView1.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DatagridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DatagridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.DatagridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DatagridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colID, Me.colBillNumber, Me.colDishName, Me.colChangedDate, Me.colOriginalRate, Me.colChangedRate, Me.colDiffrence, Me.colStatus, Me.colBillType, Me.colOperator, Me.colPermission, Me.colRemarks, Me.colComapnyId, Me.colBranchId})
         Me.DatagridView1.EnableHeadersVisualStyles = False
@@ -91,6 +91,93 @@ Partial Class frmDishRateChangeLog
         Me.DatagridView1.RowHeadersVisible = False
         Me.DatagridView1.Size = New System.Drawing.Size(1003, 293)
         Me.DatagridView1.TabIndex = 0
+        '
+        'colID
+        '
+        Me.colID.HeaderText = "ID"
+        Me.colID.Name = "colID"
+        Me.colID.ReadOnly = True
+        Me.colID.Visible = False
+        '
+        'colBillNumber
+        '
+        Me.colBillNumber.HeaderText = "Bill Number"
+        Me.colBillNumber.Name = "colBillNumber"
+        Me.colBillNumber.ReadOnly = True
+        '
+        'colDishName
+        '
+        Me.colDishName.HeaderText = "Dish Name"
+        Me.colDishName.Name = "colDishName"
+        Me.colDishName.ReadOnly = True
+        '
+        'colChangedDate
+        '
+        Me.colChangedDate.HeaderText = "Changed Date"
+        Me.colChangedDate.Name = "colChangedDate"
+        Me.colChangedDate.ReadOnly = True
+        '
+        'colOriginalRate
+        '
+        Me.colOriginalRate.HeaderText = "Original Rate"
+        Me.colOriginalRate.Name = "colOriginalRate"
+        Me.colOriginalRate.ReadOnly = True
+        '
+        'colChangedRate
+        '
+        Me.colChangedRate.HeaderText = "Changed Rate"
+        Me.colChangedRate.Name = "colChangedRate"
+        Me.colChangedRate.ReadOnly = True
+        '
+        'colDiffrence
+        '
+        Me.colDiffrence.HeaderText = "Diffrence"
+        Me.colDiffrence.Name = "colDiffrence"
+        Me.colDiffrence.ReadOnly = True
+        '
+        'colStatus
+        '
+        Me.colStatus.HeaderText = "Rate Status"
+        Me.colStatus.Name = "colStatus"
+        Me.colStatus.ReadOnly = True
+        '
+        'colBillType
+        '
+        Me.colBillType.HeaderText = "Bill Type"
+        Me.colBillType.Name = "colBillType"
+        Me.colBillType.ReadOnly = True
+        '
+        'colOperator
+        '
+        Me.colOperator.HeaderText = "Operator"
+        Me.colOperator.Name = "colOperator"
+        Me.colOperator.ReadOnly = True
+        '
+        'colPermission
+        '
+        Me.colPermission.HeaderText = "Permission Granted"
+        Me.colPermission.Name = "colPermission"
+        Me.colPermission.ReadOnly = True
+        '
+        'colRemarks
+        '
+        Me.colRemarks.HeaderText = "Remarks"
+        Me.colRemarks.Name = "colRemarks"
+        Me.colRemarks.ReadOnly = True
+        '
+        'colComapnyId
+        '
+        Me.colComapnyId.HeaderText = "comp_Id"
+        Me.colComapnyId.Name = "colComapnyId"
+        Me.colComapnyId.ReadOnly = True
+        Me.colComapnyId.Visible = False
+        '
+        'colBranchId
+        '
+        Me.colBranchId.HeaderText = "Branch_ID"
+        Me.colBranchId.Name = "colBranchId"
+        Me.colBranchId.ReadOnly = True
+        Me.colBranchId.Visible = False
         '
         'GroupBox1
         '
@@ -141,7 +228,6 @@ Partial Class frmDishRateChangeLog
         '
         'btnExportExcel
         '
-        Me.btnExportExcel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnExportExcel.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnExportExcel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnExportExcel.ForeColor = System.Drawing.SystemColors.InfoText
@@ -304,13 +390,13 @@ Partial Class frmDishRateChangeLog
         Me.txtRateDiffSum.Size = New System.Drawing.Size(154, 20)
         Me.txtRateDiffSum.TabIndex = 5
         '
-        'txtOrgRateSum
+        'txtChangeRateSum
         '
-        Me.txtOrgRateSum.Location = New System.Drawing.Point(771, 8)
-        Me.txtOrgRateSum.Name = "txtOrgRateSum"
-        Me.txtOrgRateSum.ReadOnly = True
-        Me.txtOrgRateSum.Size = New System.Drawing.Size(154, 20)
-        Me.txtOrgRateSum.TabIndex = 6
+        Me.txtChangeRateSum.Location = New System.Drawing.Point(771, 8)
+        Me.txtChangeRateSum.Name = "txtChangeRateSum"
+        Me.txtChangeRateSum.ReadOnly = True
+        Me.txtChangeRateSum.Size = New System.Drawing.Size(154, 20)
+        Me.txtChangeRateSum.TabIndex = 6
         '
         'Panel1
         '
@@ -318,7 +404,7 @@ Partial Class frmDishRateChangeLog
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel1.Controls.Add(Me.Label7)
         Me.Panel1.Controls.Add(Me.Label8)
-        Me.Panel1.Controls.Add(Me.txtOrgRateSum)
+        Me.Panel1.Controls.Add(Me.txtChangeRateSum)
         Me.Panel1.Controls.Add(Me.txtRateDiffSum)
         Me.Panel1.Location = New System.Drawing.Point(1, 480)
         Me.Panel1.Name = "Panel1"
@@ -334,93 +420,6 @@ Partial Class frmDishRateChangeLog
         Me.Label7.Size = New System.Drawing.Size(176, 13)
         Me.Label7.TabIndex = 7
         Me.Label7.Text = "Grand Total Of Changed Rate"
-        '
-        'colID
-        '
-        Me.colID.HeaderText = "ID"
-        Me.colID.Name = "colID"
-        Me.colID.ReadOnly = True
-        Me.colID.Visible = False
-        '
-        'colBillNumber
-        '
-        Me.colBillNumber.HeaderText = "Bill Number"
-        Me.colBillNumber.Name = "colBillNumber"
-        Me.colBillNumber.ReadOnly = True
-        '
-        'colDishName
-        '
-        Me.colDishName.HeaderText = "Dish Name"
-        Me.colDishName.Name = "colDishName"
-        Me.colDishName.ReadOnly = True
-        '
-        'colChangedDate
-        '
-        Me.colChangedDate.HeaderText = "Changed Date"
-        Me.colChangedDate.Name = "colChangedDate"
-        Me.colChangedDate.ReadOnly = True
-        '
-        'colOriginalRate
-        '
-        Me.colOriginalRate.HeaderText = "Original Rate"
-        Me.colOriginalRate.Name = "colOriginalRate"
-        Me.colOriginalRate.ReadOnly = True
-        '
-        'colChangedRate
-        '
-        Me.colChangedRate.HeaderText = "Changed Rate"
-        Me.colChangedRate.Name = "colChangedRate"
-        Me.colChangedRate.ReadOnly = True
-        '
-        'colDiffrence
-        '
-        Me.colDiffrence.HeaderText = "Diffrence"
-        Me.colDiffrence.Name = "colDiffrence"
-        Me.colDiffrence.ReadOnly = True
-        '
-        'colStatus
-        '
-        Me.colStatus.HeaderText = "Rate Status"
-        Me.colStatus.Name = "colStatus"
-        Me.colStatus.ReadOnly = True
-        '
-        'colBillType
-        '
-        Me.colBillType.HeaderText = "Bill Type"
-        Me.colBillType.Name = "colBillType"
-        Me.colBillType.ReadOnly = True
-        '
-        'colOperator
-        '
-        Me.colOperator.HeaderText = "Operator"
-        Me.colOperator.Name = "colOperator"
-        Me.colOperator.ReadOnly = True
-        '
-        'colPermission
-        '
-        Me.colPermission.HeaderText = "Permission Granted"
-        Me.colPermission.Name = "colPermission"
-        Me.colPermission.ReadOnly = True
-        '
-        'colRemarks
-        '
-        Me.colRemarks.HeaderText = "Remarks"
-        Me.colRemarks.Name = "colRemarks"
-        Me.colRemarks.ReadOnly = True
-        '
-        'colComapnyId
-        '
-        Me.colComapnyId.HeaderText = "comp_Id"
-        Me.colComapnyId.Name = "colComapnyId"
-        Me.colComapnyId.ReadOnly = True
-        Me.colComapnyId.Visible = False
-        '
-        'colBranchId
-        '
-        Me.colBranchId.HeaderText = "Branch_ID"
-        Me.colBranchId.Name = "colBranchId"
-        Me.colBranchId.ReadOnly = True
-        Me.colBranchId.Visible = False
         '
         'frmDishRateChangeLog
         '
@@ -463,7 +462,7 @@ Partial Class frmDishRateChangeLog
     Friend WithEvents Label6 As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents txtRateDiffSum As TextBox
-    Friend WithEvents txtOrgRateSum As TextBox
+    Friend WithEvents txtChangeRateSum As TextBox
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Label7 As Label
     Friend WithEvents colID As DataGridViewTextBoxColumn

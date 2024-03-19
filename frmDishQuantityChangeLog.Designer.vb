@@ -22,12 +22,10 @@ Partial Class frmDishQuantityChangeLog
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDishQuantityChangeLog))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDishQuantityChangeLog))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.btnExportExcel = New System.Windows.Forms.Button()
         Me.BtnPrint = New System.Windows.Forms.Button()
-        Me.btnReset = New System.Windows.Forms.Button()
         Me.cmbPermission = New System.Windows.Forms.ComboBox()
         Me.CmbBillType = New System.Windows.Forms.ComboBox()
         Me.cmbOperator = New System.Windows.Forms.ComboBox()
@@ -58,6 +56,8 @@ Partial Class frmDishQuantityChangeLog
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.txtChangedQtyCount = New System.Windows.Forms.TextBox()
+        Me.btnExportExcel = New System.Windows.Forms.Button()
+        Me.btnReset = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         CType(Me.DatagridViewQty, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
@@ -92,21 +92,6 @@ Partial Class frmDishQuantityChangeLog
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Search By Date"
         '
-        'btnExportExcel
-        '
-        Me.btnExportExcel.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnExportExcel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnExportExcel.ForeColor = System.Drawing.SystemColors.InfoText
-        Me.btnExportExcel.Image = CType(resources.GetObject("btnExportExcel.Image"), System.Drawing.Image)
-        Me.btnExportExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnExportExcel.Location = New System.Drawing.Point(676, 113)
-        Me.btnExportExcel.Name = "btnExportExcel"
-        Me.btnExportExcel.Size = New System.Drawing.Size(124, 33)
-        Me.btnExportExcel.TabIndex = 152
-        Me.btnExportExcel.Text = "Export Excel"
-        Me.btnExportExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnExportExcel.UseVisualStyleBackColor = True
-        '
         'BtnPrint
         '
         Me.BtnPrint.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -117,22 +102,6 @@ Partial Class frmDishQuantityChangeLog
         Me.BtnPrint.TabIndex = 150
         Me.BtnPrint.Text = "Print"
         Me.BtnPrint.UseVisualStyleBackColor = True
-        '
-        'btnReset
-        '
-        Me.btnReset.BackColor = System.Drawing.SystemColors.Control
-        Me.btnReset.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnReset.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnReset.ForeColor = System.Drawing.Color.Black
-        Me.btnReset.Image = CType(resources.GetObject("btnReset.Image"), System.Drawing.Image)
-        Me.btnReset.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReset.Location = New System.Drawing.Point(676, 68)
-        Me.btnReset.Name = "btnReset"
-        Me.btnReset.Size = New System.Drawing.Size(124, 32)
-        Me.btnReset.TabIndex = 151
-        Me.btnReset.Text = "Reset"
-        Me.btnReset.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnReset.UseVisualStyleBackColor = False
         '
         'cmbPermission
         '
@@ -382,6 +351,37 @@ Partial Class frmDishQuantityChangeLog
         Me.txtChangedQtyCount.ReadOnly = True
         Me.txtChangedQtyCount.Size = New System.Drawing.Size(216, 20)
         Me.txtChangedQtyCount.TabIndex = 0
+        '
+        'btnExportExcel
+        '
+        Me.btnExportExcel.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnExportExcel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExportExcel.ForeColor = System.Drawing.SystemColors.InfoText
+        Me.btnExportExcel.Image = CType(resources.GetObject("btnExportExcel.Image"), System.Drawing.Image)
+        Me.btnExportExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnExportExcel.Location = New System.Drawing.Point(676, 113)
+        Me.btnExportExcel.Name = "btnExportExcel"
+        Me.btnExportExcel.Size = New System.Drawing.Size(124, 33)
+        Me.btnExportExcel.TabIndex = 152
+        Me.btnExportExcel.Text = "Export Excel"
+        Me.btnExportExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnExportExcel.UseVisualStyleBackColor = True
+        '
+        'btnReset
+        '
+        Me.btnReset.BackColor = System.Drawing.SystemColors.Control
+        Me.btnReset.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnReset.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReset.ForeColor = System.Drawing.Color.Black
+        Me.btnReset.Image = CType(resources.GetObject("btnReset.Image"), System.Drawing.Image)
+        Me.btnReset.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnReset.Location = New System.Drawing.Point(676, 68)
+        Me.btnReset.Name = "btnReset"
+        Me.btnReset.Size = New System.Drawing.Size(124, 32)
+        Me.btnReset.TabIndex = 151
+        Me.btnReset.Text = "Reset"
+        Me.btnReset.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnReset.UseVisualStyleBackColor = False
         '
         'frmDishQuantityChangeLog
         '

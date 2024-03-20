@@ -4,8 +4,8 @@ Public Class frmDishQuantityChangeLog
 
     Public Sub all_print()
         Dim CN As New SqlConnection(connection)
-        Dim fromDate As Date = dtpDateFrom.Value
-        Dim toDate As Date = dtpDateTo.Value
+        Dim fromDate As Date = dtpDateFromQua.Value
+        Dim toDate As Date = dtpDateToQua.Value
 
         Dim MyCommand1 As New SqlCommand()
         Dim myDA1 As New SqlDataAdapter()
@@ -49,22 +49,22 @@ Public Class frmDishQuantityChangeLog
 
 
     Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles BtnPrint.Click
-        Dim fromDate As Date = dtpDateFrom.Value
-        Dim toDate As Date = dtpDateTo.Value
-        If txtBillNumber.Text = "" Then
-            If cmbOperator.SelectedItem <> Nothing AndAlso cmbOperator.SelectedItem.ToString() = "All" Then
+        Dim fromDate As Date = dtpDateFromQua.Value
+        Dim toDate As Date = dtpDateToQua.Value
+        If txtBillNumberQua.Text = "" Then
+            If cmbOperatorQua.SelectedItem <> Nothing AndAlso cmbOperatorQua.SelectedItem.ToString() = "All" Then
                 all_print()
 
-            ElseIf cmbPermission.SelectedItem <> Nothing AndAlso cmbPermission.SelectedItem.ToString() = "All" Then
+            ElseIf cmbPermissionQua.SelectedItem <> Nothing AndAlso cmbPermissionQua.SelectedItem.ToString() = "All" Then
                 all_print()
 
-            ElseIf CmbBillType.SelectedItem <> Nothing AndAlso CmbBillType.SelectedItem.ToString() = "All" Then
+            ElseIf CmbBillTypeQua.SelectedItem <> Nothing AndAlso CmbBillTypeQua.SelectedItem.ToString() = "All" Then
                 all_print()
-            ElseIf cmbOperator.SelectedItem = Nothing AndAlso CmbBillType.SelectedItem = Nothing AndAlso cmbPermission.SelectedItem = Nothing Then
+            ElseIf cmbOperatorQua.SelectedItem = Nothing AndAlso CmbBillTypeQua.SelectedItem = Nothing AndAlso cmbPermissionQua.SelectedItem = Nothing Then
                 all_print()
 
                 'it is check all value cmboperator except all
-            ElseIf cmbOperator.SelectedItem <> Nothing AndAlso cmbOperator.SelectedItem.ToString() <> "All" Then
+            ElseIf cmbOperatorQua.SelectedItem <> Nothing AndAlso cmbOperatorQua.SelectedItem.ToString() <> "All" Then
                 Dim CN As New SqlConnection(connection)
                 CN.Open()
                 Dim MyCommand1 As New SqlCommand()
@@ -79,7 +79,7 @@ Public Class frmDishQuantityChangeLog
                 myDA1.SelectCommand = MyCommand1
                 myDA1.Fill(ds, "Hotel")
                 ' Call the stored procedure
-                Dim operator1 As String = cmbOperator.SelectedItem.ToString()
+                Dim operator1 As String = cmbOperatorQua.SelectedItem.ToString()
                 Dim cmd2 As New SqlCommand("GetQtyChangeLogByOperatorAndDateRange", CN)
                 cmd2.CommandType = CommandType.StoredProcedure
                 cmd2.Parameters.AddWithValue("@FromDate", fromDate)
@@ -107,7 +107,7 @@ Public Class frmDishQuantityChangeLog
                 rpt2.Dispose()
                 CN.Close()
 
-            ElseIf CmbBillType.SelectedItem <> Nothing AndAlso CmbBillType.SelectedItem.ToString() <> "All" Then
+            ElseIf CmbBillTypeQua.SelectedItem <> Nothing AndAlso CmbBillTypeQua.SelectedItem.ToString() <> "All" Then
                 Dim CN As New SqlConnection(connection)
                 CN.Open()
                 Dim MyCommand1 As New SqlCommand()
@@ -123,7 +123,7 @@ Public Class frmDishQuantityChangeLog
                 myDA1.Fill(ds, "Hotel")
 
                 ' Call the stored procedure
-                Dim bill_type As String = CmbBillType.SelectedItem.ToString()
+                Dim bill_type As String = CmbBillTypeQua.SelectedItem.ToString()
                 If bill_type = "Dine In" Then
                     bill_type = "DI"
                 End If
@@ -166,7 +166,7 @@ Public Class frmDishQuantityChangeLog
                 rpt2.Dispose()
                 CN.Close()
 
-            ElseIf cmbPermission.SelectedItem <> Nothing AndAlso cmbPermission.SelectedItem <> "All" Then
+            ElseIf cmbPermissionQua.SelectedItem <> Nothing AndAlso cmbPermissionQua.SelectedItem <> "All" Then
                 Dim CN As New SqlConnection(connection)
                 CN.Open()
                 Dim MyCommand1 As New SqlCommand()
@@ -181,7 +181,7 @@ Public Class frmDishQuantityChangeLog
                 myDA1.SelectCommand = MyCommand1
                 myDA1.Fill(ds, "Hotel")
                 ' Call the stored procedure
-                Dim permission As String = cmbPermission.SelectedItem.ToString()
+                Dim permission As String = cmbPermissionQua.SelectedItem.ToString()
                 Dim cmd2 As New SqlCommand("GetQtyChangeLogByPermissionAndDateRange", CN)
                 cmd2.CommandType = CommandType.StoredProcedure
                 cmd2.Parameters.AddWithValue("@FromDate", fromDate)
@@ -228,7 +228,7 @@ Public Class frmDishQuantityChangeLog
 
             Dim cmd2 As New SqlCommand("SearchQtyChangeLogByBillNo", CN)
             cmd2.CommandType = CommandType.StoredProcedure
-            Dim searchquery As String = txtBillNumber.Text.Trim()
+            Dim searchquery As String = txtBillNumberQua.Text.Trim()
             cmd2.Parameters.AddWithValue("@SearchQuery", searchquery)
             Dim adapter2 As New SqlDataAdapter(cmd2)
             Dim datatable2 As New DataTable
@@ -254,10 +254,10 @@ Public Class frmDishQuantityChangeLog
         End If
     End Sub
 
-    Public Sub ALL_ROW()
+    Public Sub ALL_ROW_qua()
         Dim conn As New SqlConnection(connection)
-        Dim fromDate As Date = dtpDateFrom.Value
-        Dim toDate As Date = dtpDateTo.Value
+        Dim fromDate As Date = dtpDateFromQua.Value
+        Dim toDate As Date = dtpDateToQua.Value
         Dim query As String = "select qcl.ID,qcl.BillNo,dsh.DishName,qcl.ChangedDate,qcl.OrgQty,qcl.ChangedQty,qcl.BillType,
             ER_Operator.EmployeeName As OperatorName,
             ER_PermissionGranted.EmployeeName AS PermissionGrantedName,
@@ -308,29 +308,52 @@ Public Class frmDishQuantityChangeLog
             conn.Close()
         End Try
     End Sub
-    Public Sub GetOperatorData()
-        If cmbOperator.SelectedItem <> Nothing OrElse cmbOperator.SelectedItem <> "All" Then
+
+
+
+
+
+    Private Sub dtpDateFrom_ValueChanged(sender As Object, e As EventArgs) Handles dtpDateFromQua.ValueChanged
+        txtBillNumberQua.Text = ""
+        If cmbOperatorQua.SelectedItem = "All" OrElse CmbBillTypeQua.SelectedItem = "All" OrElse cmbPermissionQua.SelectedItem = "All" Then
+            ALL_ROW_qua()
+        ElseIf cmbOperatorQua.SelectedItem <> "All" AndAlso cmbOperatorQua.SelectedItem <> Nothing AndAlso cmd_operator_select = True Then
+            cmb_op_qua_select_ind_change()
+        ElseIf CmbBillTypeQua.SelectedItem <> "All" AndAlso CmbBillTypeQua.SelectedItem <> Nothing AndAlso cmb_bill_select = True Then
+
+            cmb_bill_qua_select_ind_change()
+        ElseIf cmbPermissionQua.SelectedItem <> "All" AndAlso cmbPermissionQua.SelectedItem <> Nothing AndAlso cmb_permission_select = True Then
+
+            cmb_permission_qua_select_ind_change()
+        Else
+            ALL_ROW_qua()
+        End If
+
+    End Sub
+
+    Public Sub cmb_op_qua_select_ind_change()
+        If cmbOperatorQua.SelectedItem <> Nothing OrElse cmbOperatorQua.SelectedItem <> "All" Then
             cmd_operator_select = True
         End If
-        txtBillNumber.Text = ""
+        txtBillNumberQua.Text = ""
 
         cmb_bill_select = False
         cmb_permission_select = False
         Dim selectedOperator As String
         Try
-            selectedOperator = cmbOperator.SelectedItem.ToString()
+            selectedOperator = cmbOperatorQua.SelectedItem.ToString()
         Catch ex As Exception
             selectedOperator = Nothing
         End Try
 
         ' Check if "All" is selected
         If selectedOperator = "All" Then
-            ALL_ROW()
+            ALL_ROW_qua()
         Else
             ' Filter the search results in DataGridView based on the selected operator name
 
-            Dim fromDate As Date = dtpDateFrom.Value
-            Dim toDate As Date = dtpDateTo.Value
+            Dim fromDate As Date = dtpDateFromQua.Value
+            Dim toDate As Date = dtpDateToQua.Value
 
 
             Dim query As String = "select qcl.ID,qcl.BillNo,dsh.DishName,qcl.ChangedDate,qcl.OrgQty,qcl.ChangedQty,qcl.BillType, 
@@ -388,296 +411,16 @@ Public Class frmDishQuantityChangeLog
         End If
 
 
-        cmbPermission.SelectedItem = Nothing
-        CmbBillType.SelectedItem = Nothing
-        cmbOperator.SelectedItem = selectedOperator
+        cmbPermissionQua.SelectedItem = Nothing
+        CmbBillTypeQua.SelectedItem = Nothing
+        cmbOperatorQua.SelectedItem = selectedOperator
     End Sub
 
-    Public Sub GetBillData()
-        txtBillNumber.Text = ""
-        cmb_permission_select = False
-        cmd_operator_select = False
-        If CmbBillType.SelectedItem <> Nothing OrElse CmbBillType.SelectedItem <> "All" Then
-            cmb_bill_select = True
-        End If
-        Dim select_bill_type As String
-        Dim selectedItem As String
-        Try
-            select_bill_type = CmbBillType.SelectedItem.ToString()
-            selectedItem = CmbBillType.SelectedItem.ToString().ToUpper()
-            If selectedItem = "EXPRESS BILL" Then
-                selectedItem = "TAEB"
-
-            Else
-                selectedItem = CmbBillType.SelectedItem.ToString().ToUpper()
-                Dim words() As String = selectedItem.Split(" "c)
-                If words.Length >= 2 Then
-                    selectedItem = words(0).Substring(0, 1) & words(1).Substring(0, 1)
-                ElseIf words.Length = 1 Then
-                    selectedItem = words(0).Substring(0, Math.Min(2, words(0).Length))
-                Else
-                    selectedItem = ""
-                End If
-            End If
-        Catch ex As Exception
-            select_bill_type = Nothing
-            selectedItem = Nothing
-        End Try
-        ' Check if "All" is selected
-
-        ' Filter the search results in DataGridView based on the selected operator name
-        If select_bill_type = "All" Then
-            ALL_ROW()
-        Else
-            Dim fromDate As Date = dtpDateFrom.Value
-            Dim toDate As Date = dtpDateTo.Value
-
-
-            Dim query As String = "SELECT qcl.Id, qcl.BillNo,dsh.DishName , qcl.ChangedDate, qcl.OrgRate, qcl.ChangedRate,qcl.BillType, 
-                             ER_Operator.EmployeeName AS OperatorName, 
-                             ER_PermissionGranted.EmployeeName AS PermissionGrantedName, 
-                             qcl.Remarks,qcl.companyId ,qcl.Branchid 
-                      FROM QtyChangeLog  AS qcl
-                      INNER JOIN EmployeeRegistration AS ER_Operator ON qcl.OperatorId = ER_Operator.EmpId
-                      INNER JOIN EmployeeRegistration AS ER_PermissionGranted ON qcl.PermissionGrantedId = ER_PermissionGranted.EmpId
-                        INNER JOIN Dish AS dsh ON qcl.DishId = dsh.DishID
-                      WHERE RCL.BillType=@BillType AND
-                      qcl.ChangedDate >= @FromDate AND qcl.ChangedDate <= @ToDate"
-
-            Dim conn As New SqlConnection(connection)
-            Dim cmd As New SqlCommand(query, conn)
-            cmd.Parameters.AddWithValue("@BillType", selectedItem)
-            cmd.Parameters.AddWithValue("@FromDate", fromDate)
-            cmd.Parameters.AddWithValue("@ToDate", toDate)
-            Try
-                conn.Open()
-                Dim read As SqlDataReader = cmd.ExecuteReader()
-                ' Clear existing rows in DataGridView
-                DatagridViewQty.Rows.Clear()
-                Dim changed_qty_count As Decimal = 0
-                Dim qty_diff_count As Decimal = 0
-                While (read.Read())
-                    'org qty variable
-                    Dim org_qty As Double = CDec(read(4)) ' Convert to Double or appropriate numerical type
-                    Dim chng_qty As Double = CDec(read(5)) ' Convert to Double or appropriate numerical type
-
-                    Dim result As Double = org_qty - chng_qty
-                    qty_diff_count = qty_diff_count + Math.Abs(result)
-                    Dim status As String = ""
-                    If chng_qty < org_qty Then
-                        status = "Less"
-                    ElseIf chng_qty > org_qty Then
-                        status = "High"
-                    ElseIf chng_qty = org_qty Then
-                        status = "Equal"
-                    End If
-                    changed_qty_count = changed_qty_count + chng_qty
-                    DatagridViewQty.Rows.Add(read(0), read(1), read(2), read(3), read(4), read(5), Math.Abs(result), status, read(6), read(7), read(8), read(9), read(10), read(11))
-                End While
-                read.Close()
-                'txtRateDiffSum.Text = rate_diff_sum
-                txtChangedQtyCount.Text = changed_qty_count
-
-            Catch ex As Exception
-
-
-            Finally
-                conn.Close()
-            End Try
-        End If
-
-        cmbPermission.SelectedItem = Nothing
-        cmbOperator.SelectedItem = Nothing
-        CmbBillType.SelectedItem = select_bill_type
-    End Sub
-    Public Sub GetPermissionData()
-        If cmbPermission.SelectedItem <> Nothing OrElse cmbPermission.SelectedItem <> "All" Then
-            cmb_permission_select = True
-        End If
-        txtBillNumber.Text = ""
-        cmb_bill_select = False
-        cmd_operator_select = False
-        Dim selectedPermission As String
-        Try
-            selectedPermission = cmbPermission.SelectedItem.ToString()
-        Catch ex As Exception
-            selectedPermission = Nothing
-        End Try
-
-        ' Check if "All" is selected
-        If selectedPermission = "All" Then
-            ALL_ROW()
-        Else
-            ' Filter the search results in DataGridView based on the selected operator name
-
-            Dim fromDate As Date = dtpDateFrom.Value
-            Dim toDate As Date = dtpDateTo.Value
-
-
-            Dim query As String = "SELECT qcl.Id, qcl.BillNo,dsh.DishName , qcl.ChangedDate, qcl.OrgRate, qcl.ChangedRate,qcl.BillType, 
-                             ER_Operator.EmployeeName AS OperatorName, 
-                             ER_PermissionGranted.EmployeeName AS PermissionGrantedName, 
-                             qcl.Remarks,RCL.companyId ,qcl.Branchid 
-                      FROM QtyChangeLog  AS qcl
-                      INNER JOIN EmployeeRegistration AS ER_Operator ON qcl.OperatorId = ER_Operator.EmpId
-                      INNER JOIN EmployeeRegistration AS ER_PermissionGranted ON qcl.PermissionGrantedId = ER_PermissionGranted.EmpId
-                        INNER JOIN Dish AS dsh ON qcl.DishId = dsh.DishID
-                      WHERE qcl.PermissionGrantedId IN (SELECT EmpId FROM EmployeeRegistration WHERE EmployeeName = @permissionGrant) AND
-                      qcl.ChangedDate >= @FromDate AND qcl.ChangedDate <= @ToDate"
-
-            Dim conn As New SqlConnection(connection)
-            Dim cmd As New SqlCommand(query, conn)
-            cmd.Parameters.AddWithValue("@permissionGrant", selectedPermission)
-            cmd.Parameters.AddWithValue("@FromDate", fromDate)
-            cmd.Parameters.AddWithValue("@ToDate", toDate)
-            Try
-                conn.Open()
-                Dim read As SqlDataReader = cmd.ExecuteReader()
-                ' Clear existing rows in DataGridView
-                DatagridViewQty.Rows.Clear()
-
-                Dim changed_qty_count As Decimal = 0
-                Dim qty_diff_count As Decimal = 0
-                While (read.Read())
-                    'org qty variable
-                    Dim org_qty As Double = CDec(read(4)) ' Convert to Double or appropriate numerical type
-                    Dim chng_qty As Double = CDec(read(5)) ' Convert to Double or appropriate numerical type
-
-                    Dim result As Double = org_qty - chng_qty
-                    qty_diff_count = qty_diff_count + Math.Abs(result)
-                    Dim status As String = ""
-                    If chng_qty < org_qty Then
-                        status = "Less"
-                    ElseIf chng_qty > org_qty Then
-                        status = "High"
-                    ElseIf chng_qty = org_qty Then
-                        status = "Equal"
-                    End If
-                    changed_qty_count = changed_qty_count + chng_qty
-                    DatagridViewQty.Rows.Add(read(0), read(1), read(2), read(3), read(4), read(5), Math.Abs(result), status, read(6), read(7), read(8), read(9), read(10), read(11))
-                End While
-                read.Close()
-                'txtRateDiffSum.Text = rate_diff_sum
-                txtChangedQtyCount.Text = changed_qty_count
-
-            Catch ex As Exception
-
-
-            Finally
-                conn.Close()
-            End Try
-        End If
-
-        cmbOperator.SelectedItem = Nothing
-        CmbBillType.SelectedItem = Nothing
-        cmbPermission.SelectedItem = selectedPermission
-    End Sub
-
-
-    Private Sub dtpDateFrom_ValueChanged(sender As Object, e As EventArgs) Handles dtpDateFrom.ValueChanged
-        txtBillNumber.Text = ""
-        If cmbOperator.SelectedItem = "All" OrElse CmbBillType.SelectedItem = "All" OrElse cmbPermission.SelectedItem = "All" Then
-            ALL_ROW()
-        ElseIf cmbOperator.SelectedItem <> "All" AndAlso cmbOperator.SelectedItem <> Nothing AndAlso cmd_operator_select = True Then
-            GetOperatorData()
-
-        ElseIf CmbBillType.SelectedItem <> "All" AndAlso CmbBillType.SelectedItem <> Nothing AndAlso cmb_bill_select = True Then
-            GetBillData()
-
-        ElseIf cmbPermission.SelectedItem <> "All" AndAlso cmbPermission.SelectedItem <> Nothing AndAlso cmb_permission_select = True Then
-            GetPermissionData()
-        Else
-            ALL_ROW()
-        End If
-
-    End Sub
-
-    Private Sub cmbOperator_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbOperator.SelectedIndexChanged
-        If cmbOperator.SelectedItem <> Nothing OrElse cmbOperator.SelectedItem <> "All" Then
-            cmd_operator_select = True
-        End If
-        txtBillNumber.Text = ""
-
-        cmb_bill_select = False
-        cmb_permission_select = False
-        Dim selectedOperator As String
-        Try
-            selectedOperator = cmbOperator.SelectedItem.ToString()
-        Catch ex As Exception
-            selectedOperator = Nothing
-        End Try
-
-        ' Check if "All" is selected
-        If selectedOperator = "All" Then
-            ALL_ROW()
-        Else
-            ' Filter the search results in DataGridView based on the selected operator name
-
-            Dim fromDate As Date = dtpDateFrom.Value
-            Dim toDate As Date = dtpDateTo.Value
-
-
-            Dim query As String = "select qcl.ID,qcl.BillNo,dsh.DishName,qcl.ChangedDate,qcl.OrgQty,qcl.ChangedQty,qcl.BillType, 
-                             ER_Operator.EmployeeName AS OperatorName, 
-                             ER_PermissionGranted.EmployeeName AS PermissionGrantedName, 
-                             qcl.Remarks,qcl.companyId ,qcl.Branchid 
-                      FROM QtyChangeLog  AS qcl
-                      INNER JOIN EmployeeRegistration AS ER_Operator ON qcl.OperatorId = ER_Operator.EmpId
-                      INNER JOIN EmployeeRegistration AS ER_PermissionGranted ON qcl.PermissionGrantedId = ER_PermissionGranted.EmpId
-                        INNER JOIN Dish AS dsh ON qcl.DishId = dsh.DishID
-                      WHERE qcl.OperatorId IN (SELECT EmpId FROM EmployeeRegistration WHERE EmployeeName = @OperatorName) AND
-                      qcl.ChangedDate >= @FromDate AND qcl.ChangedDate <= @ToDate"
-
-            Dim conn As New SqlConnection(connection)
-            Dim cmd As New SqlCommand(query, conn)
-            cmd.Parameters.AddWithValue("@OperatorName", selectedOperator)
-            cmd.Parameters.AddWithValue("@FromDate", fromDate)
-            cmd.Parameters.AddWithValue("@ToDate", toDate)
-            Try
-                conn.Open()
-                Dim read As SqlDataReader = cmd.ExecuteReader()
-                ' Clear existing rows in DataGridView
-                DatagridViewQty.Rows.Clear()
-
-                Dim changed_qty_count As Decimal = 0
-                Dim qty_diff_count As Decimal = 0
-                While (read.Read())
-                    'org qty variable
-                    Dim org_qty As Double = CDec(read(4)) ' Convert to Double or appropriate numerical type
-                    Dim chng_qty As Double = CDec(read(5)) ' Convert to Double or appropriate numerical type
-
-                    Dim result As Double = org_qty - chng_qty
-                    qty_diff_count = qty_diff_count + Math.Abs(result)
-                    Dim status As String = ""
-                    If chng_qty < org_qty Then
-                        status = "Less"
-                    ElseIf chng_qty > org_qty Then
-                        status = "High"
-                    ElseIf chng_qty = org_qty Then
-                        status = "Equal"
-                    End If
-                    changed_qty_count = changed_qty_count + chng_qty
-                    DatagridViewQty.Rows.Add(read(0), read(1), read(2), read(3), read(4), read(5), Math.Abs(result), status, read(6), read(7), read(8), read(9), read(10), read(11))
-                End While
-                read.Close()
-                'txtRateDiffSum.Text = rate_diff_sum
-                txtChangedQtyCount.Text = changed_qty_count
-
-            Catch ex As Exception
-
-
-            Finally
-                conn.Close()
-            End Try
-        End If
-
-
-        cmbPermission.SelectedItem = Nothing
-        CmbBillType.SelectedItem = Nothing
-        cmbOperator.SelectedItem = selectedOperator
+    Private Sub cmbOperator_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbOperatorQua.SelectedIndexChanged
+        cmb_op_qua_select_ind_change()
     End Sub
     Public Sub LoadPermissionGrantedNames()
-        cmbPermission.Items.Insert(0, "All")
+        cmbPermissionQua.Items.Insert(0, "All")
         Dim query As String = "SELECT DISTINCT  ER.EmployeeName AS PermissionGrantedName
                            FROM QtyChangeLog  AS ecl
                            INNER JOIN EmployeeRegistration AS ER ON ecl.PermissionGrantedId = ER.EmpId"
@@ -687,18 +430,18 @@ Public Class frmDishQuantityChangeLog
                 conn.Open()
                 Dim reader As SqlDataReader = cmd.ExecuteReader()
                 While reader.Read()
-                    cmbPermission.Items.Add(reader("PermissionGrantedName").ToString())
+                    cmbPermissionQua.Items.Add(reader("PermissionGrantedName").ToString())
                 End While
             End Using
         End Using
     End Sub
     Public Sub fillBilltype()
-        CmbBillType.Items.Add("Dine In")
-        CmbBillType.Items.Add("Take Away")
-        CmbBillType.Items.Add("Home Delivery")
-        CmbBillType.Items.Add("Third Party")
-        CmbBillType.Items.Add("Express Bill")
-        CmbBillType.Items.Insert(0, "All")
+        CmbBillTypeQua.Items.Add("Dine In")
+        CmbBillTypeQua.Items.Add("Take Away")
+        CmbBillTypeQua.Items.Add("Home Delivery")
+        CmbBillTypeQua.Items.Add("Third Party")
+        CmbBillTypeQua.Items.Add("Express Bill")
+        CmbBillTypeQua.Items.Insert(0, "All")
 
     End Sub
     Private Sub frmDishQuantityChangeLog_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -717,7 +460,7 @@ Public Class frmDishQuantityChangeLog
 
     'load operators
     Public Sub LoadEmployeeNames()
-        cmbOperator.Items.Insert(0, "All")
+        cmbOperatorQua.Items.Insert(0, "All")
         'cmbOperator.SelectedIndex = 0
         Dim query As String = "SELECT DISTINCT EmployeeName FROM EmployeeRegistration"
         Using conn As New SqlConnection(connection)
@@ -725,29 +468,29 @@ Public Class frmDishQuantityChangeLog
                 conn.Open()
                 Dim reader As SqlDataReader = cmd.ExecuteReader()
                 While reader.Read()
-                    cmbOperator.Items.Add(reader("EmployeeName").ToString())
+                    cmbOperatorQua.Items.Add(reader("EmployeeName").ToString())
                 End While
             End Using
         End Using
     End Sub
 
-    Private Sub CmbBillType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbBillType.SelectedIndexChanged
-        txtBillNumber.Text = ""
+    Public Sub cmb_bill_qua_select_ind_change()
+        txtBillNumberQua.Text = ""
         cmb_permission_select = False
         cmd_operator_select = False
-        If CmbBillType.SelectedItem <> Nothing OrElse CmbBillType.SelectedItem <> "All" Then
+        If CmbBillTypeQua.SelectedItem <> Nothing OrElse CmbBillTypeQua.SelectedItem <> "All" Then
             cmb_bill_select = True
         End If
         Dim select_bill_type As String
         Dim selectedItem As String
         Try
-            select_bill_type = CmbBillType.SelectedItem.ToString()
-            selectedItem = CmbBillType.SelectedItem.ToString().ToUpper()
+            select_bill_type = CmbBillTypeQua.SelectedItem.ToString()
+            selectedItem = CmbBillTypeQua.SelectedItem.ToString().ToUpper()
             If selectedItem = "EXPRESS BILL" Then
                 selectedItem = "TAEB"
 
             Else
-                selectedItem = CmbBillType.SelectedItem.ToString().ToUpper()
+                selectedItem = CmbBillTypeQua.SelectedItem.ToString().ToUpper()
                 Dim words() As String = selectedItem.Split(" "c)
                 If words.Length >= 2 Then
                     selectedItem = words(0).Substring(0, 1) & words(1).Substring(0, 1)
@@ -765,10 +508,10 @@ Public Class frmDishQuantityChangeLog
 
         ' Filter the search results in DataGridView based on the selected operator name
         If select_bill_type = "All" Then
-            ALL_ROW()
+            ALL_ROW_qua()
         Else
-            Dim fromDate As Date = dtpDateFrom.Value
-            Dim toDate As Date = dtpDateTo.Value
+            Dim fromDate As Date = dtpDateFromQua.Value
+            Dim toDate As Date = dtpDateToQua.Value
 
 
             Dim query As String = "SELECT qcl.Id, qcl.BillNo,dsh.DishName , qcl.ChangedDate, qcl.OrgQty, qcl.ChangedQty,qcl.BillType, 
@@ -824,33 +567,37 @@ Public Class frmDishQuantityChangeLog
             End Try
         End If
 
-        cmbPermission.SelectedItem = Nothing
-        cmbOperator.SelectedItem = Nothing
-        CmbBillType.SelectedItem = select_bill_type
+        cmbPermissionQua.SelectedItem = Nothing
+        cmbOperatorQua.SelectedItem = Nothing
+        CmbBillTypeQua.SelectedItem = select_bill_type
     End Sub
 
-    Private Sub cmbPermission_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPermission.SelectedIndexChanged
-        If cmbPermission.SelectedItem <> Nothing OrElse cmbPermission.SelectedItem <> "All" Then
+    Private Sub CmbBillType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbBillTypeQua.SelectedIndexChanged
+        cmb_bill_qua_select_ind_change()
+    End Sub
+
+    Public Sub cmb_permission_qua_select_ind_change()
+        If cmbPermissionQua.SelectedItem <> Nothing OrElse cmbPermissionQua.SelectedItem <> "All" Then
             cmb_permission_select = True
         End If
-        txtBillNumber.Text = ""
+        txtBillNumberQua.Text = ""
         cmb_bill_select = False
         cmd_operator_select = False
         Dim selectedPermission As String
         Try
-            selectedPermission = cmbPermission.SelectedItem.ToString()
+            selectedPermission = cmbPermissionQua.SelectedItem.ToString()
         Catch ex As Exception
             selectedPermission = Nothing
         End Try
 
         ' Check if "All" is selected
         If selectedPermission = "All" Then
-            ALL_ROW()
+            ALL_ROW_qua()
         Else
             ' Filter the search results in DataGridView based on the selected operator name
 
-            Dim fromDate As Date = dtpDateFrom.Value
-            Dim toDate As Date = dtpDateTo.Value
+            Dim fromDate As Date = dtpDateFromQua.Value
+            Dim toDate As Date = dtpDateToQua.Value
 
 
             Dim query As String = "SELECT qcl.Id, qcl.BillNo,dsh.DishName , qcl.ChangedDate, qcl.OrgQty, qcl.ChangedQty,qcl.BillType, 
@@ -907,27 +654,31 @@ Public Class frmDishQuantityChangeLog
             End Try
         End If
 
-        cmbOperator.SelectedItem = Nothing
-        CmbBillType.SelectedItem = Nothing
-        cmbPermission.SelectedItem = selectedPermission
+        cmbOperatorQua.SelectedItem = Nothing
+        CmbBillTypeQua.SelectedItem = Nothing
+        cmbPermissionQua.SelectedItem = selectedPermission
     End Sub
 
-    Private Sub txtBillNumber_TextChanged(sender As Object, e As EventArgs) Handles txtBillNumber.TextChanged
-        If txtBillNumber.Text = "" Then
-            ALL_ROW()
+    Private Sub txtBillNumber_TextChanged(sender As Object, e As EventArgs) Handles txtBillNumberQua.TextChanged
+        If txtBillNumberQua.Text = "" Then
+            ALL_ROW_qua()
 
         Else
             searchbillno()
         End If
     End Sub
+
+    Private Sub cmbPermission_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPermissionQua.SelectedIndexChanged
+        cmb_permission_qua_select_ind_change()
+    End Sub
     Public Sub searchbillno()
-        Dim searchQuery As String = txtBillNumber.Text.Trim()
+        Dim searchQuery As String = txtBillNumberQua.Text.Trim()
         cmd_operator_select = False
         cmb_bill_select = False
         cmb_permission_select = False
-        cmbPermission.SelectedItem = Nothing
-        cmbOperator.SelectedItem = Nothing
-        CmbBillType.SelectedItem = Nothing
+        cmbPermissionQua.SelectedItem = Nothing
+        cmbOperatorQua.SelectedItem = Nothing
+        CmbBillTypeQua.SelectedItem = Nothing
 
         'Dim fromDate As Date = dtpDateFrom.Value
         'Dim toDate As Date = dtpDateTo.Value
@@ -985,27 +736,44 @@ Public Class frmDishQuantityChangeLog
         Finally
             conn.Close()
         End Try
-        txtBillNumber.Text = searchQuery + "  "
-        txtBillNumber.SelectionStart = txtBillNumber.Text.IndexOf(searchQuery) + searchQuery.Length
+        txtBillNumberQua.Text = searchQuery + "  "
+        txtBillNumberQua.SelectionStart = txtBillNumberQua.Text.IndexOf(searchQuery) + searchQuery.Length
 
     End Sub
 
     Private Sub btnReset_Click(sender As Object, e As EventArgs) Handles btnReset.Click
-        dtpDateFrom.Value = DateTime.Today
-        dtpDateTo.Value = DateTime.Today
+        dtpDateFromQua.Value = DateTime.Today
+        dtpDateToQua.Value = DateTime.Today
         'ComboBox1.SelectedIndex = 0
         'cmbOperator.SelectedIndex = 0
-        txtBillNumber.Text = ""
+        txtBillNumberQua.Text = ""
         DatagridViewQty.Rows.Clear()
         cmd_operator_select = False
         cmb_bill_select = False
         cmb_permission_select = False
-        cmbPermission.SelectedItem = Nothing
-        cmbOperator.SelectedItem = Nothing
-        CmbBillType.SelectedItem = Nothing
+        cmbPermissionQua.SelectedItem = Nothing
+        cmbOperatorQua.SelectedItem = Nothing
+        CmbBillTypeQua.SelectedItem = Nothing
     End Sub
 
     Private Sub btnExportExcel_Click(sender As Object, e As EventArgs) Handles btnExportExcel.Click
         ToExcel1(DatagridViewQty)
+    End Sub
+
+    Private Sub dtpDateToQua_ValueChanged(sender As Object, e As EventArgs) Handles dtpDateToQua.ValueChanged
+        txtBillNumberQua.Text = ""
+        If cmbOperatorQua.SelectedItem = "All" OrElse CmbBillTypeQua.SelectedItem = "All" OrElse cmbPermissionQua.SelectedItem = "All" Then
+            ALL_ROW_qua()
+        ElseIf cmbOperatorQua.SelectedItem <> "All" AndAlso cmbOperatorQua.SelectedItem <> Nothing AndAlso cmd_operator_select = True Then
+            cmb_op_qua_select_ind_change()
+        ElseIf CmbBillTypeQua.SelectedItem <> "All" AndAlso CmbBillTypeQua.SelectedItem <> Nothing AndAlso cmb_bill_select = True Then
+
+            cmb_bill_qua_select_ind_change()
+        ElseIf cmbPermissionQua.SelectedItem <> "All" AndAlso cmbPermissionQua.SelectedItem <> Nothing AndAlso cmb_permission_select = True Then
+
+            cmb_permission_qua_select_ind_change()
+        Else
+            ALL_ROW_qua()
+        End If
     End Sub
 End Class

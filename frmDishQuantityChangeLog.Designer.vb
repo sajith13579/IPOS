@@ -22,22 +22,24 @@ Partial Class frmDishQuantityChangeLog
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDishQuantityChangeLog))
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Me.GroupBox1Qua = New System.Windows.Forms.GroupBox()
+        Me.btnExportExcel = New System.Windows.Forms.Button()
         Me.BtnPrint = New System.Windows.Forms.Button()
-        Me.cmbPermission = New System.Windows.Forms.ComboBox()
-        Me.CmbBillType = New System.Windows.Forms.ComboBox()
-        Me.cmbOperator = New System.Windows.Forms.ComboBox()
-        Me.txtBillNumber = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.dtpDateTo = New System.Windows.Forms.DateTimePicker()
-        Me.dtpDateFrom = New System.Windows.Forms.DateTimePicker()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.btnReset = New System.Windows.Forms.Button()
+        Me.cmbPermissionQua = New System.Windows.Forms.ComboBox()
+        Me.CmbBillTypeQua = New System.Windows.Forms.ComboBox()
+        Me.cmbOperatorQua = New System.Windows.Forms.ComboBox()
+        Me.txtBillNumberQua = New System.Windows.Forms.TextBox()
+        Me.Label6Qua = New System.Windows.Forms.Label()
+        Me.Label5Qua = New System.Windows.Forms.Label()
+        Me.Label4Qua = New System.Windows.Forms.Label()
+        Me.Label3Qua = New System.Windows.Forms.Label()
+        Me.dtpDateToQua = New System.Windows.Forms.DateTimePicker()
+        Me.dtpDateFromQua = New System.Windows.Forms.DateTimePicker()
+        Me.Label2Qua = New System.Windows.Forms.Label()
+        Me.Label1Qua = New System.Windows.Forms.Label()
         Me.DatagridViewQty = New System.Windows.Forms.DataGridView()
         Me.colID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.BillNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -53,44 +55,57 @@ Partial Class frmDishQuantityChangeLog
         Me.Remarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colComapnyId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colBranchId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Panel1Qua = New System.Windows.Forms.Panel()
+        Me.Label7Qua = New System.Windows.Forms.Label()
         Me.txtChangedQtyCount = New System.Windows.Forms.TextBox()
-        Me.btnExportExcel = New System.Windows.Forms.Button()
-        Me.btnReset = New System.Windows.Forms.Button()
-        Me.GroupBox1.SuspendLayout()
+        Me.GroupBox1Qua.SuspendLayout()
         CType(Me.DatagridViewQty, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel1.SuspendLayout()
+        Me.Panel1Qua.SuspendLayout()
         Me.SuspendLayout()
         '
-        'GroupBox1
+        'GroupBox1Qua
         '
-        Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.GroupBox1Qua.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
-        Me.GroupBox1.Controls.Add(Me.btnExportExcel)
-        Me.GroupBox1.Controls.Add(Me.BtnPrint)
-        Me.GroupBox1.Controls.Add(Me.btnReset)
-        Me.GroupBox1.Controls.Add(Me.cmbPermission)
-        Me.GroupBox1.Controls.Add(Me.CmbBillType)
-        Me.GroupBox1.Controls.Add(Me.cmbOperator)
-        Me.GroupBox1.Controls.Add(Me.txtBillNumber)
-        Me.GroupBox1.Controls.Add(Me.Label6)
-        Me.GroupBox1.Controls.Add(Me.Label5)
-        Me.GroupBox1.Controls.Add(Me.Label4)
-        Me.GroupBox1.Controls.Add(Me.Label3)
-        Me.GroupBox1.Controls.Add(Me.dtpDateTo)
-        Me.GroupBox1.Controls.Add(Me.dtpDateFrom)
-        Me.GroupBox1.Controls.Add(Me.Label2)
-        Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.ForeColor = System.Drawing.Color.White
-        Me.GroupBox1.Location = New System.Drawing.Point(2, 3)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(879, 152)
-        Me.GroupBox1.TabIndex = 0
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Search By Date"
+        Me.GroupBox1Qua.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
+        Me.GroupBox1Qua.Controls.Add(Me.btnExportExcel)
+        Me.GroupBox1Qua.Controls.Add(Me.BtnPrint)
+        Me.GroupBox1Qua.Controls.Add(Me.btnReset)
+        Me.GroupBox1Qua.Controls.Add(Me.cmbPermissionQua)
+        Me.GroupBox1Qua.Controls.Add(Me.CmbBillTypeQua)
+        Me.GroupBox1Qua.Controls.Add(Me.cmbOperatorQua)
+        Me.GroupBox1Qua.Controls.Add(Me.txtBillNumberQua)
+        Me.GroupBox1Qua.Controls.Add(Me.Label6Qua)
+        Me.GroupBox1Qua.Controls.Add(Me.Label5Qua)
+        Me.GroupBox1Qua.Controls.Add(Me.Label4Qua)
+        Me.GroupBox1Qua.Controls.Add(Me.Label3Qua)
+        Me.GroupBox1Qua.Controls.Add(Me.dtpDateToQua)
+        Me.GroupBox1Qua.Controls.Add(Me.dtpDateFromQua)
+        Me.GroupBox1Qua.Controls.Add(Me.Label2Qua)
+        Me.GroupBox1Qua.Controls.Add(Me.Label1Qua)
+        Me.GroupBox1Qua.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox1Qua.ForeColor = System.Drawing.Color.White
+        Me.GroupBox1Qua.Location = New System.Drawing.Point(2, 3)
+        Me.GroupBox1Qua.Name = "GroupBox1Qua"
+        Me.GroupBox1Qua.Size = New System.Drawing.Size(879, 152)
+        Me.GroupBox1Qua.TabIndex = 0
+        Me.GroupBox1Qua.TabStop = False
+        Me.GroupBox1Qua.Text = "Search By Date"
+        '
+        'btnExportExcel
+        '
+        Me.btnExportExcel.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnExportExcel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExportExcel.ForeColor = System.Drawing.SystemColors.InfoText
+        Me.btnExportExcel.Image = CType(resources.GetObject("btnExportExcel.Image"), System.Drawing.Image)
+        Me.btnExportExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnExportExcel.Location = New System.Drawing.Point(676, 113)
+        Me.btnExportExcel.Name = "btnExportExcel"
+        Me.btnExportExcel.Size = New System.Drawing.Size(124, 33)
+        Me.btnExportExcel.TabIndex = 152
+        Me.btnExportExcel.Text = "Export Excel"
+        Me.btnExportExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnExportExcel.UseVisualStyleBackColor = True
         '
         'BtnPrint
         '
@@ -103,110 +118,126 @@ Partial Class frmDishQuantityChangeLog
         Me.BtnPrint.Text = "Print"
         Me.BtnPrint.UseVisualStyleBackColor = True
         '
-        'cmbPermission
+        'btnReset
         '
-        Me.cmbPermission.FormattingEnabled = True
-        Me.cmbPermission.Location = New System.Drawing.Point(455, 122)
-        Me.cmbPermission.Name = "cmbPermission"
-        Me.cmbPermission.Size = New System.Drawing.Size(145, 24)
-        Me.cmbPermission.TabIndex = 149
+        Me.btnReset.BackColor = System.Drawing.SystemColors.Control
+        Me.btnReset.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnReset.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReset.ForeColor = System.Drawing.Color.Black
+        Me.btnReset.Image = CType(resources.GetObject("btnReset.Image"), System.Drawing.Image)
+        Me.btnReset.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnReset.Location = New System.Drawing.Point(676, 68)
+        Me.btnReset.Name = "btnReset"
+        Me.btnReset.Size = New System.Drawing.Size(124, 32)
+        Me.btnReset.TabIndex = 151
+        Me.btnReset.Text = "Reset"
+        Me.btnReset.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnReset.UseVisualStyleBackColor = False
         '
-        'CmbBillType
+        'cmbPermissionQua
         '
-        Me.CmbBillType.FormattingEnabled = True
-        Me.CmbBillType.Location = New System.Drawing.Point(455, 88)
-        Me.CmbBillType.Name = "CmbBillType"
-        Me.CmbBillType.Size = New System.Drawing.Size(145, 24)
-        Me.CmbBillType.TabIndex = 148
+        Me.cmbPermissionQua.FormattingEnabled = True
+        Me.cmbPermissionQua.Location = New System.Drawing.Point(455, 122)
+        Me.cmbPermissionQua.Name = "cmbPermissionQua"
+        Me.cmbPermissionQua.Size = New System.Drawing.Size(145, 24)
+        Me.cmbPermissionQua.TabIndex = 149
         '
-        'cmbOperator
+        'CmbBillTypeQua
         '
-        Me.cmbOperator.FormattingEnabled = True
-        Me.cmbOperator.Location = New System.Drawing.Point(455, 50)
-        Me.cmbOperator.Name = "cmbOperator"
-        Me.cmbOperator.Size = New System.Drawing.Size(145, 24)
-        Me.cmbOperator.TabIndex = 147
+        Me.CmbBillTypeQua.FormattingEnabled = True
+        Me.CmbBillTypeQua.Location = New System.Drawing.Point(455, 88)
+        Me.CmbBillTypeQua.Name = "CmbBillTypeQua"
+        Me.CmbBillTypeQua.Size = New System.Drawing.Size(145, 24)
+        Me.CmbBillTypeQua.TabIndex = 148
         '
-        'txtBillNumber
+        'cmbOperatorQua
         '
-        Me.txtBillNumber.Location = New System.Drawing.Point(455, 14)
-        Me.txtBillNumber.Name = "txtBillNumber"
-        Me.txtBillNumber.Size = New System.Drawing.Size(145, 23)
-        Me.txtBillNumber.TabIndex = 146
+        Me.cmbOperatorQua.FormattingEnabled = True
+        Me.cmbOperatorQua.Location = New System.Drawing.Point(455, 50)
+        Me.cmbOperatorQua.Name = "cmbOperatorQua"
+        Me.cmbOperatorQua.Size = New System.Drawing.Size(145, 24)
+        Me.cmbOperatorQua.TabIndex = 147
         '
-        'Label6
+        'txtBillNumberQua
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(354, 129)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(87, 17)
-        Me.Label6.TabIndex = 145
-        Me.Label6.Text = "Permission"
+        Me.txtBillNumberQua.Location = New System.Drawing.Point(455, 14)
+        Me.txtBillNumberQua.Name = "txtBillNumberQua"
+        Me.txtBillNumberQua.Size = New System.Drawing.Size(145, 23)
+        Me.txtBillNumberQua.TabIndex = 146
         '
-        'Label5
+        'Label6Qua
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(354, 95)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(71, 17)
-        Me.Label5.TabIndex = 144
-        Me.Label5.Text = "Bill Type"
+        Me.Label6Qua.AutoSize = True
+        Me.Label6Qua.Location = New System.Drawing.Point(354, 129)
+        Me.Label6Qua.Name = "Label6Qua"
+        Me.Label6Qua.Size = New System.Drawing.Size(87, 17)
+        Me.Label6Qua.TabIndex = 145
+        Me.Label6Qua.Text = "Permission"
         '
-        'Label4
+        'Label5Qua
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(354, 57)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(73, 17)
-        Me.Label4.TabIndex = 143
-        Me.Label4.Text = "Operator"
+        Me.Label5Qua.AutoSize = True
+        Me.Label5Qua.Location = New System.Drawing.Point(354, 95)
+        Me.Label5Qua.Name = "Label5Qua"
+        Me.Label5Qua.Size = New System.Drawing.Size(71, 17)
+        Me.Label5Qua.TabIndex = 144
+        Me.Label5Qua.Text = "Bill Type"
         '
-        'Label3
+        'Label4Qua
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(354, 20)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(91, 17)
-        Me.Label3.TabIndex = 142
-        Me.Label3.Text = "Bill Number"
+        Me.Label4Qua.AutoSize = True
+        Me.Label4Qua.Location = New System.Drawing.Point(354, 57)
+        Me.Label4Qua.Name = "Label4Qua"
+        Me.Label4Qua.Size = New System.Drawing.Size(73, 17)
+        Me.Label4Qua.TabIndex = 143
+        Me.Label4Qua.Text = "Operator"
         '
-        'dtpDateTo
+        'Label3Qua
         '
-        Me.dtpDateTo.CustomFormat = "dd/MM/yyyy"
-        Me.dtpDateTo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpDateTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpDateTo.Location = New System.Drawing.Point(86, 83)
-        Me.dtpDateTo.Name = "dtpDateTo"
-        Me.dtpDateTo.Size = New System.Drawing.Size(195, 23)
-        Me.dtpDateTo.TabIndex = 135
+        Me.Label3Qua.AutoSize = True
+        Me.Label3Qua.Location = New System.Drawing.Point(354, 20)
+        Me.Label3Qua.Name = "Label3Qua"
+        Me.Label3Qua.Size = New System.Drawing.Size(91, 17)
+        Me.Label3Qua.TabIndex = 142
+        Me.Label3Qua.Text = "Bill Number"
         '
-        'dtpDateFrom
+        'dtpDateToQua
         '
-        Me.dtpDateFrom.CustomFormat = "dd/MM/yyyy"
-        Me.dtpDateFrom.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpDateFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpDateFrom.Location = New System.Drawing.Point(86, 28)
-        Me.dtpDateFrom.Name = "dtpDateFrom"
-        Me.dtpDateFrom.Size = New System.Drawing.Size(195, 23)
-        Me.dtpDateFrom.TabIndex = 134
+        Me.dtpDateToQua.CustomFormat = "dd/MM/yyyy"
+        Me.dtpDateToQua.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpDateToQua.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpDateToQua.Location = New System.Drawing.Point(86, 83)
+        Me.dtpDateToQua.Name = "dtpDateToQua"
+        Me.dtpDateToQua.Size = New System.Drawing.Size(195, 23)
+        Me.dtpDateToQua.TabIndex = 135
         '
-        'Label2
+        'dtpDateFromQua
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(22, 83)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(27, 17)
-        Me.Label2.TabIndex = 133
-        Me.Label2.Text = "To"
+        Me.dtpDateFromQua.CustomFormat = "dd/MM/yyyy"
+        Me.dtpDateFromQua.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpDateFromQua.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpDateFromQua.Location = New System.Drawing.Point(86, 28)
+        Me.dtpDateFromQua.Name = "dtpDateFromQua"
+        Me.dtpDateFromQua.Size = New System.Drawing.Size(195, 23)
+        Me.dtpDateFromQua.TabIndex = 134
         '
-        'Label1
+        'Label2Qua
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(22, 28)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(44, 17)
-        Me.Label1.TabIndex = 132
-        Me.Label1.Text = "From"
+        Me.Label2Qua.AutoSize = True
+        Me.Label2Qua.Location = New System.Drawing.Point(22, 83)
+        Me.Label2Qua.Name = "Label2Qua"
+        Me.Label2Qua.Size = New System.Drawing.Size(27, 17)
+        Me.Label2Qua.TabIndex = 133
+        Me.Label2Qua.Text = "To"
+        '
+        'Label1Qua
+        '
+        Me.Label1Qua.AutoSize = True
+        Me.Label1Qua.Location = New System.Drawing.Point(22, 28)
+        Me.Label1Qua.Name = "Label1Qua"
+        Me.Label1Qua.Size = New System.Drawing.Size(44, 17)
+        Me.Label1Qua.TabIndex = 132
+        Me.Label1Qua.Text = "From"
         '
         'DatagridViewQty
         '
@@ -321,28 +352,28 @@ Partial Class frmDishQuantityChangeLog
         Me.colBranchId.ReadOnly = True
         Me.colBranchId.Visible = False
         '
-        'Panel1
+        'Panel1Qua
         '
-        Me.Panel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.Panel1Qua.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
-        Me.Panel1.Controls.Add(Me.Label7)
-        Me.Panel1.Controls.Add(Me.txtChangedQtyCount)
-        Me.Panel1.Location = New System.Drawing.Point(2, 388)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(879, 62)
-        Me.Panel1.TabIndex = 2
+        Me.Panel1Qua.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
+        Me.Panel1Qua.Controls.Add(Me.Label7Qua)
+        Me.Panel1Qua.Controls.Add(Me.txtChangedQtyCount)
+        Me.Panel1Qua.Location = New System.Drawing.Point(2, 388)
+        Me.Panel1Qua.Name = "Panel1Qua"
+        Me.Panel1Qua.Size = New System.Drawing.Size(879, 62)
+        Me.Panel1Qua.TabIndex = 2
         '
-        'Label7
+        'Label7Qua
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.ForeColor = System.Drawing.Color.White
-        Me.Label7.Location = New System.Drawing.Point(196, 23)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(206, 20)
-        Me.Label7.TabIndex = 1
-        Me.Label7.Text = "Changed Quantity Count"
+        Me.Label7Qua.AutoSize = True
+        Me.Label7Qua.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7Qua.ForeColor = System.Drawing.Color.White
+        Me.Label7Qua.Location = New System.Drawing.Point(196, 23)
+        Me.Label7Qua.Name = "Label7Qua"
+        Me.Label7Qua.Size = New System.Drawing.Size(206, 20)
+        Me.Label7Qua.TabIndex = 1
+        Me.Label7Qua.Text = "Changed Quantity Count"
         '
         'txtChangedQtyCount
         '
@@ -352,75 +383,44 @@ Partial Class frmDishQuantityChangeLog
         Me.txtChangedQtyCount.Size = New System.Drawing.Size(216, 20)
         Me.txtChangedQtyCount.TabIndex = 0
         '
-        'btnExportExcel
-        '
-        Me.btnExportExcel.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnExportExcel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnExportExcel.ForeColor = System.Drawing.SystemColors.InfoText
-        Me.btnExportExcel.Image = CType(resources.GetObject("btnExportExcel.Image"), System.Drawing.Image)
-        Me.btnExportExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnExportExcel.Location = New System.Drawing.Point(676, 113)
-        Me.btnExportExcel.Name = "btnExportExcel"
-        Me.btnExportExcel.Size = New System.Drawing.Size(124, 33)
-        Me.btnExportExcel.TabIndex = 152
-        Me.btnExportExcel.Text = "Export Excel"
-        Me.btnExportExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnExportExcel.UseVisualStyleBackColor = True
-        '
-        'btnReset
-        '
-        Me.btnReset.BackColor = System.Drawing.SystemColors.Control
-        Me.btnReset.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnReset.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnReset.ForeColor = System.Drawing.Color.Black
-        Me.btnReset.Image = CType(resources.GetObject("btnReset.Image"), System.Drawing.Image)
-        Me.btnReset.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReset.Location = New System.Drawing.Point(676, 68)
-        Me.btnReset.Name = "btnReset"
-        Me.btnReset.Size = New System.Drawing.Size(124, 32)
-        Me.btnReset.TabIndex = 151
-        Me.btnReset.Text = "Reset"
-        Me.btnReset.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnReset.UseVisualStyleBackColor = False
-        '
         'frmDishQuantityChangeLog
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(885, 450)
-        Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.Panel1Qua)
         Me.Controls.Add(Me.DatagridViewQty)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.GroupBox1Qua)
         Me.Name = "frmDishQuantityChangeLog"
         Me.Text = "frmDishQuantityChangeLog"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.GroupBox1Qua.ResumeLayout(False)
+        Me.GroupBox1Qua.PerformLayout()
         CType(Me.DatagridViewQty, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
+        Me.Panel1Qua.ResumeLayout(False)
+        Me.Panel1Qua.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Label1 As Label
-    Friend WithEvents dtpDateFrom As DateTimePicker
-    Friend WithEvents dtpDateTo As DateTimePicker
-    Friend WithEvents Label6 As Label
-    Friend WithEvents Label5 As Label
-    Friend WithEvents Label4 As Label
-    Friend WithEvents Label3 As Label
-    Friend WithEvents cmbPermission As ComboBox
-    Friend WithEvents CmbBillType As ComboBox
-    Friend WithEvents cmbOperator As ComboBox
-    Friend WithEvents txtBillNumber As TextBox
+    Friend WithEvents GroupBox1Qua As GroupBox
+    Friend WithEvents Label2Qua As Label
+    Friend WithEvents Label1Qua As Label
+    Friend WithEvents dtpDateFromQua As DateTimePicker
+    Friend WithEvents dtpDateToQua As DateTimePicker
+    Friend WithEvents Label6Qua As Label
+    Friend WithEvents Label5Qua As Label
+    Friend WithEvents Label4Qua As Label
+    Friend WithEvents Label3Qua As Label
+    Friend WithEvents cmbPermissionQua As ComboBox
+    Friend WithEvents CmbBillTypeQua As ComboBox
+    Friend WithEvents cmbOperatorQua As ComboBox
+    Friend WithEvents txtBillNumberQua As TextBox
     Friend WithEvents btnExportExcel As Button
     Friend WithEvents BtnPrint As Button
     Friend WithEvents btnReset As Button
     Friend WithEvents DatagridViewQty As DataGridView
-    Friend WithEvents Panel1 As Panel
+    Friend WithEvents Panel1Qua As Panel
     Friend WithEvents colID As DataGridViewTextBoxColumn
     Friend WithEvents BillNumber As DataGridViewTextBoxColumn
     Friend WithEvents DishName As DataGridViewTextBoxColumn
@@ -435,6 +435,6 @@ Partial Class frmDishQuantityChangeLog
     Friend WithEvents Remarks As DataGridViewTextBoxColumn
     Friend WithEvents colComapnyId As DataGridViewTextBoxColumn
     Friend WithEvents colBranchId As DataGridViewTextBoxColumn
-    Friend WithEvents Label7 As Label
+    Friend WithEvents Label7Qua As Label
     Friend WithEvents txtChangedQtyCount As TextBox
 End Class

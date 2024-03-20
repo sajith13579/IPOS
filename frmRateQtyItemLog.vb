@@ -18,6 +18,20 @@ Public Class frmRateQtyItemLog
         End If
     End Sub
 
+    Public Sub print_dl_en_dis()
+        If DatagridViewItemDel.Rows.Count > 0 Then
+            BtnPrintdl.Enabled = True
+            BtnPrintdl.BackColor = Color.HotPink
+            btnExportExceldl.Enabled = True
+            BtnPrintdl.BackColor = Color.HotPink
+        Else
+            BtnPrintdl.Enabled = False
+            BtnPrintdl.BackColor = SystemColors.Control ' Reset button color to default
+            btnExportExceldl.Enabled = False
+            btnExportExceldl.BackColor = SystemColors.Control
+        End If
+    End Sub
+
     Public Sub sel_false()
         cmd_operator_select = False
         cmb_bill_select = False
@@ -120,7 +134,7 @@ Public Class frmRateQtyItemLog
 
     Private Sub TabControl1_Selecting(sender As Object, e As TabControlCancelEventArgs) Handles TabControl1.Selecting
 
-        ClearAllDataGridViews()
+
         ' Check which tab is being selected
         Select Case e.TabPageIndex
             Case 0 ' TabPage 1 Rate change log
@@ -133,6 +147,7 @@ Public Class frmRateQtyItemLog
                 LoadEmployeeNames()
                 fillBilltype()
                 LoadPermissionGrantedNames_itm_del()
+                print_dl_en_dis()
         End Select
     End Sub
 
@@ -176,6 +191,7 @@ Public Class frmRateQtyItemLog
         Finally
             conn.Close()
         End Try
+        print_dl_en_dis()
     End Sub
 
     Public Sub cmb_op_selct_Index_change_del()
@@ -248,6 +264,7 @@ Public Class frmRateQtyItemLog
         cmbPermissiondl.SelectedItem = Nothing
         CmbBillTypedl.SelectedItem = Nothing
         cmbOperatordl.SelectedItem = selectedOperator
+        print_dl_en_dis()
     End Sub
 
     Private Sub cmbOperatordl_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbOperatordl.SelectedIndexChanged
@@ -322,6 +339,8 @@ Public Class frmRateQtyItemLog
         cmbOperatordl.SelectedItem = Nothing
         CmbBillTypedl.SelectedItem = Nothing
         cmbPermissiondl.SelectedItem = selectedPermission
+
+        print_dl_en_dis()
     End Sub
 
     Private Sub cmbPermissiondl_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPermissiondl.SelectedIndexChanged
@@ -389,6 +408,7 @@ Public Class frmRateQtyItemLog
         End Try
         txtBillNumberdl.Text = searchQuery + "  "
         txtBillNumberdl.SelectionStart = txtBillNumberdl.Text.IndexOf(searchQuery) + searchQuery.Length
+        print_dl_en_dis()
     End Sub
 
 
@@ -479,9 +499,301 @@ Public Class frmRateQtyItemLog
         cmbPermissiondl.SelectedItem = Nothing
         cmbOperatordl.SelectedItem = Nothing
         CmbBillTypedl.SelectedItem = select_bill_type
+
+        print_dl_en_dis()
     End Sub
 
     Private Sub CmbBillTypedl_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbBillTypedl.SelectedIndexChanged
         cmb_bill_typ_selct_Index_change_del()
+    End Sub
+
+    Public Sub all_print_dl()
+        Dim CN As New SqlConnection(connection)
+        Dim fromDate As Date = dtpDateFromdl.Value
+        Dim toDate As Date = dtpDateTodl.Value
+
+        Dim MyCommand1 As New SqlCommand()
+        Dim myDA1 As New SqlDataAdapter()
+        Dim ds As New DataSet ' The DataSet you created.
+
+        MyCommand1.Connection = CN
+        MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
+                                "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
+                                "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
+        MyCommand1.CommandType = CommandType.Text
+        myDA1.SelectCommand = MyCommand1
+        myDA1.Fill(ds, "Hotel")
+        CN.Open()
+        ' Call the stored procedure
+        Dim cmd2 As New SqlCommand("GetItemDeletedData", CN)
+        cmd2.CommandType = CommandType.StoredProcedure
+        cmd2.Parameters.AddWithValue("@FromDate", fromDate)
+        cmd2.Parameters.AddWithValue("@ToDate", toDate)
+        Dim adapter2 As New SqlDataAdapter(cmd2)
+        Dim datatable2 As New DataTable
+        adapter2.Fill(ds, "Item_delete")
+        ' Merge the new DataTable into the existing DataSet
+        'ds.Tables.Add(datatable.Copy())
+
+        ' Load the Crystal Report
+        Dim rpt2 As New RptItemDelete
+        rpt2.Load(Application.StartupPath & "\Reports\RptItemDelete.rpt")
+
+        ' Set the DataSource of the Crystal Report to the DataTable
+        'rpt.SetDataSource(dataTable)
+        rpt2.SetDataSource(ds)
+        ' Show the report
+        frmReport.CrystalReportViewer1.ReportSource = rpt2
+        frmReport.ShowDialog()
+
+        ' Clean up
+        rpt2.Close()
+        rpt2.Dispose()
+        CN.Close()
+    End Sub
+
+
+    Private Sub BtnPrintdl_Click(sender As Object, e As EventArgs) Handles BtnPrintdl.Click
+        Dim fromDate As Date = dtpDateFromdl.Value
+        Dim toDate As Date = dtpDateTodl.Value
+        If txtBillNumberdl.Text = "" Then
+            If cmbOperatordl.SelectedItem <> Nothing AndAlso cmbOperatordl.SelectedItem.ToString() = "All" Then
+                all_print_dl()
+
+            ElseIf cmbPermissiondl.SelectedItem <> Nothing AndAlso cmbPermissiondl.SelectedItem.ToString() = "All" Then
+                all_print_dl()
+
+            ElseIf CmbBillTypedl.SelectedItem <> Nothing AndAlso CmbBillTypedl.SelectedItem.ToString() = "All" Then
+                all_print_dl()
+            ElseIf cmbOperatordl.SelectedItem = Nothing AndAlso CmbBillTypedl.SelectedItem = Nothing AndAlso cmbPermissiondl.SelectedItem = Nothing Then
+                all_print_dl()
+
+            ElseIf cmbOperatordl.SelectedItem <> Nothing AndAlso cmbOperatordl.SelectedItem.ToString() <> "All" Then
+                Dim CN As New SqlConnection(connection)
+                CN.Open()
+                Dim MyCommand1 As New SqlCommand()
+                Dim myDA1 As New SqlDataAdapter()
+                Dim ds As New DataSet ' The DataSet you created.
+
+                MyCommand1.Connection = CN
+                MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
+                                "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
+                                "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
+                MyCommand1.CommandType = CommandType.Text
+                myDA1.SelectCommand = MyCommand1
+                myDA1.Fill(ds, "Hotel")
+                ' Call the stored procedure
+                Dim operator1 As String = cmbOperatordl.SelectedItem.ToString()
+                Dim cmd2 As New SqlCommand("GetItemDeletedDataByOperatore", CN)
+                cmd2.CommandType = CommandType.StoredProcedure
+                cmd2.Parameters.AddWithValue("@FromDate", fromDate)
+                cmd2.Parameters.AddWithValue("@ToDate", toDate)
+                cmd2.Parameters.AddWithValue("@OperatorName", operator1)
+                Dim adapter2 As New SqlDataAdapter(cmd2)
+                Dim datatable2 As New DataTable
+                adapter2.Fill(ds, "Item_delete")
+                ' Merge the new DataTable into the existing DataSet
+                'ds.Tables.Add(datatable.Copy())
+
+                ' Load the Crystal Report
+                Dim rpt2 As New RptItemDelete
+                rpt2.Load(Application.StartupPath & "\Reports\RptItemDelete.rpt")
+
+                ' Set the DataSource of the Crystal Report to the DataTable
+                'rpt.SetDataSource(dataTable)
+                rpt2.SetDataSource(ds)
+                ' Show the report
+                frmReport.CrystalReportViewer1.ReportSource = rpt2
+                frmReport.ShowDialog()
+
+                ' Clean up
+                rpt2.Close()
+                rpt2.Dispose()
+                CN.Close()
+
+            ElseIf CmbBillTypedl.SelectedItem <> Nothing AndAlso CmbBillTypedl.SelectedItem.ToString() <> "All" Then
+                Dim CN As New SqlConnection(connection)
+                CN.Open()
+                Dim MyCommand1 As New SqlCommand()
+                Dim myDA1 As New SqlDataAdapter()
+                Dim ds As New DataSet ' The DataSet you created.
+
+                MyCommand1.Connection = CN
+                MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
+                                "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
+                                "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
+                MyCommand1.CommandType = CommandType.Text
+                myDA1.SelectCommand = MyCommand1
+                myDA1.Fill(ds, "Hotel")
+
+                ' Call the stored procedure
+                Dim bill_type As String = CmbBillTypedl.SelectedItem.ToString()
+                If bill_type = "Dine In" Then
+                    bill_type = "DI"
+                End If
+                If bill_type = "Take Away" Then
+                    bill_type = "TA"
+                End If
+                If bill_type = "Home Delivery" Then
+                    bill_type = "HD"
+                End If
+                If bill_type = "Third Party" Then
+                    bill_type = "TP"
+                End If
+                If bill_type = "Express Bill" Then
+                    bill_type = "TAEB"
+                End If
+                Dim cmd2 As New SqlCommand("GetItemDeletedDataByBillType", CN)
+                cmd2.CommandType = CommandType.StoredProcedure
+                cmd2.Parameters.AddWithValue("@FromDate", fromDate)
+                cmd2.Parameters.AddWithValue("@ToDate", toDate)
+                cmd2.Parameters.AddWithValue("@BillType", bill_type)
+                Dim adapter2 As New SqlDataAdapter(cmd2)
+                Dim datatable2 As New DataTable
+                adapter2.Fill(ds, "Item_delete")
+                ' Merge the new DataTable into the existing DataSet
+                'ds.Tables.Add(datatable.Copy())
+
+                ' Load the Crystal Report
+                Dim rpt2 As New RptItemDelete
+                rpt2.Load(Application.StartupPath & "\Reports\RptItemDelete.rpt")
+
+                ' Set the DataSource of the Crystal Report to the DataTable
+                'rpt.SetDataSource(dataTable)
+                rpt2.SetDataSource(ds)
+                ' Show the report
+                frmReport.CrystalReportViewer1.ReportSource = rpt2
+                frmReport.ShowDialog()
+
+                ' Clean up
+                rpt2.Close()
+                rpt2.Dispose()
+                CN.Close()
+
+            ElseIf cmbPermissiondl.SelectedItem <> Nothing AndAlso cmbPermissiondl.SelectedItem <> "All" Then
+                Dim CN As New SqlConnection(connection)
+                CN.Open()
+                Dim MyCommand1 As New SqlCommand()
+                Dim myDA1 As New SqlDataAdapter()
+                Dim ds As New DataSet ' The DataSet you created.
+
+                MyCommand1.Connection = CN
+                MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
+                                "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
+                                "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
+                MyCommand1.CommandType = CommandType.Text
+                myDA1.SelectCommand = MyCommand1
+                myDA1.Fill(ds, "Hotel")
+                ' Call the stored procedure
+                Dim permission As String = cmbPermissiondl.SelectedItem.ToString()
+                Dim cmd2 As New SqlCommand("GeItemDeleteDataByPermission", CN)
+                cmd2.CommandType = CommandType.StoredProcedure
+                cmd2.Parameters.AddWithValue("@FromDate", fromDate)
+                cmd2.Parameters.AddWithValue("@ToDate", toDate)
+                cmd2.Parameters.AddWithValue("@PermissionGrant", permission)
+                Dim adapter2 As New SqlDataAdapter(cmd2)
+                Dim datatable2 As New DataTable
+                adapter2.Fill(ds, "Item_delete")
+                ' Merge the new DataTable into the existing DataSet
+                'ds.Tables.Add(datatable.Copy())
+
+                ' Load the Crystal Report
+                Dim rpt2 As New RptItemDelete
+                rpt2.Load(Application.StartupPath & "\Reports\RptItemDelete.rpt")
+
+                ' Set the DataSource of the Crystal Report to the DataTable
+                'rpt.SetDataSource(dataTable)
+                rpt2.SetDataSource(ds)
+                ' Show the report
+                frmReport.CrystalReportViewer1.ReportSource = rpt2
+                frmReport.ShowDialog()
+
+                ' Clean up
+                rpt2.Close()
+                rpt2.Dispose()
+                CN.Close()
+
+
+
+            End If
+        Else
+            Dim CN As New SqlConnection(connection)
+            CN.Open()
+            Dim MyCommand1 As New SqlCommand()
+            Dim myDA1 As New SqlDataAdapter()
+            Dim ds As New DataSet ' The DataSet you created.
+
+            MyCommand1.Connection = CN
+            MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
+                                "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
+                                "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
+            MyCommand1.CommandType = CommandType.Text
+            myDA1.SelectCommand = MyCommand1
+            myDA1.Fill(ds, "Hotel")
+            ' Call the stored procedure
+
+            Dim cmd2 As New SqlCommand("GetItemDeletedByBillNo", CN)
+            cmd2.CommandType = CommandType.StoredProcedure
+            Dim searchquery As String = txtBillNumberdl.Text.Trim()
+            cmd2.Parameters.AddWithValue("@SearchQuery", searchquery)
+            Dim adapter2 As New SqlDataAdapter(cmd2)
+            Dim datatable2 As New DataTable
+            adapter2.Fill(ds, "Item_delete")
+            ' Merge the new DataTable into the existing DataSet
+            'ds.Tables.Add(datatable.Copy())
+
+            ' Load the Crystal Report
+            Dim rpt2 As New RptItemDelete
+            rpt2.Load(Application.StartupPath & "\Reports\RptItemDelete.rpt")
+
+            ' Set the DataSource of the Crystal Report to the DataTable
+            'rpt.SetDataSource(dataTable)
+            rpt2.SetDataSource(ds)
+            ' Show the report
+            frmReport.CrystalReportViewer1.ReportSource = rpt2
+            frmReport.ShowDialog()
+
+            ' Clean up
+            rpt2.Close()
+            rpt2.Dispose()
+            CN.Close()
+        End If
+    End Sub
+
+    Private Sub btnResetdl_Click(sender As Object, e As EventArgs) Handles btnResetdl.Click
+        dtpDateFromdl.Value = DateTime.Today
+        dtpDateTodl.Value = DateTime.Today
+        'ComboBox1.SelectedIndex = 0
+        'cmbOperator.SelectedIndex = 0
+        txtBillNumberdl.Text = ""
+        DatagridViewItemDel.Rows.Clear()
+        cmd_operator_select = False
+        cmb_bill_select = False
+        cmb_permission_select = False
+        cmbPermissiondl.SelectedItem = Nothing
+        cmbOperatordl.SelectedItem = Nothing
+        CmbBillTypedl.SelectedItem = Nothing
+        BtnPrintdl.Enabled = False
+    End Sub
+
+    Private Sub btnExportExceldl_Click(sender As Object, e As EventArgs) Handles btnExportExceldl.Click
+        ToExcel1(DatagridViewItemDel)
+    End Sub
+
+    Private Sub dtpDateTodl_ValueChanged(sender As Object, e As EventArgs) Handles dtpDateTodl.ValueChanged
+        txtBillNumberdl.Text = ""
+        If cmbOperatordl.SelectedItem = "All" OrElse CmbBillTypedl.SelectedItem = "All" OrElse cmbPermissiondl.SelectedItem = "All" Then
+            ALL_row_Itm_del()
+        ElseIf cmbOperatordl.SelectedItem <> "All" AndAlso cmbOperatordl.SelectedItem <> Nothing AndAlso cmd_operator_select = True Then
+            cmb_op_selct_Index_change_del()
+
+        ElseIf CmbBillTypedl.SelectedItem <> "All" AndAlso CmbBillTypedl.SelectedItem <> Nothing AndAlso cmb_bill_select = True Then
+            cmb_bill_typ_selct_Index_change_del()
+
+        ElseIf cmbPermissiondl.SelectedItem <> "All" AndAlso cmbPermissiondl.SelectedItem <> Nothing AndAlso cmb_permission_select = True Then
+            cmb_permi_selct_Index_change_del()
+        Else
+            ALL_row_Itm_del()
+        End If
     End Sub
 End Class

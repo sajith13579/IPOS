@@ -55,7 +55,6 @@ Partial Class frmDishRateChangeLog
         Me.dtpDateFrom = New System.Windows.Forms.DateTimePicker()
         Me.txtBillNumber = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.SearchRadio = New System.Windows.Forms.RadioButton()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.txtRateDiffSum = New System.Windows.Forms.TextBox()
         Me.txtChangeRateSum = New System.Windows.Forms.TextBox()
@@ -89,7 +88,7 @@ Partial Class frmDishRateChangeLog
         Me.DatagridView1.Name = "DatagridView1"
         Me.DatagridView1.ReadOnly = True
         Me.DatagridView1.RowHeadersVisible = False
-        Me.DatagridView1.Size = New System.Drawing.Size(1003, 293)
+        Me.DatagridView1.Size = New System.Drawing.Size(1003, 291)
         Me.DatagridView1.TabIndex = 0
         '
         'colID
@@ -199,7 +198,6 @@ Partial Class frmDishRateChangeLog
         Me.GroupBox1.Controls.Add(Me.dtpDateFrom)
         Me.GroupBox1.Controls.Add(Me.txtBillNumber)
         Me.GroupBox1.Controls.Add(Me.Label3)
-        Me.GroupBox1.Controls.Add(Me.SearchRadio)
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.ForeColor = System.Drawing.Color.White
         Me.GroupBox1.Location = New System.Drawing.Point(1, -1)
@@ -356,27 +354,12 @@ Partial Class frmDishRateChangeLog
         Me.Label3.TabIndex = 131
         Me.Label3.Text = "Bill Number"
         '
-        'SearchRadio
-        '
-        Me.SearchRadio.AutoSize = True
-        Me.SearchRadio.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
-        Me.SearchRadio.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SearchRadio.ForeColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
-        Me.SearchRadio.Location = New System.Drawing.Point(332, 18)
-        Me.SearchRadio.Name = "SearchRadio"
-        Me.SearchRadio.Size = New System.Drawing.Size(99, 29)
-        Me.SearchRadio.TabIndex = 136
-        Me.SearchRadio.TabStop = True
-        Me.SearchRadio.Text = "Search"
-        Me.SearchRadio.UseVisualStyleBackColor = False
-        Me.SearchRadio.Visible = False
-        '
         'Label8
         '
         Me.Label8.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(17, 11)
+        Me.Label8.Location = New System.Drawing.Point(17, 13)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(176, 13)
         Me.Label8.TabIndex = 4
@@ -406,9 +389,9 @@ Partial Class frmDishRateChangeLog
         Me.Panel1.Controls.Add(Me.Label8)
         Me.Panel1.Controls.Add(Me.txtChangeRateSum)
         Me.Panel1.Controls.Add(Me.txtRateDiffSum)
-        Me.Panel1.Location = New System.Drawing.Point(1, 480)
+        Me.Panel1.Location = New System.Drawing.Point(1, 478)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1003, 32)
+        Me.Panel1.Size = New System.Drawing.Size(1003, 34)
         Me.Panel1.TabIndex = 7
         '
         'Label7
@@ -454,7 +437,6 @@ Partial Class frmDishRateChangeLog
     Friend WithEvents btnReset As Button
     Friend WithEvents cmbOperator As ComboBox
     Friend WithEvents Label4 As Label
-    Friend WithEvents SearchRadio As RadioButton
     Friend WithEvents CmbBillType As ComboBox
     Friend WithEvents Label5 As Label
     Friend WithEvents btnExportExcel As Button

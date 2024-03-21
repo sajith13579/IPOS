@@ -2,7 +2,7 @@
 
 Public Class frmDishQuantityChangeLog
 
-    Public Sub all_print()
+    Public Sub all_print_qua()
         Dim CN As New SqlConnection(connection)
         Dim fromDate As Date = dtpDateFromQua.Value
         Dim toDate As Date = dtpDateToQua.Value
@@ -48,20 +48,20 @@ Public Class frmDishQuantityChangeLog
     End Sub
 
 
-    Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles BtnPrint.Click
+    Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles BtnPrintqua.Click
         Dim fromDate As Date = dtpDateFromQua.Value
         Dim toDate As Date = dtpDateToQua.Value
         If txtBillNumberQua.Text = "" Then
             If cmbOperatorQua.SelectedItem <> Nothing AndAlso cmbOperatorQua.SelectedItem.ToString() = "All" Then
-                all_print()
+                all_print_qua()
 
             ElseIf cmbPermissionQua.SelectedItem <> Nothing AndAlso cmbPermissionQua.SelectedItem.ToString() = "All" Then
-                all_print()
+                all_print_qua()
 
             ElseIf CmbBillTypeQua.SelectedItem <> Nothing AndAlso CmbBillTypeQua.SelectedItem.ToString() = "All" Then
-                all_print()
+                all_print_qua()
             ElseIf cmbOperatorQua.SelectedItem = Nothing AndAlso CmbBillTypeQua.SelectedItem = Nothing AndAlso cmbPermissionQua.SelectedItem = Nothing Then
-                all_print()
+                all_print_qua()
 
                 'it is check all value cmboperator except all
             ElseIf cmbOperatorQua.SelectedItem <> Nothing AndAlso cmbOperatorQua.SelectedItem.ToString() <> "All" Then
@@ -435,6 +435,47 @@ Public Class frmDishQuantityChangeLog
             End Using
         End Using
     End Sub
+
+    Public Sub load_combobox_data_qua()
+        'operator combobox load items
+        cmbOperatorQua.Items.Insert(0, "All")
+        'cmbOperator.SelectedIndex = 0
+        Dim query As String = "SELECT DISTINCT EmployeeName FROM EmployeeRegistration"
+        Using conn As New SqlConnection(connection)
+            Using cmd As New SqlCommand(query, conn)
+                conn.Open()
+                Dim reader As SqlDataReader = cmd.ExecuteReader()
+                While reader.Read()
+                    cmbOperatorQua.Items.Add(reader("EmployeeName").ToString())
+                End While
+            End Using
+        End Using
+
+        'bill type combobox load items
+        CmbBillTypeQua.Items.Add("Dine In")
+        CmbBillTypeQua.Items.Add("Take Away")
+        CmbBillTypeQua.Items.Add("Home Delivery")
+        CmbBillTypeQua.Items.Add("Third Party")
+        CmbBillTypeQua.Items.Add("Express Bill")
+        CmbBillTypeQua.Items.Insert(0, "All")
+
+        'permisson granted combobox load items
+        cmbPermissionQua.Items.Insert(0, "All")
+        Dim query1 As String = "SELECT DISTINCT  ER.EmployeeName AS PermissionGrantedName
+                           FROM QtyChangeLog  AS ecl
+                           INNER JOIN EmployeeRegistration AS ER ON ecl.PermissionGrantedId = ER.EmpId"
+
+        Using conn As New SqlConnection(connection)
+            Using cmd As New SqlCommand(query1, conn)
+                conn.Open()
+                Dim reader As SqlDataReader = cmd.ExecuteReader()
+                While reader.Read()
+                    cmbPermissionQua.Items.Add(reader("PermissionGrantedName").ToString())
+                End While
+            End Using
+        End Using
+    End Sub
+
     Public Sub fillBilltype()
         CmbBillTypeQua.Items.Add("Dine In")
         CmbBillTypeQua.Items.Add("Take Away")
@@ -445,11 +486,7 @@ Public Class frmDishQuantityChangeLog
 
     End Sub
     Private Sub frmDishQuantityChangeLog_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'load operators to combobox
-        LoadEmployeeNames()
-        'load permission to combobox
-        LoadPermissionGrantedNames()
-        fillBilltype()
+        load_combobox_data_qua()
         cmd_operator_select = False
         cmb_bill_select = False
         cmb_permission_select = False
@@ -664,14 +701,14 @@ Public Class frmDishQuantityChangeLog
             ALL_ROW_qua()
 
         Else
-            searchbillno()
+            searchbillnoQua()
         End If
     End Sub
 
     Private Sub cmbPermission_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPermissionQua.SelectedIndexChanged
         cmb_permission_qua_select_ind_change()
     End Sub
-    Public Sub searchbillno()
+    Public Sub searchbillnoQua()
         Dim searchQuery As String = txtBillNumberQua.Text.Trim()
         cmd_operator_select = False
         cmb_bill_select = False
@@ -741,7 +778,7 @@ Public Class frmDishQuantityChangeLog
 
     End Sub
 
-    Private Sub btnReset_Click(sender As Object, e As EventArgs) Handles btnReset.Click
+    Private Sub btnReset_Click(sender As Object, e As EventArgs) Handles btnResetqua.Click
         dtpDateFromQua.Value = DateTime.Today
         dtpDateToQua.Value = DateTime.Today
         'ComboBox1.SelectedIndex = 0
@@ -756,7 +793,7 @@ Public Class frmDishQuantityChangeLog
         CmbBillTypeQua.SelectedItem = Nothing
     End Sub
 
-    Private Sub btnExportExcel_Click(sender As Object, e As EventArgs) Handles btnExportExcel.Click
+    Private Sub btnExportExcel_Click(sender As Object, e As EventArgs) Handles btnExportExcelqua.Click
         ToExcel1(DatagridViewQty)
     End Sub
 

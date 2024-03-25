@@ -22,10 +22,10 @@ Partial Class frmRateQtyItemLog
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmRateQtyItemLog))
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.tbRateChange = New System.Windows.Forms.TabPage()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -49,6 +49,8 @@ Partial Class frmRateQtyItemLog
         Me.DataGridViewTextBoxColumn11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.cmbDishName = New System.Windows.Forms.ComboBox()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.cmbPermission = New System.Windows.Forms.ComboBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.btnExportExcel = New System.Windows.Forms.Button()
@@ -84,6 +86,8 @@ Partial Class frmRateQtyItemLog
         Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1Qua = New System.Windows.Forms.GroupBox()
+        Me.CmbDishNameQua = New System.Windows.Forms.ComboBox()
+        Me.Label10qua = New System.Windows.Forms.Label()
         Me.btnExportExcelqua = New System.Windows.Forms.Button()
         Me.BtnPrintqua = New System.Windows.Forms.Button()
         Me.btnResetqua = New System.Windows.Forms.Button()
@@ -104,6 +108,8 @@ Partial Class frmRateQtyItemLog
         Me.txtGrandTotaldl = New System.Windows.Forms.TextBox()
         Me.Label7del = New System.Windows.Forms.Label()
         Me.GroupBox1del = New System.Windows.Forms.GroupBox()
+        Me.cmbDishNameDl = New System.Windows.Forms.ComboBox()
+        Me.Label10dl = New System.Windows.Forms.Label()
         Me.btnExportExceldl = New System.Windows.Forms.Button()
         Me.BtnPrintdl = New System.Windows.Forms.Button()
         Me.btnResetdl = New System.Windows.Forms.Button()
@@ -133,12 +139,6 @@ Partial Class frmRateQtyItemLog
         Me.Remarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colComapnyId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colBranchId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.cmbDishName = New System.Windows.Forms.ComboBox()
-        Me.CmbDishNameQua = New System.Windows.Forms.ComboBox()
-        Me.Label10qua = New System.Windows.Forms.Label()
-        Me.cmbDishNameDl = New System.Windows.Forms.ComboBox()
-        Me.Label10dl = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
         Me.tbRateChange.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -190,9 +190,9 @@ Partial Class frmRateQtyItemLog
         Me.Panel1.Controls.Add(Me.txtChangeRateSum)
         Me.Panel1.Controls.Add(Me.txtRateDiffSum)
         Me.Panel1.ForeColor = System.Drawing.Color.White
-        Me.Panel1.Location = New System.Drawing.Point(0, 456)
+        Me.Panel1.Location = New System.Drawing.Point(3, 456)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(958, 55)
+        Me.Panel1.Size = New System.Drawing.Size(955, 55)
         Me.Panel1.TabIndex = 8
         '
         'Label7
@@ -240,22 +240,22 @@ Partial Class frmRateQtyItemLog
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DatagridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DatagridView1.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DatagridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle8.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DatagridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle8
         Me.DatagridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DatagridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn10, Me.colBillNumber, Me.colDishName, Me.colChangedDate, Me.colOriginalRate, Me.colChangedRate, Me.colDiffrence, Me.colStatus, Me.colBillType, Me.colOperator, Me.colPermission, Me.colRemarks, Me.DataGridViewTextBoxColumn11, Me.DataGridViewTextBoxColumn12})
         Me.DatagridView1.EnableHeadersVisualStyles = False
-        Me.DatagridView1.Location = New System.Drawing.Point(0, 155)
+        Me.DatagridView1.Location = New System.Drawing.Point(3, 131)
         Me.DatagridView1.Name = "DatagridView1"
         Me.DatagridView1.ReadOnly = True
         Me.DatagridView1.RowHeadersVisible = False
-        Me.DatagridView1.Size = New System.Drawing.Size(958, 295)
+        Me.DatagridView1.Size = New System.Drawing.Size(955, 320)
         Me.DatagridView1.TabIndex = 3
         '
         'DataGridViewTextBoxColumn10
@@ -367,20 +367,39 @@ Partial Class frmRateQtyItemLog
         Me.GroupBox1.Controls.Add(Me.dtpDateFrom)
         Me.GroupBox1.Controls.Add(Me.txtBillNumber)
         Me.GroupBox1.Controls.Add(Me.Label3)
-        Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox1.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.ForeColor = System.Drawing.Color.White
         Me.GroupBox1.Location = New System.Drawing.Point(3, 0)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(955, 160)
+        Me.GroupBox1.Size = New System.Drawing.Size(955, 134)
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Serach by date"
+        '
+        'cmbDishName
+        '
+        Me.cmbDishName.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbDishName.FormattingEnabled = True
+        Me.cmbDishName.Location = New System.Drawing.Point(641, 56)
+        Me.cmbDishName.Name = "cmbDishName"
+        Me.cmbDishName.Size = New System.Drawing.Size(145, 22)
+        Me.cmbDishName.TabIndex = 144
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(564, 59)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(60, 14)
+        Me.Label9.TabIndex = 143
+        Me.Label9.Text = "Dish name"
         '
         'cmbPermission
         '
         Me.cmbPermission.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbPermission.FormattingEnabled = True
-        Me.cmbPermission.Location = New System.Drawing.Point(390, 116)
+        Me.cmbPermission.Location = New System.Drawing.Point(641, 14)
         Me.cmbPermission.Name = "cmbPermission"
         Me.cmbPermission.Size = New System.Drawing.Size(145, 22)
         Me.cmbPermission.TabIndex = 142
@@ -389,7 +408,7 @@ Partial Class frmRateQtyItemLog
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(300, 120)
+        Me.Label6.Location = New System.Drawing.Point(564, 18)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(61, 14)
         Me.Label6.TabIndex = 141
@@ -402,9 +421,9 @@ Partial Class frmRateQtyItemLog
         Me.btnExportExcel.ForeColor = System.Drawing.SystemColors.InfoText
         Me.btnExportExcel.Image = CType(resources.GetObject("btnExportExcel.Image"), System.Drawing.Image)
         Me.btnExportExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnExportExcel.Location = New System.Drawing.Point(814, 105)
+        Me.btnExportExcel.Location = New System.Drawing.Point(814, 95)
         Me.btnExportExcel.Name = "btnExportExcel"
-        Me.btnExportExcel.Size = New System.Drawing.Size(106, 33)
+        Me.btnExportExcel.Size = New System.Drawing.Size(106, 30)
         Me.btnExportExcel.TabIndex = 140
         Me.btnExportExcel.Text = "Export Excel"
         Me.btnExportExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -414,7 +433,7 @@ Partial Class frmRateQtyItemLog
         '
         Me.CmbBillType.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CmbBillType.FormattingEnabled = True
-        Me.CmbBillType.Location = New System.Drawing.Point(390, 82)
+        Me.CmbBillType.Location = New System.Drawing.Point(389, 103)
         Me.CmbBillType.Name = "CmbBillType"
         Me.CmbBillType.Size = New System.Drawing.Size(145, 22)
         Me.CmbBillType.TabIndex = 139
@@ -423,7 +442,7 @@ Partial Class frmRateQtyItemLog
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(301, 86)
+        Me.Label5.Location = New System.Drawing.Point(300, 108)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(50, 14)
         Me.Label5.TabIndex = 138
@@ -443,9 +462,9 @@ Partial Class frmRateQtyItemLog
         '
         Me.BtnPrint.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnPrint.ForeColor = System.Drawing.Color.Black
-        Me.BtnPrint.Location = New System.Drawing.Point(814, 15)
+        Me.BtnPrint.Location = New System.Drawing.Point(814, 14)
         Me.BtnPrint.Name = "BtnPrint"
-        Me.BtnPrint.Size = New System.Drawing.Size(106, 32)
+        Me.BtnPrint.Size = New System.Drawing.Size(106, 30)
         Me.BtnPrint.TabIndex = 130
         Me.BtnPrint.Text = "Print"
         Me.BtnPrint.UseVisualStyleBackColor = True
@@ -458,9 +477,9 @@ Partial Class frmRateQtyItemLog
         Me.btnReset.ForeColor = System.Drawing.Color.Black
         Me.btnReset.Image = CType(resources.GetObject("btnReset.Image"), System.Drawing.Image)
         Me.btnReset.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReset.Location = New System.Drawing.Point(814, 61)
+        Me.btnReset.Location = New System.Drawing.Point(814, 55)
         Me.btnReset.Name = "btnReset"
-        Me.btnReset.Size = New System.Drawing.Size(106, 32)
+        Me.btnReset.Size = New System.Drawing.Size(106, 30)
         Me.btnReset.TabIndex = 133
         Me.btnReset.Text = "Reset"
         Me.btnReset.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -470,7 +489,7 @@ Partial Class frmRateQtyItemLog
         '
         Me.cmbOperator.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbOperator.FormattingEnabled = True
-        Me.cmbOperator.Location = New System.Drawing.Point(390, 48)
+        Me.cmbOperator.Location = New System.Drawing.Point(389, 59)
         Me.cmbOperator.Name = "cmbOperator"
         Me.cmbOperator.Size = New System.Drawing.Size(145, 22)
         Me.cmbOperator.TabIndex = 134
@@ -479,7 +498,7 @@ Partial Class frmRateQtyItemLog
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(300, 52)
+        Me.Label4.Location = New System.Drawing.Point(299, 65)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(51, 14)
         Me.Label4.TabIndex = 135
@@ -502,7 +521,7 @@ Partial Class frmRateQtyItemLog
         Me.dtpDateTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpDateTo.Location = New System.Drawing.Point(77, 73)
         Me.dtpDateTo.Name = "dtpDateTo"
-        Me.dtpDateTo.Size = New System.Drawing.Size(195, 22)
+        Me.dtpDateTo.Size = New System.Drawing.Size(145, 22)
         Me.dtpDateTo.TabIndex = 108
         '
         'dtpDateFrom
@@ -510,15 +529,15 @@ Partial Class frmRateQtyItemLog
         Me.dtpDateFrom.CustomFormat = "dd/MM/yyyy"
         Me.dtpDateFrom.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpDateFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpDateFrom.Location = New System.Drawing.Point(77, 25)
+        Me.dtpDateFrom.Location = New System.Drawing.Point(77, 22)
         Me.dtpDateFrom.Name = "dtpDateFrom"
-        Me.dtpDateFrom.Size = New System.Drawing.Size(195, 22)
+        Me.dtpDateFrom.Size = New System.Drawing.Size(145, 22)
         Me.dtpDateFrom.TabIndex = 107
         '
         'txtBillNumber
         '
         Me.txtBillNumber.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtBillNumber.Location = New System.Drawing.Point(390, 14)
+        Me.txtBillNumber.Location = New System.Drawing.Point(389, 15)
         Me.txtBillNumber.Name = "txtBillNumber"
         Me.txtBillNumber.Size = New System.Drawing.Size(145, 22)
         Me.txtBillNumber.TabIndex = 132
@@ -527,7 +546,7 @@ Partial Class frmRateQtyItemLog
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(300, 18)
+        Me.Label3.Location = New System.Drawing.Point(299, 19)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(66, 14)
         Me.Label3.TabIndex = 131
@@ -553,25 +572,26 @@ Partial Class frmRateQtyItemLog
         Me.Panel1Qua.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
         Me.Panel1Qua.Controls.Add(Me.Label7Qua)
         Me.Panel1Qua.Controls.Add(Me.txtChangedQtyCount)
-        Me.Panel1Qua.Location = New System.Drawing.Point(6, 440)
+        Me.Panel1Qua.Location = New System.Drawing.Point(3, 451)
         Me.Panel1Qua.Name = "Panel1Qua"
-        Me.Panel1Qua.Size = New System.Drawing.Size(948, 67)
+        Me.Panel1Qua.Size = New System.Drawing.Size(951, 56)
         Me.Panel1Qua.TabIndex = 3
         '
         'Label7Qua
         '
         Me.Label7Qua.AutoSize = True
-        Me.Label7Qua.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7Qua.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7Qua.ForeColor = System.Drawing.Color.White
-        Me.Label7Qua.Location = New System.Drawing.Point(202, 30)
+        Me.Label7Qua.Location = New System.Drawing.Point(202, 25)
         Me.Label7Qua.Name = "Label7Qua"
-        Me.Label7Qua.Size = New System.Drawing.Size(206, 20)
+        Me.Label7Qua.Size = New System.Drawing.Size(136, 14)
         Me.Label7Qua.TabIndex = 1
         Me.Label7Qua.Text = "Changed Quantity Count"
         '
         'txtChangedQtyCount
         '
-        Me.txtChangedQtyCount.Location = New System.Drawing.Point(430, 28)
+        Me.txtChangedQtyCount.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtChangedQtyCount.Location = New System.Drawing.Point(365, 22)
         Me.txtChangedQtyCount.Name = "txtChangedQtyCount"
         Me.txtChangedQtyCount.ReadOnly = True
         Me.txtChangedQtyCount.Size = New System.Drawing.Size(216, 22)
@@ -585,22 +605,22 @@ Partial Class frmRateQtyItemLog
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DatagridViewQty.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DatagridViewQty.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DatagridViewQty.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
+        DataGridViewCellStyle9.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle9.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DatagridViewQty.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle9
         Me.DatagridViewQty.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DatagridViewQty.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.Changed_Date, Me.Original_Quantity, Me.Changed_Quantity, Me.Diffrence, Me.Rate_Status, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7, Me.DataGridViewTextBoxColumn8, Me.DataGridViewTextBoxColumn9})
         Me.DatagridViewQty.EnableHeadersVisualStyles = False
-        Me.DatagridViewQty.Location = New System.Drawing.Point(6, 152)
+        Me.DatagridViewQty.Location = New System.Drawing.Point(3, 139)
         Me.DatagridViewQty.Name = "DatagridViewQty"
         Me.DatagridViewQty.ReadOnly = True
         Me.DatagridViewQty.RowHeadersVisible = False
-        Me.DatagridViewQty.Size = New System.Drawing.Size(948, 282)
+        Me.DatagridViewQty.Size = New System.Drawing.Size(951, 306)
         Me.DatagridViewQty.TabIndex = 2
         '
         'DataGridViewTextBoxColumn1
@@ -712,14 +732,33 @@ Partial Class frmRateQtyItemLog
         Me.GroupBox1Qua.Controls.Add(Me.dtpDateFromQua)
         Me.GroupBox1Qua.Controls.Add(Me.Label2Qua)
         Me.GroupBox1Qua.Controls.Add(Me.Label1Qua)
-        Me.GroupBox1Qua.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox1Qua.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1Qua.ForeColor = System.Drawing.Color.White
-        Me.GroupBox1Qua.Location = New System.Drawing.Point(6, 0)
+        Me.GroupBox1Qua.Location = New System.Drawing.Point(3, 0)
         Me.GroupBox1Qua.Name = "GroupBox1Qua"
-        Me.GroupBox1Qua.Size = New System.Drawing.Size(948, 158)
+        Me.GroupBox1Qua.Size = New System.Drawing.Size(951, 140)
         Me.GroupBox1Qua.TabIndex = 1
         Me.GroupBox1Qua.TabStop = False
         Me.GroupBox1Qua.Text = "Search By Date"
+        '
+        'CmbDishNameQua
+        '
+        Me.CmbDishNameQua.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CmbDishNameQua.FormattingEnabled = True
+        Me.CmbDishNameQua.Location = New System.Drawing.Point(639, 68)
+        Me.CmbDishNameQua.Name = "CmbDishNameQua"
+        Me.CmbDishNameQua.Size = New System.Drawing.Size(145, 22)
+        Me.CmbDishNameQua.TabIndex = 154
+        '
+        'Label10qua
+        '
+        Me.Label10qua.AutoSize = True
+        Me.Label10qua.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10qua.Location = New System.Drawing.Point(561, 71)
+        Me.Label10qua.Name = "Label10qua"
+        Me.Label10qua.Size = New System.Drawing.Size(60, 14)
+        Me.Label10qua.TabIndex = 153
+        Me.Label10qua.Text = "Dish name"
         '
         'btnExportExcelqua
         '
@@ -728,7 +767,7 @@ Partial Class frmRateQtyItemLog
         Me.btnExportExcelqua.ForeColor = System.Drawing.SystemColors.InfoText
         Me.btnExportExcelqua.Image = CType(resources.GetObject("btnExportExcelqua.Image"), System.Drawing.Image)
         Me.btnExportExcelqua.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnExportExcelqua.Location = New System.Drawing.Point(822, 103)
+        Me.btnExportExcelqua.Location = New System.Drawing.Point(808, 100)
         Me.btnExportExcelqua.Name = "btnExportExcelqua"
         Me.btnExportExcelqua.Size = New System.Drawing.Size(124, 33)
         Me.btnExportExcelqua.TabIndex = 152
@@ -740,9 +779,9 @@ Partial Class frmRateQtyItemLog
         '
         Me.BtnPrintqua.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnPrintqua.ForeColor = System.Drawing.Color.Black
-        Me.BtnPrintqua.Location = New System.Drawing.Point(823, 18)
+        Me.BtnPrintqua.Location = New System.Drawing.Point(809, 15)
         Me.BtnPrintqua.Name = "BtnPrintqua"
-        Me.BtnPrintqua.Size = New System.Drawing.Size(123, 31)
+        Me.BtnPrintqua.Size = New System.Drawing.Size(124, 33)
         Me.BtnPrintqua.TabIndex = 150
         Me.BtnPrintqua.Text = "Print"
         Me.BtnPrintqua.UseVisualStyleBackColor = True
@@ -755,9 +794,9 @@ Partial Class frmRateQtyItemLog
         Me.btnResetqua.ForeColor = System.Drawing.Color.Black
         Me.btnResetqua.Image = CType(resources.GetObject("btnResetqua.Image"), System.Drawing.Image)
         Me.btnResetqua.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnResetqua.Location = New System.Drawing.Point(823, 65)
+        Me.btnResetqua.Location = New System.Drawing.Point(809, 61)
         Me.btnResetqua.Name = "btnResetqua"
-        Me.btnResetqua.Size = New System.Drawing.Size(123, 32)
+        Me.btnResetqua.Size = New System.Drawing.Size(124, 33)
         Me.btnResetqua.TabIndex = 151
         Me.btnResetqua.Text = "Reset"
         Me.btnResetqua.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -767,7 +806,7 @@ Partial Class frmRateQtyItemLog
         '
         Me.cmbPermissionQua.Font = New System.Drawing.Font("Calibri", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbPermissionQua.FormattingEnabled = True
-        Me.cmbPermissionQua.Location = New System.Drawing.Point(415, 117)
+        Me.cmbPermissionQua.Location = New System.Drawing.Point(639, 21)
         Me.cmbPermissionQua.Name = "cmbPermissionQua"
         Me.cmbPermissionQua.Size = New System.Drawing.Size(145, 23)
         Me.cmbPermissionQua.TabIndex = 149
@@ -776,7 +815,7 @@ Partial Class frmRateQtyItemLog
         '
         Me.CmbBillTypeQua.Font = New System.Drawing.Font("Calibri", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CmbBillTypeQua.FormattingEnabled = True
-        Me.CmbBillTypeQua.Location = New System.Drawing.Point(415, 85)
+        Me.CmbBillTypeQua.Location = New System.Drawing.Point(396, 99)
         Me.CmbBillTypeQua.Name = "CmbBillTypeQua"
         Me.CmbBillTypeQua.Size = New System.Drawing.Size(145, 23)
         Me.CmbBillTypeQua.TabIndex = 148
@@ -785,7 +824,7 @@ Partial Class frmRateQtyItemLog
         '
         Me.cmbOperatorQua.Font = New System.Drawing.Font("Calibri", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbOperatorQua.FormattingEnabled = True
-        Me.cmbOperatorQua.Location = New System.Drawing.Point(415, 49)
+        Me.cmbOperatorQua.Location = New System.Drawing.Point(396, 61)
         Me.cmbOperatorQua.Name = "cmbOperatorQua"
         Me.cmbOperatorQua.Size = New System.Drawing.Size(145, 23)
         Me.cmbOperatorQua.TabIndex = 147
@@ -793,7 +832,7 @@ Partial Class frmRateQtyItemLog
         'txtBillNumberQua
         '
         Me.txtBillNumberQua.Font = New System.Drawing.Font("Calibri", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtBillNumberQua.Location = New System.Drawing.Point(415, 15)
+        Me.txtBillNumberQua.Location = New System.Drawing.Point(396, 22)
         Me.txtBillNumberQua.Name = "txtBillNumberQua"
         Me.txtBillNumberQua.Size = New System.Drawing.Size(145, 24)
         Me.txtBillNumberQua.TabIndex = 146
@@ -802,7 +841,7 @@ Partial Class frmRateQtyItemLog
         '
         Me.Label6Qua.AutoSize = True
         Me.Label6Qua.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6Qua.Location = New System.Drawing.Point(328, 121)
+        Me.Label6Qua.Location = New System.Drawing.Point(562, 23)
         Me.Label6Qua.Name = "Label6Qua"
         Me.Label6Qua.Size = New System.Drawing.Size(61, 14)
         Me.Label6Qua.TabIndex = 145
@@ -812,7 +851,7 @@ Partial Class frmRateQtyItemLog
         '
         Me.Label5Qua.AutoSize = True
         Me.Label5Qua.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5Qua.Location = New System.Drawing.Point(328, 85)
+        Me.Label5Qua.Location = New System.Drawing.Point(309, 100)
         Me.Label5Qua.Name = "Label5Qua"
         Me.Label5Qua.Size = New System.Drawing.Size(50, 14)
         Me.Label5Qua.TabIndex = 144
@@ -822,7 +861,7 @@ Partial Class frmRateQtyItemLog
         '
         Me.Label4Qua.AutoSize = True
         Me.Label4Qua.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4Qua.Location = New System.Drawing.Point(327, 49)
+        Me.Label4Qua.Location = New System.Drawing.Point(308, 64)
         Me.Label4Qua.Name = "Label4Qua"
         Me.Label4Qua.Size = New System.Drawing.Size(51, 14)
         Me.Label4Qua.TabIndex = 143
@@ -832,7 +871,7 @@ Partial Class frmRateQtyItemLog
         '
         Me.Label3Qua.AutoSize = True
         Me.Label3Qua.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3Qua.Location = New System.Drawing.Point(328, 19)
+        Me.Label3Qua.Location = New System.Drawing.Point(309, 26)
         Me.Label3Qua.Name = "Label3Qua"
         Me.Label3Qua.Size = New System.Drawing.Size(66, 14)
         Me.Label3Qua.TabIndex = 142
@@ -843,9 +882,9 @@ Partial Class frmRateQtyItemLog
         Me.dtpDateToQua.CustomFormat = "dd/MM/yyyy"
         Me.dtpDateToQua.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpDateToQua.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpDateToQua.Location = New System.Drawing.Point(86, 83)
+        Me.dtpDateToQua.Location = New System.Drawing.Point(86, 62)
         Me.dtpDateToQua.Name = "dtpDateToQua"
-        Me.dtpDateToQua.Size = New System.Drawing.Size(195, 22)
+        Me.dtpDateToQua.Size = New System.Drawing.Size(145, 22)
         Me.dtpDateToQua.TabIndex = 135
         '
         'dtpDateFromQua
@@ -853,16 +892,16 @@ Partial Class frmRateQtyItemLog
         Me.dtpDateFromQua.CustomFormat = "dd/MM/yyyy"
         Me.dtpDateFromQua.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpDateFromQua.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpDateFromQua.Location = New System.Drawing.Point(86, 28)
+        Me.dtpDateFromQua.Location = New System.Drawing.Point(86, 22)
         Me.dtpDateFromQua.Name = "dtpDateFromQua"
-        Me.dtpDateFromQua.Size = New System.Drawing.Size(195, 22)
+        Me.dtpDateFromQua.Size = New System.Drawing.Size(145, 22)
         Me.dtpDateFromQua.TabIndex = 134
         '
         'Label2Qua
         '
         Me.Label2Qua.AutoSize = True
         Me.Label2Qua.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2Qua.Location = New System.Drawing.Point(22, 83)
+        Me.Label2Qua.Location = New System.Drawing.Point(22, 68)
         Me.Label2Qua.Name = "Label2Qua"
         Me.Label2Qua.Size = New System.Drawing.Size(18, 14)
         Me.Label2Qua.TabIndex = 133
@@ -872,7 +911,7 @@ Partial Class frmRateQtyItemLog
         '
         Me.Label1Qua.AutoSize = True
         Me.Label1Qua.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1Qua.Location = New System.Drawing.Point(22, 28)
+        Me.Label1Qua.Location = New System.Drawing.Point(22, 22)
         Me.Label1Qua.Name = "Label1Qua"
         Me.Label1Qua.Size = New System.Drawing.Size(33, 14)
         Me.Label1Qua.TabIndex = 132
@@ -899,14 +938,15 @@ Partial Class frmRateQtyItemLog
         Me.Panel1del.Controls.Add(Me.txtGrandTotaldl)
         Me.Panel1del.Controls.Add(Me.Label7del)
         Me.Panel1del.ForeColor = System.Drawing.Color.White
-        Me.Panel1del.Location = New System.Drawing.Point(0, 442)
+        Me.Panel1del.Location = New System.Drawing.Point(3, 453)
         Me.Panel1del.Name = "Panel1del"
-        Me.Panel1del.Size = New System.Drawing.Size(954, 65)
+        Me.Panel1del.Size = New System.Drawing.Size(951, 54)
         Me.Panel1del.TabIndex = 5
         '
         'txtGrandTotaldl
         '
-        Me.txtGrandTotaldl.Location = New System.Drawing.Point(420, 25)
+        Me.txtGrandTotaldl.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtGrandTotaldl.Location = New System.Drawing.Point(373, 22)
         Me.txtGrandTotaldl.Name = "txtGrandTotaldl"
         Me.txtGrandTotaldl.ReadOnly = True
         Me.txtGrandTotaldl.Size = New System.Drawing.Size(180, 22)
@@ -915,10 +955,10 @@ Partial Class frmRateQtyItemLog
         'Label7del
         '
         Me.Label7del.AutoSize = True
-        Me.Label7del.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7del.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7del.Location = New System.Drawing.Point(297, 25)
         Me.Label7del.Name = "Label7del"
-        Me.Label7del.Size = New System.Drawing.Size(95, 17)
+        Me.Label7del.Size = New System.Drawing.Size(70, 14)
         Me.Label7del.TabIndex = 4
         Me.Label7del.Text = "Grand Total"
         '
@@ -944,14 +984,33 @@ Partial Class frmRateQtyItemLog
         Me.GroupBox1del.Controls.Add(Me.dtpDateFromdl)
         Me.GroupBox1del.Controls.Add(Me.Label2del)
         Me.GroupBox1del.Controls.Add(Me.Label1del)
-        Me.GroupBox1del.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox1del.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1del.ForeColor = System.Drawing.Color.White
         Me.GroupBox1del.Location = New System.Drawing.Point(0, 6)
         Me.GroupBox1del.Name = "GroupBox1del"
-        Me.GroupBox1del.Size = New System.Drawing.Size(958, 164)
+        Me.GroupBox1del.Size = New System.Drawing.Size(958, 138)
         Me.GroupBox1del.TabIndex = 3
         Me.GroupBox1del.TabStop = False
         Me.GroupBox1del.Text = "Search By Date"
+        '
+        'cmbDishNameDl
+        '
+        Me.cmbDishNameDl.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbDishNameDl.FormattingEnabled = True
+        Me.cmbDishNameDl.Location = New System.Drawing.Point(643, 67)
+        Me.cmbDishNameDl.Name = "cmbDishNameDl"
+        Me.cmbDishNameDl.Size = New System.Drawing.Size(145, 22)
+        Me.cmbDishNameDl.TabIndex = 156
+        '
+        'Label10dl
+        '
+        Me.Label10dl.AutoSize = True
+        Me.Label10dl.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10dl.Location = New System.Drawing.Point(565, 70)
+        Me.Label10dl.Name = "Label10dl"
+        Me.Label10dl.Size = New System.Drawing.Size(60, 14)
+        Me.Label10dl.TabIndex = 155
+        Me.Label10dl.Text = "Dish name"
         '
         'btnExportExceldl
         '
@@ -960,7 +1019,7 @@ Partial Class frmRateQtyItemLog
         Me.btnExportExceldl.ForeColor = System.Drawing.SystemColors.InfoText
         Me.btnExportExceldl.Image = CType(resources.GetObject("btnExportExceldl.Image"), System.Drawing.Image)
         Me.btnExportExceldl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnExportExceldl.Location = New System.Drawing.Point(822, 103)
+        Me.btnExportExceldl.Location = New System.Drawing.Point(822, 95)
         Me.btnExportExceldl.Name = "btnExportExceldl"
         Me.btnExportExceldl.Size = New System.Drawing.Size(113, 33)
         Me.btnExportExceldl.TabIndex = 152
@@ -972,7 +1031,7 @@ Partial Class frmRateQtyItemLog
         '
         Me.BtnPrintdl.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnPrintdl.ForeColor = System.Drawing.Color.Black
-        Me.BtnPrintdl.Location = New System.Drawing.Point(822, 22)
+        Me.BtnPrintdl.Location = New System.Drawing.Point(822, 17)
         Me.BtnPrintdl.Name = "BtnPrintdl"
         Me.BtnPrintdl.Size = New System.Drawing.Size(113, 31)
         Me.BtnPrintdl.TabIndex = 150
@@ -987,7 +1046,7 @@ Partial Class frmRateQtyItemLog
         Me.btnResetdl.ForeColor = System.Drawing.Color.Black
         Me.btnResetdl.Image = CType(resources.GetObject("btnResetdl.Image"), System.Drawing.Image)
         Me.btnResetdl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnResetdl.Location = New System.Drawing.Point(822, 65)
+        Me.btnResetdl.Location = New System.Drawing.Point(822, 57)
         Me.btnResetdl.Name = "btnResetdl"
         Me.btnResetdl.Size = New System.Drawing.Size(113, 32)
         Me.btnResetdl.TabIndex = 151
@@ -998,7 +1057,7 @@ Partial Class frmRateQtyItemLog
         '
         Me.cmbPermissiondl.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbPermissiondl.FormattingEnabled = True
-        Me.cmbPermissiondl.Location = New System.Drawing.Point(420, 136)
+        Me.cmbPermissiondl.Location = New System.Drawing.Point(643, 26)
         Me.cmbPermissiondl.Name = "cmbPermissiondl"
         Me.cmbPermissiondl.Size = New System.Drawing.Size(145, 22)
         Me.cmbPermissiondl.TabIndex = 149
@@ -1007,7 +1066,7 @@ Partial Class frmRateQtyItemLog
         '
         Me.CmbBillTypedl.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CmbBillTypedl.FormattingEnabled = True
-        Me.CmbBillTypedl.Location = New System.Drawing.Point(420, 95)
+        Me.CmbBillTypedl.Location = New System.Drawing.Point(373, 101)
         Me.CmbBillTypedl.Name = "CmbBillTypedl"
         Me.CmbBillTypedl.Size = New System.Drawing.Size(145, 22)
         Me.CmbBillTypedl.TabIndex = 148
@@ -1016,7 +1075,7 @@ Partial Class frmRateQtyItemLog
         '
         Me.cmbOperatordl.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbOperatordl.FormattingEnabled = True
-        Me.cmbOperatordl.Location = New System.Drawing.Point(420, 54)
+        Me.cmbOperatordl.Location = New System.Drawing.Point(373, 62)
         Me.cmbOperatordl.Name = "cmbOperatordl"
         Me.cmbOperatordl.Size = New System.Drawing.Size(145, 22)
         Me.cmbOperatordl.TabIndex = 147
@@ -1024,7 +1083,7 @@ Partial Class frmRateQtyItemLog
         'txtBillNumberdl
         '
         Me.txtBillNumberdl.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtBillNumberdl.Location = New System.Drawing.Point(420, 14)
+        Me.txtBillNumberdl.Location = New System.Drawing.Point(373, 23)
         Me.txtBillNumberdl.Name = "txtBillNumberdl"
         Me.txtBillNumberdl.Size = New System.Drawing.Size(145, 22)
         Me.txtBillNumberdl.TabIndex = 146
@@ -1033,7 +1092,7 @@ Partial Class frmRateQtyItemLog
         '
         Me.Label6del.AutoSize = True
         Me.Label6del.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6del.Location = New System.Drawing.Point(321, 140)
+        Me.Label6del.Location = New System.Drawing.Point(565, 26)
         Me.Label6del.Name = "Label6del"
         Me.Label6del.Size = New System.Drawing.Size(61, 14)
         Me.Label6del.TabIndex = 145
@@ -1043,7 +1102,7 @@ Partial Class frmRateQtyItemLog
         '
         Me.Label5del.AutoSize = True
         Me.Label5del.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5del.Location = New System.Drawing.Point(321, 99)
+        Me.Label5del.Location = New System.Drawing.Point(274, 104)
         Me.Label5del.Name = "Label5del"
         Me.Label5del.Size = New System.Drawing.Size(50, 14)
         Me.Label5del.TabIndex = 144
@@ -1053,7 +1112,7 @@ Partial Class frmRateQtyItemLog
         '
         Me.Label4del.AutoSize = True
         Me.Label4del.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4del.Location = New System.Drawing.Point(321, 58)
+        Me.Label4del.Location = New System.Drawing.Point(274, 65)
         Me.Label4del.Name = "Label4del"
         Me.Label4del.Size = New System.Drawing.Size(51, 14)
         Me.Label4del.TabIndex = 143
@@ -1063,7 +1122,7 @@ Partial Class frmRateQtyItemLog
         '
         Me.Label3del.AutoSize = True
         Me.Label3del.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3del.Location = New System.Drawing.Point(321, 17)
+        Me.Label3del.Location = New System.Drawing.Point(274, 26)
         Me.Label3del.Name = "Label3del"
         Me.Label3del.Size = New System.Drawing.Size(66, 14)
         Me.Label3del.TabIndex = 142
@@ -1074,9 +1133,9 @@ Partial Class frmRateQtyItemLog
         Me.dtpDateTodl.CustomFormat = "dd/MM/yyyy"
         Me.dtpDateTodl.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpDateTodl.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpDateTodl.Location = New System.Drawing.Point(86, 83)
+        Me.dtpDateTodl.Location = New System.Drawing.Point(86, 77)
         Me.dtpDateTodl.Name = "dtpDateTodl"
-        Me.dtpDateTodl.Size = New System.Drawing.Size(195, 23)
+        Me.dtpDateTodl.Size = New System.Drawing.Size(145, 23)
         Me.dtpDateTodl.TabIndex = 135
         '
         'dtpDateFromdl
@@ -1084,16 +1143,16 @@ Partial Class frmRateQtyItemLog
         Me.dtpDateFromdl.CustomFormat = "dd/MM/yyyy"
         Me.dtpDateFromdl.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpDateFromdl.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpDateFromdl.Location = New System.Drawing.Point(86, 28)
+        Me.dtpDateFromdl.Location = New System.Drawing.Point(86, 22)
         Me.dtpDateFromdl.Name = "dtpDateFromdl"
-        Me.dtpDateFromdl.Size = New System.Drawing.Size(195, 23)
+        Me.dtpDateFromdl.Size = New System.Drawing.Size(145, 23)
         Me.dtpDateFromdl.TabIndex = 134
         '
         'Label2del
         '
         Me.Label2del.AutoSize = True
         Me.Label2del.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2del.Location = New System.Drawing.Point(22, 83)
+        Me.Label2del.Location = New System.Drawing.Point(22, 77)
         Me.Label2del.Name = "Label2del"
         Me.Label2del.Size = New System.Drawing.Size(18, 14)
         Me.Label2del.TabIndex = 133
@@ -1103,7 +1162,7 @@ Partial Class frmRateQtyItemLog
         '
         Me.Label1del.AutoSize = True
         Me.Label1del.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1del.Location = New System.Drawing.Point(22, 28)
+        Me.Label1del.Location = New System.Drawing.Point(22, 22)
         Me.Label1del.Name = "Label1del"
         Me.Label1del.Size = New System.Drawing.Size(33, 14)
         Me.Label1del.TabIndex = 132
@@ -1117,22 +1176,22 @@ Partial Class frmRateQtyItemLog
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DatagridViewItemDel.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DatagridViewItemDel.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DatagridViewItemDel.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DatagridViewItemDel.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
         Me.DatagridViewItemDel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DatagridViewItemDel.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colID, Me.BillNumber, Me.DishName, Me.Kot_Date, Me.table_No, Me.Quantity, Me.Rate, Me.Bill_Type, Me.Operator_, Me.Permission_Granted, Me.Remarks, Me.colComapnyId, Me.colBranchId})
         Me.DatagridViewItemDel.EnableHeadersVisualStyles = False
-        Me.DatagridViewItemDel.Location = New System.Drawing.Point(-3, 169)
+        Me.DatagridViewItemDel.Location = New System.Drawing.Point(3, 150)
         Me.DatagridViewItemDel.Name = "DatagridViewItemDel"
         Me.DatagridViewItemDel.ReadOnly = True
         Me.DatagridViewItemDel.RowHeadersVisible = False
-        Me.DatagridViewItemDel.Size = New System.Drawing.Size(961, 278)
+        Me.DatagridViewItemDel.Size = New System.Drawing.Size(955, 297)
         Me.DatagridViewItemDel.TabIndex = 2
         '
         'colID
@@ -1215,63 +1274,6 @@ Partial Class frmRateQtyItemLog
         Me.colBranchId.Name = "colBranchId"
         Me.colBranchId.ReadOnly = True
         Me.colBranchId.Visible = False
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(556, 21)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(60, 14)
-        Me.Label9.TabIndex = 143
-        Me.Label9.Text = "Dish name"
-        '
-        'cmbDishName
-        '
-        Me.cmbDishName.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmbDishName.FormattingEnabled = True
-        Me.cmbDishName.Location = New System.Drawing.Point(634, 18)
-        Me.cmbDishName.Name = "cmbDishName"
-        Me.cmbDishName.Size = New System.Drawing.Size(145, 22)
-        Me.cmbDishName.TabIndex = 144
-        '
-        'CmbDishNameQua
-        '
-        Me.CmbDishNameQua.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CmbDishNameQua.FormattingEnabled = True
-        Me.CmbDishNameQua.Location = New System.Drawing.Point(644, 16)
-        Me.CmbDishNameQua.Name = "CmbDishNameQua"
-        Me.CmbDishNameQua.Size = New System.Drawing.Size(145, 22)
-        Me.CmbDishNameQua.TabIndex = 154
-        '
-        'Label10qua
-        '
-        Me.Label10qua.AutoSize = True
-        Me.Label10qua.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10qua.Location = New System.Drawing.Point(566, 19)
-        Me.Label10qua.Name = "Label10qua"
-        Me.Label10qua.Size = New System.Drawing.Size(60, 14)
-        Me.Label10qua.TabIndex = 153
-        Me.Label10qua.Text = "Dish name"
-        '
-        'cmbDishNameDl
-        '
-        Me.cmbDishNameDl.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmbDishNameDl.FormattingEnabled = True
-        Me.cmbDishNameDl.Location = New System.Drawing.Point(660, 17)
-        Me.cmbDishNameDl.Name = "cmbDishNameDl"
-        Me.cmbDishNameDl.Size = New System.Drawing.Size(145, 22)
-        Me.cmbDishNameDl.TabIndex = 156
-        '
-        'Label10dl
-        '
-        Me.Label10dl.AutoSize = True
-        Me.Label10dl.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10dl.Location = New System.Drawing.Point(582, 20)
-        Me.Label10dl.Name = "Label10dl"
-        Me.Label10dl.Size = New System.Drawing.Size(60, 14)
-        Me.Label10dl.TabIndex = 155
-        Me.Label10dl.Text = "Dish name"
         '
         'frmRateQtyItemLog
         '

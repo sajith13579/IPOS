@@ -3,7 +3,7 @@
 Public Class frmRateQtyItemLog
     Private Sub dtpDateFrom_ValueChanged(sender As Object, e As EventArgs) Handles dtpDateFromdl.ValueChanged
         txtBillNumberdl.Text = ""
-        If cmbOperatordl.SelectedItem = "All" OrElse CmbBillTypedl.SelectedItem = "All" OrElse cmbPermissiondl.SelectedItem = "All" Then
+        If cmbOperatordl.SelectedItem = "All" OrElse CmbBillTypedl.SelectedItem = "All" OrElse cmbPermissiondl.SelectedItem = "All" OrElse cmbDishNameDl.SelectedItem = "All" Then
             ALL_row_Itm_del()
         ElseIf cmbOperatordl.SelectedItem <> "All" AndAlso cmbOperatordl.SelectedItem <> Nothing AndAlso cmd_operator_select = True Then
             cmb_op_selct_Index_change_del()
@@ -13,6 +13,9 @@ Public Class frmRateQtyItemLog
 
         ElseIf cmbPermissiondl.SelectedItem <> "All" AndAlso cmbPermissiondl.SelectedItem <> Nothing AndAlso cmb_permission_select = True Then
             cmb_permi_selct_Index_change_del()
+
+        ElseIf cmbDishNameDl.SelectedItem <> "All" AndAlso cmbDishNameDl.SelectedItem <> Nothing AndAlso cmb_Dish_select = True Then
+            cmb_dish_selct_Index_change_del()
         Else
             ALL_row_Itm_del()
         End If
@@ -21,9 +24,9 @@ Public Class frmRateQtyItemLog
     Public Sub print_dl_en_dis()
         If DatagridViewItemDel.Rows.Count > 0 Then
             BtnPrintdl.Enabled = True
-            BtnPrintdl.BackColor = Color.HotPink
+            BtnPrintdl.BackColor = Color.LightSteelBlue
             btnExportExceldl.Enabled = True
-            btnExportExceldl.BackColor = Color.HotPink
+            btnExportExceldl.BackColor = Color.LightSteelBlue
         Else
             BtnPrintdl.Enabled = False
             BtnPrintdl.BackColor = SystemColors.Control ' Reset button color to default
@@ -102,6 +105,8 @@ Public Class frmRateQtyItemLog
     End Sub
     Private Sub frmRateQtyItemLog_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         load_combobox_RT()
+        print_btn_RT_chg_enb_dis_qua()
+
     End Sub
 
 
@@ -194,6 +199,8 @@ Public Class frmRateQtyItemLog
 
         cmb_bill_select = False
         cmb_permission_select = False
+        cmb_Dish_select = False
+
         Dim selectedOperator As String
         Try
             selectedOperator = cmbOperatordl.SelectedItem.ToString()
@@ -255,13 +262,15 @@ Public Class frmRateQtyItemLog
 
         cmbPermissiondl.SelectedItem = Nothing
         CmbBillTypedl.SelectedItem = Nothing
+        cmbDishName.SelectedItem = Nothing
+        cmbDishNameDl.SelectedItem = Nothing
         cmbOperatordl.SelectedItem = selectedOperator
         print_dl_en_dis()
     End Sub
 
     Public Sub cmb_dish_selct_Index_change_del()
-        If cmbOperatordl.SelectedItem <> Nothing OrElse cmbOperatordl.SelectedItem <> "All" Then
-            cmd_operator_select = True
+        If cmbDishNameDl.SelectedItem <> Nothing OrElse cmbDishNameDl.SelectedItem <> "All" Then
+            cmb_Dish_select = True
         End If
         txtBillNumberdl.Text = ""
 
@@ -270,7 +279,7 @@ Public Class frmRateQtyItemLog
         cmd_operator_select = False
         Dim selectedDish As String
         Try
-            selectedDish = cmbOperatordl.SelectedItem.ToString()
+            selectedDish = cmbDishNameDl.SelectedItem.ToString()
         Catch ex As Exception
             selectedDish = Nothing
         End Try
@@ -285,6 +294,8 @@ Public Class frmRateQtyItemLog
             Dim toDate As Date = dtpDateTodl.Value
 
 
+
+
             Dim query As String = "SELECT itd.ID, itd.TicketId as BillNo, dsh.DishName, itd.KOTTime as Kotdate, itd.TableNo, itd.Quantity,itd.Rate, itd.BillType, 
                              ER_Operator.EmployeeName AS OperatorName, 
                              ER_PermissionGranted.EmployeeName AS PermissionGrantedName, 
@@ -293,7 +304,7 @@ Public Class frmRateQtyItemLog
                       INNER JOIN EmployeeRegistration AS ER_Operator ON itd.OperatorId = ER_Operator.EmpId
                       INNER JOIN EmployeeRegistration AS ER_PermissionGranted ON itd.PermissionGrantedId = ER_PermissionGranted.EmpId
                       INNER JOIN Dish AS dsh ON itd.Dish_Id = dsh.DishID
-                      WHERE itd.DishId IN (SELECT DishID FROM Dish WHERE Dishname = @Dishname) AND
+                      WHERE itd.Dish_Id IN (SELECT DishID FROM Dish WHERE Dishname = @Dishname) AND
                       itd.KOTTime >= @FromDate AND itd.KOTTime <= @ToDate"
 
             Dim conn As New SqlConnection(connection)
@@ -406,6 +417,7 @@ Public Class frmRateQtyItemLog
         txtBillNumberdl.Text = ""
         cmb_bill_select = False
         cmd_operator_select = False
+        cmb_Dish_select = False
         Dim selectedPermission As String
         Try
             selectedPermission = cmbPermissiondl.SelectedItem.ToString()
@@ -466,6 +478,7 @@ Public Class frmRateQtyItemLog
 
         cmbOperatordl.SelectedItem = Nothing
         CmbBillTypedl.SelectedItem = Nothing
+        cmbDishNameDl.SelectedItem = Nothing
         cmbPermissiondl.SelectedItem = selectedPermission
 
         print_dl_en_dis()
@@ -544,6 +557,7 @@ Public Class frmRateQtyItemLog
         txtBillNumberdl.Text = ""
         cmb_permission_select = False
         cmd_operator_select = False
+        cmb_Dish_select = False
         If CmbBillTypedl.SelectedItem <> Nothing OrElse CmbBillTypedl.SelectedItem <> "All" Then
             cmb_bill_select = True
         End If
@@ -626,6 +640,8 @@ Public Class frmRateQtyItemLog
 
         cmbPermissiondl.SelectedItem = Nothing
         cmbOperatordl.SelectedItem = Nothing
+        cmbDishName.SelectedItem = Nothing
+        cmbDishNameDl.SelectedItem = Nothing
         CmbBillTypedl.SelectedItem = select_bill_type
 
         print_dl_en_dis()
@@ -693,7 +709,11 @@ Public Class frmRateQtyItemLog
 
             ElseIf CmbBillTypedl.SelectedItem <> Nothing AndAlso CmbBillTypedl.SelectedItem.ToString() = "All" Then
                 all_print_dl()
-            ElseIf cmbOperatordl.SelectedItem = Nothing AndAlso CmbBillTypedl.SelectedItem = Nothing AndAlso cmbPermissiondl.SelectedItem = Nothing Then
+
+            ElseIf cmbDishNameDl.SelectedItem <> Nothing AndAlso cmbDishNameDl.SelectedItem.ToString() = "All" Then
+                all_print_dl()
+
+            ElseIf cmbOperatordl.SelectedItem = Nothing AndAlso CmbBillTypedl.SelectedItem = Nothing AndAlso cmbPermissiondl.SelectedItem = Nothing AndAlso cmbDishNameDl.SelectedItem = Nothing Then
                 all_print_dl()
 
             ElseIf cmbOperatordl.SelectedItem <> Nothing AndAlso cmbOperatordl.SelectedItem.ToString() <> "All" Then
@@ -841,7 +861,48 @@ Public Class frmRateQtyItemLog
                 rpt2.Dispose()
                 CN.Close()
 
+            ElseIf cmbDishNameDl.SelectedItem <> Nothing AndAlso cmbDishNameDl.SelectedItem <> "All" Then
+                Dim CN As New SqlConnection(connection)
+                CN.Open()
+                Dim MyCommand1 As New SqlCommand()
+                Dim myDA1 As New SqlDataAdapter()
+                Dim ds As New DataSet ' The DataSet you created.
 
+                MyCommand1.Connection = CN
+                MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
+                                "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
+                                "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
+                MyCommand1.CommandType = CommandType.Text
+                myDA1.SelectCommand = MyCommand1
+                myDA1.Fill(ds, "Hotel")
+                ' Call the stored procedure
+                Dim dishname As String = cmbDishNameDl.SelectedItem.ToString()
+                Dim cmd2 As New SqlCommand("GetItemDeletedByDish", CN)
+                cmd2.CommandType = CommandType.StoredProcedure
+                cmd2.Parameters.AddWithValue("@FromDate", fromDate)
+                cmd2.Parameters.AddWithValue("@ToDate", toDate)
+                cmd2.Parameters.AddWithValue("@Dishname", dishname)
+                Dim adapter2 As New SqlDataAdapter(cmd2)
+                Dim datatable2 As New DataTable
+                adapter2.Fill(ds, "Item_delete")
+                ' Merge the new DataTable into the existing DataSet
+                'ds.Tables.Add(datatable.Copy())
+
+                ' Load the Crystal Report
+                Dim rpt2 As New RptItemDelete
+                rpt2.Load(Application.StartupPath & "\Reports\RptItemDelete.rpt")
+
+                ' Set the DataSource of the Crystal Report to the DataTable
+                'rpt.SetDataSource(dataTable)
+                rpt2.SetDataSource(ds)
+                ' Show the report
+                frmReport.CrystalReportViewer1.ReportSource = rpt2
+                frmReport.ShowDialog()
+
+                ' Clean up
+                rpt2.Close()
+                rpt2.Dispose()
+                CN.Close()
 
             End If
         Else
@@ -901,6 +962,7 @@ Public Class frmRateQtyItemLog
         cmbPermissiondl.SelectedItem = Nothing
         cmbOperatordl.SelectedItem = Nothing
         CmbBillTypedl.SelectedItem = Nothing
+        cmbDishNameDl.SelectedItem = Nothing
         BtnPrintdl.Enabled = False
         txtGrandTotaldl.Text = ""
     End Sub
@@ -915,7 +977,7 @@ Public Class frmRateQtyItemLog
 
     Private Sub dtpDateTodl_ValueChanged(sender As Object, e As EventArgs) Handles dtpDateTodl.ValueChanged
         txtBillNumberdl.Text = ""
-        If cmbOperatordl.SelectedItem = "All" OrElse CmbBillTypedl.SelectedItem = "All" OrElse cmbPermissiondl.SelectedItem = "All" Then
+        If cmbOperatordl.SelectedItem = "All" OrElse CmbBillTypedl.SelectedItem = "All" OrElse cmbPermissiondl.SelectedItem = "All" OrElse cmbDishNameDl.SelectedItem = "All" Then
             ALL_row_Itm_del()
         ElseIf cmbOperatordl.SelectedItem <> "All" AndAlso cmbOperatordl.SelectedItem <> Nothing AndAlso cmd_operator_select = True Then
             cmb_op_selct_Index_change_del()
@@ -925,6 +987,9 @@ Public Class frmRateQtyItemLog
 
         ElseIf cmbPermissiondl.SelectedItem <> "All" AndAlso cmbPermissiondl.SelectedItem <> Nothing AndAlso cmb_permission_select = True Then
             cmb_permi_selct_Index_change_del()
+
+        ElseIf cmbDishNameDl.SelectedItem <> "All" AndAlso cmbDishNameDl.SelectedItem <> Nothing AndAlso cmb_Dish_select = True Then
+            cmb_dish_selct_Index_change_del()
         Else
             ALL_row_Itm_del()
         End If
@@ -1546,9 +1611,9 @@ Public Class frmRateQtyItemLog
     Public Sub print_btn_enb_dis_qua()
         If DatagridViewQty.Rows.Count > 0 Then
             BtnPrintqua.Enabled = True
-            BtnPrintqua.BackColor = Color.HotPink
+            BtnPrintqua.BackColor = Color.LightSteelBlue
             btnExportExcelqua.Enabled = True
-            btnExportExcelqua.BackColor = Color.HotPink
+            btnExportExcelqua.BackColor = Color.LightSteelBlue
         Else
             BtnPrintqua.Enabled = False
             BtnPrintqua.BackColor = SystemColors.Control ' Reset button color to default
@@ -1923,9 +1988,9 @@ Public Class frmRateQtyItemLog
     Public Sub print_btn_RT_chg_enb_dis_qua()
         If DatagridView1.Rows.Count > 0 Then
             BtnPrint.Enabled = True
-            BtnPrint.BackColor = Color.HotPink
+            BtnPrint.BackColor = Color.LightSteelBlue
             btnExportExcel.Enabled = True
-            btnExportExcel.BackColor = Color.HotPink
+            btnExportExcel.BackColor = Color.LightSteelBlue
             ' Assuming you have a button named Button1
 
 
@@ -2940,5 +3005,9 @@ Public Class frmRateQtyItemLog
 
     Private Sub cmbDishNameDl_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDishNameDl.SelectedIndexChanged
         cmb_dish_selct_Index_change_del()
+    End Sub
+
+    Private Sub Label10dl_Click(sender As Object, e As EventArgs) Handles Label10dl.Click
+
     End Sub
 End Class

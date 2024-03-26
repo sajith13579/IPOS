@@ -22,10 +22,10 @@ Partial Class frmRateQtyItemLog
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmRateQtyItemLog))
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.tbRateChange = New System.Windows.Forms.TabPage()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -87,7 +87,6 @@ Partial Class frmRateQtyItemLog
         Me.CmbDishNameQua = New System.Windows.Forms.ComboBox()
         Me.Label10qua = New System.Windows.Forms.Label()
         Me.btnExportExcelqua = New System.Windows.Forms.Button()
-        Me.BtnPrintqua1 = New System.Windows.Forms.Button()
         Me.btnResetqua = New System.Windows.Forms.Button()
         Me.cmbPermissionQua = New System.Windows.Forms.ComboBox()
         Me.CmbBillTypeQua = New System.Windows.Forms.ComboBox()
@@ -247,14 +246,14 @@ Partial Class frmRateQtyItemLog
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DatagridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DatagridView1.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle8.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DatagridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DatagridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DatagridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DatagridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn10, Me.colBillNumber, Me.colDishName, Me.colChangedDate, Me.colOriginalRate, Me.colChangedRate, Me.colDiffrence, Me.colStatus, Me.colBillType, Me.colOperator, Me.colPermission, Me.colRemarks, Me.DataGridViewTextBoxColumn11, Me.DataGridViewTextBoxColumn12})
         Me.DatagridView1.EnableHeadersVisualStyles = False
@@ -442,7 +441,9 @@ Partial Class frmRateQtyItemLog
         '
         Me.BtnPrint.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnPrint.ForeColor = System.Drawing.Color.Black
-        Me.BtnPrint.Location = New System.Drawing.Point(229, 10)
+        Me.BtnPrint.Image = CType(resources.GetObject("BtnPrint.Image"), System.Drawing.Image)
+        Me.BtnPrint.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BtnPrint.Location = New System.Drawing.Point(231, 9)
         Me.BtnPrint.Name = "BtnPrint"
         Me.BtnPrint.Size = New System.Drawing.Size(106, 38)
         Me.BtnPrint.TabIndex = 130
@@ -555,7 +556,6 @@ Partial Class frmRateQtyItemLog
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel1Qua.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
         Me.Panel1Qua.Controls.Add(Me.BtnPrintqua)
-        Me.Panel1Qua.Controls.Add(Me.BtnPrintqua1)
         Me.Panel1Qua.Controls.Add(Me.btnExportExcelqua)
         Me.Panel1Qua.Controls.Add(Me.Label7Qua)
         Me.Panel1Qua.Controls.Add(Me.txtChangedQtyCount)
@@ -593,14 +593,14 @@ Partial Class frmRateQtyItemLog
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DatagridViewQty.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DatagridViewQty.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle7.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DatagridViewQty.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DatagridViewQty.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.DatagridViewQty.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DatagridViewQty.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.Changed_Date, Me.Original_Quantity, Me.Changed_Quantity, Me.Diffrence, Me.Rate_Status, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7, Me.DataGridViewTextBoxColumn8, Me.DataGridViewTextBoxColumn9})
         Me.DatagridViewQty.EnableHeadersVisualStyles = False
@@ -721,7 +721,7 @@ Partial Class frmRateQtyItemLog
         'btnExportExcelqua
         '
         Me.btnExportExcelqua.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnExportExcelqua.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExportExcelqua.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnExportExcelqua.ForeColor = System.Drawing.SystemColors.InfoText
         Me.btnExportExcelqua.Image = CType(resources.GetObject("btnExportExcelqua.Image"), System.Drawing.Image)
         Me.btnExportExcelqua.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -733,26 +733,11 @@ Partial Class frmRateQtyItemLog
         Me.btnExportExcelqua.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnExportExcelqua.UseVisualStyleBackColor = True
         '
-        'BtnPrintqua1
-        '
-        Me.BtnPrintqua1.BackgroundImage = CType(resources.GetObject("BtnPrintqua1.BackgroundImage"), System.Drawing.Image)
-        Me.BtnPrintqua1.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.BtnPrintqua1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnPrintqua1.ForeColor = System.Drawing.Color.Black
-        Me.BtnPrintqua1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BtnPrintqua1.Location = New System.Drawing.Point(438, 9)
-        Me.BtnPrintqua1.Name = "BtnPrintqua1"
-        Me.BtnPrintqua1.Size = New System.Drawing.Size(106, 38)
-        Me.BtnPrintqua1.TabIndex = 150
-        Me.BtnPrintqua1.Text = "Print"
-        Me.BtnPrintqua1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.BtnPrintqua1.UseVisualStyleBackColor = True
-        '
         'btnResetqua
         '
         Me.btnResetqua.BackColor = System.Drawing.SystemColors.Control
         Me.btnResetqua.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnResetqua.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnResetqua.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnResetqua.ForeColor = System.Drawing.Color.Black
         Me.btnResetqua.Image = CType(resources.GetObject("btnResetqua.Image"), System.Drawing.Image)
         Me.btnResetqua.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -761,7 +746,6 @@ Partial Class frmRateQtyItemLog
         Me.btnResetqua.Size = New System.Drawing.Size(106, 38)
         Me.btnResetqua.TabIndex = 151
         Me.btnResetqua.Text = "Reset"
-        Me.btnResetqua.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnResetqua.UseVisualStyleBackColor = False
         '
         'cmbPermissionQua
@@ -972,6 +956,8 @@ Partial Class frmRateQtyItemLog
         '
         Me.BtnPrintdl.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnPrintdl.ForeColor = System.Drawing.Color.Black
+        Me.BtnPrintdl.Image = CType(resources.GetObject("BtnPrintdl.Image"), System.Drawing.Image)
+        Me.BtnPrintdl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.BtnPrintdl.Location = New System.Drawing.Point(276, 11)
         Me.BtnPrintdl.Name = "BtnPrintdl"
         Me.BtnPrintdl.Size = New System.Drawing.Size(113, 32)
@@ -1123,14 +1109,14 @@ Partial Class frmRateQtyItemLog
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DatagridViewItemDel.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DatagridViewItemDel.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
-        DataGridViewCellStyle9.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle9.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DatagridViewItemDel.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DatagridViewItemDel.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.DatagridViewItemDel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DatagridViewItemDel.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colID, Me.BillNumber, Me.DishName, Me.Kot_Date, Me.table_No, Me.Quantity, Me.Rate, Me.Bill_Type, Me.Operator_, Me.Permission_Granted, Me.Remarks, Me.colComapnyId, Me.colBranchId})
         Me.DatagridViewItemDel.EnableHeadersVisualStyles = False
@@ -1297,7 +1283,7 @@ Partial Class frmRateQtyItemLog
         'BtnPrintqua
         '
         Me.BtnPrintqua.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.BtnPrintqua.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnPrintqua.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnPrintqua.ForeColor = System.Drawing.SystemColors.InfoText
         Me.BtnPrintqua.Image = CType(resources.GetObject("BtnPrintqua.Image"), System.Drawing.Image)
         Me.BtnPrintqua.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1306,7 +1292,6 @@ Partial Class frmRateQtyItemLog
         Me.BtnPrintqua.Size = New System.Drawing.Size(126, 38)
         Me.BtnPrintqua.TabIndex = 153
         Me.BtnPrintqua.Text = "Print"
-        Me.BtnPrintqua.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.BtnPrintqua.UseVisualStyleBackColor = True
         '
         'frmRateQtyItemLog
@@ -1380,7 +1365,6 @@ Partial Class frmRateQtyItemLog
     Friend WithEvents txtGrandTotaldl As TextBox
     Friend WithEvents Label7del As Label
     Friend WithEvents btnExportExcelqua As Button
-    Friend WithEvents BtnPrintqua1 As Button
     Friend WithEvents btnResetqua As Button
     Friend WithEvents cmbPermissionQua As ComboBox
     Friend WithEvents CmbBillTypeQua As ComboBox

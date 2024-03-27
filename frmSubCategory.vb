@@ -6,4 +6,12 @@
     Private Sub Label5_Click(sender As Object, e As EventArgs) Handles Label5.Click
 
     End Sub
+
+    Private Sub frmSubCategory_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
+
+    Public Sub sub_cat_combo()
+
+    End Sub
 End Class

@@ -31,6 +31,7 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.bttnCatSave = New System.Windows.Forms.Button()
         Me.bttnCatNew = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.lblCatImagePath = New System.Windows.Forms.Label()
         Me.bttnCatBrowse = New System.Windows.Forms.Button()
         Me.bttnCatRemove = New System.Windows.Forms.Button()
         Me.PictBoxCat = New System.Windows.Forms.PictureBox()
@@ -42,44 +43,44 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.DgvCategory = New System.Windows.Forms.DataGridView()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.SubCategory = New System.Windows.Forms.TabPage()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SubCategoryLocal = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.IsActive = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.CategoryName = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.SubCatImage = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.DisplayOrder = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.btnDelete = New System.Windows.Forms.Button()
-        Me.btnUpdate = New System.Windows.Forms.Button()
-        Me.btnSave = New System.Windows.Forms.Button()
-        Me.btnNew = New System.Windows.Forms.Button()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.btnBrowse = New System.Windows.Forms.Button()
-        Me.btnRemove = New System.Windows.Forms.Button()
-        Me.picture = New System.Windows.Forms.PictureBox()
-        Me.txtCatName = New System.Windows.Forms.ComboBox()
-        Me.txtSubCatLocal = New System.Windows.Forms.TextBox()
-        Me.txtDisplayOrder = New System.Windows.Forms.TextBox()
-        Me.txtSubCategory = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.Col_Cat_ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Col_Category = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Col_Category_Local = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Col_Cat_IsActive = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.Col_Category_Image = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Col_Display_Order = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.lblCatImagePath = New System.Windows.Forms.Label()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.SubCategory = New System.Windows.Forms.TabPage()
+        Me.DgvSubCat = New System.Windows.Forms.DataGridView()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.btnSubCatDelete = New System.Windows.Forms.Button()
+        Me.btnSubCatUpdate = New System.Windows.Forms.Button()
+        Me.btnSubCatSave = New System.Windows.Forms.Button()
+        Me.btnSubCatNew = New System.Windows.Forms.Button()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnSubCatBrowse = New System.Windows.Forms.Button()
+        Me.btnSubCatRemove = New System.Windows.Forms.Button()
+        Me.pictboxSubCat = New System.Windows.Forms.PictureBox()
+        Me.cmbCatName = New System.Windows.Forms.ComboBox()
+        Me.txtSubCatLocal = New System.Windows.Forms.TextBox()
+        Me.txtSubCatDisplayOrder = New System.Windows.Forms.TextBox()
+        Me.txtSubCategory = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.ChkSubCategory = New System.Windows.Forms.CheckBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.lblSubCatImagePath = New System.Windows.Forms.Label()
+        Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Sub_Category = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SubCategoryLocal = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.IsActive = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.CategoryName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SubCatImage = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DisplayOrder = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabControl1.SuspendLayout()
         Me.Category.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -88,10 +89,10 @@ Partial Class frmDisplayCategoryAndSubCategory
         CType(Me.DgvCategory, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         Me.SubCategory.SuspendLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DgvSubCat, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel3.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
-        CType(Me.picture, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pictboxSubCat, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -214,6 +215,16 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Sub Category Info"
         '
+        'lblCatImagePath
+        '
+        Me.lblCatImagePath.AutoSize = True
+        Me.lblCatImagePath.Location = New System.Drawing.Point(18, 340)
+        Me.lblCatImagePath.Name = "lblCatImagePath"
+        Me.lblCatImagePath.Size = New System.Drawing.Size(39, 13)
+        Me.lblCatImagePath.TabIndex = 63
+        Me.lblCatImagePath.Text = "Label4"
+        Me.lblCatImagePath.Visible = False
+        '
         'bttnCatBrowse
         '
         Me.bttnCatBrowse.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -334,10 +345,52 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.DgvCategory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvCategory.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Col_Cat_ID, Me.Col_Category, Me.Col_Category_Local, Me.Col_Cat_IsActive, Me.Col_Category_Image, Me.Col_Display_Order})
         Me.DgvCategory.Location = New System.Drawing.Point(355, 63)
+        Me.DgvCategory.MultiSelect = False
         Me.DgvCategory.Name = "DgvCategory"
         Me.DgvCategory.ReadOnly = True
         Me.DgvCategory.Size = New System.Drawing.Size(563, 370)
         Me.DgvCategory.TabIndex = 19
+        '
+        'Col_Cat_ID
+        '
+        Me.Col_Cat_ID.HeaderText = "ID"
+        Me.Col_Cat_ID.Name = "Col_Cat_ID"
+        Me.Col_Cat_ID.ReadOnly = True
+        Me.Col_Cat_ID.Visible = False
+        '
+        'Col_Category
+        '
+        Me.Col_Category.HeaderText = "Category"
+        Me.Col_Category.Name = "Col_Category"
+        Me.Col_Category.ReadOnly = True
+        '
+        'Col_Category_Local
+        '
+        Me.Col_Category_Local.HeaderText = "Category Local"
+        Me.Col_Category_Local.Name = "Col_Category_Local"
+        Me.Col_Category_Local.ReadOnly = True
+        '
+        'Col_Cat_IsActive
+        '
+        Me.Col_Cat_IsActive.HeaderText = "IsActive"
+        Me.Col_Cat_IsActive.Name = "Col_Cat_IsActive"
+        Me.Col_Cat_IsActive.ReadOnly = True
+        '
+        'Col_Category_Image
+        '
+        Me.Col_Category_Image.HeaderText = "Category_Image"
+        Me.Col_Category_Image.Name = "Col_Category_Image"
+        Me.Col_Category_Image.ReadOnly = True
+        Me.Col_Category_Image.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Col_Category_Image.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Col_Display_Order
+        '
+        Me.Col_Display_Order.HeaderText = "Display Order"
+        Me.Col_Display_Order.Name = "Col_Display_Order"
+        Me.Col_Display_Order.ReadOnly = True
+        Me.Col_Display_Order.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Col_Display_Order.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'Panel2
         '
@@ -365,7 +418,7 @@ Partial Class frmDisplayCategoryAndSubCategory
         '
         'SubCategory
         '
-        Me.SubCategory.Controls.Add(Me.DataGridView1)
+        Me.SubCategory.Controls.Add(Me.DgvSubCat)
         Me.SubCategory.Controls.Add(Me.Panel3)
         Me.SubCategory.Controls.Add(Me.GroupBox1)
         Me.SubCategory.Controls.Add(Me.Panel1)
@@ -377,148 +430,107 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.SubCategory.Text = "Sub Category"
         Me.SubCategory.UseVisualStyleBackColor = True
         '
-        'DataGridView1
+        'DgvSubCat
         '
-        Me.DataGridView1.AllowUserToAddRows = False
-        Me.DataGridView1.AllowUserToDeleteRows = False
-        Me.DataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.DataGridView1.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.DataGridViewTextBoxColumn1, Me.SubCategoryLocal, Me.IsActive, Me.CategoryName, Me.SubCatImage, Me.DisplayOrder})
-        Me.DataGridView1.Location = New System.Drawing.Point(355, 54)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.ReadOnly = True
-        Me.DataGridView1.Size = New System.Drawing.Size(563, 380)
-        Me.DataGridView1.TabIndex = 18
-        '
-        'ID
-        '
-        Me.ID.HeaderText = "ID"
-        Me.ID.Name = "ID"
-        Me.ID.ReadOnly = True
-        '
-        'DataGridViewTextBoxColumn1
-        '
-        Me.DataGridViewTextBoxColumn1.HeaderText = "Sub Category"
-        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-        Me.DataGridViewTextBoxColumn1.ReadOnly = True
-        '
-        'SubCategoryLocal
-        '
-        Me.SubCategoryLocal.HeaderText = "Sub Category Local"
-        Me.SubCategoryLocal.Name = "SubCategoryLocal"
-        Me.SubCategoryLocal.ReadOnly = True
-        '
-        'IsActive
-        '
-        Me.IsActive.HeaderText = "IsActive"
-        Me.IsActive.Name = "IsActive"
-        Me.IsActive.ReadOnly = True
-        '
-        'CategoryName
-        '
-        Me.CategoryName.HeaderText = "Category Name"
-        Me.CategoryName.Name = "CategoryName"
-        Me.CategoryName.ReadOnly = True
-        '
-        'SubCatImage
-        '
-        Me.SubCatImage.HeaderText = "SubCatImage"
-        Me.SubCatImage.Name = "SubCatImage"
-        Me.SubCatImage.ReadOnly = True
-        '
-        'DisplayOrder
-        '
-        Me.DisplayOrder.HeaderText = "DisplayOrder"
-        Me.DisplayOrder.Name = "DisplayOrder"
-        Me.DisplayOrder.ReadOnly = True
+        Me.DgvSubCat.AllowUserToAddRows = False
+        Me.DgvSubCat.AllowUserToDeleteRows = False
+        Me.DgvSubCat.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.DgvSubCat.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
+        Me.DgvSubCat.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DgvSubCat.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Sub_Category, Me.SubCategoryLocal, Me.IsActive, Me.CategoryName, Me.SubCatImage, Me.DisplayOrder})
+        Me.DgvSubCat.Location = New System.Drawing.Point(355, 54)
+        Me.DgvSubCat.Name = "DgvSubCat"
+        Me.DgvSubCat.ReadOnly = True
+        Me.DgvSubCat.Size = New System.Drawing.Size(563, 380)
+        Me.DgvSubCat.TabIndex = 18
         '
         'Panel3
         '
         Me.Panel3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
-        Me.Panel3.Controls.Add(Me.btnDelete)
-        Me.Panel3.Controls.Add(Me.btnUpdate)
-        Me.Panel3.Controls.Add(Me.btnSave)
-        Me.Panel3.Controls.Add(Me.btnNew)
+        Me.Panel3.Controls.Add(Me.btnSubCatDelete)
+        Me.Panel3.Controls.Add(Me.btnSubCatUpdate)
+        Me.Panel3.Controls.Add(Me.btnSubCatSave)
+        Me.Panel3.Controls.Add(Me.btnSubCatNew)
         Me.Panel3.Location = New System.Drawing.Point(0, 440)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(921, 55)
         Me.Panel3.TabIndex = 17
         '
-        'btnDelete
+        'btnSubCatDelete
         '
-        Me.btnDelete.BackColor = System.Drawing.Color.White
-        Me.btnDelete.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDelete.ForeColor = System.Drawing.Color.Black
-        Me.btnDelete.Image = CType(resources.GetObject("btnDelete.Image"), System.Drawing.Image)
-        Me.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDelete.Location = New System.Drawing.Point(292, 11)
-        Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(87, 36)
-        Me.btnDelete.TabIndex = 12
-        Me.btnDelete.Text = "Delete"
-        Me.btnDelete.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnDelete.UseVisualStyleBackColor = False
+        Me.btnSubCatDelete.BackColor = System.Drawing.Color.White
+        Me.btnSubCatDelete.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSubCatDelete.ForeColor = System.Drawing.Color.Black
+        Me.btnSubCatDelete.Image = CType(resources.GetObject("btnSubCatDelete.Image"), System.Drawing.Image)
+        Me.btnSubCatDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSubCatDelete.Location = New System.Drawing.Point(292, 11)
+        Me.btnSubCatDelete.Name = "btnSubCatDelete"
+        Me.btnSubCatDelete.Size = New System.Drawing.Size(87, 36)
+        Me.btnSubCatDelete.TabIndex = 12
+        Me.btnSubCatDelete.Text = "Delete"
+        Me.btnSubCatDelete.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSubCatDelete.UseVisualStyleBackColor = False
         '
-        'btnUpdate
+        'btnSubCatUpdate
         '
-        Me.btnUpdate.BackColor = System.Drawing.Color.White
-        Me.btnUpdate.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUpdate.ForeColor = System.Drawing.Color.Black
-        Me.btnUpdate.Image = CType(resources.GetObject("btnUpdate.Image"), System.Drawing.Image)
-        Me.btnUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUpdate.Location = New System.Drawing.Point(199, 11)
-        Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(87, 36)
-        Me.btnUpdate.TabIndex = 11
-        Me.btnUpdate.Text = "Update"
-        Me.btnUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnUpdate.UseVisualStyleBackColor = False
+        Me.btnSubCatUpdate.BackColor = System.Drawing.Color.White
+        Me.btnSubCatUpdate.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSubCatUpdate.ForeColor = System.Drawing.Color.Black
+        Me.btnSubCatUpdate.Image = CType(resources.GetObject("btnSubCatUpdate.Image"), System.Drawing.Image)
+        Me.btnSubCatUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSubCatUpdate.Location = New System.Drawing.Point(199, 11)
+        Me.btnSubCatUpdate.Name = "btnSubCatUpdate"
+        Me.btnSubCatUpdate.Size = New System.Drawing.Size(87, 36)
+        Me.btnSubCatUpdate.TabIndex = 11
+        Me.btnSubCatUpdate.Text = "Update"
+        Me.btnSubCatUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSubCatUpdate.UseVisualStyleBackColor = False
         '
-        'btnSave
+        'btnSubCatSave
         '
-        Me.btnSave.BackColor = System.Drawing.Color.White
-        Me.btnSave.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSave.ForeColor = System.Drawing.Color.Black
-        Me.btnSave.Image = CType(resources.GetObject("btnSave.Image"), System.Drawing.Image)
-        Me.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSave.Location = New System.Drawing.Point(106, 11)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(87, 36)
-        Me.btnSave.TabIndex = 10
-        Me.btnSave.Text = "Save"
-        Me.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnSave.UseVisualStyleBackColor = False
+        Me.btnSubCatSave.BackColor = System.Drawing.Color.White
+        Me.btnSubCatSave.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSubCatSave.ForeColor = System.Drawing.Color.Black
+        Me.btnSubCatSave.Image = CType(resources.GetObject("btnSubCatSave.Image"), System.Drawing.Image)
+        Me.btnSubCatSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSubCatSave.Location = New System.Drawing.Point(106, 11)
+        Me.btnSubCatSave.Name = "btnSubCatSave"
+        Me.btnSubCatSave.Size = New System.Drawing.Size(87, 36)
+        Me.btnSubCatSave.TabIndex = 10
+        Me.btnSubCatSave.Text = "Save"
+        Me.btnSubCatSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSubCatSave.UseVisualStyleBackColor = False
         '
-        'btnNew
+        'btnSubCatNew
         '
-        Me.btnNew.BackColor = System.Drawing.Color.White
-        Me.btnNew.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnNew.ForeColor = System.Drawing.Color.Black
-        Me.btnNew.Image = CType(resources.GetObject("btnNew.Image"), System.Drawing.Image)
-        Me.btnNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnNew.Location = New System.Drawing.Point(13, 11)
-        Me.btnNew.Name = "btnNew"
-        Me.btnNew.Size = New System.Drawing.Size(87, 36)
-        Me.btnNew.TabIndex = 9
-        Me.btnNew.Text = "New"
-        Me.btnNew.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnNew.UseVisualStyleBackColor = False
+        Me.btnSubCatNew.BackColor = System.Drawing.Color.White
+        Me.btnSubCatNew.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSubCatNew.ForeColor = System.Drawing.Color.Black
+        Me.btnSubCatNew.Image = CType(resources.GetObject("btnSubCatNew.Image"), System.Drawing.Image)
+        Me.btnSubCatNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSubCatNew.Location = New System.Drawing.Point(13, 11)
+        Me.btnSubCatNew.Name = "btnSubCatNew"
+        Me.btnSubCatNew.Size = New System.Drawing.Size(87, 36)
+        Me.btnSubCatNew.TabIndex = 9
+        Me.btnSubCatNew.Text = "New"
+        Me.btnSubCatNew.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSubCatNew.UseVisualStyleBackColor = False
         '
         'GroupBox1
         '
         Me.GroupBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
-        Me.GroupBox1.Controls.Add(Me.btnBrowse)
-        Me.GroupBox1.Controls.Add(Me.btnRemove)
-        Me.GroupBox1.Controls.Add(Me.picture)
-        Me.GroupBox1.Controls.Add(Me.txtCatName)
+        Me.GroupBox1.Controls.Add(Me.lblSubCatImagePath)
+        Me.GroupBox1.Controls.Add(Me.btnSubCatBrowse)
+        Me.GroupBox1.Controls.Add(Me.btnSubCatRemove)
+        Me.GroupBox1.Controls.Add(Me.pictboxSubCat)
+        Me.GroupBox1.Controls.Add(Me.cmbCatName)
         Me.GroupBox1.Controls.Add(Me.txtSubCatLocal)
-        Me.GroupBox1.Controls.Add(Me.txtDisplayOrder)
+        Me.GroupBox1.Controls.Add(Me.txtSubCatDisplayOrder)
         Me.GroupBox1.Controls.Add(Me.txtSubCategory)
         Me.GroupBox1.Controls.Add(Me.Label6)
         Me.GroupBox1.Controls.Add(Me.Label3)
-        Me.GroupBox1.Controls.Add(Me.CheckBox1)
+        Me.GroupBox1.Controls.Add(Me.ChkSubCategory)
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.ForeColor = System.Drawing.Color.White
@@ -529,60 +541,60 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Sub Category Info"
         '
-        'btnBrowse
+        'btnSubCatBrowse
         '
-        Me.btnBrowse.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnBrowse.BackColor = System.Drawing.Color.White
-        Me.btnBrowse.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnBrowse.ForeColor = System.Drawing.Color.Black
-        Me.btnBrowse.Image = CType(resources.GetObject("btnBrowse.Image"), System.Drawing.Image)
-        Me.btnBrowse.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnBrowse.Location = New System.Drawing.Point(155, 308)
-        Me.btnBrowse.Name = "btnBrowse"
-        Me.btnBrowse.Size = New System.Drawing.Size(108, 40)
-        Me.btnBrowse.TabIndex = 61
-        Me.btnBrowse.Text = "Browse"
-        Me.btnBrowse.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnBrowse.UseVisualStyleBackColor = False
+        Me.btnSubCatBrowse.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSubCatBrowse.BackColor = System.Drawing.Color.White
+        Me.btnSubCatBrowse.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSubCatBrowse.ForeColor = System.Drawing.Color.Black
+        Me.btnSubCatBrowse.Image = CType(resources.GetObject("btnSubCatBrowse.Image"), System.Drawing.Image)
+        Me.btnSubCatBrowse.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSubCatBrowse.Location = New System.Drawing.Point(155, 308)
+        Me.btnSubCatBrowse.Name = "btnSubCatBrowse"
+        Me.btnSubCatBrowse.Size = New System.Drawing.Size(108, 40)
+        Me.btnSubCatBrowse.TabIndex = 61
+        Me.btnSubCatBrowse.Text = "Browse"
+        Me.btnSubCatBrowse.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSubCatBrowse.UseVisualStyleBackColor = False
         '
-        'btnRemove
+        'btnSubCatRemove
         '
-        Me.btnRemove.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnRemove.BackColor = System.Drawing.Color.White
-        Me.btnRemove.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRemove.ForeColor = System.Drawing.Color.Black
-        Me.btnRemove.Image = CType(resources.GetObject("btnRemove.Image"), System.Drawing.Image)
-        Me.btnRemove.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnRemove.Location = New System.Drawing.Point(155, 226)
-        Me.btnRemove.Name = "btnRemove"
-        Me.btnRemove.Size = New System.Drawing.Size(108, 40)
-        Me.btnRemove.TabIndex = 62
-        Me.btnRemove.Text = "Remove"
-        Me.btnRemove.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnRemove.UseVisualStyleBackColor = False
+        Me.btnSubCatRemove.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSubCatRemove.BackColor = System.Drawing.Color.White
+        Me.btnSubCatRemove.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSubCatRemove.ForeColor = System.Drawing.Color.Black
+        Me.btnSubCatRemove.Image = CType(resources.GetObject("btnSubCatRemove.Image"), System.Drawing.Image)
+        Me.btnSubCatRemove.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSubCatRemove.Location = New System.Drawing.Point(155, 226)
+        Me.btnSubCatRemove.Name = "btnSubCatRemove"
+        Me.btnSubCatRemove.Size = New System.Drawing.Size(108, 40)
+        Me.btnSubCatRemove.TabIndex = 62
+        Me.btnSubCatRemove.Text = "Remove"
+        Me.btnSubCatRemove.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSubCatRemove.UseVisualStyleBackColor = False
         '
-        'picture
+        'pictboxSubCat
         '
-        Me.picture.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.picture.BackColor = System.Drawing.SystemColors.ControlLightLight
-        Me.picture.ErrorImage = Nothing
-        Me.picture.Image = CType(resources.GetObject("picture.Image"), System.Drawing.Image)
-        Me.picture.InitialImage = CType(resources.GetObject("picture.InitialImage"), System.Drawing.Image)
-        Me.picture.Location = New System.Drawing.Point(17, 225)
-        Me.picture.Name = "picture"
-        Me.picture.Size = New System.Drawing.Size(118, 123)
-        Me.picture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.picture.TabIndex = 59
-        Me.picture.TabStop = False
+        Me.pictboxSubCat.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pictboxSubCat.BackColor = System.Drawing.SystemColors.ControlLightLight
+        Me.pictboxSubCat.ErrorImage = Nothing
+        Me.pictboxSubCat.Image = CType(resources.GetObject("pictboxSubCat.Image"), System.Drawing.Image)
+        Me.pictboxSubCat.InitialImage = CType(resources.GetObject("pictboxSubCat.InitialImage"), System.Drawing.Image)
+        Me.pictboxSubCat.Location = New System.Drawing.Point(17, 225)
+        Me.pictboxSubCat.Name = "pictboxSubCat"
+        Me.pictboxSubCat.Size = New System.Drawing.Size(118, 123)
+        Me.pictboxSubCat.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.pictboxSubCat.TabIndex = 59
+        Me.pictboxSubCat.TabStop = False
         '
-        'txtCatName
+        'cmbCatName
         '
-        Me.txtCatName.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCatName.FormattingEnabled = True
-        Me.txtCatName.Location = New System.Drawing.Point(137, 95)
-        Me.txtCatName.Name = "txtCatName"
-        Me.txtCatName.Size = New System.Drawing.Size(149, 21)
-        Me.txtCatName.TabIndex = 7
+        Me.cmbCatName.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbCatName.FormattingEnabled = True
+        Me.cmbCatName.Location = New System.Drawing.Point(137, 95)
+        Me.cmbCatName.Name = "cmbCatName"
+        Me.cmbCatName.Size = New System.Drawing.Size(149, 21)
+        Me.cmbCatName.TabIndex = 7
         '
         'txtSubCatLocal
         '
@@ -592,13 +604,13 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.txtSubCatLocal.Size = New System.Drawing.Size(149, 21)
         Me.txtSubCatLocal.TabIndex = 6
         '
-        'txtDisplayOrder
+        'txtSubCatDisplayOrder
         '
-        Me.txtDisplayOrder.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDisplayOrder.Location = New System.Drawing.Point(137, 140)
-        Me.txtDisplayOrder.Name = "txtDisplayOrder"
-        Me.txtDisplayOrder.Size = New System.Drawing.Size(149, 21)
-        Me.txtDisplayOrder.TabIndex = 6
+        Me.txtSubCatDisplayOrder.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtSubCatDisplayOrder.Location = New System.Drawing.Point(137, 140)
+        Me.txtSubCatDisplayOrder.Name = "txtSubCatDisplayOrder"
+        Me.txtSubCatDisplayOrder.Size = New System.Drawing.Size(149, 21)
+        Me.txtSubCatDisplayOrder.TabIndex = 6
         '
         'txtSubCategory
         '
@@ -628,15 +640,15 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.Label3.TabIndex = 3
         Me.Label3.Text = "Category "
         '
-        'CheckBox1
+        'ChkSubCategory
         '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(137, 203)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(56, 17)
-        Me.CheckBox1.TabIndex = 2
-        Me.CheckBox1.Text = "Active"
-        Me.CheckBox1.UseVisualStyleBackColor = True
+        Me.ChkSubCategory.AutoSize = True
+        Me.ChkSubCategory.Location = New System.Drawing.Point(137, 185)
+        Me.ChkSubCategory.Name = "ChkSubCategory"
+        Me.ChkSubCategory.Size = New System.Drawing.Size(56, 17)
+        Me.ChkSubCategory.TabIndex = 2
+        Me.ChkSubCategory.Text = "Active"
+        Me.ChkSubCategory.UseVisualStyleBackColor = True
         '
         'Label2
         '
@@ -682,55 +694,62 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.Label5.TabIndex = 4
         Me.Label5.Text = " Sub Categories"
         '
-        'Col_Cat_ID
+        'lblSubCatImagePath
         '
-        Me.Col_Cat_ID.HeaderText = "ID"
-        Me.Col_Cat_ID.Name = "Col_Cat_ID"
-        Me.Col_Cat_ID.ReadOnly = True
+        Me.lblSubCatImagePath.AutoSize = True
+        Me.lblSubCatImagePath.Location = New System.Drawing.Point(17, 355)
+        Me.lblSubCatImagePath.Name = "lblSubCatImagePath"
+        Me.lblSubCatImagePath.Size = New System.Drawing.Size(39, 13)
+        Me.lblSubCatImagePath.TabIndex = 63
+        Me.lblSubCatImagePath.Text = "Label4"
         '
-        'Col_Category
+        'ID
         '
-        Me.Col_Category.HeaderText = "Category"
-        Me.Col_Category.Name = "Col_Category"
-        Me.Col_Category.ReadOnly = True
+        Me.ID.HeaderText = "ID"
+        Me.ID.Name = "ID"
+        Me.ID.ReadOnly = True
         '
-        'Col_Category_Local
+        'Sub_Category
         '
-        Me.Col_Category_Local.HeaderText = "Category Local"
-        Me.Col_Category_Local.Name = "Col_Category_Local"
-        Me.Col_Category_Local.ReadOnly = True
+        Me.Sub_Category.HeaderText = "Sub Category"
+        Me.Sub_Category.Name = "Sub_Category"
+        Me.Sub_Category.ReadOnly = True
         '
-        'Col_Cat_IsActive
+        'SubCategoryLocal
         '
-        Me.Col_Cat_IsActive.HeaderText = "IsActive"
-        Me.Col_Cat_IsActive.Name = "Col_Cat_IsActive"
-        Me.Col_Cat_IsActive.ReadOnly = True
+        Me.SubCategoryLocal.HeaderText = "Sub Category Local"
+        Me.SubCategoryLocal.Name = "SubCategoryLocal"
+        Me.SubCategoryLocal.ReadOnly = True
         '
-        'Col_Category_Image
+        'IsActive
         '
-        Me.Col_Category_Image.HeaderText = "Category_Image"
-        Me.Col_Category_Image.Name = "Col_Category_Image"
-        Me.Col_Category_Image.ReadOnly = True
-        Me.Col_Category_Image.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Col_Category_Image.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.IsActive.HeaderText = "IsActive"
+        Me.IsActive.Name = "IsActive"
+        Me.IsActive.ReadOnly = True
         '
-        'Col_Display_Order
+        'CategoryName
         '
-        Me.Col_Display_Order.HeaderText = "Display Order"
-        Me.Col_Display_Order.Name = "Col_Display_Order"
-        Me.Col_Display_Order.ReadOnly = True
-        Me.Col_Display_Order.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Col_Display_Order.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.CategoryName.HeaderText = "Category Name"
+        Me.CategoryName.Name = "CategoryName"
+        Me.CategoryName.ReadOnly = True
+        Me.CategoryName.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.CategoryName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
-        'lblCatImagePath
+        'SubCatImage
         '
-        Me.lblCatImagePath.AutoSize = True
-        Me.lblCatImagePath.Location = New System.Drawing.Point(18, 340)
-        Me.lblCatImagePath.Name = "lblCatImagePath"
-        Me.lblCatImagePath.Size = New System.Drawing.Size(39, 13)
-        Me.lblCatImagePath.TabIndex = 63
-        Me.lblCatImagePath.Text = "Label4"
-        Me.lblCatImagePath.Visible = False
+        Me.SubCatImage.HeaderText = "SubCatImage"
+        Me.SubCatImage.Name = "SubCatImage"
+        Me.SubCatImage.ReadOnly = True
+        Me.SubCatImage.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.SubCatImage.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'DisplayOrder
+        '
+        Me.DisplayOrder.HeaderText = "DisplayOrder"
+        Me.DisplayOrder.Name = "DisplayOrder"
+        Me.DisplayOrder.ReadOnly = True
+        Me.DisplayOrder.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DisplayOrder.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'frmDisplayCategoryAndSubCategory
         '
@@ -750,11 +769,11 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         Me.SubCategory.ResumeLayout(False)
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DgvSubCat, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel3.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
-        CType(Me.picture, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pictboxSubCat, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
@@ -767,33 +786,26 @@ Partial Class frmDisplayCategoryAndSubCategory
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Label5 As Label
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents btnBrowse As Button
-    Friend WithEvents btnRemove As Button
-    Friend WithEvents picture As PictureBox
-    Friend WithEvents txtCatName As ComboBox
+    Friend WithEvents btnSubCatBrowse As Button
+    Friend WithEvents btnSubCatRemove As Button
+    Friend WithEvents pictboxSubCat As PictureBox
+    Friend WithEvents cmbCatName As ComboBox
     Friend WithEvents txtSubCatLocal As TextBox
-    Friend WithEvents txtDisplayOrder As TextBox
+    Friend WithEvents txtSubCatDisplayOrder As TextBox
     Friend WithEvents txtSubCategory As TextBox
     Friend WithEvents Label6 As Label
     Friend WithEvents Label3 As Label
-    Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents ChkSubCategory As CheckBox
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents Panel3 As Panel
-    Friend WithEvents btnDelete As Button
-    Friend WithEvents btnUpdate As Button
-    Friend WithEvents btnSave As Button
-    Friend WithEvents btnNew As Button
+    Friend WithEvents btnSubCatDelete As Button
+    Friend WithEvents btnSubCatUpdate As Button
+    Friend WithEvents btnSubCatSave As Button
+    Friend WithEvents btnSubCatNew As Button
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Label7 As Label
-    Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents ID As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
-    Friend WithEvents SubCategoryLocal As DataGridViewTextBoxColumn
-    Friend WithEvents IsActive As DataGridViewCheckBoxColumn
-    Friend WithEvents CategoryName As DataGridViewCheckBoxColumn
-    Friend WithEvents SubCatImage As DataGridViewCheckBoxColumn
-    Friend WithEvents DisplayOrder As DataGridViewCheckBoxColumn
+    Friend WithEvents DgvSubCat As DataGridView
     Friend WithEvents DgvCategory As DataGridView
     Friend WithEvents Panel4 As Panel
     Friend WithEvents bttnCatDelete As Button
@@ -811,11 +823,19 @@ Partial Class frmDisplayCategoryAndSubCategory
     Friend WithEvents ChkCategory As CheckBox
     Friend WithEvents Label11 As Label
     Friend WithEvents Label12 As Label
+    Friend WithEvents lblCatImagePath As Label
     Friend WithEvents Col_Cat_ID As DataGridViewTextBoxColumn
     Friend WithEvents Col_Category As DataGridViewTextBoxColumn
     Friend WithEvents Col_Category_Local As DataGridViewTextBoxColumn
     Friend WithEvents Col_Cat_IsActive As DataGridViewCheckBoxColumn
     Friend WithEvents Col_Category_Image As DataGridViewTextBoxColumn
     Friend WithEvents Col_Display_Order As DataGridViewTextBoxColumn
-    Friend WithEvents lblCatImagePath As Label
+    Friend WithEvents lblSubCatImagePath As Label
+    Friend WithEvents ID As DataGridViewTextBoxColumn
+    Friend WithEvents Sub_Category As DataGridViewTextBoxColumn
+    Friend WithEvents SubCategoryLocal As DataGridViewTextBoxColumn
+    Friend WithEvents IsActive As DataGridViewCheckBoxColumn
+    Friend WithEvents CategoryName As DataGridViewTextBoxColumn
+    Friend WithEvents SubCatImage As DataGridViewTextBoxColumn
+    Friend WithEvents DisplayOrder As DataGridViewTextBoxColumn
 End Class

@@ -59,6 +59,7 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.btnSubCatSave = New System.Windows.Forms.Button()
         Me.btnSubCatNew = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lblSubCatImagePath = New System.Windows.Forms.Label()
         Me.btnSubCatBrowse = New System.Windows.Forms.Button()
         Me.btnSubCatRemove = New System.Windows.Forms.Button()
         Me.pictboxSubCat = New System.Windows.Forms.PictureBox()
@@ -73,7 +74,6 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.lblSubCatImagePath = New System.Windows.Forms.Label()
         Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Sub_Category = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SubCategoryLocal = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -81,6 +81,7 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.CategoryName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SubCatImage = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DisplayOrder = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.category_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabControl1.SuspendLayout()
         Me.Category.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -344,11 +345,11 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.DgvCategory.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
         Me.DgvCategory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvCategory.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Col_Cat_ID, Me.Col_Category, Me.Col_Category_Local, Me.Col_Cat_IsActive, Me.Col_Category_Image, Me.Col_Display_Order})
-        Me.DgvCategory.Location = New System.Drawing.Point(355, 63)
+        Me.DgvCategory.Location = New System.Drawing.Point(355, 59)
         Me.DgvCategory.MultiSelect = False
         Me.DgvCategory.Name = "DgvCategory"
         Me.DgvCategory.ReadOnly = True
-        Me.DgvCategory.Size = New System.Drawing.Size(563, 370)
+        Me.DgvCategory.Size = New System.Drawing.Size(563, 374)
         Me.DgvCategory.TabIndex = 19
         '
         'Col_Cat_ID
@@ -437,7 +438,7 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.DgvSubCat.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DgvSubCat.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
         Me.DgvSubCat.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvSubCat.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Sub_Category, Me.SubCategoryLocal, Me.IsActive, Me.CategoryName, Me.SubCatImage, Me.DisplayOrder})
+        Me.DgvSubCat.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Sub_Category, Me.SubCategoryLocal, Me.IsActive, Me.CategoryName, Me.SubCatImage, Me.DisplayOrder, Me.category_id})
         Me.DgvSubCat.Location = New System.Drawing.Point(355, 54)
         Me.DgvSubCat.Name = "DgvSubCat"
         Me.DgvSubCat.ReadOnly = True
@@ -540,6 +541,15 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.GroupBox1.TabIndex = 16
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Sub Category Info"
+        '
+        'lblSubCatImagePath
+        '
+        Me.lblSubCatImagePath.AutoSize = True
+        Me.lblSubCatImagePath.Location = New System.Drawing.Point(17, 355)
+        Me.lblSubCatImagePath.Name = "lblSubCatImagePath"
+        Me.lblSubCatImagePath.Size = New System.Drawing.Size(39, 13)
+        Me.lblSubCatImagePath.TabIndex = 63
+        Me.lblSubCatImagePath.Text = "Label4"
         '
         'btnSubCatBrowse
         '
@@ -694,15 +704,6 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.Label5.TabIndex = 4
         Me.Label5.Text = " Sub Categories"
         '
-        'lblSubCatImagePath
-        '
-        Me.lblSubCatImagePath.AutoSize = True
-        Me.lblSubCatImagePath.Location = New System.Drawing.Point(17, 355)
-        Me.lblSubCatImagePath.Name = "lblSubCatImagePath"
-        Me.lblSubCatImagePath.Size = New System.Drawing.Size(39, 13)
-        Me.lblSubCatImagePath.TabIndex = 63
-        Me.lblSubCatImagePath.Text = "Label4"
-        '
         'ID
         '
         Me.ID.HeaderText = "ID"
@@ -750,6 +751,12 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.DisplayOrder.ReadOnly = True
         Me.DisplayOrder.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DisplayOrder.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'category_id
+        '
+        Me.category_id.HeaderText = "category_id"
+        Me.category_id.Name = "category_id"
+        Me.category_id.ReadOnly = True
         '
         'frmDisplayCategoryAndSubCategory
         '
@@ -838,4 +845,5 @@ Partial Class frmDisplayCategoryAndSubCategory
     Friend WithEvents CategoryName As DataGridViewTextBoxColumn
     Friend WithEvents SubCatImage As DataGridViewTextBoxColumn
     Friend WithEvents DisplayOrder As DataGridViewTextBoxColumn
+    Friend WithEvents category_id As DataGridViewTextBoxColumn
 End Class

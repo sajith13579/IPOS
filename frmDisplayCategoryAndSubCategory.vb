@@ -132,15 +132,17 @@ Public Class frmDisplayCategoryAndSubCategory
             Using conn As New SqlConnection(connection)
                 Using cmd As New SqlCommand(query, conn)
                     conn.Open()
-                    Dim reader As SqlDataReader = cmd.ExecuteReader()
-                    While reader.Read()
-                        cmbCatName.Items.Add(New With {.Text = reader("Category").ToString(), .Value = reader("ID")})
-                    End While
+                    adpt = New SqlDataAdapter()
+                    adpt.SelectCommand = New SqlCommand("SELECT Category, ID FROM DisplayCategory ", con)
+                    ds = New DataSet("ds")
+                    adpt.Fill(ds)
+                    Dim dtable = ds.Tables(0)
+                    cmbCatName.DisplayMember = "Category"
+                    cmbCatName.ValueMember = "ID"
+                    cmbCatName.DataSource = dtable
                 End Using
             End Using
-            ' Set the DisplayMember and ValueMember properties
-            cmbCatName.DisplayMember = "Text"
-            cmbCatName.ValueMember = "Value"
+
         Catch ex As Exception
             MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -174,6 +176,7 @@ Public Class frmDisplayCategoryAndSubCategory
             Dim selectedRow As DataGridViewRow = DgvCategory.SelectedRows(0)
             selectedCategoryId = Convert.ToInt32(selectedRow.Cells("Col_Cat_ID").Value)
             txtCategory.Text = selectedRow.Cells("Col_Category").Value.ToString()
+            __category = selectedRow.Cells("Col_Category").Value.ToString()
             txtCategoryLocal.Text = selectedRow.Cells("Col_Category_Local").Value.ToString()
 
             ChkCategory.Checked = Convert.ToBoolean(selectedRow.Cells("Col_Cat_IsActive").Value)
@@ -190,20 +193,31 @@ Public Class frmDisplayCategoryAndSubCategory
             Return
         End If
 
+
+        Dim cat_dis_nmber = txtCatDisplayOrder.Text
         Try
+
             Dim query As String = "SELECT Category FROM DisplayCategory WHERE Category = @ctname"
-            Using con As New SqlConnection(connection)
-                con.Open()
-                Using cmd As New SqlCommand(query, con)
-                    cmd.Parameters.AddWithValue("@ctname", txtCategory.Text)
-                    Using rdr As SqlDataReader = cmd.ExecuteReader()
+                Using con As New SqlConnection(connection)
+                    con.Open()
+                    Using cmd As New SqlCommand(query, con)
+                        cmd.Parameters.AddWithValue("@ctname", txtCategory.Text)
+                        Using rdr As SqlDataReader = cmd.ExecuteReader()
                         If rdr.Read() Then
-                            MessageBox.Show("Category Already Exists")
-                            Return
+                            If __category = txtCategory.Text Then
+
+                            Else
+                                MessageBox.Show("Category name Already Exists It could not be updated")
+                                Return
+                            End If
                         End If
                     End Using
+                    End Using
                 End Using
-            End Using
+
+
+
+
 
 
             If ChkCategory.Checked = True Then
@@ -299,7 +313,7 @@ Public Class frmDisplayCategoryAndSubCategory
 
 
         Try
-            Dim query As String = "SELECT subcategory FROM Display_SubCategory WHERE subcategory = @sctname"
+            Dim query As String = "SELECT subcategory FROM DisplaySubCategory WHERE subcategory = @sctname"
             Using con As New SqlConnection(connection)
                 con.Open()
                 Using cmd As New SqlCommand(query, con)
@@ -324,7 +338,7 @@ Public Class frmDisplayCategoryAndSubCategory
 
             Using con2 As New SqlConnection(connection)
                 con2.Open()
-                Dim query2 As String = "INSERT INTO Display_SubCategory (subcategory, subcategoryLocal, IsActive,categoryId , subCatImage, DisplayOrder)
+                Dim query2 As String = "INSERT INTO DisplaySubCategory (subcategory, subcategoryLocal, IsActive,categoryId , subCatImage, DisplayOrder)
                                     VALUES (@sc1, @sc2, @sc3, @sc4, @sc5,@sc6)"
                 Using cmd2 As New SqlCommand(query2, con2)
                     cmd2.Parameters.AddWithValue("@sc1", txtSubCategory.Text)
@@ -332,7 +346,7 @@ Public Class frmDisplayCategoryAndSubCategory
                     cmd2.Parameters.AddWithValue("@sc3", Sub_Catitem)
                     cmd2.Parameters.AddWithValue("@sc4", categoryId) 'category id  val mm
                     cmd2.Parameters.AddWithValue("@sc5", imagePath)
-                    cmd2.Parameters.AddWithValue("@sc6", CDec(txtCatDisplayOrder.Text))
+                    cmd2.Parameters.AddWithValue("@sc6", CDec(txtSubCatDisplayOrder.Text))
                     cmd2.ExecuteNonQuery()
                 End Using
 
@@ -353,7 +367,11 @@ Public Class frmDisplayCategoryAndSubCategory
     End Sub
     Public Sub GetData_from_sub_cat()
         Try
-            Dim query As String = "SELECT * FROM Display_SubCategory"
+            'Dim query As String = "SELECT DSC.*,DC.category FROM Display_SubCategory 
+            'as DSC inner join DisplayCategory as DC on DSC.categoryId=DC.ID"
+
+            Dim query As String = "select DSC.ID , DSC.subcategory ,DSC.subcategoryLocal,DSC.IsActive , DC.Category,DSC.subCatImage,dSC.DisplayOrder,DSC.categoryId
+            from  DisplaySubCategory as DSC inner join DisplayCategory as DC on DSC.categoryId=DC.ID"
             Using conn As New SqlConnection(connection)
                 Using cmd As New SqlCommand(query, conn)
                     conn.Open()
@@ -362,7 +380,7 @@ Public Class frmDisplayCategoryAndSubCategory
                         DgvSubCat.Rows.Clear()
                         ' Loop through the result set and add rows to the DataGridView
                         While reader.Read()
-                            DgvSubCat.Rows.Add(reader("ID"), reader("subcategory"), reader("subcategoryLocal"), reader("IsActive"), reader("categoryId"), reader("subCatImage"), reader("DisplayOrder"))
+                            DgvSubCat.Rows.Add(reader("ID"), reader("subcategory"), reader("subcategoryLocal"), reader("IsActive"), reader("Category"), reader("subCatImage"), reader("DisplayOrder"), reader("categoryId"))
                         End While
                     End Using
                 End Using
@@ -411,6 +429,10 @@ Public Class frmDisplayCategoryAndSubCategory
             txtSubCatLocal.Text = selectedRow.Cells("SubCategoryLocal").Value.ToString()
 
             ChkSubCategory.Checked = Convert.ToBoolean(selectedRow.Cells("IsActive").Value)
+            Dim categoryId As Integer = Convert.ToInt32(selectedRow.Cells("category_id").Value)
+            cmbCatName.SelectedValue = categoryId
+
+
             cmbCatName.SelectedItem = selectedRow.Cells("CategoryName").Value.ToString()
             txtSubCatDisplayOrder.Text = selectedRow.Cells("DisplayOrder").Value.ToString()
             lblSubCatImagePath.Text = selectedRow.Cells("SubCatImage").Value.ToString()
@@ -425,23 +447,7 @@ Public Class frmDisplayCategoryAndSubCategory
             Return
         End If
 
-
         Try
-            Dim query As String = "SELECT subcategory FROM Display_SubCategory WHERE subcategory = @sctname"
-            Using con As New SqlConnection(connection)
-                con.Open()
-                Using cmd As New SqlCommand(query, con)
-                    cmd.Parameters.AddWithValue("@sctname", txtSubCategory.Text)
-                    Using rdr As SqlDataReader = cmd.ExecuteReader()
-                        If rdr.Read() Then
-                            MessageBox.Show("Subcategory Already Exists")
-                            Return
-                        End If
-                    End Using
-                End Using
-            End Using
-
-
             If ChkSubCategory.Checked = True Then
                 Sub_Catitem = True
             Else
@@ -452,7 +458,7 @@ Public Class frmDisplayCategoryAndSubCategory
 
             Using con2 As New SqlConnection(connection)
                 con2.Open()
-                Dim query2 As String = "update Display_SubCategory set subcategory=@sc1, subcategoryLocal=@sc2, IsActive=@sc3,categoryId=@sc4 , subCatImage=@sc5, DisplayOrder=@sc6
+                Dim query2 As String = "update DisplaySubCategory set subcategory=@sc1, subcategoryLocal=@sc2, IsActive=@sc3,categoryId=@sc4 , subCatImage=@sc5, DisplayOrder=@sc6
                                     where ID=@sc7"
                 Using cmd2 As New SqlCommand(query2, con2)
                     cmd2.Parameters.AddWithValue("@sc1", txtSubCategory.Text)
@@ -460,7 +466,7 @@ Public Class frmDisplayCategoryAndSubCategory
                     cmd2.Parameters.AddWithValue("@sc3", Sub_Catitem)
                     cmd2.Parameters.AddWithValue("@sc4", categoryId) 'category id  val mm
                     cmd2.Parameters.AddWithValue("@sc5", imagePath)
-                    cmd2.Parameters.AddWithValue("@sc6", CDec(txtCatDisplayOrder.Text))
+                    cmd2.Parameters.AddWithValue("@sc6", CDec(txtSubCatDisplayOrder.Text))
                     cmd2.Parameters.AddWithValue("@sc7", selected_sub_CategoryId)
                     cmd2.ExecuteNonQuery()
                 End Using
@@ -519,5 +525,25 @@ Public Class frmDisplayCategoryAndSubCategory
                 txtCatDisplayOrder.Text = ""
             End If
         End If
+    End Sub
+
+    Private Sub txtSubCatDisplayOrder_TextChanged(sender As Object, e As EventArgs) Handles txtSubCatDisplayOrder.TextChanged
+        ' Get the text from the TextBox
+        Dim text As String = txtSubCatDisplayOrder.Text
+
+        ' Check if the text is numeric
+        If Not IsNumeric(text) Then
+            ' If the text is not numeric, remove the last character
+            If text.Length > 0 Then
+                txtSubCatDisplayOrder.Text = text.Substring(0, text.Length - 1)
+                txtSubCatDisplayOrder.SelectionStart = txtSubCatDisplayOrder.Text.Length
+            Else
+                txtSubCatDisplayOrder.Text = ""
+            End If
+        End If
+    End Sub
+
+    Private Sub txtCategory_TextChanged(sender As Object, e As EventArgs) Handles txtCategory.TextChanged
+
     End Sub
 End Class

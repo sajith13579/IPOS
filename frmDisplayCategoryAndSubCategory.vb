@@ -36,6 +36,10 @@ Public Class frmDisplayCategoryAndSubCategory
             End Using
 
 
+
+
+
+
             If ChkCategory.Checked = True Then
                 Catitem = True
             Else
@@ -121,7 +125,8 @@ Public Class frmDisplayCategoryAndSubCategory
     Public Sub Reset_subCat()
         txtSubCategory.Text = ""
         txtCategoryLocal.Text = ""
-        cmbCatName.SelectedItem = Nothing
+        cmbCatName.SelectedIndex = 0
+        txtSubCatLocal.Text = ""
         'PictBoxCat.Image = Nothing
     End Sub
 
@@ -151,13 +156,50 @@ Public Class frmDisplayCategoryAndSubCategory
         GetData()
         GetData_from_sub_cat()
         GetCategoryCombo()
+        GetSubCategoryCombo()
         ChkCategory.Checked = True
         bttnCatUpdate.Enabled = False
         bttnCatDelete.Enabled = False
 
         btnSubCatUpdate.Enabled = False
         btnSubCatDelete.Enabled = False
+        Load_dish_to_grid()
+    End Sub
 
+
+    Public Sub GetSubCategoryCombo()
+        ' Assuming your ComboBox is named cmbCategory
+        Try
+            Dim query As String = "SELECT subcategory, ID FROM DisplaySubCategory"
+            Using conn As New SqlConnection(connection)
+                Using cmd As New SqlCommand(query, conn)
+                    conn.Open()
+                    adpt = New SqlDataAdapter()
+                    adpt.SelectCommand = New SqlCommand(query, con)
+                    ds = New DataSet("ds")
+                    adpt.Fill(ds)
+                    Dim dtable = ds.Tables(0)
+                    cmbSub2CategoryNam.DisplayMember = "subcategory"
+                    cmbSub2CategoryNam.ValueMember = "ID"
+                    cmbSub2CategoryNam.DataSource = dtable
+                End Using
+            End Using
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Public Sub Load_dish_to_grid()
+        Dim con As New SqlConnection(connection)
+        con.Open()
+        Dim query As String = "select DishID, DishName,DishNameLocal from Dish"
+        Dim cmd As New SqlCommand(query, con)
+        Dim reader As SqlDataReader = cmd.ExecuteReader()
+        While reader.Read()
+            DgwListDish.Rows.Add(reader("DishID"), reader("DishName"), reader("DishNameLocal"), CStr(0))
+        End While
+        con.Close()
     End Sub
 
     Private Sub bttnCatNew_Click(sender As Object, e As EventArgs) Handles bttnCatNew.Click
@@ -181,6 +223,7 @@ Public Class frmDisplayCategoryAndSubCategory
 
             ChkCategory.Checked = Convert.ToBoolean(selectedRow.Cells("Col_Cat_IsActive").Value)
             txtCatDisplayOrder.Text = selectedRow.Cells("Col_Display_Order").Value.ToString()
+            __categoryDisNum = selectedRow.Cells("Col_Display_Order").Value.ToString()
             lblCatImagePath.Text = selectedRow.Cells("Col_Category_Image").Value.ToString()
             PictBoxCat.ImageLocation = Application.StartupPath & "\" & lblCatImagePath.Text
         End If
@@ -214,6 +257,7 @@ Public Class frmDisplayCategoryAndSubCategory
                     End Using
                     End Using
                 End Using
+
 
 
 
@@ -313,6 +357,15 @@ Public Class frmDisplayCategoryAndSubCategory
 
 
         Try
+
+            ' Check if Subcategory name is provided
+            If txtSubCategory.Text.Trim() = "" Then
+                MessageBox.Show("Please enter sub category name", "", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                txtSubCategory.Focus()
+                Return
+            End If
+
+            ' Check if Subcategory already exists
             Dim query As String = "SELECT subcategory FROM DisplaySubCategory WHERE subcategory = @sctname"
             Using con As New SqlConnection(connection)
                 con.Open()
@@ -328,41 +381,41 @@ Public Class frmDisplayCategoryAndSubCategory
             End Using
 
 
-            If ChkSubCategory.Checked = True Then
-                Sub_Catitem = True
-            Else
-                Sub_Catitem = False
-            End If
+            ' Get selected Category ID
             Dim categoryId As Integer = Convert.ToInt32(cmbCatName.SelectedValue)
-            Dim imagePath As String = "\Display Sub_Category Images\" & Trim(txtCategory.Text) & ".jpg"
 
-            Using con2 As New SqlConnection(connection)
-                con2.Open()
-                Dim query2 As String = "INSERT INTO DisplaySubCategory (subcategory, subcategoryLocal, IsActive,categoryId , subCatImage, DisplayOrder)
-                                    VALUES (@sc1, @sc2, @sc3, @sc4, @sc5,@sc6)"
-                Using cmd2 As New SqlCommand(query2, con2)
-                    cmd2.Parameters.AddWithValue("@sc1", txtSubCategory.Text)
-                    cmd2.Parameters.AddWithValue("@sc2", txtSubCatLocal.Text)
-                    cmd2.Parameters.AddWithValue("@sc3", Sub_Catitem)
-                    cmd2.Parameters.AddWithValue("@sc4", categoryId) 'category id  val mm
-                    cmd2.Parameters.AddWithValue("@sc5", imagePath)
-                    cmd2.Parameters.AddWithValue("@sc6", CDec(txtSubCatDisplayOrder.Text))
-                    cmd2.ExecuteNonQuery()
+            ' Prepare image path
+            Dim imagePath As String = "\Display Sub_Category Images\" & Trim(txtSubCategory.Text) & ".jpg"
+
+            ' Insert new Subcategory
+            Using con3 As New SqlConnection(connection)
+                con3.Open()
+                Dim query3 As String = "INSERT INTO DisplaySubCategory (subcategory, subcategoryLocal, IsActive, categoryId, subCatImage, DisplayOrder) VALUES (@sc1, @sc2, @sc3, @sc4, @sc5, @sc6)"
+                Using cmd3 As New SqlCommand(query3, con3)
+                    cmd3.Parameters.AddWithValue("@sc1", txtSubCategory.Text)
+                    cmd3.Parameters.AddWithValue("@sc2", txtSubCatLocal.Text)
+                    cmd3.Parameters.AddWithValue("@sc3", Sub_Catitem)
+                    cmd3.Parameters.AddWithValue("@sc4", categoryId)
+                    cmd3.Parameters.AddWithValue("@sc5", imagePath)
+                    cmd3.Parameters.AddWithValue("@sc6", CDec(txtSubCatDisplayOrder.Text))
+                    cmd3.ExecuteNonQuery()
                 End Using
 
+                ' Save image file
                 If Not System.IO.Directory.Exists(Application.StartupPath & "\Display Sub_Category Images") Then
                     System.IO.Directory.CreateDirectory(Application.StartupPath & "\Display Sub_Category Images")
                 End If
                 pictboxSubCat.Image.Save(Application.StartupPath & imagePath)
+
                 MessageBox.Show("SubCategory Added Successfully")
             End Using
         Catch ex As Exception
             MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-
         Finally
-
+            ' Perform cleanup or additional actions if necessary
         End Try
-        ' Reset()
+
+        ' Refresh the DataGridView
         GetData_from_sub_cat()
     End Sub
     Public Sub GetData_from_sub_cat()
@@ -426,6 +479,7 @@ Public Class frmDisplayCategoryAndSubCategory
             Dim selectedRow As DataGridViewRow = DgvSubCat.SelectedRows(0)
             selected_sub_CategoryId = Convert.ToInt32(selectedRow.Cells("ID").Value)
             txtSubCategory.Text = selectedRow.Cells("Sub_Category").Value.ToString()
+            __subcategory = selectedRow.Cells("Sub_Category").Value.ToString()
             txtSubCatLocal.Text = selectedRow.Cells("SubCategoryLocal").Value.ToString()
 
             ChkSubCategory.Checked = Convert.ToBoolean(selectedRow.Cells("IsActive").Value)
@@ -435,6 +489,7 @@ Public Class frmDisplayCategoryAndSubCategory
 
             cmbCatName.SelectedItem = selectedRow.Cells("CategoryName").Value.ToString()
             txtSubCatDisplayOrder.Text = selectedRow.Cells("DisplayOrder").Value.ToString()
+            __categoryDisNum = selectedRow.Cells("DisplayOrder").Value.ToString()
             lblSubCatImagePath.Text = selectedRow.Cells("SubCatImage").Value.ToString()
             pictboxSubCat.ImageLocation = Application.StartupPath & "\" & lblSubCatImagePath.Text
         End If
@@ -448,6 +503,26 @@ Public Class frmDisplayCategoryAndSubCategory
         End If
 
         Try
+
+            Dim query As String = "SELECT subcategory FROM DisplaySubCategory WHERE subcategory = @sctname"
+            Using con As New SqlConnection(connection)
+                con.Open()
+                Using cmd As New SqlCommand(query, con)
+                    cmd.Parameters.AddWithValue("@sctname", txtSubCategory.Text)
+                    Using rdr As SqlDataReader = cmd.ExecuteReader()
+                        If rdr.Read() Then
+                            If __subcategory = txtSubCategory.Text Then
+
+                            Else
+                                MessageBox.Show("subCategory name Already Exists It could not be updated")
+                                Return
+                            End If
+                        End If
+                    End Using
+                End Using
+            End Using
+
+
             If ChkSubCategory.Checked = True Then
                 Sub_Catitem = True
             Else
@@ -494,7 +569,7 @@ Public Class frmDisplayCategoryAndSubCategory
         Try
             Using con2 As New SqlConnection(connection)
                 con2.Open()
-                Dim query2 As String = "Delete from Display_SubCategory where ID=@c6"
+                Dim query2 As String = "Delete from DisplaySubCategory where ID=@c6"
                 Using cmd2 As New SqlCommand(query2, con2)
                     cmd2.Parameters.AddWithValue("@c6", selected_sub_CategoryId)
                     cmd2.ExecuteNonQuery()
@@ -545,5 +620,56 @@ Public Class frmDisplayCategoryAndSubCategory
 
     Private Sub txtCategory_TextChanged(sender As Object, e As EventArgs) Handles txtCategory.TextChanged
 
+    End Sub
+
+    Private Sub btnSubCatNew_Click(sender As Object, e As EventArgs) Handles btnSubCatNew.Click
+        Reset_subCat()
+        btnSubCatUpdate.Enabled = False
+        btnSubCatDelete.Enabled = False
+        btnSubCatSave.Enabled = True
+    End Sub
+
+    Private Sub TabPage1_Click(sender As Object, e As EventArgs) Handles DisplaySubCategoryDish.Click
+
+    End Sub
+
+    Private Sub DataGridView2_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DgwDisplaySubCatDish.CellContentClick
+
+    End Sub
+
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DgwListDish.CellContentClick
+
+    End Sub
+
+    Private Sub bttnAddToGrid_Click(sender As Object, e As EventArgs) Handles bttnAddToGrid.Click
+        DgwDisplaySubCatDish.Rows.Clear()
+        For Each row As DataGridViewRow In DgwListDish.Rows()
+            Dim isChecked = CBool(row.Cells("Check").Value)
+            If isChecked Then
+                'fetch display member
+                Dim selectedSubcategory As String = cmbSub2CategoryNam.Text
+                Dim dishname As String = row.Cells("DishName").Value.ToString()
+                Dim dishname_local As String = row.Cells("DishNameLocal").Value.ToString()
+                Dim diplay_order As String = ""
+                Try
+                    diplay_order = row.Cells("DisplayOrderDish").Value.ToString()
+                Catch ex As Exception
+                    diplay_order = "0"
+                End Try
+                ' Add the data to DgwDisplaySubCatDish
+                DgwDisplaySubCatDish.Rows.Add(selectedSubcategory, dishname, DishNameLocal, DisplayOrder, True)
+            End If
+        Next
+        'untick column
+        untick_all()
+    End Sub
+    Public Sub untick_all()
+        For Each row As DataGridViewRow In DgwListDish.Rows()
+            Dim isChecked = CBool(row.Cells("Check").Value)
+            If isChecked Then
+                Dim dishname As String = row.Cells("DishName").Value.ToString()
+                row.Cells("Check").Value = False
+            End If
+        Next
     End Sub
 End Class

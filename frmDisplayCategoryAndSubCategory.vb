@@ -209,7 +209,7 @@ Public Class frmDisplayCategoryAndSubCategory
         bttnCatSave.Enabled = True
     End Sub
 
-    Private Sub DgvCategory_MouseClick(sender As Object, e As MouseEventArgs) Handles DgvCategory.MouseClick
+    Private Sub DgvCategory_MouseClick(sender As Object, e As MouseEventArgs)
         If DgvCategory.SelectedRows.Count > 0 Then
             bttnCatUpdate.Enabled = True
             bttnCatDelete.Enabled = True
@@ -241,11 +241,11 @@ Public Class frmDisplayCategoryAndSubCategory
         Try
 
             Dim query As String = "SELECT Category FROM DisplayCategory WHERE Category = @ctname"
-                Using con As New SqlConnection(connection)
-                    con.Open()
-                    Using cmd As New SqlCommand(query, con)
-                        cmd.Parameters.AddWithValue("@ctname", txtCategory.Text)
-                        Using rdr As SqlDataReader = cmd.ExecuteReader()
+            Using con As New SqlConnection(connection)
+                con.Open()
+                Using cmd As New SqlCommand(query, con)
+                    cmd.Parameters.AddWithValue("@ctname", txtCategory.Text)
+                    Using rdr As SqlDataReader = cmd.ExecuteReader()
                         If rdr.Read() Then
                             If __category = txtCategory.Text Then
 
@@ -255,8 +255,8 @@ Public Class frmDisplayCategoryAndSubCategory
                             End If
                         End If
                     End Using
-                    End Using
                 End Using
+            End Using
 
 
 
@@ -470,29 +470,8 @@ Public Class frmDisplayCategoryAndSubCategory
 
     End Sub
 
-    Private Sub DgvSubCat_MouseClick(sender As Object, e As MouseEventArgs) Handles DgvSubCat.MouseClick
-        If DgvSubCat.SelectedRows.Count > 0 Then
-            btnSubCatUpdate.Enabled = True
-            btnSubCatDelete.Enabled = True
-            btnSubCatSave.Enabled = False
+    Private Sub DgvSubCat_MouseClick(sender As Object, e As MouseEventArgs)
 
-            Dim selectedRow As DataGridViewRow = DgvSubCat.SelectedRows(0)
-            selected_sub_CategoryId = Convert.ToInt32(selectedRow.Cells("ID").Value)
-            txtSubCategory.Text = selectedRow.Cells("Sub_Category").Value.ToString()
-            __subcategory = selectedRow.Cells("Sub_Category").Value.ToString()
-            txtSubCatLocal.Text = selectedRow.Cells("SubCategoryLocal").Value.ToString()
-
-            ChkSubCategory.Checked = Convert.ToBoolean(selectedRow.Cells("IsActive").Value)
-            Dim categoryId As Integer = Convert.ToInt32(selectedRow.Cells("category_id").Value)
-            cmbCatName.SelectedValue = categoryId
-
-
-            cmbCatName.SelectedItem = selectedRow.Cells("CategoryName").Value.ToString()
-            txtSubCatDisplayOrder.Text = selectedRow.Cells("DisplayOrder").Value.ToString()
-            __categoryDisNum = selectedRow.Cells("DisplayOrder").Value.ToString()
-            lblSubCatImagePath.Text = selectedRow.Cells("SubCatImage").Value.ToString()
-            pictboxSubCat.ImageLocation = Application.StartupPath & "\" & lblSubCatImagePath.Text
-        End If
     End Sub
 
     Private Sub btnSubCatUpdate_Click(sender As Object, e As EventArgs) Handles btnSubCatUpdate.Click
@@ -633,31 +612,44 @@ Public Class frmDisplayCategoryAndSubCategory
 
     End Sub
 
-    Private Sub DataGridView2_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DgwDisplaySubCatDish.CellContentClick
+    Private Sub DataGridView2_CellContentClick(sender As Object, e As DataGridViewCellEventArgs)
 
     End Sub
 
-    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DgwListDish.CellContentClick
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs)
 
     End Sub
 
     Private Sub bttnAddToGrid_Click(sender As Object, e As EventArgs) Handles bttnAddToGrid.Click
-        DgwDisplaySubCatDish.Rows.Clear()
+
         For Each row As DataGridViewRow In DgwListDish.Rows()
             Dim isChecked = CBool(row.Cells("Check").Value)
             If isChecked Then
                 'fetch display member
                 Dim selectedSubcategory As String = cmbSub2CategoryNam.Text
                 Dim dishname As String = row.Cells("DishName").Value.ToString()
-                Dim dishname_local As String = row.Cells("DishNameLocal").Value.ToString()
+                Dim DishId_2 As String = row.Cells("DishId").Value.ToString()
+                ' Dim dishname_local As String = row.Cells("DishNameLocal").Value.ToString()
                 Dim diplay_order As String = ""
-                Try
-                    diplay_order = row.Cells("DisplayOrderDish").Value.ToString()
-                Catch ex As Exception
-                    diplay_order = "0"
-                End Try
-                ' Add the data to DgwDisplaySubCatDish
-                DgwDisplaySubCatDish.Rows.Add(selectedSubcategory, dishname, DishNameLocal, DisplayOrder, True)
+
+                diplay_order = row.Cells("DisplayOrderDish").Value.ToString()
+
+
+
+                    ' Check if the combination already exists in DgwDisplaySubCatDish
+                    Dim alreadyExists As Boolean = False
+                For Each existingRow As DataGridViewRow In DgwDisplaySubCatDish.Rows
+                    If existingRow.Cells("subCatName").Value.ToString() = selectedSubcategory AndAlso
+                   existingRow.Cells("DishName__2").Value.ToString() = dishname Then
+                        alreadyExists = True
+                        Exit For
+                    End If
+                Next
+                If Not alreadyExists Then
+                    ' Add the data to DgwDisplaySubCatDish
+                    DgwDisplaySubCatDish.Rows.Add(DishId_2, selectedSubcategory, dishname, diplay_order, True, "Remove")
+                End If
+
             End If
         Next
         'untick column
@@ -667,9 +659,239 @@ Public Class frmDisplayCategoryAndSubCategory
         For Each row As DataGridViewRow In DgwListDish.Rows()
             Dim isChecked = CBool(row.Cells("Check").Value)
             If isChecked Then
-                Dim dishname As String = row.Cells("DishName").Value.ToString()
+                ' Dim dishname As String = row.Cells("DishName").Value.ToString()
                 row.Cells("Check").Value = False
             End If
+        Next
+    End Sub
+
+    Private Sub DgwListDish_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs)
+
+        If DgwListDish.Rows.Count < 0 Then
+
+            ' Check if the cell being validated is in the DisplayOrder column and the value is being changed
+            ' Check if the changed cell is in the DisplayOrder column and the value is not empty
+            If e.ColumnIndex = DgwListDish.Columns("DisplayOrderDish").Index AndAlso e.RowIndex >= 0 Then
+                Dim cell As DataGridViewCell = DgwListDish.Rows(e.RowIndex).Cells(e.ColumnIndex)
+                Dim newValue As String = cell.Value.ToString().Trim()
+
+                ' Initialize the Tag property if it's currently Nothing
+                If cell.Tag Is Nothing Then
+                    cell.Tag = ""
+                End If
+
+                ' Check if the value is numeric
+                If Not String.IsNullOrEmpty(newValue) AndAlso Not IsNumeric(newValue) Then
+                    MessageBox.Show("Please enter a numeric value for the Display Order.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    ' Reset the cell value to the previous value
+                    cell.Value = cell.Tag
+                Else
+                    ' Store the valid value in the cell's Tag property for potential rollback
+                    cell.Tag = newValue
+                End If
+            End If
+        End If
+
+    End Sub
+
+    Private Sub DgwListDish_CellContentClick(sender As Object, e As DataGridViewCellEventArgs)
+
+    End Sub
+
+    Private Sub DgwDisplaySubCatDish_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DgwDisplaySubCatDish.CellContentClick
+        ' Check if the clicked cell is in the "Remove" column and if the click was on a button
+        If e.ColumnIndex = DgwDisplaySubCatDish.Columns("Remove_").Index AndAlso e.RowIndex >= 0 Then
+            ' Remove the row from the DataGridView
+            DgwDisplaySubCatDish.Rows.RemoveAt(e.RowIndex)
+        End If
+    End Sub
+
+    Private Sub DgwListDish_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DgwListDish.CellEndEdit
+        ' Check if the cell being validated is in the DisplayOrder column and the value is being changed
+        ' Check if the changed cell is in the DisplayOrder column and the value is not empty
+        If e.ColumnIndex = DgwListDish.Columns("DisplayOrderDish").Index AndAlso e.RowIndex >= 0 Then
+            Dim cell As DataGridViewCell = DgwListDish.Rows(e.RowIndex).Cells(e.ColumnIndex)
+            Dim newValue As String
+            Try
+                newValue = cell.Value.ToString().Trim()
+            Catch ex As Exception
+                newValue = ""
+            End Try
+
+            'if displayorder column value is nothing newvalue variable is zero
+
+
+            ' Initialize the Tag property if it's currently Nothing
+            If cell.Tag Is Nothing Then
+                cell.Tag = ""
+            End If
+
+            ' Check if the value is numeric
+            If Not String.IsNullOrEmpty(newValue) AndAlso Not IsNumeric(newValue) Then
+                MessageBox.Show("Please enter a numeric value for the Display Order.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                ' Reset the cell value to the previous value
+                cell.Value = CStr(0)
+
+            ElseIf newValue = "" Then
+                cell.Value = CStr(0)
+
+            ElseIf CInt(newValue) < 0 Then
+                MessageBox.Show("Don't allowed negative value", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                cell.Value = CStr(0)
+            Else
+                ' Store the valid value in the cell's Tag property for potential rollback
+                cell.Tag = newValue
+            End If
+        End If
+    End Sub
+
+    Private Sub DgwListDish_CellValueChanged_1(sender As Object, e As DataGridViewCellEventArgs) Handles DgwListDish.CellValueChanged
+
+    End Sub
+
+    Private Sub DgwDisplaySubCatDish_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DgwDisplaySubCatDish.CellEndEdit
+        Dim newValue As String
+        If e.ColumnIndex = DgwDisplaySubCatDish.Columns("DisplayOrder__2").Index AndAlso e.RowIndex >= 0 Then
+            Dim cell As DataGridViewCell = DgwDisplaySubCatDish.Rows(e.RowIndex).Cells(e.ColumnIndex)
+            Try
+                newValue = cell.Value.ToString().Trim()
+            Catch ex As Exception
+                newValue = ""
+            End Try
+
+
+            ' Initialize the Tag property if it's currently Nothing
+            If cell.Tag Is Nothing Then
+                cell.Tag = ""
+            End If
+
+            ' Check if the value is numeric
+            If Not String.IsNullOrEmpty(newValue) AndAlso Not IsNumeric(newValue) Then
+                MessageBox.Show("Please enter a numeric value for the Display Order.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                ' Reset the cell value to the previous value
+                cell.Value = CStr(0)
+
+            ElseIf newValue = "" Then
+                cell.Value = CStr(0)
+
+
+            ElseIf CInt(newValue) < 0 Then
+                MessageBox.Show("Don't allowed negative value", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                cell.Value = CStr(0)
+            Else
+                ' Store the valid value in the cell's Tag property for potential rollback
+                cell.Tag = newValue
+            End If
+        End If
+    End Sub
+
+    Private Sub bttnSaveSubCategoryDish_Click(sender As Object, e As EventArgs) Handles bttnSaveSubCategoryDish.Click
+        Dim subcategoryId, dis_ID, Disorder As Integer
+        Dim active As Boolean
+        For Each row As DataGridViewRow In DgwDisplaySubCatDish.Rows()
+
+            Dim selectedSubcategory As Object = cmbSub2CategoryNam.SelectedValue
+            ' Check if the selected value is not null and then convert it to the appropriate type
+            If selectedSubcategory IsNot Nothing Then
+                'convert subcategory id
+                subcategoryId = Convert.ToInt32(selectedSubcategory)
+            End If
+            dis_ID = CInt(row.Cells("DishId_2").Value.ToString())
+            ' Dim dishname_local As String = row.Cells("DishNameLocal").Value.ToString()
+            Dim diplay_order As String = ""
+            Try
+                diplay_order = row.Cells("DisplayOrder__2").Value.ToString()
+            Catch ex As Exception
+                diplay_order = "0"
+            End Try
+            Disorder = CInt(diplay_order)
+            Dim isChecked = CBool(row.Cells("IsActive__2").Value)
+            If isChecked Then
+                active = True
+            Else
+                active = False
+            End If
+
+            Dim con As New SqlConnection(connection)
+            Dim query As String = "insert into DisplaySubCategoryDish (subCatId,dishid,IsActive,DisplayOrder) values(@s1,@s2,@s3,@s4)"
+            con.Open()
+            Dim cmd As New SqlCommand(query, con)
+            cmd.Parameters.AddWithValue("@s1", subcategoryId)
+            cmd.Parameters.AddWithValue("@s2", dis_ID)
+            cmd.Parameters.AddWithValue("@s3", active)
+            cmd.Parameters.AddWithValue("@s4", Disorder)
+            cmd.ExecuteNonQuery()
+            con.Close()
+            MessageBox.Show("inserted successfully")
+            DgwDisplaySubCatDish.Rows.Clear()
+        Next
+
+    End Sub
+
+
+
+    Private Sub DgvCategory_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DgvCategory.CellClick
+        If DgvCategory.SelectedRows.Count > 0 Then
+            bttnCatUpdate.Enabled = True
+            bttnCatDelete.Enabled = True
+            bttnCatSave.Enabled = False
+
+            Dim selectedRow As DataGridViewRow = DgvCategory.SelectedRows(0)
+            selectedCategoryId = Convert.ToInt32(selectedRow.Cells("Col_Cat_ID").Value)
+            txtCategory.Text = selectedRow.Cells("Col_Category").Value.ToString()
+            __category = selectedRow.Cells("Col_Category").Value.ToString()
+            txtCategoryLocal.Text = selectedRow.Cells("Col_Category_Local").Value.ToString()
+
+            ChkCategory.Checked = Convert.ToBoolean(selectedRow.Cells("Col_Cat_IsActive").Value)
+            txtCatDisplayOrder.Text = selectedRow.Cells("Col_Display_Order").Value.ToString()
+            __categoryDisNum = selectedRow.Cells("Col_Display_Order").Value.ToString()
+            lblCatImagePath.Text = selectedRow.Cells("Col_Category_Image").Value.ToString()
+            PictBoxCat.ImageLocation = Application.StartupPath & "\" & lblCatImagePath.Text
+        End If
+    End Sub
+
+    Private Sub DgvSubCat_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DgvSubCat.CellClick
+        If DgvSubCat.SelectedRows.Count > 0 Then
+            btnSubCatUpdate.Enabled = True
+            btnSubCatDelete.Enabled = True
+            btnSubCatSave.Enabled = False
+
+            Dim selectedRow As DataGridViewRow = DgvSubCat.SelectedRows(0)
+            selected_sub_CategoryId = Convert.ToInt32(selectedRow.Cells("ID").Value)
+            txtSubCategory.Text = selectedRow.Cells("Sub_Category").Value.ToString()
+            __subcategory = selectedRow.Cells("Sub_Category").Value.ToString()
+            txtSubCatLocal.Text = selectedRow.Cells("SubCategoryLocal").Value.ToString()
+
+            ChkSubCategory.Checked = Convert.ToBoolean(selectedRow.Cells("IsActive").Value)
+            Dim categoryId As Integer = Convert.ToInt32(selectedRow.Cells("category_id").Value)
+            cmbCatName.SelectedValue = categoryId
+
+
+            cmbCatName.SelectedItem = selectedRow.Cells("CategoryName").Value.ToString()
+            txtSubCatDisplayOrder.Text = selectedRow.Cells("DisplayOrder").Value.ToString()
+            __categoryDisNum = selectedRow.Cells("DisplayOrder").Value.ToString()
+            lblSubCatImagePath.Text = selectedRow.Cells("SubCatImage").Value.ToString()
+            pictboxSubCat.ImageLocation = Application.StartupPath & "\" & lblSubCatImagePath.Text
+        End If
+    End Sub
+
+    Private Sub txtSearchListOfDish_TextChanged(sender As Object, e As EventArgs) Handles txtSearchListOfDish.TextChanged
+        Dim searchText As String = txtSearchListOfDish.Text.Trim().ToLower()
+        For Each row As DataGridViewRow In DgwListDish.Rows
+            Dim dishName As String = row.Cells("DishName").Value.ToString().ToLower()
+
+            ' If the dishName contains the search text, make the row visible; otherwise, hide it
+            row.Visible = dishName.Contains(searchText)
+        Next
+    End Sub
+
+    Private Sub txtSearchSubCatDish_TextChanged(sender As Object, e As EventArgs) Handles txtSearchSubCatDish.TextChanged
+        Dim searchText As String = txtSearchSubCatDish.Text.Trim().ToLower()
+        For Each row As DataGridViewRow In DgwDisplaySubCatDish.Rows
+            Dim dishName As String = row.Cells("DishName__2").Value.ToString().ToLower()
+
+            ' If the dishName contains the search text, make the row visible; otherwise, hide it
+            row.Visible = dishName.Contains(searchText)
         Next
     End Sub
 End Class

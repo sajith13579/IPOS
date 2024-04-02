@@ -627,6 +627,7 @@ Public Class frmDisplayCategoryAndSubCategory
             If isChecked Then
                 'fetch display member
                 Dim selectedSubcategory As String = cmbSub2CategoryNam.Text
+                Dim Subcategory_ID As String = cmbSub2CategoryNam.SelectedValue
                 Dim dishname As String = row.Cells("DishName").Value.ToString()
                 Dim DishId_2 As String = row.Cells("DishId").Value.ToString()
                 ' Dim dishname_local As String = row.Cells("DishNameLocal").Value.ToString()
@@ -647,7 +648,7 @@ Public Class frmDisplayCategoryAndSubCategory
                 Next
                 If Not alreadyExists Then
                     ' Add the data to DgwDisplaySubCatDish
-                    DgwDisplaySubCatDish.Rows.Add(DishId_2, selectedSubcategory, dishname, diplay_order, True, "Remove")
+                    DgwDisplaySubCatDish.Rows.Add(Subcategory_ID, DishId_2, selectedSubcategory, dishname, diplay_order, True, "Remove")
                 End If
 
             End If
@@ -789,13 +790,14 @@ Public Class frmDisplayCategoryAndSubCategory
         Dim subcategoryId, dis_ID, Disorder As Integer
         Dim active As Boolean
         For Each row As DataGridViewRow In DgwDisplaySubCatDish.Rows()
+            'This for validation purpose
+            Dim subcategoryName, disName As String
+            subcategoryName = row.Cells("subCatName").Value.ToString()
+            disName = row.Cells("DishName__2").Value.ToString()
+            '-----------------------------------------------------
 
-            Dim selectedSubcategory As Object = cmbSub2CategoryNam.SelectedValue
-            ' Check if the selected value is not null and then convert it to the appropriate type
-            If selectedSubcategory IsNot Nothing Then
-                'convert subcategory id
-                subcategoryId = Convert.ToInt32(selectedSubcategory)
-            End If
+            subcategoryId = CInt(row.Cells("subCatId_2").Value.ToString())
+
             dis_ID = CInt(row.Cells("DishId_2").Value.ToString())
             ' Dim dishname_local As String = row.Cells("DishNameLocal").Value.ToString()
             Dim diplay_order As String = ""
@@ -812,6 +814,22 @@ Public Class frmDisplayCategoryAndSubCategory
                 active = False
             End If
 
+            Dim queryy As String = "SELECT subCatId,dishid FROM DisplaySubCategoryDish WHERE subCatId = @s1 and dishid=@s2"
+            Using conn As New SqlConnection(connection)
+                conn.Open()
+                Using cmdd As New SqlCommand(queryy, conn)
+                    cmdd.Parameters.AddWithValue("@s1", subcategoryId)
+                    cmdd.Parameters.AddWithValue("@s2", dis_ID)
+                    Using rdr As SqlDataReader = cmdd.ExecuteReader()
+                        If rdr.Read() Then
+                            MessageBox.Show("This " & disName & " dishname already available in " & subcategoryName & " this Subcategory.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                            Continue For
+                        End If
+                    End Using
+                End Using
+            End Using
+
+
             Dim con As New SqlConnection(connection)
             Dim query As String = "insert into DisplaySubCategoryDish (subCatId,dishid,IsActive,DisplayOrder) values(@s1,@s2,@s3,@s4)"
             con.Open()
@@ -823,9 +841,8 @@ Public Class frmDisplayCategoryAndSubCategory
             cmd.ExecuteNonQuery()
             con.Close()
             MessageBox.Show("inserted successfully")
-            DgwDisplaySubCatDish.Rows.Clear()
         Next
-
+        DgwDisplaySubCatDish.Rows.Clear()
     End Sub
 
 

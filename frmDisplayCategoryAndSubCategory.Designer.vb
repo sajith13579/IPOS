@@ -23,7 +23,16 @@ Partial Class frmDisplayCategoryAndSubCategory
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDisplayCategoryAndSubCategory))
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.Category = New System.Windows.Forms.TabPage()
         Me.Panel4 = New System.Windows.Forms.Panel()
@@ -84,12 +93,23 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.DisplaySubCategoryDish = New System.Windows.Forms.TabPage()
-        Me.cmbSub2CategoryNam = New System.Windows.Forms.ComboBox()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.bttnSaveSubCategoryDish = New System.Windows.Forms.Button()
-        Me.bttnAddToGrid = New System.Windows.Forms.Button()
+        Me.Panel11 = New System.Windows.Forms.Panel()
         Me.Label9 = New System.Windows.Forms.Label()
+        Me.Panel10 = New System.Windows.Forms.Panel()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.Panel9 = New System.Windows.Forms.Panel()
+        Me.txtSearchSubCatDish = New System.Windows.Forms.TextBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Panel8 = New System.Windows.Forms.Panel()
+        Me.txtSearchListOfDish = New System.Windows.Forms.TextBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Panel7 = New System.Windows.Forms.Panel()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.cmbSub2CategoryNam = New System.Windows.Forms.ComboBox()
+        Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.bttnSaveSubCategoryDish = New System.Windows.Forms.Button()
+        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.bttnAddToGrid = New System.Windows.Forms.Button()
         Me.DgwDisplaySubCatDish = New System.Windows.Forms.DataGridView()
         Me.DgwListDish = New System.Windows.Forms.DataGridView()
         Me.DishId = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -97,23 +117,13 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.DishNameLocal = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DisplayOrderDish = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Check = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.subCatId_2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DishId_2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.subCatName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DishName__2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DisplayOrder__2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.IsActive__2 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.Remove_ = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.Panel6 = New System.Windows.Forms.Panel()
-        Me.Panel7 = New System.Windows.Forms.Panel()
-        Me.Panel8 = New System.Windows.Forms.Panel()
-        Me.Panel9 = New System.Windows.Forms.Panel()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.txtSearchListOfDish = New System.Windows.Forms.TextBox()
-        Me.txtSearchSubCatDish = New System.Windows.Forms.TextBox()
-        Me.Panel10 = New System.Windows.Forms.Panel()
-        Me.Panel11 = New System.Windows.Forms.Panel()
         Me.TabControl1.SuspendLayout()
         Me.Category.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -128,26 +138,29 @@ Partial Class frmDisplayCategoryAndSubCategory
         CType(Me.pictboxSubCat, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.DisplaySubCategoryDish.SuspendLayout()
+        Me.Panel11.SuspendLayout()
+        Me.Panel10.SuspendLayout()
+        Me.Panel9.SuspendLayout()
+        Me.Panel8.SuspendLayout()
+        Me.Panel7.SuspendLayout()
+        Me.Panel6.SuspendLayout()
+        Me.Panel5.SuspendLayout()
         CType(Me.DgwDisplaySubCatDish, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgwListDish, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel5.SuspendLayout()
-        Me.Panel6.SuspendLayout()
-        Me.Panel7.SuspendLayout()
-        Me.Panel8.SuspendLayout()
-        Me.Panel9.SuspendLayout()
-        Me.Panel10.SuspendLayout()
-        Me.Panel11.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabControl1
         '
+        Me.TabControl1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TabControl1.Controls.Add(Me.Category)
         Me.TabControl1.Controls.Add(Me.SubCategory)
         Me.TabControl1.Controls.Add(Me.DisplaySubCategoryDish)
         Me.TabControl1.Location = New System.Drawing.Point(2, 0)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(932, 516)
+        Me.TabControl1.Size = New System.Drawing.Size(1079, 516)
         Me.TabControl1.TabIndex = 0
         '
         'Category
@@ -159,22 +172,23 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.Category.Location = New System.Drawing.Point(4, 22)
         Me.Category.Name = "Category"
         Me.Category.Padding = New System.Windows.Forms.Padding(3)
-        Me.Category.Size = New System.Drawing.Size(924, 490)
+        Me.Category.Size = New System.Drawing.Size(1071, 490)
         Me.Category.TabIndex = 0
         Me.Category.Text = "Category"
         Me.Category.UseVisualStyleBackColor = True
         '
         'Panel4
         '
-        Me.Panel4.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
         Me.Panel4.Controls.Add(Me.bttnCatDelete)
         Me.Panel4.Controls.Add(Me.bttnCatUpdate)
         Me.Panel4.Controls.Add(Me.bttnCatSave)
         Me.Panel4.Controls.Add(Me.bttnCatNew)
-        Me.Panel4.Location = New System.Drawing.Point(0, 439)
+        Me.Panel4.Location = New System.Drawing.Point(3, 439)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(921, 55)
+        Me.Panel4.Size = New System.Drawing.Size(1068, 55)
         Me.Panel4.TabIndex = 21
         '
         'bttnCatDelete
@@ -239,6 +253,8 @@ Partial Class frmDisplayCategoryAndSubCategory
         '
         'GroupBox2
         '
+        Me.GroupBox2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.GroupBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
         Me.GroupBox2.Controls.Add(Me.lblCatImagePath)
         Me.GroupBox2.Controls.Add(Me.bttnCatBrowse)
@@ -384,17 +400,37 @@ Partial Class frmDisplayCategoryAndSubCategory
         '
         Me.DgvCategory.AllowUserToAddRows = False
         Me.DgvCategory.AllowUserToDeleteRows = False
+        Me.DgvCategory.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DgvCategory.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DgvCategory.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvCategory.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DgvCategory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvCategory.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Col_Cat_ID, Me.Col_Category, Me.Col_Category_Local, Me.Col_Cat_IsActive, Me.Col_Category_Image, Me.Col_Display_Order})
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DgvCategory.DefaultCellStyle = DataGridViewCellStyle2
+        Me.DgvCategory.EnableHeadersVisualStyles = False
         Me.DgvCategory.Location = New System.Drawing.Point(355, 59)
         Me.DgvCategory.MultiSelect = False
         Me.DgvCategory.Name = "DgvCategory"
         Me.DgvCategory.ReadOnly = True
         Me.DgvCategory.RowHeadersVisible = False
         Me.DgvCategory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvCategory.Size = New System.Drawing.Size(563, 374)
+        Me.DgvCategory.Size = New System.Drawing.Size(716, 374)
         Me.DgvCategory.TabIndex = 19
         '
         'Col_Cat_ID
@@ -447,7 +483,7 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.Panel2.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.Panel2.Location = New System.Drawing.Point(3, 3)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(921, 50)
+        Me.Panel2.Size = New System.Drawing.Size(1068, 50)
         Me.Panel2.TabIndex = 3
         '
         'Label7
@@ -471,7 +507,7 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.SubCategory.Location = New System.Drawing.Point(4, 22)
         Me.SubCategory.Name = "SubCategory"
         Me.SubCategory.Padding = New System.Windows.Forms.Padding(3)
-        Me.SubCategory.Size = New System.Drawing.Size(924, 490)
+        Me.SubCategory.Size = New System.Drawing.Size(1071, 490)
         Me.SubCategory.TabIndex = 1
         Me.SubCategory.Text = "Sub Category"
         Me.SubCategory.UseVisualStyleBackColor = True
@@ -480,16 +516,36 @@ Partial Class frmDisplayCategoryAndSubCategory
         '
         Me.DgvSubCat.AllowUserToAddRows = False
         Me.DgvSubCat.AllowUserToDeleteRows = False
+        Me.DgvSubCat.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DgvSubCat.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DgvSubCat.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvSubCat.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.DgvSubCat.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvSubCat.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Sub_Category, Me.SubCategoryLocal, Me.IsActive, Me.CategoryName, Me.SubCatImage, Me.DisplayOrder, Me.category_id})
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DgvSubCat.DefaultCellStyle = DataGridViewCellStyle4
+        Me.DgvSubCat.EnableHeadersVisualStyles = False
         Me.DgvSubCat.Location = New System.Drawing.Point(355, 54)
         Me.DgvSubCat.Name = "DgvSubCat"
         Me.DgvSubCat.ReadOnly = True
         Me.DgvSubCat.RowHeadersVisible = False
         Me.DgvSubCat.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvSubCat.Size = New System.Drawing.Size(569, 380)
+        Me.DgvSubCat.Size = New System.Drawing.Size(716, 375)
         Me.DgvSubCat.TabIndex = 18
         '
         'ID
@@ -550,15 +606,16 @@ Partial Class frmDisplayCategoryAndSubCategory
         '
         'Panel3
         '
-        Me.Panel3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
         Me.Panel3.Controls.Add(Me.btnSubCatDelete)
         Me.Panel3.Controls.Add(Me.btnSubCatUpdate)
         Me.Panel3.Controls.Add(Me.btnSubCatSave)
         Me.Panel3.Controls.Add(Me.btnSubCatNew)
-        Me.Panel3.Location = New System.Drawing.Point(0, 440)
+        Me.Panel3.Location = New System.Drawing.Point(3, 435)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(924, 55)
+        Me.Panel3.Size = New System.Drawing.Size(1068, 55)
         Me.Panel3.TabIndex = 17
         '
         'btnSubCatDelete
@@ -623,6 +680,8 @@ Partial Class frmDisplayCategoryAndSubCategory
         '
         'GroupBox1
         '
+        Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.GroupBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
         Me.GroupBox1.Controls.Add(Me.lblSubCatImagePath)
         Me.GroupBox1.Controls.Add(Me.btnSubCatBrowse)
@@ -640,7 +699,7 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.GroupBox1.ForeColor = System.Drawing.Color.White
         Me.GroupBox1.Location = New System.Drawing.Point(1, 54)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(348, 380)
+        Me.GroupBox1.Size = New System.Drawing.Size(348, 375)
         Me.GroupBox1.TabIndex = 16
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Sub Category Info"
@@ -704,7 +763,7 @@ Partial Class frmDisplayCategoryAndSubCategory
         '
         Me.cmbCatName.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbCatName.FormattingEnabled = True
-        Me.cmbCatName.Location = New System.Drawing.Point(137, 95)
+        Me.cmbCatName.Location = New System.Drawing.Point(137, 101)
         Me.cmbCatName.Name = "cmbCatName"
         Me.cmbCatName.Size = New System.Drawing.Size(149, 21)
         Me.cmbCatName.TabIndex = 7
@@ -712,7 +771,7 @@ Partial Class frmDisplayCategoryAndSubCategory
         'txtSubCatLocal
         '
         Me.txtSubCatLocal.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtSubCatLocal.Location = New System.Drawing.Point(137, 60)
+        Me.txtSubCatLocal.Location = New System.Drawing.Point(137, 63)
         Me.txtSubCatLocal.Name = "txtSubCatLocal"
         Me.txtSubCatLocal.Size = New System.Drawing.Size(149, 21)
         Me.txtSubCatLocal.TabIndex = 6
@@ -720,7 +779,7 @@ Partial Class frmDisplayCategoryAndSubCategory
         'txtSubCatDisplayOrder
         '
         Me.txtSubCatDisplayOrder.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtSubCatDisplayOrder.Location = New System.Drawing.Point(137, 140)
+        Me.txtSubCatDisplayOrder.Location = New System.Drawing.Point(137, 139)
         Me.txtSubCatDisplayOrder.Name = "txtSubCatDisplayOrder"
         Me.txtSubCatDisplayOrder.Size = New System.Drawing.Size(149, 21)
         Me.txtSubCatDisplayOrder.TabIndex = 6
@@ -738,7 +797,7 @@ Partial Class frmDisplayCategoryAndSubCategory
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(29, 140)
+        Me.Label6.Location = New System.Drawing.Point(29, 139)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(71, 13)
         Me.Label6.TabIndex = 5
@@ -748,7 +807,7 @@ Partial Class frmDisplayCategoryAndSubCategory
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(29, 95)
+        Me.Label3.Location = New System.Drawing.Point(29, 101)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(51, 13)
         Me.Label3.TabIndex = 3
@@ -768,7 +827,7 @@ Partial Class frmDisplayCategoryAndSubCategory
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(29, 60)
+        Me.Label2.Location = New System.Drawing.Point(29, 63)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(95, 13)
         Me.Label2.TabIndex = 1
@@ -791,9 +850,9 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
         Me.Panel1.Controls.Add(Me.Label5)
         Me.Panel1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Panel1.Location = New System.Drawing.Point(3, 0)
+        Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(921, 50)
+        Me.Panel1.Size = New System.Drawing.Size(1071, 48)
         Me.Panel1.TabIndex = 2
         '
         'Label5
@@ -824,36 +883,161 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.DisplaySubCategoryDish.Location = New System.Drawing.Point(4, 22)
         Me.DisplaySubCategoryDish.Name = "DisplaySubCategoryDish"
         Me.DisplaySubCategoryDish.Padding = New System.Windows.Forms.Padding(3)
-        Me.DisplaySubCategoryDish.Size = New System.Drawing.Size(924, 490)
+        Me.DisplaySubCategoryDish.Size = New System.Drawing.Size(1071, 490)
         Me.DisplaySubCategoryDish.TabIndex = 2
         Me.DisplaySubCategoryDish.Text = "Display SubCategory Dish"
         '
-        'cmbSub2CategoryNam
+        'Panel11
         '
-        Me.cmbSub2CategoryNam.FormattingEnabled = True
-        Me.cmbSub2CategoryNam.Location = New System.Drawing.Point(143, 12)
-        Me.cmbSub2CategoryNam.Name = "cmbSub2CategoryNam"
-        Me.cmbSub2CategoryNam.Size = New System.Drawing.Size(179, 21)
-        Me.cmbSub2CategoryNam.TabIndex = 22
+        Me.Panel11.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel11.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
+        Me.Panel11.Controls.Add(Me.Label9)
+        Me.Panel11.Location = New System.Drawing.Point(515, 56)
+        Me.Panel11.Name = "Panel11"
+        Me.Panel11.Size = New System.Drawing.Size(554, 34)
+        Me.Panel11.TabIndex = 28
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.ForeColor = System.Drawing.Color.White
+        Me.Label9.Location = New System.Drawing.Point(6, 13)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(133, 16)
+        Me.Label9.TabIndex = 3
+        Me.Label9.Text = "SubCategory Dish"
+        '
+        'Panel10
+        '
+        Me.Panel10.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
+        Me.Panel10.Controls.Add(Me.Label4)
+        Me.Panel10.Location = New System.Drawing.Point(0, 56)
+        Me.Panel10.Name = "Panel10"
+        Me.Panel10.Size = New System.Drawing.Size(509, 34)
+        Me.Panel10.TabIndex = 27
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.Color.White
+        Me.Label4.Location = New System.Drawing.Point(6, 13)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(99, 16)
+        Me.Label4.TabIndex = 2
+        Me.Label4.Text = "List of dishes"
+        '
+        'Panel9
+        '
+        Me.Panel9.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel9.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
+        Me.Panel9.Controls.Add(Me.txtSearchSubCatDish)
+        Me.Panel9.Controls.Add(Me.Label14)
+        Me.Panel9.Location = New System.Drawing.Point(515, 95)
+        Me.Panel9.Name = "Panel9"
+        Me.Panel9.Size = New System.Drawing.Size(553, 34)
+        Me.Panel9.TabIndex = 26
+        '
+        'txtSearchSubCatDish
+        '
+        Me.txtSearchSubCatDish.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtSearchSubCatDish.Location = New System.Drawing.Point(362, 8)
+        Me.txtSearchSubCatDish.Name = "txtSearchSubCatDish"
+        Me.txtSearchSubCatDish.Size = New System.Drawing.Size(179, 20)
+        Me.txtSearchSubCatDish.TabIndex = 2
+        '
+        'Label14
+        '
+        Me.Label14.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label14.AutoSize = True
+        Me.Label14.ForeColor = System.Drawing.Color.White
+        Me.Label14.Location = New System.Drawing.Point(213, 11)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(139, 13)
+        Me.Label14.TabIndex = 1
+        Me.Label14.Text = "Search Subcategory Dishes"
+        '
+        'Panel8
+        '
+        Me.Panel8.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
+        Me.Panel8.Controls.Add(Me.txtSearchListOfDish)
+        Me.Panel8.Controls.Add(Me.Label13)
+        Me.Panel8.Location = New System.Drawing.Point(1, 95)
+        Me.Panel8.Name = "Panel8"
+        Me.Panel8.Size = New System.Drawing.Size(508, 34)
+        Me.Panel8.TabIndex = 25
+        '
+        'txtSearchListOfDish
+        '
+        Me.txtSearchListOfDish.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtSearchListOfDish.Location = New System.Drawing.Point(323, 8)
+        Me.txtSearchListOfDish.Name = "txtSearchListOfDish"
+        Me.txtSearchListOfDish.Size = New System.Drawing.Size(179, 20)
+        Me.txtSearchListOfDish.TabIndex = 1
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.ForeColor = System.Drawing.Color.White
+        Me.Label13.Location = New System.Drawing.Point(240, 12)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(76, 13)
+        Me.Label13.TabIndex = 0
+        Me.Label13.Text = "Search Dishes"
+        '
+        'Panel7
+        '
+        Me.Panel7.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel7.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
+        Me.Panel7.Controls.Add(Me.Label10)
+        Me.Panel7.Controls.Add(Me.cmbSub2CategoryNam)
+        Me.Panel7.Location = New System.Drawing.Point(1, 5)
+        Me.Panel7.Name = "Panel7"
+        Me.Panel7.Size = New System.Drawing.Size(1067, 45)
+        Me.Panel7.TabIndex = 24
         '
         'Label10
         '
         Me.Label10.AutoSize = True
         Me.Label10.ForeColor = System.Drawing.Color.White
-        Me.Label10.Location = New System.Drawing.Point(21, 15)
+        Me.Label10.Location = New System.Drawing.Point(5, 12)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(102, 13)
+        Me.Label10.Size = New System.Drawing.Size(71, 13)
         Me.Label10.TabIndex = 21
-        Me.Label10.Text = "Sub Category Name"
+        Me.Label10.Text = "Sub Category"
+        '
+        'cmbSub2CategoryNam
+        '
+        Me.cmbSub2CategoryNam.FormattingEnabled = True
+        Me.cmbSub2CategoryNam.Location = New System.Drawing.Point(120, 12)
+        Me.cmbSub2CategoryNam.Name = "cmbSub2CategoryNam"
+        Me.cmbSub2CategoryNam.Size = New System.Drawing.Size(179, 21)
+        Me.cmbSub2CategoryNam.TabIndex = 22
+        '
+        'Panel6
+        '
+        Me.Panel6.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel6.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
+        Me.Panel6.Controls.Add(Me.bttnSaveSubCategoryDish)
+        Me.Panel6.Location = New System.Drawing.Point(515, 433)
+        Me.Panel6.Name = "Panel6"
+        Me.Panel6.Size = New System.Drawing.Size(553, 54)
+        Me.Panel6.TabIndex = 24
         '
         'bttnSaveSubCategoryDish
         '
+        Me.bttnSaveSubCategoryDish.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.bttnSaveSubCategoryDish.BackColor = System.Drawing.Color.White
-        Me.bttnSaveSubCategoryDish.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.bttnSaveSubCategoryDish.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.bttnSaveSubCategoryDish.ForeColor = System.Drawing.Color.Black
         Me.bttnSaveSubCategoryDish.Image = CType(resources.GetObject("bttnSaveSubCategoryDish.Image"), System.Drawing.Image)
         Me.bttnSaveSubCategoryDish.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.bttnSaveSubCategoryDish.Location = New System.Drawing.Point(363, 8)
+        Me.bttnSaveSubCategoryDish.Location = New System.Drawing.Point(461, 9)
         Me.bttnSaveSubCategoryDish.Name = "bttnSaveSubCategoryDish"
         Me.bttnSaveSubCategoryDish.Size = New System.Drawing.Size(86, 39)
         Me.bttnSaveSubCategoryDish.TabIndex = 20
@@ -861,107 +1045,163 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.bttnSaveSubCategoryDish.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.bttnSaveSubCategoryDish.UseVisualStyleBackColor = False
         '
+        'Panel5
+        '
+        Me.Panel5.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Panel5.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
+        Me.Panel5.Controls.Add(Me.bttnAddToGrid)
+        Me.Panel5.Location = New System.Drawing.Point(0, 433)
+        Me.Panel5.Name = "Panel5"
+        Me.Panel5.Size = New System.Drawing.Size(509, 54)
+        Me.Panel5.TabIndex = 23
+        '
         'bttnAddToGrid
         '
         Me.bttnAddToGrid.BackColor = System.Drawing.Color.White
+        Me.bttnAddToGrid.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.bttnAddToGrid.ForeColor = System.Drawing.Color.Black
-        Me.bttnAddToGrid.Location = New System.Drawing.Point(353, 8)
+        Me.bttnAddToGrid.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.bttnAddToGrid.Location = New System.Drawing.Point(398, 9)
         Me.bttnAddToGrid.Name = "bttnAddToGrid"
-        Me.bttnAddToGrid.Size = New System.Drawing.Size(102, 40)
+        Me.bttnAddToGrid.Size = New System.Drawing.Size(102, 39)
         Me.bttnAddToGrid.TabIndex = 4
         Me.bttnAddToGrid.Text = "Add"
         Me.bttnAddToGrid.UseVisualStyleBackColor = False
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.ForeColor = System.Drawing.Color.White
-        Me.Label9.Location = New System.Drawing.Point(160, 13)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(117, 16)
-        Me.Label9.TabIndex = 3
-        Me.Label9.Text = "SubCategory Dish"
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.ForeColor = System.Drawing.Color.White
-        Me.Label4.Location = New System.Drawing.Point(141, 13)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(85, 16)
-        Me.Label4.TabIndex = 2
-        Me.Label4.Text = "List of dishes"
         '
         'DgwDisplaySubCatDish
         '
         Me.DgwDisplaySubCatDish.AllowUserToAddRows = False
         Me.DgwDisplaySubCatDish.AllowUserToDeleteRows = False
+        Me.DgwDisplaySubCatDish.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DgwDisplaySubCatDish.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.DgwDisplaySubCatDish.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgwDisplaySubCatDish.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DishId_2, Me.subCatName, Me.DishName__2, Me.DisplayOrder__2, Me.IsActive__2, Me.Remove_})
-        Me.DgwDisplaySubCatDish.Location = New System.Drawing.Point(464, 135)
+        Me.DgwDisplaySubCatDish.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgwDisplaySubCatDish.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
+        Me.DgwDisplaySubCatDish.ColumnHeadersHeight = 35
+        Me.DgwDisplaySubCatDish.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.subCatId_2, Me.DishId_2, Me.subCatName, Me.DishName__2, Me.DisplayOrder__2, Me.IsActive__2, Me.Remove_})
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DgwDisplaySubCatDish.DefaultCellStyle = DataGridViewCellStyle6
+        Me.DgwDisplaySubCatDish.EnableHeadersVisualStyles = False
+        Me.DgwDisplaySubCatDish.Location = New System.Drawing.Point(515, 135)
         Me.DgwDisplaySubCatDish.Name = "DgwDisplaySubCatDish"
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgwDisplaySubCatDish.RowHeadersDefaultCellStyle = DataGridViewCellStyle7
         Me.DgwDisplaySubCatDish.RowHeadersVisible = False
-        Me.DgwDisplaySubCatDish.Size = New System.Drawing.Size(457, 292)
+        Me.DgwDisplaySubCatDish.Size = New System.Drawing.Size(553, 292)
         Me.DgwDisplaySubCatDish.TabIndex = 1
         '
         'DgwListDish
         '
         Me.DgwListDish.AllowUserToAddRows = False
         Me.DgwListDish.AllowUserToDeleteRows = False
+        Me.DgwListDish.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.DgwListDish.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.DgwListDish.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DgwListDish.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgwListDish.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle8
+        Me.DgwListDish.ColumnHeadersHeight = 35
         Me.DgwListDish.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DishId, Me.DishName, Me.DishNameLocal, Me.DisplayOrderDish, Me.Check})
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DgwListDish.DefaultCellStyle = DataGridViewCellStyle10
+        Me.DgwListDish.EnableHeadersVisualStyles = False
         Me.DgwListDish.Location = New System.Drawing.Point(1, 135)
         Me.DgwListDish.Name = "DgwListDish"
         Me.DgwListDish.RowHeadersVisible = False
-        Me.DgwListDish.Size = New System.Drawing.Size(457, 292)
+        Me.DgwListDish.Size = New System.Drawing.Size(508, 292)
         Me.DgwListDish.TabIndex = 0
         '
         'DishId
         '
-        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-        Me.DishId.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
+        Me.DishId.DefaultCellStyle = DataGridViewCellStyle9
         Me.DishId.HeaderText = "Dish ID"
         Me.DishId.Name = "DishId"
         Me.DishId.Visible = False
         '
         'DishName
         '
-        Me.DishName.HeaderText = "Dish Name"
+        Me.DishName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.DishName.FillWeight = 26.11486!
+        Me.DishName.HeaderText = "Dish "
         Me.DishName.Name = "DishName"
+        Me.DishName.Width = 170
         '
         'DishNameLocal
         '
-        Me.DishNameLocal.HeaderText = "Dish Name Local"
+        Me.DishNameLocal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.DishNameLocal.FillWeight = 334.2703!
+        Me.DishNameLocal.HeaderText = "Dish  Local"
         Me.DishNameLocal.Name = "DishNameLocal"
+        Me.DishNameLocal.Width = 186
         '
         'DisplayOrderDish
         '
+        Me.DisplayOrderDish.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DisplayOrderDish.FillWeight = 19.3103!
         Me.DisplayOrderDish.HeaderText = "Display Order"
         Me.DisplayOrderDish.Name = "DisplayOrderDish"
         '
         'Check
         '
+        Me.Check.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Check.FillWeight = 20.30457!
         Me.Check.HeaderText = "check"
         Me.Check.Name = "Check"
+        '
+        'subCatId_2
+        '
+        Me.subCatId_2.HeaderText = "subCatID"
+        Me.subCatId_2.Name = "subCatId_2"
+        Me.subCatId_2.Visible = False
         '
         'DishId_2
         '
         Me.DishId_2.HeaderText = "DishId"
         Me.DishId_2.Name = "DishId_2"
+        Me.DishId_2.Visible = False
         '
         'subCatName
         '
-        Me.subCatName.HeaderText = "Subcategory Name"
+        Me.subCatName.HeaderText = "Subcategory "
         Me.subCatName.Name = "subCatName"
         Me.subCatName.ReadOnly = True
         '
         'DishName__2
         '
-        Me.DishName__2.HeaderText = "Dish name"
+        Me.DishName__2.HeaderText = "Dish "
         Me.DishName__2.Name = "DishName__2"
         Me.DishName__2.ReadOnly = True
         '
@@ -984,114 +1224,15 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.Remove_.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Remove_.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
-        'Panel5
-        '
-        Me.Panel5.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
-        Me.Panel5.Controls.Add(Me.bttnAddToGrid)
-        Me.Panel5.Location = New System.Drawing.Point(0, 433)
-        Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(458, 54)
-        Me.Panel5.TabIndex = 23
-        '
-        'Panel6
-        '
-        Me.Panel6.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
-        Me.Panel6.Controls.Add(Me.bttnSaveSubCategoryDish)
-        Me.Panel6.Location = New System.Drawing.Point(464, 433)
-        Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(460, 57)
-        Me.Panel6.TabIndex = 24
-        '
-        'Panel7
-        '
-        Me.Panel7.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
-        Me.Panel7.Controls.Add(Me.Label10)
-        Me.Panel7.Controls.Add(Me.cmbSub2CategoryNam)
-        Me.Panel7.Location = New System.Drawing.Point(1, 0)
-        Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(920, 52)
-        Me.Panel7.TabIndex = 24
-        '
-        'Panel8
-        '
-        Me.Panel8.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
-        Me.Panel8.Controls.Add(Me.txtSearchListOfDish)
-        Me.Panel8.Controls.Add(Me.Label13)
-        Me.Panel8.Location = New System.Drawing.Point(1, 95)
-        Me.Panel8.Name = "Panel8"
-        Me.Panel8.Size = New System.Drawing.Size(457, 34)
-        Me.Panel8.TabIndex = 25
-        '
-        'Panel9
-        '
-        Me.Panel9.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
-        Me.Panel9.Controls.Add(Me.txtSearchSubCatDish)
-        Me.Panel9.Controls.Add(Me.Label14)
-        Me.Panel9.Location = New System.Drawing.Point(464, 95)
-        Me.Panel9.Name = "Panel9"
-        Me.Panel9.Size = New System.Drawing.Size(457, 34)
-        Me.Panel9.TabIndex = 26
-        '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.ForeColor = System.Drawing.Color.White
-        Me.Label13.Location = New System.Drawing.Point(5, 11)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(76, 13)
-        Me.Label13.TabIndex = 0
-        Me.Label13.Text = "Search Dishes"
-        '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.ForeColor = System.Drawing.Color.White
-        Me.Label14.Location = New System.Drawing.Point(3, 11)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(139, 13)
-        Me.Label14.TabIndex = 1
-        Me.Label14.Text = "Search Subcategory Dishes"
-        '
-        'txtSearchListOfDish
-        '
-        Me.txtSearchListOfDish.Location = New System.Drawing.Point(255, 8)
-        Me.txtSearchListOfDish.Name = "txtSearchListOfDish"
-        Me.txtSearchListOfDish.Size = New System.Drawing.Size(179, 20)
-        Me.txtSearchListOfDish.TabIndex = 1
-        '
-        'txtSearchSubCatDish
-        '
-        Me.txtSearchSubCatDish.Location = New System.Drawing.Point(255, 8)
-        Me.txtSearchSubCatDish.Name = "txtSearchSubCatDish"
-        Me.txtSearchSubCatDish.Size = New System.Drawing.Size(179, 20)
-        Me.txtSearchSubCatDish.TabIndex = 2
-        '
-        'Panel10
-        '
-        Me.Panel10.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
-        Me.Panel10.Controls.Add(Me.Label4)
-        Me.Panel10.Location = New System.Drawing.Point(0, 59)
-        Me.Panel10.Name = "Panel10"
-        Me.Panel10.Size = New System.Drawing.Size(458, 34)
-        Me.Panel10.TabIndex = 27
-        '
-        'Panel11
-        '
-        Me.Panel11.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
-        Me.Panel11.Controls.Add(Me.Label9)
-        Me.Panel11.Location = New System.Drawing.Point(464, 59)
-        Me.Panel11.Name = "Panel11"
-        Me.Panel11.Size = New System.Drawing.Size(458, 34)
-        Me.Panel11.TabIndex = 28
-        '
         'frmDisplayCategoryAndSubCategory
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(946, 521)
+        Me.ClientSize = New System.Drawing.Size(1093, 521)
         Me.Controls.Add(Me.TabControl1)
         Me.Name = "frmDisplayCategoryAndSubCategory"
         Me.Text = "frmDisplayCategoryAndSubCategory"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.TabControl1.ResumeLayout(False)
         Me.Category.ResumeLayout(False)
         Me.Panel4.ResumeLayout(False)
@@ -1110,20 +1251,20 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.DisplaySubCategoryDish.ResumeLayout(False)
-        CType(Me.DgwDisplaySubCatDish, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DgwListDish, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel5.ResumeLayout(False)
-        Me.Panel6.ResumeLayout(False)
-        Me.Panel7.ResumeLayout(False)
-        Me.Panel7.PerformLayout()
-        Me.Panel8.ResumeLayout(False)
-        Me.Panel8.PerformLayout()
-        Me.Panel9.ResumeLayout(False)
-        Me.Panel9.PerformLayout()
-        Me.Panel10.ResumeLayout(False)
-        Me.Panel10.PerformLayout()
         Me.Panel11.ResumeLayout(False)
         Me.Panel11.PerformLayout()
+        Me.Panel10.ResumeLayout(False)
+        Me.Panel10.PerformLayout()
+        Me.Panel9.ResumeLayout(False)
+        Me.Panel9.PerformLayout()
+        Me.Panel8.ResumeLayout(False)
+        Me.Panel8.PerformLayout()
+        Me.Panel7.ResumeLayout(False)
+        Me.Panel7.PerformLayout()
+        Me.Panel6.ResumeLayout(False)
+        Me.Panel5.ResumeLayout(False)
+        CType(Me.DgwDisplaySubCatDish, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DgwListDish, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1196,17 +1337,6 @@ Partial Class frmDisplayCategoryAndSubCategory
     Friend WithEvents bttnSaveSubCategoryDish As Button
     Friend WithEvents cmbSub2CategoryNam As ComboBox
     Friend WithEvents Label10 As Label
-    Friend WithEvents DishId As DataGridViewTextBoxColumn
-    Friend WithEvents DishName As DataGridViewTextBoxColumn
-    Friend WithEvents DishNameLocal As DataGridViewTextBoxColumn
-    Friend WithEvents DisplayOrderDish As DataGridViewTextBoxColumn
-    Friend WithEvents Check As DataGridViewCheckBoxColumn
-    Friend WithEvents DishId_2 As DataGridViewTextBoxColumn
-    Friend WithEvents subCatName As DataGridViewTextBoxColumn
-    Friend WithEvents DishName__2 As DataGridViewTextBoxColumn
-    Friend WithEvents DisplayOrder__2 As DataGridViewTextBoxColumn
-    Friend WithEvents IsActive__2 As DataGridViewCheckBoxColumn
-    Friend WithEvents Remove_ As DataGridViewButtonColumn
     Friend WithEvents Panel9 As Panel
     Friend WithEvents txtSearchSubCatDish As TextBox
     Friend WithEvents Label14 As Label
@@ -1218,4 +1348,16 @@ Partial Class frmDisplayCategoryAndSubCategory
     Friend WithEvents Panel5 As Panel
     Friend WithEvents Panel11 As Panel
     Friend WithEvents Panel10 As Panel
+    Friend WithEvents subCatId_2 As DataGridViewTextBoxColumn
+    Friend WithEvents DishId_2 As DataGridViewTextBoxColumn
+    Friend WithEvents subCatName As DataGridViewTextBoxColumn
+    Friend WithEvents DishName__2 As DataGridViewTextBoxColumn
+    Friend WithEvents DisplayOrder__2 As DataGridViewTextBoxColumn
+    Friend WithEvents IsActive__2 As DataGridViewCheckBoxColumn
+    Friend WithEvents Remove_ As DataGridViewButtonColumn
+    Friend WithEvents DishId As DataGridViewTextBoxColumn
+    Friend WithEvents DishName As DataGridViewTextBoxColumn
+    Friend WithEvents DishNameLocal As DataGridViewTextBoxColumn
+    Friend WithEvents DisplayOrderDish As DataGridViewTextBoxColumn
+    Friend WithEvents Check As DataGridViewCheckBoxColumn
 End Class

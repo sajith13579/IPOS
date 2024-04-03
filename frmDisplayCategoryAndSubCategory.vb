@@ -911,4 +911,9 @@ Public Class frmDisplayCategoryAndSubCategory
             row.Visible = dishName.Contains(searchText)
         Next
     End Sub
+
+    Private Sub bttnDisplaySubCatDish_Click(sender As Object, e As EventArgs) Handles bttnDisplaySubCatDish.Click
+        frm_Display_sub_cat_dish.ShowDialog()
+        frm_Display_sub_cat_dish.Dispose()
+    End Sub
 End Class

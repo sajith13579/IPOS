@@ -22,7 +22,6 @@ Partial Class frmDisplayCategoryAndSubCategory
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDisplayCategoryAndSubCategory))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -33,18 +32,12 @@ Partial Class frmDisplayCategoryAndSubCategory
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDisplayCategoryAndSubCategory))
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.Category = New System.Windows.Forms.TabPage()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.bttnCatDelete = New System.Windows.Forms.Button()
-        Me.bttnCatUpdate = New System.Windows.Forms.Button()
-        Me.bttnCatSave = New System.Windows.Forms.Button()
-        Me.bttnCatNew = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.lblCatImagePath = New System.Windows.Forms.Label()
-        Me.bttnCatBrowse = New System.Windows.Forms.Button()
-        Me.bttnCatRemove = New System.Windows.Forms.Button()
-        Me.PictBoxCat = New System.Windows.Forms.PictureBox()
         Me.txtCategoryLocal = New System.Windows.Forms.TextBox()
         Me.txtCatDisplayOrder = New System.Windows.Forms.TextBox()
         Me.txtCategory = New System.Windows.Forms.TextBox()
@@ -72,15 +65,8 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.DisplayOrder = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.category_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.btnSubCatDelete = New System.Windows.Forms.Button()
-        Me.btnSubCatUpdate = New System.Windows.Forms.Button()
-        Me.btnSubCatSave = New System.Windows.Forms.Button()
-        Me.btnSubCatNew = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lblSubCatImagePath = New System.Windows.Forms.Label()
-        Me.btnSubCatBrowse = New System.Windows.Forms.Button()
-        Me.btnSubCatRemove = New System.Windows.Forms.Button()
-        Me.pictboxSubCat = New System.Windows.Forms.PictureBox()
         Me.cmbCatName = New System.Windows.Forms.ComboBox()
         Me.txtSubCatLocal = New System.Windows.Forms.TextBox()
         Me.txtSubCatDisplayOrder = New System.Windows.Forms.TextBox()
@@ -107,16 +93,9 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.Label10 = New System.Windows.Forms.Label()
         Me.cmbSub2CategoryNam = New System.Windows.Forms.ComboBox()
         Me.Panel6 = New System.Windows.Forms.Panel()
-        Me.bttnSaveSubCategoryDish = New System.Windows.Forms.Button()
+        Me.bttnDisplaySubCatDish = New System.Windows.Forms.Button()
         Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.bttnAddToGrid = New System.Windows.Forms.Button()
         Me.DgwDisplaySubCatDish = New System.Windows.Forms.DataGridView()
-        Me.DgwListDish = New System.Windows.Forms.DataGridView()
-        Me.DishId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DishName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DishNameLocal = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DisplayOrderDish = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Check = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.subCatId_2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DishId_2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.subCatName = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -124,18 +103,38 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.DisplayOrder__2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.IsActive__2 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.Remove_ = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.DgwListDish = New System.Windows.Forms.DataGridView()
+        Me.DishId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DishName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DishNameLocal = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DisplayOrderDish = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Check = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.bttnCatDelete = New System.Windows.Forms.Button()
+        Me.bttnCatUpdate = New System.Windows.Forms.Button()
+        Me.bttnCatSave = New System.Windows.Forms.Button()
+        Me.bttnCatNew = New System.Windows.Forms.Button()
+        Me.bttnCatBrowse = New System.Windows.Forms.Button()
+        Me.bttnCatRemove = New System.Windows.Forms.Button()
+        Me.PictBoxCat = New System.Windows.Forms.PictureBox()
+        Me.btnSubCatDelete = New System.Windows.Forms.Button()
+        Me.btnSubCatUpdate = New System.Windows.Forms.Button()
+        Me.btnSubCatSave = New System.Windows.Forms.Button()
+        Me.btnSubCatNew = New System.Windows.Forms.Button()
+        Me.btnSubCatBrowse = New System.Windows.Forms.Button()
+        Me.btnSubCatRemove = New System.Windows.Forms.Button()
+        Me.pictboxSubCat = New System.Windows.Forms.PictureBox()
+        Me.bttnSaveSubCategoryDish = New System.Windows.Forms.Button()
+        Me.bttnAddToGrid = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.Category.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
-        CType(Me.PictBoxCat, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvCategory, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         Me.SubCategory.SuspendLayout()
         CType(Me.DgvSubCat, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel3.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
-        CType(Me.pictboxSubCat, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.DisplaySubCategoryDish.SuspendLayout()
         Me.Panel11.SuspendLayout()
@@ -147,6 +146,8 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.Panel5.SuspendLayout()
         CType(Me.DgwDisplaySubCatDish, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgwListDish, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictBoxCat, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pictboxSubCat, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -191,66 +192,6 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.Panel4.Size = New System.Drawing.Size(1068, 55)
         Me.Panel4.TabIndex = 21
         '
-        'bttnCatDelete
-        '
-        Me.bttnCatDelete.BackColor = System.Drawing.Color.White
-        Me.bttnCatDelete.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.bttnCatDelete.ForeColor = System.Drawing.Color.Black
-        Me.bttnCatDelete.Image = CType(resources.GetObject("bttnCatDelete.Image"), System.Drawing.Image)
-        Me.bttnCatDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.bttnCatDelete.Location = New System.Drawing.Point(292, 11)
-        Me.bttnCatDelete.Name = "bttnCatDelete"
-        Me.bttnCatDelete.Size = New System.Drawing.Size(87, 36)
-        Me.bttnCatDelete.TabIndex = 12
-        Me.bttnCatDelete.Text = "Delete"
-        Me.bttnCatDelete.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.bttnCatDelete.UseVisualStyleBackColor = False
-        '
-        'bttnCatUpdate
-        '
-        Me.bttnCatUpdate.BackColor = System.Drawing.Color.White
-        Me.bttnCatUpdate.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.bttnCatUpdate.ForeColor = System.Drawing.Color.Black
-        Me.bttnCatUpdate.Image = CType(resources.GetObject("bttnCatUpdate.Image"), System.Drawing.Image)
-        Me.bttnCatUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.bttnCatUpdate.Location = New System.Drawing.Point(199, 11)
-        Me.bttnCatUpdate.Name = "bttnCatUpdate"
-        Me.bttnCatUpdate.Size = New System.Drawing.Size(87, 36)
-        Me.bttnCatUpdate.TabIndex = 11
-        Me.bttnCatUpdate.Text = "Update"
-        Me.bttnCatUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.bttnCatUpdate.UseVisualStyleBackColor = False
-        '
-        'bttnCatSave
-        '
-        Me.bttnCatSave.BackColor = System.Drawing.Color.White
-        Me.bttnCatSave.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.bttnCatSave.ForeColor = System.Drawing.Color.Black
-        Me.bttnCatSave.Image = CType(resources.GetObject("bttnCatSave.Image"), System.Drawing.Image)
-        Me.bttnCatSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.bttnCatSave.Location = New System.Drawing.Point(106, 11)
-        Me.bttnCatSave.Name = "bttnCatSave"
-        Me.bttnCatSave.Size = New System.Drawing.Size(87, 36)
-        Me.bttnCatSave.TabIndex = 10
-        Me.bttnCatSave.Text = "Save"
-        Me.bttnCatSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.bttnCatSave.UseVisualStyleBackColor = False
-        '
-        'bttnCatNew
-        '
-        Me.bttnCatNew.BackColor = System.Drawing.Color.White
-        Me.bttnCatNew.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.bttnCatNew.ForeColor = System.Drawing.Color.Black
-        Me.bttnCatNew.Image = CType(resources.GetObject("bttnCatNew.Image"), System.Drawing.Image)
-        Me.bttnCatNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.bttnCatNew.Location = New System.Drawing.Point(13, 11)
-        Me.bttnCatNew.Name = "bttnCatNew"
-        Me.bttnCatNew.Size = New System.Drawing.Size(87, 36)
-        Me.bttnCatNew.TabIndex = 9
-        Me.bttnCatNew.Text = "New"
-        Me.bttnCatNew.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.bttnCatNew.UseVisualStyleBackColor = False
-        '
         'GroupBox2
         '
         Me.GroupBox2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -284,52 +225,6 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.lblCatImagePath.TabIndex = 63
         Me.lblCatImagePath.Text = "Label4"
         Me.lblCatImagePath.Visible = False
-        '
-        'bttnCatBrowse
-        '
-        Me.bttnCatBrowse.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.bttnCatBrowse.BackColor = System.Drawing.Color.White
-        Me.bttnCatBrowse.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.bttnCatBrowse.ForeColor = System.Drawing.Color.Black
-        Me.bttnCatBrowse.Image = CType(resources.GetObject("bttnCatBrowse.Image"), System.Drawing.Image)
-        Me.bttnCatBrowse.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.bttnCatBrowse.Location = New System.Drawing.Point(155, 268)
-        Me.bttnCatBrowse.Name = "bttnCatBrowse"
-        Me.bttnCatBrowse.Size = New System.Drawing.Size(108, 40)
-        Me.bttnCatBrowse.TabIndex = 61
-        Me.bttnCatBrowse.Text = "Browse"
-        Me.bttnCatBrowse.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.bttnCatBrowse.UseVisualStyleBackColor = False
-        '
-        'bttnCatRemove
-        '
-        Me.bttnCatRemove.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.bttnCatRemove.BackColor = System.Drawing.Color.White
-        Me.bttnCatRemove.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.bttnCatRemove.ForeColor = System.Drawing.Color.Black
-        Me.bttnCatRemove.Image = CType(resources.GetObject("bttnCatRemove.Image"), System.Drawing.Image)
-        Me.bttnCatRemove.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.bttnCatRemove.Location = New System.Drawing.Point(155, 185)
-        Me.bttnCatRemove.Name = "bttnCatRemove"
-        Me.bttnCatRemove.Size = New System.Drawing.Size(108, 40)
-        Me.bttnCatRemove.TabIndex = 62
-        Me.bttnCatRemove.Text = "Remove"
-        Me.bttnCatRemove.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.bttnCatRemove.UseVisualStyleBackColor = False
-        '
-        'PictBoxCat
-        '
-        Me.PictBoxCat.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.PictBoxCat.BackColor = System.Drawing.SystemColors.ControlLightLight
-        Me.PictBoxCat.ErrorImage = Nothing
-        Me.PictBoxCat.Image = CType(resources.GetObject("PictBoxCat.Image"), System.Drawing.Image)
-        Me.PictBoxCat.InitialImage = CType(resources.GetObject("PictBoxCat.InitialImage"), System.Drawing.Image)
-        Me.PictBoxCat.Location = New System.Drawing.Point(21, 185)
-        Me.PictBoxCat.Name = "PictBoxCat"
-        Me.PictBoxCat.Size = New System.Drawing.Size(118, 123)
-        Me.PictBoxCat.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictBoxCat.TabIndex = 59
-        Me.PictBoxCat.TabStop = False
         '
         'txtCategoryLocal
         '
@@ -407,7 +302,7 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.DgvCategory.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         DataGridViewCellStyle1.ForeColor = System.Drawing.Color.White
         DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
@@ -618,66 +513,6 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.Panel3.Size = New System.Drawing.Size(1068, 55)
         Me.Panel3.TabIndex = 17
         '
-        'btnSubCatDelete
-        '
-        Me.btnSubCatDelete.BackColor = System.Drawing.Color.White
-        Me.btnSubCatDelete.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSubCatDelete.ForeColor = System.Drawing.Color.Black
-        Me.btnSubCatDelete.Image = CType(resources.GetObject("btnSubCatDelete.Image"), System.Drawing.Image)
-        Me.btnSubCatDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSubCatDelete.Location = New System.Drawing.Point(292, 11)
-        Me.btnSubCatDelete.Name = "btnSubCatDelete"
-        Me.btnSubCatDelete.Size = New System.Drawing.Size(87, 36)
-        Me.btnSubCatDelete.TabIndex = 12
-        Me.btnSubCatDelete.Text = "Delete"
-        Me.btnSubCatDelete.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnSubCatDelete.UseVisualStyleBackColor = False
-        '
-        'btnSubCatUpdate
-        '
-        Me.btnSubCatUpdate.BackColor = System.Drawing.Color.White
-        Me.btnSubCatUpdate.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSubCatUpdate.ForeColor = System.Drawing.Color.Black
-        Me.btnSubCatUpdate.Image = CType(resources.GetObject("btnSubCatUpdate.Image"), System.Drawing.Image)
-        Me.btnSubCatUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSubCatUpdate.Location = New System.Drawing.Point(199, 11)
-        Me.btnSubCatUpdate.Name = "btnSubCatUpdate"
-        Me.btnSubCatUpdate.Size = New System.Drawing.Size(87, 36)
-        Me.btnSubCatUpdate.TabIndex = 11
-        Me.btnSubCatUpdate.Text = "Update"
-        Me.btnSubCatUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnSubCatUpdate.UseVisualStyleBackColor = False
-        '
-        'btnSubCatSave
-        '
-        Me.btnSubCatSave.BackColor = System.Drawing.Color.White
-        Me.btnSubCatSave.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSubCatSave.ForeColor = System.Drawing.Color.Black
-        Me.btnSubCatSave.Image = CType(resources.GetObject("btnSubCatSave.Image"), System.Drawing.Image)
-        Me.btnSubCatSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSubCatSave.Location = New System.Drawing.Point(106, 11)
-        Me.btnSubCatSave.Name = "btnSubCatSave"
-        Me.btnSubCatSave.Size = New System.Drawing.Size(87, 36)
-        Me.btnSubCatSave.TabIndex = 10
-        Me.btnSubCatSave.Text = "Save"
-        Me.btnSubCatSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnSubCatSave.UseVisualStyleBackColor = False
-        '
-        'btnSubCatNew
-        '
-        Me.btnSubCatNew.BackColor = System.Drawing.Color.White
-        Me.btnSubCatNew.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSubCatNew.ForeColor = System.Drawing.Color.Black
-        Me.btnSubCatNew.Image = CType(resources.GetObject("btnSubCatNew.Image"), System.Drawing.Image)
-        Me.btnSubCatNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSubCatNew.Location = New System.Drawing.Point(13, 11)
-        Me.btnSubCatNew.Name = "btnSubCatNew"
-        Me.btnSubCatNew.Size = New System.Drawing.Size(87, 36)
-        Me.btnSubCatNew.TabIndex = 9
-        Me.btnSubCatNew.Text = "New"
-        Me.btnSubCatNew.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnSubCatNew.UseVisualStyleBackColor = False
-        '
         'GroupBox1
         '
         Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -712,52 +547,6 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.lblSubCatImagePath.Size = New System.Drawing.Size(39, 13)
         Me.lblSubCatImagePath.TabIndex = 63
         Me.lblSubCatImagePath.Text = "Label4"
-        '
-        'btnSubCatBrowse
-        '
-        Me.btnSubCatBrowse.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSubCatBrowse.BackColor = System.Drawing.Color.White
-        Me.btnSubCatBrowse.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSubCatBrowse.ForeColor = System.Drawing.Color.Black
-        Me.btnSubCatBrowse.Image = CType(resources.GetObject("btnSubCatBrowse.Image"), System.Drawing.Image)
-        Me.btnSubCatBrowse.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSubCatBrowse.Location = New System.Drawing.Point(155, 308)
-        Me.btnSubCatBrowse.Name = "btnSubCatBrowse"
-        Me.btnSubCatBrowse.Size = New System.Drawing.Size(108, 40)
-        Me.btnSubCatBrowse.TabIndex = 61
-        Me.btnSubCatBrowse.Text = "Browse"
-        Me.btnSubCatBrowse.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnSubCatBrowse.UseVisualStyleBackColor = False
-        '
-        'btnSubCatRemove
-        '
-        Me.btnSubCatRemove.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSubCatRemove.BackColor = System.Drawing.Color.White
-        Me.btnSubCatRemove.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSubCatRemove.ForeColor = System.Drawing.Color.Black
-        Me.btnSubCatRemove.Image = CType(resources.GetObject("btnSubCatRemove.Image"), System.Drawing.Image)
-        Me.btnSubCatRemove.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSubCatRemove.Location = New System.Drawing.Point(155, 226)
-        Me.btnSubCatRemove.Name = "btnSubCatRemove"
-        Me.btnSubCatRemove.Size = New System.Drawing.Size(108, 40)
-        Me.btnSubCatRemove.TabIndex = 62
-        Me.btnSubCatRemove.Text = "Remove"
-        Me.btnSubCatRemove.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnSubCatRemove.UseVisualStyleBackColor = False
-        '
-        'pictboxSubCat
-        '
-        Me.pictboxSubCat.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pictboxSubCat.BackColor = System.Drawing.SystemColors.ControlLightLight
-        Me.pictboxSubCat.ErrorImage = Nothing
-        Me.pictboxSubCat.Image = CType(resources.GetObject("pictboxSubCat.Image"), System.Drawing.Image)
-        Me.pictboxSubCat.InitialImage = CType(resources.GetObject("pictboxSubCat.InitialImage"), System.Drawing.Image)
-        Me.pictboxSubCat.Location = New System.Drawing.Point(17, 225)
-        Me.pictboxSubCat.Name = "pictboxSubCat"
-        Me.pictboxSubCat.Size = New System.Drawing.Size(118, 123)
-        Me.pictboxSubCat.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.pictboxSubCat.TabIndex = 59
-        Me.pictboxSubCat.TabStop = False
         '
         'cmbCatName
         '
@@ -885,7 +674,7 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.DisplaySubCategoryDish.Padding = New System.Windows.Forms.Padding(3)
         Me.DisplaySubCategoryDish.Size = New System.Drawing.Size(1071, 490)
         Me.DisplaySubCategoryDish.TabIndex = 2
-        Me.DisplaySubCategoryDish.Text = "Display SubCategory Dish"
+        Me.DisplaySubCategoryDish.Text = "Add SubCategory Dish"
         '
         'Panel11
         '
@@ -1023,27 +812,22 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.Panel6.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel6.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
+        Me.Panel6.Controls.Add(Me.bttnDisplaySubCatDish)
         Me.Panel6.Controls.Add(Me.bttnSaveSubCategoryDish)
         Me.Panel6.Location = New System.Drawing.Point(515, 433)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(553, 54)
         Me.Panel6.TabIndex = 24
         '
-        'bttnSaveSubCategoryDish
+        'bttnDisplaySubCatDish
         '
-        Me.bttnSaveSubCategoryDish.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.bttnSaveSubCategoryDish.BackColor = System.Drawing.Color.White
-        Me.bttnSaveSubCategoryDish.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.bttnSaveSubCategoryDish.ForeColor = System.Drawing.Color.Black
-        Me.bttnSaveSubCategoryDish.Image = CType(resources.GetObject("bttnSaveSubCategoryDish.Image"), System.Drawing.Image)
-        Me.bttnSaveSubCategoryDish.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.bttnSaveSubCategoryDish.Location = New System.Drawing.Point(461, 9)
-        Me.bttnSaveSubCategoryDish.Name = "bttnSaveSubCategoryDish"
-        Me.bttnSaveSubCategoryDish.Size = New System.Drawing.Size(86, 39)
-        Me.bttnSaveSubCategoryDish.TabIndex = 20
-        Me.bttnSaveSubCategoryDish.Text = "Save"
-        Me.bttnSaveSubCategoryDish.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.bttnSaveSubCategoryDish.UseVisualStyleBackColor = False
+        Me.bttnDisplaySubCatDish.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.bttnDisplaySubCatDish.Location = New System.Drawing.Point(35, 9)
+        Me.bttnDisplaySubCatDish.Name = "bttnDisplaySubCatDish"
+        Me.bttnDisplaySubCatDish.Size = New System.Drawing.Size(171, 39)
+        Me.bttnDisplaySubCatDish.TabIndex = 21
+        Me.bttnDisplaySubCatDish.Text = "Display subcategory dish"
+        Me.bttnDisplaySubCatDish.UseVisualStyleBackColor = True
         '
         'Panel5
         '
@@ -1054,19 +838,6 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(509, 54)
         Me.Panel5.TabIndex = 23
-        '
-        'bttnAddToGrid
-        '
-        Me.bttnAddToGrid.BackColor = System.Drawing.Color.White
-        Me.bttnAddToGrid.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.bttnAddToGrid.ForeColor = System.Drawing.Color.Black
-        Me.bttnAddToGrid.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.bttnAddToGrid.Location = New System.Drawing.Point(398, 9)
-        Me.bttnAddToGrid.Name = "bttnAddToGrid"
-        Me.bttnAddToGrid.Size = New System.Drawing.Size(102, 39)
-        Me.bttnAddToGrid.TabIndex = 4
-        Me.bttnAddToGrid.Text = "Add"
-        Me.bttnAddToGrid.UseVisualStyleBackColor = False
         '
         'DgwDisplaySubCatDish
         '
@@ -1109,6 +880,49 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.DgwDisplaySubCatDish.RowHeadersVisible = False
         Me.DgwDisplaySubCatDish.Size = New System.Drawing.Size(553, 292)
         Me.DgwDisplaySubCatDish.TabIndex = 1
+        '
+        'subCatId_2
+        '
+        Me.subCatId_2.HeaderText = "subCatID"
+        Me.subCatId_2.Name = "subCatId_2"
+        Me.subCatId_2.Visible = False
+        '
+        'DishId_2
+        '
+        Me.DishId_2.HeaderText = "DishId"
+        Me.DishId_2.Name = "DishId_2"
+        Me.DishId_2.Visible = False
+        '
+        'subCatName
+        '
+        Me.subCatName.HeaderText = "Subcategory "
+        Me.subCatName.Name = "subCatName"
+        Me.subCatName.ReadOnly = True
+        '
+        'DishName__2
+        '
+        Me.DishName__2.HeaderText = "Dish "
+        Me.DishName__2.Name = "DishName__2"
+        Me.DishName__2.ReadOnly = True
+        '
+        'DisplayOrder__2
+        '
+        Me.DisplayOrder__2.HeaderText = "Display Order"
+        Me.DisplayOrder__2.Name = "DisplayOrder__2"
+        '
+        'IsActive__2
+        '
+        Me.IsActive__2.HeaderText = "IsActive"
+        Me.IsActive__2.Name = "IsActive__2"
+        Me.IsActive__2.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.IsActive__2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        '
+        'Remove_
+        '
+        Me.Remove_.HeaderText = "Remove"
+        Me.Remove_.Name = "Remove_"
+        Me.Remove_.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Remove_.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
         'DgwListDish
         '
@@ -1181,48 +995,247 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.Check.HeaderText = "check"
         Me.Check.Name = "Check"
         '
-        'subCatId_2
+        'bttnCatDelete
         '
-        Me.subCatId_2.HeaderText = "subCatID"
-        Me.subCatId_2.Name = "subCatId_2"
-        Me.subCatId_2.Visible = False
+        Me.bttnCatDelete.BackColor = System.Drawing.Color.White
+        Me.bttnCatDelete.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.bttnCatDelete.ForeColor = System.Drawing.Color.Black
+        Me.bttnCatDelete.Image = CType(resources.GetObject("bttnCatDelete.Image"), System.Drawing.Image)
+        Me.bttnCatDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.bttnCatDelete.Location = New System.Drawing.Point(292, 11)
+        Me.bttnCatDelete.Name = "bttnCatDelete"
+        Me.bttnCatDelete.Size = New System.Drawing.Size(87, 36)
+        Me.bttnCatDelete.TabIndex = 12
+        Me.bttnCatDelete.Text = "Delete"
+        Me.bttnCatDelete.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.bttnCatDelete.UseVisualStyleBackColor = False
         '
-        'DishId_2
+        'bttnCatUpdate
         '
-        Me.DishId_2.HeaderText = "DishId"
-        Me.DishId_2.Name = "DishId_2"
-        Me.DishId_2.Visible = False
+        Me.bttnCatUpdate.BackColor = System.Drawing.Color.White
+        Me.bttnCatUpdate.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.bttnCatUpdate.ForeColor = System.Drawing.Color.Black
+        Me.bttnCatUpdate.Image = CType(resources.GetObject("bttnCatUpdate.Image"), System.Drawing.Image)
+        Me.bttnCatUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.bttnCatUpdate.Location = New System.Drawing.Point(199, 11)
+        Me.bttnCatUpdate.Name = "bttnCatUpdate"
+        Me.bttnCatUpdate.Size = New System.Drawing.Size(87, 36)
+        Me.bttnCatUpdate.TabIndex = 11
+        Me.bttnCatUpdate.Text = "Update"
+        Me.bttnCatUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.bttnCatUpdate.UseVisualStyleBackColor = False
         '
-        'subCatName
+        'bttnCatSave
         '
-        Me.subCatName.HeaderText = "Subcategory "
-        Me.subCatName.Name = "subCatName"
-        Me.subCatName.ReadOnly = True
+        Me.bttnCatSave.BackColor = System.Drawing.Color.White
+        Me.bttnCatSave.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.bttnCatSave.ForeColor = System.Drawing.Color.Black
+        Me.bttnCatSave.Image = CType(resources.GetObject("bttnCatSave.Image"), System.Drawing.Image)
+        Me.bttnCatSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.bttnCatSave.Location = New System.Drawing.Point(106, 11)
+        Me.bttnCatSave.Name = "bttnCatSave"
+        Me.bttnCatSave.Size = New System.Drawing.Size(87, 36)
+        Me.bttnCatSave.TabIndex = 10
+        Me.bttnCatSave.Text = "Save"
+        Me.bttnCatSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.bttnCatSave.UseVisualStyleBackColor = False
         '
-        'DishName__2
+        'bttnCatNew
         '
-        Me.DishName__2.HeaderText = "Dish "
-        Me.DishName__2.Name = "DishName__2"
-        Me.DishName__2.ReadOnly = True
+        Me.bttnCatNew.BackColor = System.Drawing.Color.White
+        Me.bttnCatNew.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.bttnCatNew.ForeColor = System.Drawing.Color.Black
+        Me.bttnCatNew.Image = CType(resources.GetObject("bttnCatNew.Image"), System.Drawing.Image)
+        Me.bttnCatNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.bttnCatNew.Location = New System.Drawing.Point(13, 11)
+        Me.bttnCatNew.Name = "bttnCatNew"
+        Me.bttnCatNew.Size = New System.Drawing.Size(87, 36)
+        Me.bttnCatNew.TabIndex = 9
+        Me.bttnCatNew.Text = "New"
+        Me.bttnCatNew.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.bttnCatNew.UseVisualStyleBackColor = False
         '
-        'DisplayOrder__2
+        'bttnCatBrowse
         '
-        Me.DisplayOrder__2.HeaderText = "Display Order"
-        Me.DisplayOrder__2.Name = "DisplayOrder__2"
+        Me.bttnCatBrowse.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.bttnCatBrowse.BackColor = System.Drawing.Color.White
+        Me.bttnCatBrowse.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.bttnCatBrowse.ForeColor = System.Drawing.Color.Black
+        Me.bttnCatBrowse.Image = CType(resources.GetObject("bttnCatBrowse.Image"), System.Drawing.Image)
+        Me.bttnCatBrowse.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.bttnCatBrowse.Location = New System.Drawing.Point(155, 268)
+        Me.bttnCatBrowse.Name = "bttnCatBrowse"
+        Me.bttnCatBrowse.Size = New System.Drawing.Size(108, 40)
+        Me.bttnCatBrowse.TabIndex = 61
+        Me.bttnCatBrowse.Text = "Browse"
+        Me.bttnCatBrowse.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.bttnCatBrowse.UseVisualStyleBackColor = False
         '
-        'IsActive__2
+        'bttnCatRemove
         '
-        Me.IsActive__2.HeaderText = "IsActive"
-        Me.IsActive__2.Name = "IsActive__2"
-        Me.IsActive__2.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.IsActive__2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.bttnCatRemove.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.bttnCatRemove.BackColor = System.Drawing.Color.White
+        Me.bttnCatRemove.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.bttnCatRemove.ForeColor = System.Drawing.Color.Black
+        Me.bttnCatRemove.Image = CType(resources.GetObject("bttnCatRemove.Image"), System.Drawing.Image)
+        Me.bttnCatRemove.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.bttnCatRemove.Location = New System.Drawing.Point(155, 185)
+        Me.bttnCatRemove.Name = "bttnCatRemove"
+        Me.bttnCatRemove.Size = New System.Drawing.Size(108, 40)
+        Me.bttnCatRemove.TabIndex = 62
+        Me.bttnCatRemove.Text = "Remove"
+        Me.bttnCatRemove.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.bttnCatRemove.UseVisualStyleBackColor = False
         '
-        'Remove_
+        'PictBoxCat
         '
-        Me.Remove_.HeaderText = "Remove"
-        Me.Remove_.Name = "Remove_"
-        Me.Remove_.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Remove_.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.PictBoxCat.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PictBoxCat.BackColor = System.Drawing.SystemColors.ControlLightLight
+        Me.PictBoxCat.ErrorImage = Nothing
+        Me.PictBoxCat.Image = CType(resources.GetObject("PictBoxCat.Image"), System.Drawing.Image)
+        Me.PictBoxCat.InitialImage = CType(resources.GetObject("PictBoxCat.InitialImage"), System.Drawing.Image)
+        Me.PictBoxCat.Location = New System.Drawing.Point(21, 185)
+        Me.PictBoxCat.Name = "PictBoxCat"
+        Me.PictBoxCat.Size = New System.Drawing.Size(118, 123)
+        Me.PictBoxCat.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictBoxCat.TabIndex = 59
+        Me.PictBoxCat.TabStop = False
+        '
+        'btnSubCatDelete
+        '
+        Me.btnSubCatDelete.BackColor = System.Drawing.Color.White
+        Me.btnSubCatDelete.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSubCatDelete.ForeColor = System.Drawing.Color.Black
+        Me.btnSubCatDelete.Image = CType(resources.GetObject("btnSubCatDelete.Image"), System.Drawing.Image)
+        Me.btnSubCatDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSubCatDelete.Location = New System.Drawing.Point(292, 11)
+        Me.btnSubCatDelete.Name = "btnSubCatDelete"
+        Me.btnSubCatDelete.Size = New System.Drawing.Size(87, 36)
+        Me.btnSubCatDelete.TabIndex = 12
+        Me.btnSubCatDelete.Text = "Delete"
+        Me.btnSubCatDelete.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSubCatDelete.UseVisualStyleBackColor = False
+        '
+        'btnSubCatUpdate
+        '
+        Me.btnSubCatUpdate.BackColor = System.Drawing.Color.White
+        Me.btnSubCatUpdate.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSubCatUpdate.ForeColor = System.Drawing.Color.Black
+        Me.btnSubCatUpdate.Image = CType(resources.GetObject("btnSubCatUpdate.Image"), System.Drawing.Image)
+        Me.btnSubCatUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSubCatUpdate.Location = New System.Drawing.Point(199, 11)
+        Me.btnSubCatUpdate.Name = "btnSubCatUpdate"
+        Me.btnSubCatUpdate.Size = New System.Drawing.Size(87, 36)
+        Me.btnSubCatUpdate.TabIndex = 11
+        Me.btnSubCatUpdate.Text = "Update"
+        Me.btnSubCatUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSubCatUpdate.UseVisualStyleBackColor = False
+        '
+        'btnSubCatSave
+        '
+        Me.btnSubCatSave.BackColor = System.Drawing.Color.White
+        Me.btnSubCatSave.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSubCatSave.ForeColor = System.Drawing.Color.Black
+        Me.btnSubCatSave.Image = CType(resources.GetObject("btnSubCatSave.Image"), System.Drawing.Image)
+        Me.btnSubCatSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSubCatSave.Location = New System.Drawing.Point(106, 11)
+        Me.btnSubCatSave.Name = "btnSubCatSave"
+        Me.btnSubCatSave.Size = New System.Drawing.Size(87, 36)
+        Me.btnSubCatSave.TabIndex = 10
+        Me.btnSubCatSave.Text = "Save"
+        Me.btnSubCatSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSubCatSave.UseVisualStyleBackColor = False
+        '
+        'btnSubCatNew
+        '
+        Me.btnSubCatNew.BackColor = System.Drawing.Color.White
+        Me.btnSubCatNew.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSubCatNew.ForeColor = System.Drawing.Color.Black
+        Me.btnSubCatNew.Image = CType(resources.GetObject("btnSubCatNew.Image"), System.Drawing.Image)
+        Me.btnSubCatNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSubCatNew.Location = New System.Drawing.Point(13, 11)
+        Me.btnSubCatNew.Name = "btnSubCatNew"
+        Me.btnSubCatNew.Size = New System.Drawing.Size(87, 36)
+        Me.btnSubCatNew.TabIndex = 9
+        Me.btnSubCatNew.Text = "New"
+        Me.btnSubCatNew.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSubCatNew.UseVisualStyleBackColor = False
+        '
+        'btnSubCatBrowse
+        '
+        Me.btnSubCatBrowse.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSubCatBrowse.BackColor = System.Drawing.Color.White
+        Me.btnSubCatBrowse.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSubCatBrowse.ForeColor = System.Drawing.Color.Black
+        Me.btnSubCatBrowse.Image = CType(resources.GetObject("btnSubCatBrowse.Image"), System.Drawing.Image)
+        Me.btnSubCatBrowse.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSubCatBrowse.Location = New System.Drawing.Point(155, 308)
+        Me.btnSubCatBrowse.Name = "btnSubCatBrowse"
+        Me.btnSubCatBrowse.Size = New System.Drawing.Size(108, 40)
+        Me.btnSubCatBrowse.TabIndex = 61
+        Me.btnSubCatBrowse.Text = "Browse"
+        Me.btnSubCatBrowse.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSubCatBrowse.UseVisualStyleBackColor = False
+        '
+        'btnSubCatRemove
+        '
+        Me.btnSubCatRemove.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSubCatRemove.BackColor = System.Drawing.Color.White
+        Me.btnSubCatRemove.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSubCatRemove.ForeColor = System.Drawing.Color.Black
+        Me.btnSubCatRemove.Image = CType(resources.GetObject("btnSubCatRemove.Image"), System.Drawing.Image)
+        Me.btnSubCatRemove.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSubCatRemove.Location = New System.Drawing.Point(155, 226)
+        Me.btnSubCatRemove.Name = "btnSubCatRemove"
+        Me.btnSubCatRemove.Size = New System.Drawing.Size(108, 40)
+        Me.btnSubCatRemove.TabIndex = 62
+        Me.btnSubCatRemove.Text = "Remove"
+        Me.btnSubCatRemove.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSubCatRemove.UseVisualStyleBackColor = False
+        '
+        'pictboxSubCat
+        '
+        Me.pictboxSubCat.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pictboxSubCat.BackColor = System.Drawing.SystemColors.ControlLightLight
+        Me.pictboxSubCat.ErrorImage = Nothing
+        Me.pictboxSubCat.Image = CType(resources.GetObject("pictboxSubCat.Image"), System.Drawing.Image)
+        Me.pictboxSubCat.InitialImage = CType(resources.GetObject("pictboxSubCat.InitialImage"), System.Drawing.Image)
+        Me.pictboxSubCat.Location = New System.Drawing.Point(17, 225)
+        Me.pictboxSubCat.Name = "pictboxSubCat"
+        Me.pictboxSubCat.Size = New System.Drawing.Size(118, 123)
+        Me.pictboxSubCat.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.pictboxSubCat.TabIndex = 59
+        Me.pictboxSubCat.TabStop = False
+        '
+        'bttnSaveSubCategoryDish
+        '
+        Me.bttnSaveSubCategoryDish.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.bttnSaveSubCategoryDish.BackColor = System.Drawing.Color.White
+        Me.bttnSaveSubCategoryDish.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.bttnSaveSubCategoryDish.ForeColor = System.Drawing.Color.Black
+        Me.bttnSaveSubCategoryDish.Image = CType(resources.GetObject("bttnSaveSubCategoryDish.Image"), System.Drawing.Image)
+        Me.bttnSaveSubCategoryDish.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.bttnSaveSubCategoryDish.Location = New System.Drawing.Point(461, 9)
+        Me.bttnSaveSubCategoryDish.Name = "bttnSaveSubCategoryDish"
+        Me.bttnSaveSubCategoryDish.Size = New System.Drawing.Size(86, 39)
+        Me.bttnSaveSubCategoryDish.TabIndex = 20
+        Me.bttnSaveSubCategoryDish.Text = "Save"
+        Me.bttnSaveSubCategoryDish.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.bttnSaveSubCategoryDish.UseVisualStyleBackColor = False
+        '
+        'bttnAddToGrid
+        '
+        Me.bttnAddToGrid.BackColor = System.Drawing.Color.White
+        Me.bttnAddToGrid.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.bttnAddToGrid.ForeColor = System.Drawing.Color.Black
+        Me.bttnAddToGrid.Image = CType(resources.GetObject("bttnAddToGrid.Image"), System.Drawing.Image)
+        Me.bttnAddToGrid.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.bttnAddToGrid.Location = New System.Drawing.Point(398, 9)
+        Me.bttnAddToGrid.Name = "bttnAddToGrid"
+        Me.bttnAddToGrid.Size = New System.Drawing.Size(102, 39)
+        Me.bttnAddToGrid.TabIndex = 4
+        Me.bttnAddToGrid.Text = "Add"
+        Me.bttnAddToGrid.UseVisualStyleBackColor = False
         '
         'frmDisplayCategoryAndSubCategory
         '
@@ -1230,6 +1243,8 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1093, 521)
         Me.Controls.Add(Me.TabControl1)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmDisplayCategoryAndSubCategory"
         Me.Text = "frmDisplayCategoryAndSubCategory"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
@@ -1238,7 +1253,6 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.Panel4.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
-        CType(Me.PictBoxCat, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DgvCategory, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
@@ -1247,7 +1261,6 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.Panel3.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
-        CType(Me.pictboxSubCat, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.DisplaySubCategoryDish.ResumeLayout(False)
@@ -1265,6 +1278,8 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.Panel5.ResumeLayout(False)
         CType(Me.DgwDisplaySubCatDish, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DgwListDish, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictBoxCat, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pictboxSubCat, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1360,4 +1375,5 @@ Partial Class frmDisplayCategoryAndSubCategory
     Friend WithEvents DishNameLocal As DataGridViewTextBoxColumn
     Friend WithEvents DisplayOrderDish As DataGridViewTextBoxColumn
     Friend WithEvents Check As DataGridViewCheckBoxColumn
+    Friend WithEvents bttnDisplaySubCatDish As Button
 End Class

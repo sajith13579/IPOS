@@ -866,6 +866,29 @@
         cJhl2S7H9PSQJPkGkauiRp0Z568AAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="bttnAddToGrid.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        xAAADsQBlSsOGwAAA/FJREFUOE+NVV1MU2cY/i4k3hAvmibCjca/mOglIiZIglTa1OJPUdJKJV74m4gu
+        mBLZBluHluFAwiaFtaWU0haaeRCJSKipQliFiAhDYH9xMcCyi20XUGyhNe7Z+d5TWOVi4U2ek/N953me
+        7+/93sNi72IILYYQDocRXY4iGomCh2fEA4VNgbSv07Dzzk7surMLBxoOQGlTQpgQgBjRVrXLy8uYX5gH
+        WwgtIBKJUCcP90s3mJHhYudFBF4HMPBmAMKPApzjTtjH7LA8t0DfoUdyRTJcIy7SvA2/JWNuyngjHJHM
+        DlsPI9uWjak/p9D9UzccLx2oG65D5UAlSh+X4nLPZRR2FiKvPQ/Gx0Yo7Aqo7WrSch8+MRaNSUvMbspG
+        ycMSPJt9htbxVjQ8b0D199Uw+o0wdBqQ582Dyq2C2q1GVksW9jbsxZ6GPTjtO03bwIOWHAvH4HzhhLpF
+        jcBvAVhfWFE7VAtTvwlXe6+icaSRyDz63/ST0e5vdkNeLccG0wYkmZKgsqvQPNRMHMYfSWVJCM4GUT9c
+        D/OgGWWBMlzpvQK9oMft4G0i8vD/7AcrZWCfiqgQ8Zn0fsh+CKm3UumgmHPYiWsPr6FmqAblT8tR0leC
+        c93noL+nh8KloL6V6JnqoQNjn6+BOIjOrYNv3AemalbBM+GhTeabXvBdAZRtSmQ2Z2J7/Xbo2/VxO+DB
+        qwdgH4kGHyeAz1ScpbZNC22rFowfRlWwCme7zkLr06JqsAoVTyvoMAq8Bbg7eDduB4zNjuF423Gc8Z0h
+        nO88j5QvU8hwa81WaBwasPSmdBT3FkPj1WCfdV9cuv5QOpQ0U7lZjkxbJlhGUwbtV4YtA1vqtsRp648c
+        e86HhvzIj3iOYEf9DiSbkzH9xzQmf5/ExNwELXHmr5m4VLxmkRBGZ0bpG8fc33PYb9lPhttqt0lL5htZ
+        JBRhY+VGKQ2uJ6CY4WjL0bgdIPwggF1aw+EpJOKU+xSBdU124YTrhJQO3DAxHcSRDR2GuN3/p02+Kx++
+        UTFt8A5IuZmCXEcu2CdriOsxFDVcu7lyM3HopgjjAhTfKrDp5iaw8gSyaHjh3gUi8gi+Dn5oKHK5hmvv
+        v7qP90vvwVbK1knvSbrPMrPsv5mKScvb6Y3pSLNIdXF1QJEjuyWD2qlGfls+eVC1CYVCWFpaoo7CjkIc
+        tBzEMdcxsBuSiCDOdBW8LX7jCc65eq90kxYXF6V6SBVbNF2piY+mHkH+hZxSQOfVIcuahdSvUgn8XefR
+        QdOigcwkg/8XP2m4lir2vFi+eA3jDd7Jqy7FP8CTX5/A0G6g0pRjzaHfQa49F0W+IvRN9xGN/y4StbFY
+        DP8CnlEw18uSdrIAAAAASUVORK5CYII=
+</value>
+  </data>
   <metadata name="subCatId_2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>

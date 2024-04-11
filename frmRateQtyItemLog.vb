@@ -2,23 +2,24 @@
 
 Public Class frmRateQtyItemLog
     Private Sub dtpDateFrom_ValueChanged(sender As Object, e As EventArgs) Handles dtpDateFromdl.ValueChanged
-        txtBillNumberdl.Text = ""
-        If cmbOperatordl.SelectedItem = "All" OrElse CmbBillTypedl.SelectedItem = "All" OrElse cmbPermissiondl.SelectedItem = "All" OrElse cmbDishNameDl.SelectedItem = "All" Then
-            ALL_row_Itm_del()
-        ElseIf cmbOperatordl.SelectedItem <> "All" AndAlso cmbOperatordl.SelectedItem <> Nothing AndAlso cmd_operator_select = True Then
-            cmb_op_selct_Index_change_del()
+        'txtBillNumberdl.Text = ""
+        'If cmbOperatordl.SelectedItem = "All" OrElse CmbBillTypedl.SelectedItem = "All" OrElse cmbPermissiondl.SelectedItem = "All" OrElse cmbDishNameDl.SelectedItem = "All" Then
+        '    ALL_row_Itm_del()
+        'ElseIf cmbOperatordl.SelectedItem <> "All" AndAlso cmbOperatordl.SelectedItem <> Nothing AndAlso cmd_operator_select = True Then
+        '    cmb_op_selct_Index_change_del()
 
-        ElseIf CmbBillTypedl.SelectedItem <> "All" AndAlso CmbBillTypedl.SelectedItem <> Nothing AndAlso cmb_bill_select = True Then
-            cmb_bill_typ_selct_Index_change_del()
+        'ElseIf CmbBillTypedl.SelectedItem <> "All" AndAlso CmbBillTypedl.SelectedItem <> Nothing AndAlso cmb_bill_select = True Then
+        '    cmb_bill_typ_selct_Index_change_del()
 
-        ElseIf cmbPermissiondl.SelectedItem <> "All" AndAlso cmbPermissiondl.SelectedItem <> Nothing AndAlso cmb_permission_select = True Then
-            cmb_permi_selct_Index_change_del()
+        'ElseIf cmbPermissiondl.SelectedItem <> "All" AndAlso cmbPermissiondl.SelectedItem <> Nothing AndAlso cmb_permission_select = True Then
+        '    cmb_permi_selct_Index_change_del()
 
-        ElseIf cmbDishNameDl.SelectedItem <> "All" AndAlso cmbDishNameDl.SelectedItem <> Nothing AndAlso cmb_Dish_select = True Then
-            cmb_dish_selct_Index_change_del()
-        Else
-            ALL_row_Itm_del()
-        End If
+        'ElseIf cmbDishNameDl.SelectedItem <> "All" AndAlso cmbDishNameDl.SelectedItem <> Nothing AndAlso cmb_Dish_select = True Then
+        '    cmb_dish_selct_Index_change_del()
+        'Else
+        '    ALL_row_Itm_del()
+        'End If
+        filter_item_del()
     End Sub
 
     Public Sub print_dl_en_dis()
@@ -103,27 +104,136 @@ Public Class frmRateQtyItemLog
         CmbBillTypedl.Items.Add("Express Bill")
         CmbBillTypedl.Items.Insert(0, "All")
     End Sub
+
+    Public Sub rate_chg_sel_ind_zer()
+        cmbOperator1.SelectedIndex = 0
+        CmbBillType.SelectedIndex = 0
+
+        cmbDishName.SelectedIndex = 0
+
+    End Sub
+
     Private Sub frmRateQtyItemLog_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        load_combobox_RT()
+
+        '----------------Rate change portion--------------------'
+        fillOperatorRt()
+        fill_bill_type_RT()
+        fill_permission_RT()
+        fill_dish_Rt()
+        cmbpermission1.SelectedIndex = 0
+        cmbOperator1.SelectedIndex = 0
+        CmbBillType.SelectedIndex = 0
+        cmbDishName.SelectedIndex = 0
+        'check the print button..if datagridview does no have value the print button disabled mode
         print_btn_RT_chg_enb_dis_qua()
+        '  rate_chg_sel_ind_zer()
+
+        '--------------------------------------------------------
 
     End Sub
 
 
 
+    Public Sub fillOperatorDl()
+        con = New SqlConnection(connection)
+        con.Open()
+        adpt = New SqlDataAdapter()
+        Dim query8 As String = "
+         select distinct er.empid, er.employeename as operatorname
+         from ItemDeleted as itd
+         inner join employeeregistration as er on itd.OperatorId = er.empid
+         union
+         select 0 as empid, 'All' as operatorname"
 
 
+        adpt.SelectCommand = New SqlCommand(query8, con)
 
-    Public Sub ClearAllDataGridViews()
-        ' Iterate through each control on the form
-        For Each ctrl As Control In Me.Controls
-            ' Check if the control is a DataGridView
-            If TypeOf ctrl Is DataGridView Then
-                ' Clear the DataGridView's contents
-                Dim dgv As DataGridView = DirectCast(ctrl, DataGridView)
-                dgv.Rows.Clear()
-            End If
-        Next
+        ds = New DataSet("ds")
+        adpt.Fill(ds)
+        Dim dtable = ds.Tables(0)
+        cmbOperatordl.DisplayMember = "operatorname"
+        cmbOperatordl.ValueMember = "EmpId"
+
+        cmbOperatordl.DataSource = dtable
+
+        con.Close()
+    End Sub
+
+    Public Sub fill_bill_type_Dl()
+        'con = New SqlConnection(connection)
+        'con.Open()
+        'adpt = New SqlDataAdapter()
+
+        'Dim query8 As String = "
+        ' select Distinct BillType 
+        ' from ratechangelog 
+        ' union
+        ' select 'All' as billtype"
+
+
+        'adpt.SelectCommand = New SqlCommand(query8, con)
+
+        'ds = New DataSet("ds")
+        'adpt.Fill(ds)
+        'Dim dtable = ds.Tables(0)
+
+        'cmbOperator1.DataSource = dtable
+
+        'con.Close()
+        CmbBillTypedl.Items.Add("Dine In")
+        CmbBillTypedl.Items.Add("Take Away")
+        CmbBillTypedl.Items.Add("Home Delivery")
+        CmbBillTypedl.Items.Add("Third Party")
+        CmbBillTypedl.Items.Add("Express Bill")
+        CmbBillTypedl.Items.Insert(0, "All")
+    End Sub
+
+    Public Sub fill_permission_Dl()
+        con = New SqlConnection(connection)
+        con.Open()
+        adpt = New SqlDataAdapter()
+
+        Dim query1 As String = "
+    SELECT DISTINCT ER.EmpId, ER.EmployeeName AS PermissionGrantedName
+    FROM ItemDeleted AS itd
+    INNER JOIN EmployeeRegistration AS ER ON itd.PermissionGrantedId = ER.EmpId
+    UNION
+    SELECT 0 AS EmpId, 'All' AS PermissionGrantedName
+"
+
+        adpt.SelectCommand = New SqlCommand(query1, con)
+        ds1 = New DataSet("ds")
+        adpt.Fill(ds1)
+        Dim dtable1 = ds1.Tables(0)
+        cmbPermissiondl.DisplayMember = "PermissionGrantedName"
+        cmbPermissiondl.ValueMember = "EmpId"
+        cmbPermissiondl.DataSource = dtable1
+
+        con.Close()
+    End Sub
+
+    Public Sub fill_dish_Dl()
+        con = New SqlConnection(connection)
+        con.Open()
+        adpt = New SqlDataAdapter()
+
+
+        Dim query2 As String = "SELECT DISTINCT Dis.DishId ,  Dis.DishName 
+                           FROM ItemDeleted AS itd
+                           INNER JOIN Dish AS Dis ON itd.Dish_Id = Dis.DishID
+                                UNION
+                            SELECT 0 AS DishId, 'All' AS DishName
+            
+                            "
+
+        adpt.SelectCommand = New SqlCommand(query2, con)
+        ds1 = New DataSet("ds")
+        adpt.Fill(ds1)
+        Dim dtable1 = ds1.Tables(0)
+        cmbDishNameDl.DisplayMember = "DishName"
+        cmbDishNameDl.ValueMember = "DishId"
+        cmbDishNameDl.DataSource = dtable1
+        con.Close()
     End Sub
 
 
@@ -134,16 +244,50 @@ Public Class frmRateQtyItemLog
 
                 'print button export excel already included Reset() function
                 Reset()
-                load_combobox_RT()
+                'load_combobox_RT()
+
+                '----------------Rate change portion--------------------'
+                fillOperatorRt()
+                fill_bill_type_RT()
+                fill_permission_RT()
+                fill_dish_Rt()
+                cmbOperator1.SelectedIndex = 0
+                CmbBillType.SelectedIndex = 0
+                cmbDishName.SelectedIndex = 0
+                'check the print button..if datagridview does no have value the print button disabled mode
+                print_btn_RT_chg_enb_dis_qua()
+        '  rate_chg_sel_ind_zer()
+
+        '--------------------------------------------------------
+
             Case 1 ' TabPage 2 quantity change
                 resetQua()
-                load_combobox_data_qua()
+                ' load_combobox_data_qua()
+
+                fillOperatorQt()
+                fill_bill_type_Qt()
+                ' fill_permission_Qt()
+                fill_permission_Qt()
+                fill_dish_Qt()
+                cmbOperatorQua.SelectedIndex = 0
+                CmbBillTypeQua.SelectedIndex = 0
+                cmbPermissionQua.SelectedIndex = 0
+                CmbDishNameQua.SelectedIndex = 0
+
                 'check gridview column function if it zero rows the print button and export excel will be disabled
                 print_btn_enb_dis_qua()
             Case 2 ' TabPage 3 item delete
                 Reset_dl()
-                load_combobox_dl()
+                ' load_combobox_dl()
                 'check gridview column function if it zero rows the print button and export excel will be disabled
+                fillOperatorDl()
+                fill_bill_type_Dl()
+                fill_permission_Dl()
+                fill_dish_Dl()
+                cmbOperatordl.SelectedIndex = 0
+                CmbBillTypedl.SelectedIndex = 0
+                cmbPermissiondl.SelectedIndex = 0
+                cmbDishNameDl.SelectedIndex = 0
                 print_dl_en_dis()
         End Select
     End Sub
@@ -407,7 +551,8 @@ Public Class frmRateQtyItemLog
     End Sub
 
     Private Sub cmbOperatordl_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbOperatordl.SelectedIndexChanged
-        cmb_op_selct_Index_change_del()
+        'cmb_op_selct_Index_change_del()
+        filter_item_del()
     End Sub
 
     Public Sub cmb_permi_selct_Index_change_del()
@@ -485,16 +630,18 @@ Public Class frmRateQtyItemLog
     End Sub
 
     Private Sub cmbPermissiondl_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPermissiondl.SelectedIndexChanged
-        cmb_permi_selct_Index_change_del()
+        'cmb_permi_selct_Index_change_del()
+        filter_item_del()
     End Sub
 
     Private Sub txtBillNumberdl_TextChanged(sender As Object, e As EventArgs) Handles txtBillNumberdl.TextChanged
-        If txtBillNumberdl.Text = "" Then
-            ALL_row_Itm_del()
+        'If txtBillNumberdl.Text = "" Then
+        '    ALL_row_Itm_del()
 
-        Else
-            searchbillno_del()
-        End If
+        'Else
+        '    searchbillno_del()
+        'End If
+        filter_item_del()
     End Sub
 
     Public Sub searchbillno_del()
@@ -648,7 +795,8 @@ Public Class frmRateQtyItemLog
     End Sub
 
     Private Sub CmbBillTypedl_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbBillTypedl.SelectedIndexChanged
-        cmb_bill_typ_selct_Index_change_del()
+        'cmb_bill_typ_selct_Index_change_del()
+        filter_item_del()
     End Sub
 
     Public Sub all_print_dl()
@@ -698,255 +846,256 @@ Public Class frmRateQtyItemLog
 
 
     Private Sub BtnPrintdl_Click(sender As Object, e As EventArgs) Handles BtnPrintdl.Click
-        Dim fromDate As Date = dtpDateFromdl.Value
-        Dim toDate As Date = dtpDateTodl.Value
-        If txtBillNumberdl.Text = "" Then
-            If cmbOperatordl.SelectedItem <> Nothing AndAlso cmbOperatordl.SelectedItem.ToString() = "All" Then
-                all_print_dl()
+        filter_item_del_print()
+        'Dim fromDate As Date = dtpDateFromdl.Value
+        'Dim toDate As Date = dtpDateTodl.Value
+        'If txtBillNumberdl.Text = "" Then
+        '    If cmbOperatordl.SelectedItem <> Nothing AndAlso cmbOperatordl.SelectedItem.ToString() = "All" Then
+        '        all_print_dl()
 
-            ElseIf cmbPermissiondl.SelectedItem <> Nothing AndAlso cmbPermissiondl.SelectedItem.ToString() = "All" Then
-                all_print_dl()
+        '    ElseIf cmbPermissiondl.SelectedItem <> Nothing AndAlso cmbPermissiondl.SelectedItem.ToString() = "All" Then
+        '        all_print_dl()
 
-            ElseIf CmbBillTypedl.SelectedItem <> Nothing AndAlso CmbBillTypedl.SelectedItem.ToString() = "All" Then
-                all_print_dl()
+        '    ElseIf CmbBillTypedl.SelectedItem <> Nothing AndAlso CmbBillTypedl.SelectedItem.ToString() = "All" Then
+        '        all_print_dl()
 
-            ElseIf cmbDishNameDl.SelectedItem <> Nothing AndAlso cmbDishNameDl.SelectedItem.ToString() = "All" Then
-                all_print_dl()
+        '    ElseIf cmbDishNameDl.SelectedItem <> Nothing AndAlso cmbDishNameDl.SelectedItem.ToString() = "All" Then
+        '        all_print_dl()
 
-            ElseIf cmbOperatordl.SelectedItem = Nothing AndAlso CmbBillTypedl.SelectedItem = Nothing AndAlso cmbPermissiondl.SelectedItem = Nothing AndAlso cmbDishNameDl.SelectedItem = Nothing Then
-                all_print_dl()
+        '    ElseIf cmbOperatordl.SelectedItem = Nothing AndAlso CmbBillTypedl.SelectedItem = Nothing AndAlso cmbPermissiondl.SelectedItem = Nothing AndAlso cmbDishNameDl.SelectedItem = Nothing Then
+        '        all_print_dl()
 
-            ElseIf cmbOperatordl.SelectedItem <> Nothing AndAlso cmbOperatordl.SelectedItem.ToString() <> "All" Then
-                Dim CN As New SqlConnection(connection)
-                CN.Open()
-                Dim MyCommand1 As New SqlCommand()
-                Dim myDA1 As New SqlDataAdapter()
-                Dim ds As New DataSet ' The DataSet you created.
+        '    ElseIf cmbOperatordl.SelectedItem <> Nothing AndAlso cmbOperatordl.SelectedItem.ToString() <> "All" Then
+        '        Dim CN As New SqlConnection(connection)
+        '        CN.Open()
+        '        Dim MyCommand1 As New SqlCommand()
+        '        Dim myDA1 As New SqlDataAdapter()
+        '        Dim ds As New DataSet ' The DataSet you created.
 
-                MyCommand1.Connection = CN
-                MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
-                                "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
-                                "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
-                MyCommand1.CommandType = CommandType.Text
-                myDA1.SelectCommand = MyCommand1
-                myDA1.Fill(ds, "Hotel")
-                ' Call the stored procedure
-                Dim operator1 As String = cmbOperatordl.SelectedItem.ToString()
-                Dim cmd2 As New SqlCommand("GetItemDeletedDataByOperatore", CN)
-                cmd2.CommandType = CommandType.StoredProcedure
-                cmd2.Parameters.AddWithValue("@FromDate", fromDate)
-                cmd2.Parameters.AddWithValue("@ToDate", toDate)
-                cmd2.Parameters.AddWithValue("@OperatorName", operator1)
-                Dim adapter2 As New SqlDataAdapter(cmd2)
-                Dim datatable2 As New DataTable
-                adapter2.Fill(ds, "Item_delete")
-                ' Merge the new DataTable into the existing DataSet
-                'ds.Tables.Add(datatable.Copy())
+        '        MyCommand1.Connection = CN
+        '        MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
+        '                        "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
+        '                        "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
+        '        MyCommand1.CommandType = CommandType.Text
+        '        myDA1.SelectCommand = MyCommand1
+        '        myDA1.Fill(ds, "Hotel")
+        '        ' Call the stored procedure
+        '        Dim operator1 As String = cmbOperatordl.SelectedItem.ToString()
+        '        Dim cmd2 As New SqlCommand("GetItemDeletedDataByOperatore", CN)
+        '        cmd2.CommandType = CommandType.StoredProcedure
+        '        cmd2.Parameters.AddWithValue("@FromDate", fromDate)
+        '        cmd2.Parameters.AddWithValue("@ToDate", toDate)
+        '        cmd2.Parameters.AddWithValue("@OperatorName", operator1)
+        '        Dim adapter2 As New SqlDataAdapter(cmd2)
+        '        Dim datatable2 As New DataTable
+        '        adapter2.Fill(ds, "Item_delete")
+        '        ' Merge the new DataTable into the existing DataSet
+        '        'ds.Tables.Add(datatable.Copy())
 
-                ' Load the Crystal Report
-                Dim rpt2 As New RptItemDelete
-                rpt2.Load(Application.StartupPath & "\Reports\RptItemDelete.rpt")
+        '        ' Load the Crystal Report
+        '        Dim rpt2 As New RptItemDelete
+        '        rpt2.Load(Application.StartupPath & "\Reports\RptItemDelete.rpt")
 
-                ' Set the DataSource of the Crystal Report to the DataTable
-                'rpt.SetDataSource(dataTable)
-                rpt2.SetDataSource(ds)
-                ' Show the report
-                frmReport.CrystalReportViewer1.ReportSource = rpt2
-                frmReport.ShowDialog()
+        '        ' Set the DataSource of the Crystal Report to the DataTable
+        '        'rpt.SetDataSource(dataTable)
+        '        rpt2.SetDataSource(ds)
+        '        ' Show the report
+        '        frmReport.CrystalReportViewer1.ReportSource = rpt2
+        '        frmReport.ShowDialog()
 
-                ' Clean up
-                rpt2.Close()
-                rpt2.Dispose()
-                CN.Close()
+        '        ' Clean up
+        '        rpt2.Close()
+        '        rpt2.Dispose()
+        '        CN.Close()
 
-            ElseIf CmbBillTypedl.SelectedItem <> Nothing AndAlso CmbBillTypedl.SelectedItem.ToString() <> "All" Then
-                Dim CN As New SqlConnection(connection)
-                CN.Open()
-                Dim MyCommand1 As New SqlCommand()
-                Dim myDA1 As New SqlDataAdapter()
-                Dim ds As New DataSet ' The DataSet you created.
+        '    ElseIf CmbBillTypedl.SelectedItem <> Nothing AndAlso CmbBillTypedl.SelectedItem.ToString() <> "All" Then
+        '        Dim CN As New SqlConnection(connection)
+        '        CN.Open()
+        '        Dim MyCommand1 As New SqlCommand()
+        '        Dim myDA1 As New SqlDataAdapter()
+        '        Dim ds As New DataSet ' The DataSet you created.
 
-                MyCommand1.Connection = CN
-                MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
-                                "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
-                                "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
-                MyCommand1.CommandType = CommandType.Text
-                myDA1.SelectCommand = MyCommand1
-                myDA1.Fill(ds, "Hotel")
+        '        MyCommand1.Connection = CN
+        '        MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
+        '                        "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
+        '                        "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
+        '        MyCommand1.CommandType = CommandType.Text
+        '        myDA1.SelectCommand = MyCommand1
+        '        myDA1.Fill(ds, "Hotel")
 
-                ' Call the stored procedure
-                Dim bill_type As String = CmbBillTypedl.SelectedItem.ToString()
-                If bill_type = "Dine In" Then
-                    bill_type = "DI"
-                End If
-                If bill_type = "Take Away" Then
-                    bill_type = "TA"
-                End If
-                If bill_type = "Home Delivery" Then
-                    bill_type = "HD"
-                End If
-                If bill_type = "Third Party" Then
-                    bill_type = "TP"
-                End If
-                If bill_type = "Express Bill" Then
-                    bill_type = "TAEB"
-                End If
-                Dim cmd2 As New SqlCommand("GetItemDeletedDataByBillType", CN)
-                cmd2.CommandType = CommandType.StoredProcedure
-                cmd2.Parameters.AddWithValue("@FromDate", fromDate)
-                cmd2.Parameters.AddWithValue("@ToDate", toDate)
-                cmd2.Parameters.AddWithValue("@BillType", bill_type)
-                Dim adapter2 As New SqlDataAdapter(cmd2)
-                Dim datatable2 As New DataTable
-                adapter2.Fill(ds, "Item_delete")
-                ' Merge the new DataTable into the existing DataSet
-                'ds.Tables.Add(datatable.Copy())
+        '        ' Call the stored procedure
+        '        Dim bill_type As String = CmbBillTypedl.SelectedItem.ToString()
+        '        If bill_type = "Dine In" Then
+        '            bill_type = "DI"
+        '        End If
+        '        If bill_type = "Take Away" Then
+        '            bill_type = "TA"
+        '        End If
+        '        If bill_type = "Home Delivery" Then
+        '            bill_type = "HD"
+        '        End If
+        '        If bill_type = "Third Party" Then
+        '            bill_type = "TP"
+        '        End If
+        '        If bill_type = "Express Bill" Then
+        '            bill_type = "TAEB"
+        '        End If
+        '        Dim cmd2 As New SqlCommand("GetItemDeletedDataByBillType", CN)
+        '        cmd2.CommandType = CommandType.StoredProcedure
+        '        cmd2.Parameters.AddWithValue("@FromDate", fromDate)
+        '        cmd2.Parameters.AddWithValue("@ToDate", toDate)
+        '        cmd2.Parameters.AddWithValue("@BillType", bill_type)
+        '        Dim adapter2 As New SqlDataAdapter(cmd2)
+        '        Dim datatable2 As New DataTable
+        '        adapter2.Fill(ds, "Item_delete")
+        '        ' Merge the new DataTable into the existing DataSet
+        '        'ds.Tables.Add(datatable.Copy())
 
-                ' Load the Crystal Report
-                Dim rpt2 As New RptItemDelete
-                rpt2.Load(Application.StartupPath & "\Reports\RptItemDelete.rpt")
+        '        ' Load the Crystal Report
+        '        Dim rpt2 As New RptItemDelete
+        '        rpt2.Load(Application.StartupPath & "\Reports\RptItemDelete.rpt")
 
-                ' Set the DataSource of the Crystal Report to the DataTable
-                'rpt.SetDataSource(dataTable)
-                rpt2.SetDataSource(ds)
-                ' Show the report
-                frmReport.CrystalReportViewer1.ReportSource = rpt2
-                frmReport.ShowDialog()
+        '        ' Set the DataSource of the Crystal Report to the DataTable
+        '        'rpt.SetDataSource(dataTable)
+        '        rpt2.SetDataSource(ds)
+        '        ' Show the report
+        '        frmReport.CrystalReportViewer1.ReportSource = rpt2
+        '        frmReport.ShowDialog()
 
-                ' Clean up
-                rpt2.Close()
-                rpt2.Dispose()
-                CN.Close()
+        '        ' Clean up
+        '        rpt2.Close()
+        '        rpt2.Dispose()
+        '        CN.Close()
 
-            ElseIf cmbPermissiondl.SelectedItem <> Nothing AndAlso cmbPermissiondl.SelectedItem <> "All" Then
-                Dim CN As New SqlConnection(connection)
-                CN.Open()
-                Dim MyCommand1 As New SqlCommand()
-                Dim myDA1 As New SqlDataAdapter()
-                Dim ds As New DataSet ' The DataSet you created.
+        '    ElseIf cmbPermissiondl.SelectedItem <> Nothing AndAlso cmbPermissiondl.SelectedItem <> "All" Then
+        '        Dim CN As New SqlConnection(connection)
+        '        CN.Open()
+        '        Dim MyCommand1 As New SqlCommand()
+        '        Dim myDA1 As New SqlDataAdapter()
+        '        Dim ds As New DataSet ' The DataSet you created.
 
-                MyCommand1.Connection = CN
-                MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
-                                "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
-                                "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
-                MyCommand1.CommandType = CommandType.Text
-                myDA1.SelectCommand = MyCommand1
-                myDA1.Fill(ds, "Hotel")
-                ' Call the stored procedure
-                Dim permission As String = cmbPermissiondl.SelectedItem.ToString()
-                Dim cmd2 As New SqlCommand("GeItemDeleteDataByPermission", CN)
-                cmd2.CommandType = CommandType.StoredProcedure
-                cmd2.Parameters.AddWithValue("@FromDate", fromDate)
-                cmd2.Parameters.AddWithValue("@ToDate", toDate)
-                cmd2.Parameters.AddWithValue("@PermissionGrant", permission)
-                Dim adapter2 As New SqlDataAdapter(cmd2)
-                Dim datatable2 As New DataTable
-                adapter2.Fill(ds, "Item_delete")
-                ' Merge the new DataTable into the existing DataSet
-                'ds.Tables.Add(datatable.Copy())
+        '        MyCommand1.Connection = CN
+        '        MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
+        '                        "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
+        '                        "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
+        '        MyCommand1.CommandType = CommandType.Text
+        '        myDA1.SelectCommand = MyCommand1
+        '        myDA1.Fill(ds, "Hotel")
+        '        ' Call the stored procedure
+        '        Dim permission As String = cmbPermissiondl.SelectedItem.ToString()
+        '        Dim cmd2 As New SqlCommand("GeItemDeleteDataByPermission", CN)
+        '        cmd2.CommandType = CommandType.StoredProcedure
+        '        cmd2.Parameters.AddWithValue("@FromDate", fromDate)
+        '        cmd2.Parameters.AddWithValue("@ToDate", toDate)
+        '        cmd2.Parameters.AddWithValue("@PermissionGrant", permission)
+        '        Dim adapter2 As New SqlDataAdapter(cmd2)
+        '        Dim datatable2 As New DataTable
+        '        adapter2.Fill(ds, "Item_delete")
+        '        ' Merge the new DataTable into the existing DataSet
+        '        'ds.Tables.Add(datatable.Copy())
 
-                ' Load the Crystal Report
-                Dim rpt2 As New RptItemDelete
-                rpt2.Load(Application.StartupPath & "\Reports\RptItemDelete.rpt")
+        '        ' Load the Crystal Report
+        '        Dim rpt2 As New RptItemDelete
+        '        rpt2.Load(Application.StartupPath & "\Reports\RptItemDelete.rpt")
 
-                ' Set the DataSource of the Crystal Report to the DataTable
-                'rpt.SetDataSource(dataTable)
-                rpt2.SetDataSource(ds)
-                ' Show the report
-                frmReport.CrystalReportViewer1.ReportSource = rpt2
-                frmReport.ShowDialog()
+        '        ' Set the DataSource of the Crystal Report to the DataTable
+        '        'rpt.SetDataSource(dataTable)
+        '        rpt2.SetDataSource(ds)
+        '        ' Show the report
+        '        frmReport.CrystalReportViewer1.ReportSource = rpt2
+        '        frmReport.ShowDialog()
 
-                ' Clean up
-                rpt2.Close()
-                rpt2.Dispose()
-                CN.Close()
+        '        ' Clean up
+        '        rpt2.Close()
+        '        rpt2.Dispose()
+        '        CN.Close()
 
-            ElseIf cmbDishNameDl.SelectedItem <> Nothing AndAlso cmbDishNameDl.SelectedItem <> "All" Then
-                Dim CN As New SqlConnection(connection)
-                CN.Open()
-                Dim MyCommand1 As New SqlCommand()
-                Dim myDA1 As New SqlDataAdapter()
-                Dim ds As New DataSet ' The DataSet you created.
+        '    ElseIf cmbDishNameDl.SelectedItem <> Nothing AndAlso cmbDishNameDl.SelectedItem <> "All" Then
+        '        Dim CN As New SqlConnection(connection)
+        '        CN.Open()
+        '        Dim MyCommand1 As New SqlCommand()
+        '        Dim myDA1 As New SqlDataAdapter()
+        '        Dim ds As New DataSet ' The DataSet you created.
 
-                MyCommand1.Connection = CN
-                MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
-                                "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
-                                "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
-                MyCommand1.CommandType = CommandType.Text
-                myDA1.SelectCommand = MyCommand1
-                myDA1.Fill(ds, "Hotel")
-                ' Call the stored procedure
-                Dim dishname As String = cmbDishNameDl.SelectedItem.ToString()
-                Dim cmd2 As New SqlCommand("GetItemDeletedByDish", CN)
-                cmd2.CommandType = CommandType.StoredProcedure
-                cmd2.Parameters.AddWithValue("@FromDate", fromDate)
-                cmd2.Parameters.AddWithValue("@ToDate", toDate)
-                cmd2.Parameters.AddWithValue("@Dishname", dishname)
-                Dim adapter2 As New SqlDataAdapter(cmd2)
-                Dim datatable2 As New DataTable
-                adapter2.Fill(ds, "Item_delete")
-                ' Merge the new DataTable into the existing DataSet
-                'ds.Tables.Add(datatable.Copy())
+        '        MyCommand1.Connection = CN
+        '        MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
+        '                        "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
+        '                        "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
+        '        MyCommand1.CommandType = CommandType.Text
+        '        myDA1.SelectCommand = MyCommand1
+        '        myDA1.Fill(ds, "Hotel")
+        '        ' Call the stored procedure
+        '        Dim dishname As String = cmbDishNameDl.SelectedItem.ToString()
+        '        Dim cmd2 As New SqlCommand("GetItemDeletedByDish", CN)
+        '        cmd2.CommandType = CommandType.StoredProcedure
+        '        cmd2.Parameters.AddWithValue("@FromDate", fromDate)
+        '        cmd2.Parameters.AddWithValue("@ToDate", toDate)
+        '        cmd2.Parameters.AddWithValue("@Dishname", dishname)
+        '        Dim adapter2 As New SqlDataAdapter(cmd2)
+        '        Dim datatable2 As New DataTable
+        '        adapter2.Fill(ds, "Item_delete")
+        '        ' Merge the new DataTable into the existing DataSet
+        '        'ds.Tables.Add(datatable.Copy())
 
-                ' Load the Crystal Report
-                Dim rpt2 As New RptItemDelete
-                rpt2.Load(Application.StartupPath & "\Reports\RptItemDelete.rpt")
+        '        ' Load the Crystal Report
+        '        Dim rpt2 As New RptItemDelete
+        '        rpt2.Load(Application.StartupPath & "\Reports\RptItemDelete.rpt")
 
-                ' Set the DataSource of the Crystal Report to the DataTable
-                'rpt.SetDataSource(dataTable)
-                rpt2.SetDataSource(ds)
-                ' Show the report
-                frmReport.CrystalReportViewer1.ReportSource = rpt2
-                frmReport.ShowDialog()
+        '        ' Set the DataSource of the Crystal Report to the DataTable
+        '        'rpt.SetDataSource(dataTable)
+        '        rpt2.SetDataSource(ds)
+        '        ' Show the report
+        '        frmReport.CrystalReportViewer1.ReportSource = rpt2
+        '        frmReport.ShowDialog()
 
-                ' Clean up
-                rpt2.Close()
-                rpt2.Dispose()
-                CN.Close()
+        '        ' Clean up
+        '        rpt2.Close()
+        '        rpt2.Dispose()
+        '        CN.Close()
 
-            End If
-        Else
-            Dim CN As New SqlConnection(connection)
-            CN.Open()
-            Dim MyCommand1 As New SqlCommand()
-            Dim myDA1 As New SqlDataAdapter()
-            Dim ds As New DataSet ' The DataSet you created.
+        '    End If
+        'Else
+        '    Dim CN As New SqlConnection(connection)
+        '    CN.Open()
+        '    Dim MyCommand1 As New SqlCommand()
+        '    Dim myDA1 As New SqlDataAdapter()
+        '    Dim ds As New DataSet ' The DataSet you created.
 
-            MyCommand1.Connection = CN
-            MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
-                                "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
-                                "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
-            MyCommand1.CommandType = CommandType.Text
-            myDA1.SelectCommand = MyCommand1
-            myDA1.Fill(ds, "Hotel")
-            ' Call the stored procedure
+        '    MyCommand1.Connection = CN
+        '    MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
+        '                        "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
+        '                        "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
+        '    MyCommand1.CommandType = CommandType.Text
+        '    myDA1.SelectCommand = MyCommand1
+        '    myDA1.Fill(ds, "Hotel")
+        '    ' Call the stored procedure
 
-            Dim cmd2 As New SqlCommand("GetItemDeletedByBillNo", CN)
-            cmd2.CommandType = CommandType.StoredProcedure
-            Dim searchquery As String = txtBillNumberdl.Text.Trim()
-            cmd2.Parameters.AddWithValue("@SearchQuery", searchquery)
-            Dim adapter2 As New SqlDataAdapter(cmd2)
-            Dim datatable2 As New DataTable
-            adapter2.Fill(ds, "Item_delete")
-            ' Merge the new DataTable into the existing DataSet
-            'ds.Tables.Add(datatable.Copy())
+        '    Dim cmd2 As New SqlCommand("GetItemDeletedByBillNo", CN)
+        '    cmd2.CommandType = CommandType.StoredProcedure
+        '    Dim searchquery As String = txtBillNumberdl.Text.Trim()
+        '    cmd2.Parameters.AddWithValue("@SearchQuery", searchquery)
+        '    Dim adapter2 As New SqlDataAdapter(cmd2)
+        '    Dim datatable2 As New DataTable
+        '    adapter2.Fill(ds, "Item_delete")
+        '    ' Merge the new DataTable into the existing DataSet
+        '    'ds.Tables.Add(datatable.Copy())
 
-            ' Load the Crystal Report
-            Dim rpt2 As New RptItemDelete
-            rpt2.Load(Application.StartupPath & "\Reports\RptItemDelete.rpt")
+        '    ' Load the Crystal Report
+        '    Dim rpt2 As New RptItemDelete
+        '    rpt2.Load(Application.StartupPath & "\Reports\RptItemDelete.rpt")
 
-            ' Set the DataSource of the Crystal Report to the DataTable
-            'rpt.SetDataSource(dataTable)
-            rpt2.SetDataSource(ds)
-            ' Show the report
-            frmReport.CrystalReportViewer1.ReportSource = rpt2
-            frmReport.ShowDialog()
+        '    ' Set the DataSource of the Crystal Report to the DataTable
+        '    'rpt.SetDataSource(dataTable)
+        '    rpt2.SetDataSource(ds)
+        '    ' Show the report
+        '    frmReport.CrystalReportViewer1.ReportSource = rpt2
+        '    frmReport.ShowDialog()
 
-            ' Clean up
-            rpt2.Close()
-            rpt2.Dispose()
-            CN.Close()
-        End If
+        '    ' Clean up
+        '    rpt2.Close()
+        '    rpt2.Dispose()
+        '    CN.Close()
+        'End If
     End Sub
 
     Public Sub Reset_dl()
@@ -976,23 +1125,24 @@ Public Class frmRateQtyItemLog
     End Sub
 
     Private Sub dtpDateTodl_ValueChanged(sender As Object, e As EventArgs) Handles dtpDateTodl.ValueChanged
-        txtBillNumberdl.Text = ""
-        If cmbOperatordl.SelectedItem = "All" OrElse CmbBillTypedl.SelectedItem = "All" OrElse cmbPermissiondl.SelectedItem = "All" OrElse cmbDishNameDl.SelectedItem = "All" Then
-            ALL_row_Itm_del()
-        ElseIf cmbOperatordl.SelectedItem <> "All" AndAlso cmbOperatordl.SelectedItem <> Nothing AndAlso cmd_operator_select = True Then
-            cmb_op_selct_Index_change_del()
+        'txtBillNumberdl.Text = ""
+        'If cmbOperatordl.SelectedItem = "All" OrElse CmbBillTypedl.SelectedItem = "All" OrElse cmbPermissiondl.SelectedItem = "All" OrElse cmbDishNameDl.SelectedItem = "All" Then
+        '    ALL_row_Itm_del()
+        'ElseIf cmbOperatordl.SelectedItem <> "All" AndAlso cmbOperatordl.SelectedItem <> Nothing AndAlso cmd_operator_select = True Then
+        '    cmb_op_selct_Index_change_del()
 
-        ElseIf CmbBillTypedl.SelectedItem <> "All" AndAlso CmbBillTypedl.SelectedItem <> Nothing AndAlso cmb_bill_select = True Then
-            cmb_bill_typ_selct_Index_change_del()
+        'ElseIf CmbBillTypedl.SelectedItem <> "All" AndAlso CmbBillTypedl.SelectedItem <> Nothing AndAlso cmb_bill_select = True Then
+        '    cmb_bill_typ_selct_Index_change_del()
 
-        ElseIf cmbPermissiondl.SelectedItem <> "All" AndAlso cmbPermissiondl.SelectedItem <> Nothing AndAlso cmb_permission_select = True Then
-            cmb_permi_selct_Index_change_del()
+        'ElseIf cmbPermissiondl.SelectedItem <> "All" AndAlso cmbPermissiondl.SelectedItem <> Nothing AndAlso cmb_permission_select = True Then
+        '    cmb_permi_selct_Index_change_del()
 
-        ElseIf cmbDishNameDl.SelectedItem <> "All" AndAlso cmbDishNameDl.SelectedItem <> Nothing AndAlso cmb_Dish_select = True Then
-            cmb_dish_selct_Index_change_del()
-        Else
-            ALL_row_Itm_del()
-        End If
+        'ElseIf cmbDishNameDl.SelectedItem <> "All" AndAlso cmbDishNameDl.SelectedItem <> Nothing AndAlso cmb_Dish_select = True Then
+        '    cmb_dish_selct_Index_change_del()
+        'Else
+        '    ALL_row_Itm_del()
+        'End If
+        filter_item_del()
     End Sub
 
     'Quantity change log start
@@ -1363,7 +1513,7 @@ Public Class frmRateQtyItemLog
 
         cmbPermission.SelectedItem = Nothing
         CmbBillType.SelectedItem = Nothing
-        cmbOperator.SelectedItem = Nothing
+        cmbOperator1.SelectedItem = Nothing
         cmbDishName.SelectedItem = selectedDish
         print_btn_RT_chg_enb_dis_qua()
     End Sub
@@ -1588,7 +1738,7 @@ Public Class frmRateQtyItemLog
 
         'Dishname
 
-        cmbDishName.Items.Insert(0, "All")
+        CmbDishNameQua.Items.Insert(0, "All")
         Dim query2 As String = "SELECT DISTINCT Dis.DishId ,  Dis.DishName 
                            FROM QtyChangeLog AS qcl
                            INNER JOIN Dish AS Dis ON qcl.DishId = Dis.DishID"
@@ -1621,65 +1771,178 @@ Public Class frmRateQtyItemLog
             btnExportExcelqua.BackColor = SystemColors.Control
         End If
     End Sub
+
+    Public Sub filter_qty_change()
+        Try
+            Dim bill_type As String = ""
+            If CmbBillTypeQua.SelectedItem IsNot Nothing Then
+                bill_type = CmbBillTypeQua.SelectedItem.ToString()
+                Select Case bill_type
+                    Case "Dine In"
+                        bill_type = "DI"
+                    Case "Take Away"
+                        bill_type = "TA"
+                    Case "Home Delivery"
+                        bill_type = "HD"
+                    Case "Third Party"
+                        bill_type = "TP"
+                    Case "Express Bill"
+                        bill_type = "TAEB"
+                    Case Else
+                        bill_type = "All"
+                End Select
+            End If
+
+            con = New SqlConnection(cs)
+            con.Open()
+
+            Dim SQL As String = "exec Proc_QtyChange @d1,@d2,@Operator,@BillNo,@BillType,@Permission ,@Dish"
+            cmd = New SqlCommand(SQL, con)
+            cmd.Parameters.Add("@d1", SqlDbType.DateTime).Value = dtpDateFromQua.Value.Date.AddHours(_startTime)
+            cmd.Parameters.Add("@d2", SqlDbType.DateTime).Value = dtpDateToQua.Value.Date.AddDays(1).AddHours(_endTime)
+            cmd.Parameters.Add("@Operator", SqlDbType.Int).Value = CInt(cmbOperatorQua.SelectedValue)
+            cmd.Parameters.Add("@BillNo", SqlDbType.NVarChar, 50).Value = txtBillNumberQua.Text
+            cmd.Parameters.Add("@BillType", SqlDbType.NVarChar, 50).Value = CStr(bill_type)
+            cmd.Parameters.Add("@Permission", SqlDbType.Int).Value = CInt(cmbPermissionQua.SelectedValue)
+            cmd.Parameters.Add("@Dish", SqlDbType.Int).Value = CInt(CmbDishNameQua.SelectedValue)
+
+            rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection)
+            DatagridViewQty.Rows.Clear()
+
+            Dim changed_qty_count As Decimal = 0
+            Dim qty_diff_count As Decimal = 0
+            While (rdr.Read())
+                'org qty variable
+                Dim org_qty As Double = CDec(rdr(4)) ' Convert to Double or appropriate numerical type
+                Dim chng_qty As Double = CDec(rdr(5)) ' Convert to Double or appropriate numerical type
+
+                Dim result As Double = org_qty - chng_qty
+                qty_diff_count = qty_diff_count + Math.Abs(result)
+                Dim status As String = ""
+                If chng_qty < org_qty Then
+                    status = "Less"
+                ElseIf chng_qty > org_qty Then
+                    status = "High"
+                ElseIf chng_qty = org_qty Then
+                    status = "Equal"
+                End If
+                changed_qty_count = changed_qty_count + chng_qty
+                DatagridViewQty.Rows.Add(rdr(0), rdr(1), rdr(2), rdr(3), rdr(4), rdr(5), Math.Abs(result), status, rdr(6), rdr(7), rdr(8), rdr(9), rdr(10), rdr(11))
+            End While
+
+            'txtRateDiffSum.Text = rate_diff_sum
+            txtChangedQtyCount.Text = changed_qty_count
+        Catch ex As Exception
+            MessageBox.Show("An error occurred: " & ex.Message)
+        Finally
+            rdr.Close()
+            con.Close()
+        End Try
+        print_btn_enb_dis_qua()
+    End Sub
+
+
+    Public Sub filter_item_del()
+        con = New SqlConnection(cs)
+        con.Open()
+        Dim SQL As String = ""
+        SQL = "exec Proc_itemDeleted @d1,@d2,@Operator,@BillNo,@BillType,@Permission ,@Dish"
+        cmd = New SqlCommand(SQL, con)
+        cmd.Parameters.Add("@d1", SqlDbType.DateTime, 30, "DateFrom").Value = dtpDateFromdl.Value.Date.AddHours(_startTime)
+        cmd.Parameters.Add("@d2", SqlDbType.DateTime, 30, "DateTo").Value = dtpDateTodl.Value.Date.AddDays(1).AddHours(_endTime)
+        cmd.Parameters.Add("@Operator", SqlDbType.Int).Value = CInt(cmbOperatordl.SelectedValue)
+        cmd.Parameters.Add("@BillNo", SqlDbType.NVarChar, 50, "BillNo").Value = txtBillNumberdl.Text
+        cmd.Parameters.Add("@BillType", SqlDbType.NVarChar, 50, "BillType").Value = CmbBillTypedl.Text
+        cmd.Parameters.Add("@Permission", SqlDbType.Int).Value = CInt(cmbPermissiondl.SelectedValue)
+        cmd.Parameters.Add("@Dish", SqlDbType.Int).Value = CInt(cmbDishNameDl.SelectedValue)
+        rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection)
+        DatagridViewItemDel.Rows.Clear()
+
+        Dim amount As Decimal = 0
+        Dim grand_tot As Decimal = 0
+        txtGrandTotaldl.Text = grand_tot
+        While (rdr.Read())
+            amount = CDec(rdr("Quantity")) * CDec(rdr("Rate"))
+            grand_tot = grand_tot + amount
+            DatagridViewItemDel.Rows.Add(rdr("ID"), rdr("BillNo"), rdr("DishName"), rdr("Kotdate"), rdr("TableNo"), rdr("Quantity"), rdr("Rate"), rdr("BillType"),
+                            rdr("OperatorName"), rdr("PermissionGrantedName"), rdr("Remarks"), rdr("companyId"), rdr("Branchid"))
+        End While
+        rdr.Close()
+        con.Close()
+        txtGrandTotaldl.Text = grand_tot
+        print_dl_en_dis()
+
+    End Sub
+
+
     Private Sub dtpDateFromQua_ValueChanged(sender As Object, e As EventArgs) Handles dtpDateFromQua.ValueChanged
-        txtBillNumberQua.Text = ""
-        If cmbOperatorQua.SelectedItem = "All" OrElse CmbBillTypeQua.SelectedItem = "All" OrElse cmbPermissionQua.SelectedItem = "All" OrElse CmbDishNameQua.SelectedItem = "All" Then
-            ALL_ROW_qua()
-        ElseIf cmbOperatorQua.SelectedItem <> "All" AndAlso cmbOperatorQua.SelectedItem <> Nothing AndAlso cmd_operator_select = True Then
-            cmb_op_qua_select_ind_change()
-        ElseIf CmbBillTypeQua.SelectedItem <> "All" AndAlso CmbBillTypeQua.SelectedItem <> Nothing AndAlso cmb_bill_select = True Then
+        'txtBillNumberQua.Text = ""
+        'If cmbOperatorQua.SelectedItem = "All" OrElse CmbBillTypeQua.SelectedItem = "All" OrElse cmbPermissionQua.SelectedItem = "All" OrElse CmbDishNameQua.SelectedItem = "All" Then
+        '    ALL_ROW_qua()
+        'ElseIf cmbOperatorQua.SelectedItem <> "All" AndAlso cmbOperatorQua.SelectedItem <> Nothing AndAlso cmd_operator_select = True Then
+        '    cmb_op_qua_select_ind_change()
+        'ElseIf CmbBillTypeQua.SelectedItem <> "All" AndAlso CmbBillTypeQua.SelectedItem <> Nothing AndAlso cmb_bill_select = True Then
 
-            cmb_bill_qua_select_ind_change()
-        ElseIf cmbPermissionQua.SelectedItem <> "All" AndAlso cmbPermissionQua.SelectedItem <> Nothing AndAlso cmb_permission_select = True Then
+        '    cmb_bill_qua_select_ind_change()
+        'ElseIf cmbPermissionQua.SelectedItem <> "All" AndAlso cmbPermissionQua.SelectedItem <> Nothing AndAlso cmb_permission_select = True Then
 
-            cmb_permission_qua_select_ind_change()
+        '    cmb_permission_qua_select_ind_change()
 
-        ElseIf CmbDishNameQua.SelectedItem <> "All" AndAlso CmbDishNameQua.SelectedItem <> Nothing AndAlso cmb_Dish_select = True Then
-            cmb_dish_qua_select_ind_change()
-        Else
-            ALL_ROW_qua()
-        End If
+        'ElseIf CmbDishNameQua.SelectedItem <> "All" AndAlso CmbDishNameQua.SelectedItem <> Nothing AndAlso cmb_Dish_select = True Then
+        '    cmb_dish_qua_select_ind_change()
+        'Else
+        '    ALL_ROW_qua()
+        'End If
+
+        filter_qty_change()
+
     End Sub
 
     Private Sub dtpDateToQua_ValueChanged(sender As Object, e As EventArgs) Handles dtpDateToQua.ValueChanged
-        txtBillNumberQua.Text = ""
-        If cmbOperatorQua.SelectedItem = "All" OrElse CmbBillTypeQua.SelectedItem = "All" OrElse cmbPermissionQua.SelectedItem = "All" OrElse cmbDishName.SelectedItem = "All" Then
-            ALL_ROW_qua()
-        ElseIf cmbOperatorQua.SelectedItem <> "All" AndAlso cmbOperatorQua.SelectedItem <> Nothing AndAlso cmd_operator_select = True Then
-            cmb_op_qua_select_ind_change()
-        ElseIf CmbBillTypeQua.SelectedItem <> "All" AndAlso CmbBillTypeQua.SelectedItem <> Nothing AndAlso cmb_bill_select = True Then
+        'txtBillNumberQua.Text = ""
+        'If cmbOperatorQua.SelectedItem = "All" OrElse CmbBillTypeQua.SelectedItem = "All" OrElse cmbPermissionQua.SelectedItem = "All" OrElse cmbDishName.SelectedItem = "All" Then
+        '    ALL_ROW_qua()
+        'ElseIf cmbOperatorQua.SelectedItem <> "All" AndAlso cmbOperatorQua.SelectedItem <> Nothing AndAlso cmd_operator_select = True Then
+        '    cmb_op_qua_select_ind_change()
+        'ElseIf CmbBillTypeQua.SelectedItem <> "All" AndAlso CmbBillTypeQua.SelectedItem <> Nothing AndAlso cmb_bill_select = True Then
 
-            cmb_bill_qua_select_ind_change()
-        ElseIf cmbPermissionQua.SelectedItem <> "All" AndAlso cmbPermissionQua.SelectedItem <> Nothing AndAlso cmb_permission_select = True Then
+        '    cmb_bill_qua_select_ind_change()
+        'ElseIf cmbPermissionQua.SelectedItem <> "All" AndAlso cmbPermissionQua.SelectedItem <> Nothing AndAlso cmb_permission_select = True Then
 
-            cmb_permission_qua_select_ind_change()
+        '    cmb_permission_qua_select_ind_change()
 
-        ElseIf CmbDishNameQua.SelectedItem <> "All" AndAlso CmbDishNameQua.SelectedItem <> Nothing AndAlso cmb_Dish_select = True Then
-            cmb_dish_qua_select_ind_change()
-        Else
-            ALL_ROW_qua()
-        End If
+        'ElseIf CmbDishNameQua.SelectedItem <> "All" AndAlso CmbDishNameQua.SelectedItem <> Nothing AndAlso cmb_Dish_select = True Then
+        '    cmb_dish_qua_select_ind_change()
+        'Else
+        '    ALL_ROW_qua()
+        'End If
+        filter_qty_change()
+
     End Sub
 
     Private Sub txtBillNumberQua_TextChanged(sender As Object, e As EventArgs) Handles txtBillNumberQua.TextChanged
-        If txtBillNumberQua.Text = "" Then
-            ALL_ROW_qua()
+        'If txtBillNumberQua.Text = "" Then
+        '    ALL_ROW_qua()
 
-        Else
-            searchbillnoQua()
-        End If
+        'Else
+        '    searchbillnoQua()
+        'End If
+        filter_qty_change()
     End Sub
 
     Private Sub cmbOperatorQua_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbOperatorQua.SelectedIndexChanged
-        cmb_op_qua_select_ind_change()
+        'cmb_op_qua_select_ind_change()
+        filter_qty_change()
     End Sub
 
     Private Sub CmbBillTypeQua_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbBillTypeQua.SelectedIndexChanged
-        cmb_bill_qua_select_ind_change()
+        'cmb_bill_qua_select_ind_change()
+        filter_qty_change()
     End Sub
 
     Private Sub cmbPermissionQua_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPermissionQua.SelectedIndexChanged
-        cmb_permission_qua_select_ind_change()
+        '  cmb_permission_qua_select_ind_change()
+        filter_qty_change()
     End Sub
 
     Private Sub BtnPrintqua_Click(sender As Object, e As EventArgs)
@@ -1697,10 +1960,10 @@ Public Class frmRateQtyItemLog
         cmb_bill_select = False
         cmb_permission_select = False
         cmb_Dish_select = False
-        cmbPermissionQua.SelectedItem = Nothing
-        cmbOperatorQua.SelectedItem = Nothing
-        CmbBillTypeQua.SelectedItem = Nothing
-        CmbDishNameQua.SelectedItem = Nothing
+        'cmbPermissionQua.SelectedItem = Nothing
+        'cmbOperatorQua.SelectedItem = Nothing
+        'CmbBillTypeQua.SelectedItem = Nothing
+        'CmbDishNameQua.SelectedItem = Nothing
         txtChangedQtyCount.Text = ""
     End Sub
 
@@ -1848,7 +2111,7 @@ Public Class frmRateQtyItemLog
         End If
 
         cmbPermission.SelectedItem = Nothing
-        cmbOperator.SelectedItem = Nothing
+        cmbOperator1.SelectedItem = Nothing
         cmbDishName.SelectedItem = Nothing
         CmbBillType.SelectedItem = select_bill_type
         print_btn_RT_chg_enb_dis_qua()
@@ -1935,7 +2198,7 @@ Public Class frmRateQtyItemLog
     End Sub
 
     Public Sub select_oper_indx_RT_Ch()
-        If cmbOperator.SelectedItem <> Nothing OrElse cmbOperator.SelectedItem <> "All" Then
+        If cmbOperator1.SelectedItem <> Nothing OrElse cmbOperator1.SelectedItem <> "All" Then
             cmd_operator_select = True
         End If
         txtBillNumber.Text = ""
@@ -1946,7 +2209,7 @@ Public Class frmRateQtyItemLog
         Dim selectedOperator As String
 
         Try
-            selectedOperator = cmbOperator.SelectedItem.ToString()
+            selectedOperator = cmbOperator1.SelectedItem.ToString()
         Catch ex As Exception
             selectedOperator = Nothing
         End Try
@@ -2017,7 +2280,7 @@ Public Class frmRateQtyItemLog
         cmbPermission.SelectedItem = Nothing
         CmbBillType.SelectedItem = Nothing
         cmbDishName.SelectedItem = Nothing
-        cmbOperator.SelectedItem = selectedOperator
+        cmbOperator1.SelectedItem = selectedOperator
         print_btn_RT_chg_enb_dis_qua()
     End Sub
 
@@ -2104,7 +2367,7 @@ Public Class frmRateQtyItemLog
 
         cmbPermission.SelectedItem = Nothing
         CmbBillType.SelectedItem = Nothing
-        cmbOperator.SelectedItem = Nothing
+        cmbOperator1.SelectedItem = Nothing
         cmbDishName.SelectedItem = selectedDish
         print_btn_RT_chg_enb_dis_qua()
     End Sub
@@ -2186,7 +2449,7 @@ Public Class frmRateQtyItemLog
             End Try
         End If
 
-        cmbOperator.SelectedItem = Nothing
+        cmbOperator1.SelectedItem = Nothing
         CmbBillType.SelectedItem = Nothing
         cmbDishName.SelectedItem = Nothing
         cmbPermission.SelectedItem = selectedPermission
@@ -2201,7 +2464,7 @@ Public Class frmRateQtyItemLog
         cmb_bill_select = False
         cmb_permission_select = False
         cmbPermission.SelectedItem = Nothing
-        cmbOperator.SelectedItem = Nothing
+        cmbOperator1.SelectedItem = Nothing
         CmbBillType.SelectedItem = Nothing
 
         'Dim fromDate As Date = dtpDateFrom.Value
@@ -2320,58 +2583,249 @@ Public Class frmRateQtyItemLog
         cmd_operator_select = False
         cmb_bill_select = False
         cmb_permission_select = False
-        cmbPermission.SelectedItem = Nothing
-        cmbOperator.SelectedItem = Nothing
-        CmbBillType.SelectedItem = Nothing
-        cmbDishName.SelectedItem = Nothing
+        'cmbPermission.SelectedItem = Nothing
+        'cmbOperator1.SelectedItem = Nothing
+        'CmbBillType.SelectedItem = Nothing
+        'cmbDishName.SelectedItem = Nothing
         txtRateDiffSum.Text = ""
         txtChangeRateSum.Text = ""
         print_btn_RT_chg_enb_dis_qua()
     End Sub
 
     'load combobox rate change
-    Public Sub load_combobox_RT()
-        'operator load
-        cmbOperator.Items.Insert(0, "All")
-        'cmbOperator.SelectedIndex = 0
-        Dim query As String = "SELECT DISTINCT EmployeeName FROM EmployeeRegistration"
-        Using conn As New SqlConnection(connection)
-            Using cmd As New SqlCommand(query, conn)
-                conn.Open()
-                Dim reader As SqlDataReader = cmd.ExecuteReader()
-                While reader.Read()
-                    cmbOperator.Items.Add(reader("EmployeeName").ToString())
-                End While
-            End Using
-        End Using
 
-        'bill type load
+
+    Public Sub fillOperatorRt()
+        Try
+            con = New SqlConnection(connection)
+            con.Open()
+            adpt = New SqlDataAdapter()
+
+            Dim query8 As String = "
+            SELECT DISTINCT er.empid, er.employeename AS operatorname
+            FROM ratechangelog AS rcl
+            INNER JOIN employeeregistration AS er ON rcl.operatorid = er.empid
+            UNION
+            SELECT 0 AS empid, 'All' AS operatorname
+        "
+
+            adpt.SelectCommand = New SqlCommand(query8, con)
+
+            ds = New DataSet("ds")
+            adpt.Fill(ds)
+            Dim dtable = ds.Tables(0)
+            cmbOperator1.DisplayMember = "operatorname"
+            cmbOperator1.ValueMember = "EmpId"
+            cmbOperator1.DataSource = dtable
+            cmbOperator1.Refresh()
+        Catch ex As Exception
+            ' Handle the exception, e.g., show an error message
+            MessageBox.Show("An error occurred: " & ex.Message)
+        Finally
+            If con.State = ConnectionState.Open Then
+                con.Close()
+            End If
+        End Try
+    End Sub
+
+    Public Sub fill_bill_type_RT()
+        'con = New SqlConnection(connection)
+        'con.Open()
+        'adpt = New SqlDataAdapter()
+
+        'Dim query8 As String = "
+        ' select Distinct BillType 
+        ' from ratechangelog 
+        ' union
+        ' select 'All' as billtype"
+
+
+        'adpt.SelectCommand = New SqlCommand(query8, con)
+
+        'ds = New DataSet("ds")
+        'adpt.Fill(ds)
+        'Dim dtable = ds.Tables(0)
+
+        'cmbOperator1.DataSource = dtable
+
+        'con.Close()
+
         CmbBillType.Items.Add("Dine In")
         CmbBillType.Items.Add("Take Away")
         CmbBillType.Items.Add("Home Delivery")
         CmbBillType.Items.Add("Third Party")
         CmbBillType.Items.Add("Express Bill")
         CmbBillType.Items.Insert(0, "All")
+        CmbBillType.SelectedIndex = 0
 
 
+
+    End Sub
+
+    Public Sub fill_permission_RT()
+        con = New SqlConnection(connection)
+        con.Open()
+        adpt = New SqlDataAdapter()
+
+        Dim query1 As String = "
+    SELECT DISTINCT ER.EmpId, ER.EmployeeName AS PermissionGrantedName
+    FROM RateChangeLog AS RCL
+    INNER JOIN EmployeeRegistration AS ER ON RCL.PermissionGrantedId = ER.EmpId
+    UNION
+    SELECT 0 AS EmpId, 'All' AS PermissionGrantedName
+"
+
+        adpt.SelectCommand = New SqlCommand(query1, con)
+        ds1 = New DataSet("ds")
+        adpt.Fill(ds1)
+        Dim dtable1 = ds1.Tables(0)
+        cmbpermission1.DisplayMember = "PermissionGrantedName"
+        cmbpermission1.ValueMember = "EmpId"
+        cmbpermission1.DataSource = dtable1
+
+        con.Close()
+    End Sub
+
+    Public Sub fill_dish_Rt()
+        con = New SqlConnection(connection)
+        con.Open()
+        adpt = New SqlDataAdapter()
+
+
+        Dim query2 As String = "SELECT DISTINCT Dis.DishID ,  Dis.DishName 
+                           FROM RateChangeLog AS rcl
+                           INNER JOIN Dish AS Dis ON rcl.DishId = Dis.DishID
+                                UNION
+                            SELECT 0 AS DishID, 'All' AS DishName
+            
+                            "
+
+        adpt.SelectCommand = New SqlCommand(query2, con)
+        ds1 = New DataSet("ds")
+        adpt.Fill(ds1)
+        Dim dtable1 = ds1.Tables(0)
+        cmbDishName.DisplayMember = "DishName"
+        cmbDishName.ValueMember = "DishID"
+        cmbDishName.DataSource = dtable1
+        con.Close()
+    End Sub
+
+    '--------------complete load combobox rate change---------------------------
+
+    'load combobox quantity change------------------------------------------
+    Public Sub fillOperatorQt()
+        con = New SqlConnection(connection)
+        con.Open()
+        adpt = New SqlDataAdapter()
+
+        Dim query8 As String = "
+         select distinct er.empid, er.employeename as operatorname
+         from QtyChangeLog as qcl
+         inner join employeeregistration as er on qcl.operatorid = er.empid
+         union
+         select 0 as empid, 'All' as operatorname"
+
+
+        adpt.SelectCommand = New SqlCommand(query8, con)
+
+        ds = New DataSet("ds")
+        adpt.Fill(ds)
+        Dim dtable = ds.Tables(0)
+        cmbOperatorQua.DisplayMember = "operatorname"
+        cmbOperatorQua.ValueMember = "EmpId"
+
+        cmbOperatorQua.DataSource = dtable
+
+        con.Close()
+    End Sub
+
+    Public Sub fill_bill_type_Qt()
+        'con = New SqlConnection(connection)
+        'con.Open()
+        'adpt = New SqlDataAdapter()
+
+        'Dim query8 As String = "
+        ' select Distinct BillType 
+        ' from ratechangelog 
+        ' union
+        ' select 'All' as billtype"
+
+
+        'adpt.SelectCommand = New SqlCommand(query8, con)
+
+        'ds = New DataSet("ds")
+        'adpt.Fill(ds)
+        'Dim dtable = ds.Tables(0)
+
+        'cmbOperator1.DataSource = dtable
+
+        'con.Close()
+        CmbBillTypeQua.Items.Add("Dine In")
+        CmbBillTypeQua.Items.Add("Take Away")
+        CmbBillTypeQua.Items.Add("Home Delivery")
+        CmbBillTypeQua.Items.Add("Third Party")
+        CmbBillTypeQua.Items.Add("Express Bill")
+        CmbBillTypeQua.Items.Insert(0, "All")
+
+    End Sub
+
+    Public Sub fill_permission_Qt()
+        con = New SqlConnection(connection)
+        con.Open()
+        adpt = New SqlDataAdapter()
+
+        Dim query1 As String = "
+    SELECT DISTINCT ER.EmpId, ER.EmployeeName AS PermissionGrantedName
+    FROM QtyChangeLog AS qcl
+    INNER JOIN EmployeeRegistration AS ER ON qcl.PermissionGrantedId = ER.EmpId
+    UNION
+    SELECT 0 AS EmpId, 'All' AS PermissionGrantedName
+"
+
+        adpt.SelectCommand = New SqlCommand(query1, con)
+        ds1 = New DataSet("ds")
+        adpt.Fill(ds1)
+        Dim dtable1 = ds1.Tables(0)
+        cmbPermissionQua.DisplayMember = "PermissionGrantedName"
+        cmbPermissionQua.ValueMember = "EmpId"
+        cmbPermissionQua.DataSource = dtable1
+
+        con.Close()
+    End Sub
+
+    Public Sub fill_dish_Qt()
+        con = New SqlConnection(connection)
+        con.Open()
+        adpt = New SqlDataAdapter()
+
+
+        Dim query2 As String = "SELECT DISTINCT Dis.DishId ,  Dis.DishName 
+                           FROM QtyChangeLog AS qcl
+                           INNER JOIN Dish AS Dis ON qcl.DishId = Dis.DishID
+                                UNION
+                            SELECT 0 AS DishId, 'All' AS DishName
+            
+                            "
+
+        adpt.SelectCommand = New SqlCommand(query2, con)
+        ds1 = New DataSet("ds")
+        adpt.Fill(ds1)
+        Dim dtable1 = ds1.Tables(0)
+        CmbDishNameQua.DisplayMember = "DishName"
+        CmbDishNameQua.ValueMember = "DishId"
+        CmbDishNameQua.DataSource = dtable1
+        con.Close()
+    End Sub
+
+    Public Sub load_combobox_RT()
+        'operator load
+        fillOperatorRt()
+        'bill type load
+        fill_bill_type_RT()
         'permission
-        cmbPermission.Items.Insert(0, "All")
-        Dim query1 As String = "SELECT DISTINCT  ER.EmployeeName AS PermissionGrantedName
-                           FROM RateChangeLog AS RCL
-                           INNER JOIN EmployeeRegistration AS ER ON RCL.PermissionGrantedId = ER.EmpId"
 
-        Using conn As New SqlConnection(connection)
-            Using cmd As New SqlCommand(query1, conn)
-                conn.Open()
-                Dim reader As SqlDataReader = cmd.ExecuteReader()
-                While reader.Read()
-                    cmbPermission.Items.Add(reader("PermissionGrantedName").ToString())
-                End While
-            End Using
-        End Using
-
+        ' fill_permission_RT()
         'Dishname
-
         cmbDishName.Items.Insert(0, "All")
         Dim query2 As String = "SELECT DISTINCT Dis.DishId ,  Dis.DishName 
                            FROM RateChangeLog AS RCL
@@ -2386,172 +2840,31 @@ Public Class frmRateQtyItemLog
                     cmbDishName.Items.Add(dishName)
                 End While
             End Using
-
         End Using
     End Sub
     Private Sub txtBillNumber_TextChanged(sender As Object, e As EventArgs) Handles txtBillNumber.TextChanged
-        If txtBillNumber.Text = "" Then
-            data_all()
-
-        Else
-            searchbillno()
-        End If
+        filter_rate_change()
     End Sub
 
-    Private Sub cmbOperator_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbOperator.SelectedIndexChanged
+    Private Sub cmbOperator_SelectedIndexChanged(sender As Object, e As EventArgs)
         select_oper_indx_RT_Ch()
     End Sub
 
     Private Sub CmbBillType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbBillType.SelectedIndexChanged
-        select_bill_ty_indx_RT_Ch()
+        'select_bill_ty_indx_RT_Ch()
+        filter_rate_change()
     End Sub
 
     Private Sub cmbPermission_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPermission.SelectedIndexChanged
         select_permi_indx_RT_Ch()
     End Sub
 
-    Private Sub dtpDateFrom_ValueChanged_1(sender As Object, e As EventArgs) Handles dtpDateFrom.ValueChanged
-        'filter_data()
-        'SearchRadio.Checked = False
-        'SearchRadio.PerformClick()
-        txtBillNumber.Text = ""
-        'cmbOperator.SelectedItem = Nothing
-        'CmbBillType.SelectedItem = Nothing
-        'cmbPermission.SelectedItem = Nothing
-        If cmbOperator.SelectedItem = "All" OrElse CmbBillType.SelectedItem = "All" OrElse cmbPermission.SelectedItem = "All" OrElse cmbDishName.SelectedItem = "All" Then
-            data_all()
-        ElseIf cmbOperator.SelectedItem <> "All" AndAlso cmbOperator.SelectedItem <> Nothing AndAlso cmd_operator_select = True Then
+    Public Sub filter_rate_change()
+        Try
 
-            select_oper_indx_RT_Ch()
-
-        ElseIf CmbBillType.SelectedItem <> "All" AndAlso CmbBillType.SelectedItem <> Nothing AndAlso cmb_bill_select = True Then
-
-            select_bill_ty_indx_RT_Ch()
-
-        ElseIf cmbPermission.SelectedItem <> "All" AndAlso cmbPermission.SelectedItem <> Nothing AndAlso cmb_permission_select = True Then
-
-            select_permi_indx_RT_Ch()
-
-        ElseIf cmbDishName.SelectedItem <> "All" AndAlso cmbDishName.SelectedItem <> Nothing AndAlso cmb_Dish_select = True Then
-            select_dish_indx_RT_Ch()
-        Else
-            ' bttnSearch.PerformClick()
-            data_all()
-        End If
-    End Sub
-
-    Private Sub dtpDateTo_ValueChanged(sender As Object, e As EventArgs) Handles dtpDateTo.ValueChanged
-        'filter_data()
-        'SearchRadio.Checked = False
-        'SearchRadio.PerformClick()
-        txtBillNumber.Text = ""
-        'cmbOperator.SelectedItem = Nothing
-        'CmbBillType.SelectedItem = Nothing
-        'cmbPermission.SelectedItem = Nothing
-        If cmbOperator.SelectedItem = "All" OrElse CmbBillType.SelectedItem = "All" OrElse cmbPermission.SelectedItem = "All" OrElse cmbDishName.SelectedItem = "All" Then
-            data_all()
-        ElseIf cmbOperator.SelectedItem <> "All" AndAlso cmbOperator.SelectedItem <> Nothing AndAlso cmd_operator_select = True Then
-
-            select_oper_indx_RT_Ch()
-
-        ElseIf CmbBillType.SelectedItem <> "All" AndAlso CmbBillType.SelectedItem <> Nothing AndAlso cmb_bill_select = True Then
-
-            select_bill_ty_indx_RT_Ch()
-
-        ElseIf cmbPermission.SelectedItem <> "All" AndAlso cmbPermission.SelectedItem <> Nothing AndAlso cmb_permission_select = True Then
-
-            select_permi_indx_RT_Ch()
-
-
-        ElseIf cmbDishName.SelectedItem <> "All" AndAlso cmbDishName.SelectedItem <> Nothing AndAlso cmb_Dish_select = True Then
-            select_dish_indx_RT_Ch()
-        Else
-            ' bttnSearch.PerformClick()
-            data_all()
-        End If
-    End Sub
-
-    Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles BtnPrint.Click
-        Dim fromDate As Date = dtpDateFrom.Value
-        Dim toDate As Date = dtpDateTo.Value
-        If txtBillNumber.Text = "" Then
-            If cmbOperator.SelectedItem <> Nothing AndAlso cmbOperator.SelectedItem.ToString() = "All" Then
-                all_print_RT()
-
-            ElseIf cmbPermission.SelectedItem <> Nothing AndAlso cmbPermission.SelectedItem.ToString() = "All" Then
-                all_print_RT()
-
-            ElseIf CmbBillType.SelectedItem <> Nothing AndAlso CmbBillType.SelectedItem.ToString() = "All" Then
-                all_print_RT()
-
-            ElseIf cmbDishName.SelectedItem <> Nothing AndAlso cmbDishName.SelectedItem.ToString() = "All" Then
-                all_print_RT()
-
-                'if these combobox is empty value working filter according to fromDate and toDate
-            ElseIf cmbOperator.SelectedItem = Nothing AndAlso CmbBillType.SelectedItem = Nothing AndAlso cmbPermission.SelectedItem = Nothing AndAlso cmbDishName.SelectedItem = Nothing Then
-                all_print_RT()
-
-                'it is check all value cmboperator except all
-            ElseIf cmbOperator.SelectedItem <> Nothing AndAlso cmbOperator.SelectedItem.ToString() <> "All" Then
-                Dim CN As New SqlConnection(connection)
-                CN.Open()
-                Dim MyCommand1 As New SqlCommand()
-                Dim myDA1 As New SqlDataAdapter()
-                Dim ds As New DataSet ' The DataSet you created.
-
-                MyCommand1.Connection = CN
-                MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
-                                "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
-                                "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
-                MyCommand1.CommandType = CommandType.Text
-                myDA1.SelectCommand = MyCommand1
-                myDA1.Fill(ds, "Hotel")
-                ' Call the stored procedure
-                Dim operator1 As String = cmbOperator.SelectedItem.ToString()
-                Dim cmd2 As New SqlCommand("GetRateChangeLogByOperatorAndDate", CN)
-                cmd2.CommandType = CommandType.StoredProcedure
-                cmd2.Parameters.AddWithValue("@FromDate", fromDate)
-                cmd2.Parameters.AddWithValue("@ToDate", toDate)
-                cmd2.Parameters.AddWithValue("@OperatorName", operator1)
-                Dim adapter2 As New SqlDataAdapter(cmd2)
-                Dim datatable2 As New DataTable
-                adapter2.Fill(ds, "RateChangeLog")
-                ' Merge the new DataTable into the existing DataSet
-                'ds.Tables.Add(datatable.Copy())
-
-                ' Load the Crystal Report
-                Dim rpt2 As New RptRatechangeLog
-                rpt2.Load(Application.StartupPath & "\Reports\RptRatechangeLog.rpt")
-
-                ' Set the DataSource of the Crystal Report to the DataTable
-                'rpt.SetDataSource(dataTable)
-                rpt2.SetDataSource(ds)
-                ' Show the report
-                frmReport.CrystalReportViewer1.ReportSource = rpt2
-                frmReport.ShowDialog()
-
-                ' Clean up
-                rpt2.Close()
-                rpt2.Dispose()
-                CN.Close()
-
-            ElseIf CmbBillType.SelectedItem <> Nothing AndAlso CmbBillType.SelectedItem.ToString() <> "All" Then
-                Dim CN As New SqlConnection(connection)
-                CN.Open()
-                Dim MyCommand1 As New SqlCommand()
-                Dim myDA1 As New SqlDataAdapter()
-                Dim ds As New DataSet ' The DataSet you created.
-
-                MyCommand1.Connection = CN
-                MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
-                                "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
-                                "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
-                MyCommand1.CommandType = CommandType.Text
-                myDA1.SelectCommand = MyCommand1
-                myDA1.Fill(ds, "Hotel")
-
-                ' Call the stored procedure
-                Dim bill_type As String = CmbBillType.SelectedItem.ToString()
+            Dim bill_type As String
+            If CmbBillType.SelectedItem IsNot Nothing Then
+                bill_type = CStr(CmbBillType.SelectedItem)
                 If bill_type = "Dine In" Then
                     bill_type = "DI"
                 End If
@@ -2567,162 +2880,527 @@ Public Class frmRateQtyItemLog
                 If bill_type = "Express Bill" Then
                     bill_type = "TAEB"
                 End If
-                Dim cmd2 As New SqlCommand("GetRateChangeLogByBillTypeAndDate", CN)
-                cmd2.CommandType = CommandType.StoredProcedure
-                cmd2.Parameters.AddWithValue("@FromDate", fromDate)
-                cmd2.Parameters.AddWithValue("@ToDate", toDate)
-                cmd2.Parameters.AddWithValue("@BillType", bill_type)
-                Dim adapter2 As New SqlDataAdapter(cmd2)
-                Dim datatable2 As New DataTable
-                adapter2.Fill(ds, "RateChangeLog")
-                ' Merge the new DataTable into the existing DataSet
-                'ds.Tables.Add(datatable.Copy())
-
-                ' Load the Crystal Report
-                Dim rpt2 As New RptRatechangeLog
-                rpt2.Load(Application.StartupPath & "\Reports\RptRatechangeLog.rpt")
-
-                ' Set the DataSource of the Crystal Report to the DataTable
-                'rpt.SetDataSource(dataTable)
-                rpt2.SetDataSource(ds)
-                ' Show the report
-                frmReport.CrystalReportViewer1.ReportSource = rpt2
-                frmReport.ShowDialog()
-
-                ' Clean up
-                rpt2.Close()
-                rpt2.Dispose()
-                CN.Close()
-
-            ElseIf cmbPermission.SelectedItem <> Nothing AndAlso cmbPermission.SelectedItem <> "All" Then
-                Dim CN As New SqlConnection(connection)
-                CN.Open()
-                Dim MyCommand1 As New SqlCommand()
-                Dim myDA1 As New SqlDataAdapter()
-                Dim ds As New DataSet ' The DataSet you created.
-
-                MyCommand1.Connection = CN
-                MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
-                                "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
-                                "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
-                MyCommand1.CommandType = CommandType.Text
-                myDA1.SelectCommand = MyCommand1
-                myDA1.Fill(ds, "Hotel")
-                ' Call the stored procedure
-                Dim permission As String = cmbPermission.SelectedItem.ToString()
-                Dim cmd2 As New SqlCommand("GetRateChangeLogByPermissionAndDate", CN)
-                cmd2.CommandType = CommandType.StoredProcedure
-                cmd2.Parameters.AddWithValue("@FromDate", fromDate)
-                cmd2.Parameters.AddWithValue("@ToDate", toDate)
-                cmd2.Parameters.AddWithValue("@permissionGrant", permission)
-                Dim adapter2 As New SqlDataAdapter(cmd2)
-                Dim datatable2 As New DataTable
-                adapter2.Fill(ds, "RateChangeLog")
-                ' Merge the new DataTable into the existing DataSet
-                'ds.Tables.Add(datatable.Copy())
-
-                ' Load the Crystal Report
-                Dim rpt2 As New RptRatechangeLog
-                rpt2.Load(Application.StartupPath & "\Reports\RptRatechangeLog.rpt")
-
-                ' Set the DataSource of the Crystal Report to the DataTable
-                'rpt.SetDataSource(dataTable)
-                rpt2.SetDataSource(ds)
-                ' Show the report
-                frmReport.CrystalReportViewer1.ReportSource = rpt2
-                frmReport.ShowDialog()
-
-                ' Clean up
-                rpt2.Close()
-                rpt2.Dispose()
-                CN.Close()
-
-            ElseIf cmbDishName.SelectedItem <> Nothing AndAlso cmbDishName.SelectedItem.ToString() <> "All" Then
-                Dim CN As New SqlConnection(connection)
-                CN.Open()
-                Dim MyCommand1 As New SqlCommand()
-                Dim myDA1 As New SqlDataAdapter()
-                Dim ds As New DataSet ' The DataSet you created.
-
-                MyCommand1.Connection = CN
-                MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
-                                "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
-                                "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
-                MyCommand1.CommandType = CommandType.Text
-                myDA1.SelectCommand = MyCommand1
-                myDA1.Fill(ds, "Hotel")
-                ' Call the stored procedure
-                Dim dishname As String = cmbDishName.SelectedItem.ToString()
-                Dim cmd2 As New SqlCommand("GetRateChangeLogByDishAndDate", CN)
-                cmd2.CommandType = CommandType.StoredProcedure
-                cmd2.Parameters.AddWithValue("@FromDate", fromDate)
-                cmd2.Parameters.AddWithValue("@ToDate", toDate)
-                cmd2.Parameters.AddWithValue("@Dishname", dishname)
-                Dim adapter2 As New SqlDataAdapter(cmd2)
-                Dim datatable2 As New DataTable
-                adapter2.Fill(ds, "RateChangeLog")
-                ' Merge the new DataTable into the existing DataSet
-                'ds.Tables.Add(datatable.Copy())
-
-                ' Load the Crystal Report
-                Dim rpt2 As New RptRatechangeLog
-                rpt2.Load(Application.StartupPath & "\Reports\RptRatechangeLog.rpt")
-
-                ' Set the DataSource of the Crystal Report to the DataTable
-                'rpt.SetDataSource(dataTable)
-                rpt2.SetDataSource(ds)
-                ' Show the report
-                frmReport.CrystalReportViewer1.ReportSource = rpt2
-                frmReport.ShowDialog()
-
-                ' Clean up
-                rpt2.Close()
-                rpt2.Dispose()
-                CN.Close()
+                If bill_type = "All" Then
+                    bill_type = "All"
+                End If
             End If
 
-        Else
-            Dim CN As New SqlConnection(connection)
-            CN.Open()
-            Dim MyCommand1 As New SqlCommand()
-            Dim myDA1 As New SqlDataAdapter()
-            Dim ds As New DataSet ' The DataSet you created.
 
-            MyCommand1.Connection = CN
-            MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
-                                "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
-                                "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
-            MyCommand1.CommandType = CommandType.Text
-            myDA1.SelectCommand = MyCommand1
-            myDA1.Fill(ds, "Hotel")
-            ' Call the stored procedure
 
-            Dim cmd2 As New SqlCommand("Get_Rate_Change_log_bill_num", CN)
-            cmd2.CommandType = CommandType.StoredProcedure
-            Dim searchquery As String = txtBillNumber.Text.Trim()
-            cmd2.Parameters.AddWithValue("@SearchQuery", searchquery)
-            Dim adapter2 As New SqlDataAdapter(cmd2)
-            Dim datatable2 As New DataTable
-            adapter2.Fill(ds, "RateChangeLog")
-            ' Merge the new DataTable into the existing DataSet
-            'ds.Tables.Add(datatable.Copy())
 
-            ' Load the Crystal Report
-            Dim rpt2 As New RptRatechangeLog
-            rpt2.Load(Application.StartupPath & "\Reports\RptRatechangeLog.rpt")
+            con = New SqlConnection(cs)
+            con.Open()
+            Dim SQL As String = ""
+            SQL = "exec Proc_RateChangeLog @d1,@d2,@Operator,@BillNo,@BillType,@Permission ,@Dish"
+            cmd = New SqlCommand(SQL, con)
+            cmd.Parameters.Add("@d1", SqlDbType.DateTime, 30, "DateFrom").Value = dtpDateFrom.Value.Date.AddHours(_startTime)
+            cmd.Parameters.Add("@d2", SqlDbType.DateTime, 30, "DateTo").Value = dtpDateTo.Value.Date.AddDays(1).AddHours(_endTime)
+            cmd.Parameters.Add("@Operator", SqlDbType.Int).Value = CInt(cmbOperator1.SelectedValue)
+            cmd.Parameters.Add("@BillNo", SqlDbType.NVarChar, 50, "BillNo").Value = txtBillNumber.Text
+            cmd.Parameters.Add("@BillType", SqlDbType.NVarChar, 50, "BillType").Value = bill_type
 
-            ' Set the DataSource of the Crystal Report to the DataTable
-            'rpt.SetDataSource(dataTable)
-            rpt2.SetDataSource(ds)
-            ' Show the report
-            frmReport.CrystalReportViewer1.ReportSource = rpt2
-            frmReport.ShowDialog()
+            cmd.Parameters.Add("@Permission", SqlDbType.Int).Value = CInt(cmbpermission1.SelectedValue)
+            cmd.Parameters.Add("@Dish", SqlDbType.Int).Value = CInt(cmbDishName.SelectedValue)
 
-            ' Clean up
-            rpt2.Close()
-            rpt2.Dispose()
-            CN.Close()
-        End If
+            rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection)
+            DatagridView1.Rows.Clear()
+            Dim changed_rate_sum As Decimal = 0
+            Dim rate_diff_sum As Decimal = 0
+            While (rdr.Read() = True)
+                Dim value1 As Double = CDec(rdr(4)) ' Convert to Double or appropriate numerical type
+                Dim value2 As Double = CDec(rdr(5)) ' Convert to Double or appropriate numerical type
+                Dim result As Double = value1 - value2
+                rate_diff_sum = rate_diff_sum + Math.Abs(result)
+                changed_rate_sum = changed_rate_sum + value2
+                Dim status As String = ""
+                If value2 < value1 Then
+                    status = "Less"
+                ElseIf value2 > value1 Then
+                    status = "High"
+                ElseIf value1 = value2 Then
+                    status = "Equal"
+                End If
+                DatagridView1.Rows.Add(rdr(0), rdr(1), rdr(2), rdr(3), rdr(4), rdr(5), Math.Abs(result), status, rdr(6), rdr(7), rdr(8), rdr(9), rdr(10), rdr(11))
+            End While
+            txtRateDiffSum.Text = rate_diff_sum
+            txtChangeRateSum.Text = changed_rate_sum
+        Catch ex As Exception
+
+        Finally
+            rdr.Close()
+            con.Close()
+        End Try
+        print_btn_RT_chg_enb_dis_qua()
+    End Sub
+
+    Private Sub dtpDateFrom_ValueChanged_1(sender As Object, e As EventArgs) Handles dtpDateFrom.ValueChanged
+        ''filter_data()
+        ''SearchRadio.Checked = False
+        ''SearchRadio.PerformClick()
+        'txtBillNumber.Text = ""
+        ''cmbOperator.SelectedItem = Nothing
+        ''CmbBillType.SelectedItem = Nothing
+        ''cmbPermission.SelectedItem = Nothing
+        'If cmbOperator1.SelectedItem = "All" OrElse CmbBillType.SelectedItem = "All" OrElse cmbPermission.SelectedItem = "All" OrElse cmbDishName.SelectedItem = "All" Then
+        '    filter_rate_change()
+        'ElseIf cmbOperator1.SelectedItem <> "All" AndAlso cmbOperator1.SelectedItem <> Nothing AndAlso cmd_operator_select = True Then
+
+        '    select_oper_indx_RT_Ch()
+
+        'ElseIf CmbBillType.SelectedItem <> "All" AndAlso CmbBillType.SelectedItem <> Nothing AndAlso cmb_bill_select = True Then
+
+        '    select_bill_ty_indx_RT_Ch()
+
+        'ElseIf cmbPermission.SelectedItem <> "All" AndAlso cmbPermission.SelectedItem <> Nothing AndAlso cmb_permission_select = True Then
+
+        '    select_permi_indx_RT_Ch()
+
+        'ElseIf cmbDishName.SelectedItem <> "All" AndAlso cmbDishName.SelectedItem <> Nothing AndAlso cmb_Dish_select = True Then
+        '    select_dish_indx_RT_Ch()
+        'Else
+        '    ' bttnSearch.PerformClick()
+        '    data_all()
+        'End If
+        filter_rate_change()
+    End Sub
+
+    Private Sub dtpDateTo_ValueChanged(sender As Object, e As EventArgs) Handles dtpDateTo.ValueChanged
+        ''filter_data()
+        ''SearchRadio.Checked = False
+        ''SearchRadio.PerformClick()
+        'txtBillNumber.Text = ""
+        ''cmbOperator.SelectedItem = Nothing
+        ''CmbBillType.SelectedItem = Nothing
+        ''cmbPermission.SelectedItem = Nothing
+        'If cmbOperator1.SelectedItem = "All" OrElse CmbBillType.SelectedItem = "All" OrElse cmbPermission.SelectedItem = "All" OrElse cmbDishName.SelectedItem = "All" Then
+        '    data_all()
+        'ElseIf cmbOperator1.SelectedItem <> "All" AndAlso cmbOperator1.SelectedItem <> Nothing AndAlso cmd_operator_select = True Then
+
+        '    select_oper_indx_RT_Ch()
+
+        'ElseIf CmbBillType.SelectedItem <> "All" AndAlso CmbBillType.SelectedItem <> Nothing AndAlso cmb_bill_select = True Then
+
+        '    select_bill_ty_indx_RT_Ch()
+
+        'ElseIf cmbPermission.SelectedItem <> "All" AndAlso cmbPermission.SelectedItem <> Nothing AndAlso cmb_permission_select = True Then
+
+        '    select_permi_indx_RT_Ch()
+
+
+        'ElseIf cmbDishName.SelectedItem <> "All" AndAlso cmbDishName.SelectedItem <> Nothing AndAlso cmb_Dish_select = True Then
+        '    select_dish_indx_RT_Ch()
+        'Else
+        '    ' bttnSearch.PerformClick()
+        '    data_all()
+        'End If
+        filter_rate_change()
+    End Sub
+
+    Public Sub filter_rate_change_print()
+        Try
+            Using CN As New SqlConnection(connection)
+                CN.Open()
+
+                Dim ds As New DataSet()
+
+                Dim MyCommand1 As New SqlCommand("SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
+                                              "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
+                                              "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel", CN)
+                MyCommand1.CommandType = CommandType.Text
+
+                Dim myDA1 As New SqlDataAdapter(MyCommand1)
+                myDA1.Fill(ds, "Hotel")
+
+                Dim sql As String = "exec Proc_RateChangeLog @d1,@d2,@Operator,@BillNo,@BillType,@Permission ,@Dish"
+                Dim cmd As New SqlCommand(sql, CN)
+                cmd.Parameters.Add("@d1", SqlDbType.DateTime).Value = dtpDateFrom.Value.Date.AddHours(_startTime)
+                cmd.Parameters.Add("@d2", SqlDbType.DateTime).Value = dtpDateTo.Value.Date.AddDays(1).AddHours(_endTime)
+                cmd.Parameters.Add("@Operator", SqlDbType.Int).Value = CInt(cmbOperator1.SelectedValue)
+                cmd.Parameters.Add("@BillNo", SqlDbType.NVarChar, 50).Value = txtBillNumber.Text
+                cmd.Parameters.Add("@BillType", SqlDbType.NVarChar, 50).Value = CmbBillType.Text
+                cmd.Parameters.Add("@Permission", SqlDbType.Int).Value = CInt(cmbpermission1.SelectedValue)
+                cmd.Parameters.Add("@Dish", SqlDbType.Int).Value = CInt(cmbDishName.SelectedValue)
+
+                Dim myDA2 As New SqlDataAdapter(cmd)
+                myDA2.Fill(ds, "RateChangeLog")
+
+                ' Load the Crystal Report
+                Dim rpt2 As New RptRatechangeLog
+                rpt2.Load(Application.StartupPath & "\Reports\RptRatechangeLog.rpt")
+
+                ' Set the DataSource of the Crystal Report to the DataSet
+                rpt2.SetDataSource(ds)
+
+                ' Show the report
+                frmReport.CrystalReportViewer1.ReportSource = rpt2
+                frmReport.ShowDialog()
+
+                ' Clean up
+                rpt2.Close()
+                rpt2.Dispose()
+            End Using
+        Catch ex As Exception
+            ' Handle the exception
+            MessageBox.Show("An error occurred: " & ex.Message)
+        End Try
+    End Sub
+
+
+
+    Public Sub filter_qty_change_print()
+        Try
+            Using CN As New SqlConnection(connection)
+                CN.Open()
+
+                Dim ds As New DataSet()
+
+                Dim MyCommand1 As New SqlCommand("SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
+                                              "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
+                                              "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel", CN)
+                MyCommand1.CommandType = CommandType.Text
+
+                Dim myDA1 As New SqlDataAdapter(MyCommand1)
+                myDA1.Fill(ds, "Hotel")
+
+                Dim SQL As String = "exec Proc_QtyChange @d1,@d2,@Operator,@BillNo,@BillType,@Permission ,@Dish"
+                Dim cmd As New SqlCommand(SQL, CN)
+                cmd.Parameters.Add("@d1", SqlDbType.DateTime).Value = dtpDateFromQua.Value.Date.AddHours(_startTime)
+                cmd.Parameters.Add("@d2", SqlDbType.DateTime).Value = dtpDateToQua.Value.Date.AddDays(1).AddHours(_endTime)
+                cmd.Parameters.Add("@Operator", SqlDbType.Int).Value = CInt(cmbOperatorQua.SelectedValue)
+                cmd.Parameters.Add("@BillNo", SqlDbType.NVarChar, 50).Value = txtBillNumberQua.Text
+                cmd.Parameters.Add("@BillType", SqlDbType.NVarChar, 50).Value = CmbBillTypeQua.Text
+                cmd.Parameters.Add("@Permission", SqlDbType.Int).Value = CInt(cmbPermissionQua.SelectedValue)
+                cmd.Parameters.Add("@Dish", SqlDbType.Int).Value = CInt(CmbDishNameQua.SelectedValue)
+
+                Dim myDA2 As New SqlDataAdapter(cmd)
+                myDA2.Fill(ds, "QtyChangeLog")
+
+                ' Load the Crystal Report
+                Dim rpt2 As New RptQtychangeLog
+                rpt2.Load(Application.StartupPath & "\Reports\RptQtychangeLog.rpt")
+
+                ' Set the DataSource of the Crystal Report to the DataSet
+                rpt2.SetDataSource(ds)
+
+                ' Show the report
+                frmReport.CrystalReportViewer1.ReportSource = rpt2
+                frmReport.ShowDialog()
+
+                ' Clean up
+                rpt2.Close()
+                rpt2.Dispose()
+            End Using
+        Catch ex As Exception
+            ' Handle the exception
+            MessageBox.Show("An error occurred: " & ex.Message)
+        End Try
+    End Sub
+
+
+    Public Sub filter_item_del_print()
+        Try
+            Using con As New SqlConnection(connection)
+                con.Open()
+
+                Dim ds As New DataSet()
+
+                Dim MyCommand1 As New SqlCommand("SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
+                                              "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
+                                              "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel", con)
+                MyCommand1.CommandType = CommandType.Text
+
+                Dim myDA1 As New SqlDataAdapter(MyCommand1)
+                myDA1.Fill(ds, "Hotel")
+
+                Dim SQL As String = "exec Proc_itemDeleted @d1,@d2,@Operator,@BillNo,@BillType,@Permission ,@Dish"
+                Dim cmd As New SqlCommand(SQL, con)
+                cmd.Parameters.Add("@d1", SqlDbType.DateTime).Value = dtpDateFromdl.Value.Date.AddHours(_startTime)
+                cmd.Parameters.Add("@d2", SqlDbType.DateTime).Value = dtpDateTodl.Value.Date.AddDays(1).AddHours(_endTime)
+                cmd.Parameters.Add("@Operator", SqlDbType.Int).Value = CInt(cmbOperatordl.SelectedValue)
+                cmd.Parameters.Add("@BillNo", SqlDbType.NVarChar, 50).Value = txtBillNumberdl.Text
+                cmd.Parameters.Add("@BillType", SqlDbType.NVarChar, 50).Value = CmbBillTypedl.Text
+                cmd.Parameters.Add("@Permission", SqlDbType.Int).Value = CInt(cmbPermissiondl.SelectedValue)
+                cmd.Parameters.Add("@Dish", SqlDbType.Int).Value = CInt(cmbDishNameDl.SelectedValue)
+
+                Dim myDA2 As New SqlDataAdapter(cmd)
+                myDA2.Fill(ds, "Item_delete")
+
+                ' Load the Crystal Report
+                Dim rpt2 As New RptItemDelete
+                rpt2.Load(Application.StartupPath & "\Reports\RptItemDelete.rpt")
+
+                ' Set the DataSource of the Crystal Report to the DataSet
+                rpt2.SetDataSource(ds)
+
+                ' Show the report
+                frmReport.CrystalReportViewer1.ReportSource = rpt2
+                frmReport.ShowDialog()
+
+                ' Clean up
+                rpt2.Close()
+                rpt2.Dispose()
+            End Using
+        Catch ex As Exception
+            ' Handle the exception
+            MessageBox.Show("An error occurred: " & ex.Message)
+        End Try
+    End Sub
+
+
+
+    Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles BtnPrint.Click
+        filter_rate_change_print()
+        'Dim fromDate As Date = dtpDateFrom.Value
+        'Dim toDate As Date = dtpDateTo.Value
+        'If txtBillNumber.Text = "" Then
+        '    If cmbOperator1.SelectedItem <> Nothing AndAlso cmbOperator1.SelectedItem.ToString() = "All" Then
+        '        all_print_RT()
+
+        '    ElseIf cmbPermission.SelectedItem <> Nothing AndAlso cmbPermission.SelectedItem.ToString() = "All" Then
+        '        all_print_RT()
+
+        '    ElseIf CmbBillType.SelectedItem <> Nothing AndAlso CmbBillType.SelectedItem.ToString() = "All" Then
+        '        all_print_RT()
+
+        '    ElseIf cmbDishName.SelectedItem <> Nothing AndAlso cmbDishName.SelectedItem.ToString() = "All" Then
+        '        all_print_RT()
+
+        '        'if these combobox is empty value working filter according to fromDate and toDate
+        '    ElseIf cmbOperator1.SelectedItem = Nothing AndAlso CmbBillType.SelectedItem = Nothing AndAlso cmbPermission.SelectedItem = Nothing AndAlso cmbDishName.SelectedItem = Nothing Then
+        '        all_print_RT()
+
+        '        'it is check all value cmboperator except all
+        '    ElseIf cmbOperator1.SelectedItem <> Nothing AndAlso cmbOperator1.SelectedItem.ToString() <> "All" Then
+        '        Dim CN As New SqlConnection(connection)
+        '        CN.Open()
+        '        Dim MyCommand1 As New SqlCommand()
+        '        Dim myDA1, myDA2 As New SqlDataAdapter()
+        '        Dim ds As New DataSet ' The DataSet you created.
+
+        '        MyCommand1.Connection = CN
+        '        MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
+        '                        "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
+        '                        "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
+        '        MyCommand1.CommandType = CommandType.Text
+        '        myDA1.SelectCommand = MyCommand1
+        '        myDA1.Fill(ds, "Hotel")
+        '        ' Call the stored procedure
+        '        Dim operator1 As String = cmbOperator1.SelectedItem.ToString()
+        '        Dim cmd2 As New SqlCommand("GetRateChangeLogByOperatorAndDate", CN)
+        '        cmd2.CommandType = CommandType.StoredProcedure
+        '        cmd2.Parameters.AddWithValue("@FromDate", fromDate)
+        '        cmd2.Parameters.AddWithValue("@ToDate", toDate)
+        '        cmd2.Parameters.AddWithValue("@OperatorName", operator1)
+        '        Dim adapter2 As New SqlDataAdapter(cmd2)
+        '        Dim datatable2 As New DataTable
+        '        adapter2.Fill(ds, "RateChangeLog")
+        '        ' Merge the new DataTable into the existing DataSet
+        '        'ds.Tables.Add(datatable.Copy())
+
+        '        ' Load the Crystal Report
+        '        Dim rpt2 As New RptRatechangeLog
+        '        rpt2.Load(Application.StartupPath & "\Reports\RptRatechangeLog.rpt")
+
+        '        ' Set the DataSource of the Crystal Report to the DataTable
+        '        'rpt.SetDataSource(dataTable)
+        '        rpt2.SetDataSource(ds)
+        '        ' Show the report
+        '        frmReport.CrystalReportViewer1.ReportSource = rpt2
+        '        frmReport.ShowDialog()
+
+        '        ' Clean up
+        '        rpt2.Close()
+        '        rpt2.Dispose()
+        '        CN.Close()
+
+        '    ElseIf CmbBillType.SelectedItem <> Nothing AndAlso CmbBillType.SelectedItem.ToString() <> "All" Then
+        '        Dim CN As New SqlConnection(connection)
+        '        CN.Open()
+        '        Dim MyCommand1 As New SqlCommand()
+        '        Dim myDA1 As New SqlDataAdapter()
+        '        Dim ds As New DataSet ' The DataSet you created.
+
+        '        MyCommand1.Connection = CN
+        '        MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
+        '                        "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
+        '                        "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
+        '        MyCommand1.CommandType = CommandType.Text
+        '        myDA1.SelectCommand = MyCommand1
+        '        myDA1.Fill(ds, "Hotel")
+
+        '        ' Call the stored procedure
+        '        Dim bill_type As String = CmbBillType.SelectedItem.ToString()
+        '        If bill_type = "Dine In" Then
+        '            bill_type = "DI"
+        '        End If
+        '        If bill_type = "Take Away" Then
+        '            bill_type = "TA"
+        '        End If
+        '        If bill_type = "Home Delivery" Then
+        '            bill_type = "HD"
+        '        End If
+        '        If bill_type = "Third Party" Then
+        '            bill_type = "TP"
+        '        End If
+        '        If bill_type = "Express Bill" Then
+        '            bill_type = "TAEB"
+        '        End If
+        '        Dim cmd2 As New SqlCommand("GetRateChangeLogByBillTypeAndDate", CN)
+        '        cmd2.CommandType = CommandType.StoredProcedure
+        '        cmd2.Parameters.AddWithValue("@FromDate", fromDate)
+        '        cmd2.Parameters.AddWithValue("@ToDate", toDate)
+        '        cmd2.Parameters.AddWithValue("@BillType", bill_type)
+        '        Dim adapter2 As New SqlDataAdapter(cmd2)
+        '        Dim datatable2 As New DataTable
+        '        adapter2.Fill(ds, "RateChangeLog")
+        '        ' Merge the new DataTable into the existing DataSet
+        '        'ds.Tables.Add(datatable.Copy())
+
+        '        ' Load the Crystal Report
+        '        Dim rpt2 As New RptRatechangeLog
+        '        rpt2.Load(Application.StartupPath & "\Reports\RptRatechangeLog.rpt")
+
+        '        ' Set the DataSource of the Crystal Report to the DataTable
+        '        'rpt.SetDataSource(dataTable)
+        '        rpt2.SetDataSource(ds)
+        '        ' Show the report
+        '        frmReport.CrystalReportViewer1.ReportSource = rpt2
+        '        frmReport.ShowDialog()
+
+        '        ' Clean up
+        '        rpt2.Close()
+        '        rpt2.Dispose()
+        '        CN.Close()
+
+        '    ElseIf cmbPermission.SelectedItem <> Nothing AndAlso cmbPermission.SelectedItem <> "All" Then
+        '        Dim CN As New SqlConnection(connection)
+        '        CN.Open()
+        '        Dim MyCommand1 As New SqlCommand()
+        '        Dim myDA1 As New SqlDataAdapter()
+        '        Dim ds As New DataSet ' The DataSet you created.
+
+        '        MyCommand1.Connection = CN
+        '        MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
+        '                        "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
+        '                        "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
+        '        MyCommand1.CommandType = CommandType.Text
+        '        myDA1.SelectCommand = MyCommand1
+        '        myDA1.Fill(ds, "Hotel")
+        '        ' Call the stored procedure
+        '        Dim permission As String = cmbPermission.SelectedItem.ToString()
+        '        Dim cmd2 As New SqlCommand("GetRateChangeLogByPermissionAndDate", CN)
+        '        cmd2.CommandType = CommandType.StoredProcedure
+        '        cmd2.Parameters.AddWithValue("@FromDate", fromDate)
+        '        cmd2.Parameters.AddWithValue("@ToDate", toDate)
+        '        cmd2.Parameters.AddWithValue("@permissionGrant", permission)
+        '        Dim adapter2 As New SqlDataAdapter(cmd2)
+        '        Dim datatable2 As New DataTable
+        '        adapter2.Fill(ds, "RateChangeLog")
+        '        ' Merge the new DataTable into the existing DataSet
+        '        'ds.Tables.Add(datatable.Copy())
+
+        '        ' Load the Crystal Report
+        '        Dim rpt2 As New RptRatechangeLog
+        '        rpt2.Load(Application.StartupPath & "\Reports\RptRatechangeLog.rpt")
+
+        '        ' Set the DataSource of the Crystal Report to the DataTable
+        '        'rpt.SetDataSource(dataTable)
+        '        rpt2.SetDataSource(ds)
+        '        ' Show the report
+        '        frmReport.CrystalReportViewer1.ReportSource = rpt2
+        '        frmReport.ShowDialog()
+
+        '        ' Clean up
+        '        rpt2.Close()
+        '        rpt2.Dispose()
+        '        CN.Close()
+
+        '    ElseIf cmbDishName.SelectedItem <> Nothing AndAlso cmbDishName.SelectedItem.ToString() <> "All" Then
+        '        Dim CN As New SqlConnection(connection)
+        '        CN.Open()
+        '        Dim MyCommand1 As New SqlCommand()
+        '        Dim myDA1 As New SqlDataAdapter()
+        '        Dim ds As New DataSet ' The DataSet you created.
+
+        '        MyCommand1.Connection = CN
+        '        MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
+        '                        "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
+        '                        "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
+        '        MyCommand1.CommandType = CommandType.Text
+        '        myDA1.SelectCommand = MyCommand1
+        '        myDA1.Fill(ds, "Hotel")
+        '        ' Call the stored procedure
+        '        Dim dishname As String = cmbDishName.SelectedItem.ToString()
+        '        Dim cmd2 As New SqlCommand("GetRateChangeLogByDishAndDate", CN)
+        '        cmd2.CommandType = CommandType.StoredProcedure
+        '        cmd2.Parameters.AddWithValue("@FromDate", fromDate)
+        '        cmd2.Parameters.AddWithValue("@ToDate", toDate)
+        '        cmd2.Parameters.AddWithValue("@Dishname", dishname)
+        '        Dim adapter2 As New SqlDataAdapter(cmd2)
+        '        Dim datatable2 As New DataTable
+        '        adapter2.Fill(ds, "RateChangeLog")
+        '        ' Merge the new DataTable into the existing DataSet
+        '        'ds.Tables.Add(datatable.Copy())
+
+        '        ' Load the Crystal Report
+        '        Dim rpt2 As New RptRatechangeLog
+        '        rpt2.Load(Application.StartupPath & "\Reports\RptRatechangeLog.rpt")
+
+        '        ' Set the DataSource of the Crystal Report to the DataTable
+        '        'rpt.SetDataSource(dataTable)
+        '        rpt2.SetDataSource(ds)
+        '        ' Show the report
+        '        frmReport.CrystalReportViewer1.ReportSource = rpt2
+        '        frmReport.ShowDialog()
+
+        '        ' Clean up
+        '        rpt2.Close()
+        '        rpt2.Dispose()
+        '        CN.Close()
+        '    End If
+
+        'Else
+        '    Dim CN As New SqlConnection(connection)
+        '    CN.Open()
+        '    Dim MyCommand1 As New SqlCommand()
+        '    Dim myDA1 As New SqlDataAdapter()
+        '    Dim ds As New DataSet ' The DataSet you created.
+
+        '    MyCommand1.Connection = CN
+        '    MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
+        '                        "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
+        '                        "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
+        '    MyCommand1.CommandType = CommandType.Text
+        '    myDA1.SelectCommand = MyCommand1
+        '    myDA1.Fill(ds, "Hotel")
+        '    ' Call the stored procedure
+
+        '    Dim cmd2 As New SqlCommand("Get_Rate_Change_log_bill_num", CN)
+        '    cmd2.CommandType = CommandType.StoredProcedure
+        '    Dim searchquery As String = txtBillNumber.Text.Trim()
+        '    cmd2.Parameters.AddWithValue("@SearchQuery", searchquery)
+        '    Dim adapter2 As New SqlDataAdapter(cmd2)
+        '    Dim datatable2 As New DataTable
+        '    adapter2.Fill(ds, "RateChangeLog")
+        '    ' Merge the new DataTable into the existing DataSet
+        '    'ds.Tables.Add(datatable.Copy())
+
+        '    ' Load the Crystal Report
+        '    Dim rpt2 As New RptRatechangeLog
+        '    rpt2.Load(Application.StartupPath & "\Reports\RptRatechangeLog.rpt")
+
+        '    ' Set the DataSource of the Crystal Report to the DataTable
+        '    'rpt.SetDataSource(dataTable)
+        '    rpt2.SetDataSource(ds)
+        '    ' Show the report
+        '    frmReport.CrystalReportViewer1.ReportSource = rpt2
+        '    frmReport.ShowDialog()
+
+        '    ' Clean up
+        '    rpt2.Close()
+        '    rpt2.Dispose()
+        '    CN.Close()
+        'End If
     End Sub
 
     Private Sub btnReset_Click(sender As Object, e As EventArgs) Handles btnReset.Click
@@ -2738,11 +3416,13 @@ Public Class frmRateQtyItemLog
     End Sub
 
     Private Sub cmbDishName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDishName.SelectedIndexChanged
-        select_dish_indx_RT_Ch()
+        'select_dish_indx_RT_Ch()
+        filter_rate_change()
     End Sub
 
     Private Sub CmbDishNameQua_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbDishNameQua.SelectedIndexChanged
-        cmb_dish_qua_select_ind_change()
+        'cmb_dish_qua_select_ind_change()
+        filter_qty_change()
     End Sub
 
     Private Sub TabControl1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabControl1.SelectedIndexChanged
@@ -2754,7 +3434,8 @@ Public Class frmRateQtyItemLog
     End Sub
 
     Private Sub cmbDishNameDl_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDishNameDl.SelectedIndexChanged
-        cmb_dish_selct_Index_change_del()
+        'cmb_dish_selct_Index_change_del()
+        filter_item_del()
     End Sub
 
     Private Sub Label10dl_Click(sender As Object, e As EventArgs) Handles Label10dl.Click
@@ -2766,260 +3447,279 @@ Public Class frmRateQtyItemLog
     End Sub
 
     Private Sub BtnPrintqua_Click_1(sender As Object, e As EventArgs) Handles BtnPrintqua.Click
-        Dim fromDate As Date = dtpDateFromQua.Value
-        Dim toDate As Date = dtpDateToQua.Value
-        If txtBillNumberQua.Text = "" Then
-            If cmbOperatorQua.SelectedItem <> Nothing AndAlso cmbOperatorQua.SelectedItem.ToString() = "All" Then
-                all_print_qua()
+        filter_qty_change_print()
+        'Dim fromDate As Date = dtpDateFromQua.Value
+        'Dim toDate As Date = dtpDateToQua.Value
+        'If txtBillNumberQua.Text = "" Then
+        '    If cmbOperatorQua.SelectedItem <> Nothing AndAlso cmbOperatorQua.SelectedItem.ToString() = "All" Then
+        '        all_print_qua()
 
-            ElseIf cmbPermissionQua.SelectedItem <> Nothing AndAlso cmbPermissionQua.SelectedItem.ToString() = "All" Then
-                all_print_qua()
+        '    ElseIf cmbPermissionQua.SelectedItem <> Nothing AndAlso cmbPermissionQua.SelectedItem.ToString() = "All" Then
+        '        all_print_qua()
 
-            ElseIf CmbBillTypeQua.SelectedItem <> Nothing AndAlso CmbBillTypeQua.SelectedItem.ToString() = "All" Then
-                all_print_qua()
+        '    ElseIf CmbBillTypeQua.SelectedItem <> Nothing AndAlso CmbBillTypeQua.SelectedItem.ToString() = "All" Then
+        '        all_print_qua()
 
-            ElseIf CmbDishNameQua.SelectedItem <> Nothing AndAlso CmbDishNameQua.SelectedItem.ToString() = "All" Then
-                all_print_qua()
+        '    ElseIf CmbDishNameQua.SelectedItem <> Nothing AndAlso CmbDishNameQua.SelectedItem.ToString() = "All" Then
+        '        all_print_qua()
 
-                'If all combobox is nothin the filter will be work as from date and todate
-            ElseIf cmbOperatorQua.SelectedItem = Nothing AndAlso CmbBillTypeQua.SelectedItem = Nothing AndAlso cmbPermissionQua.SelectedItem = Nothing AndAlso cmbDishName.SelectedItem = Nothing Then
-                all_print_qua()
+        '        'If all combobox is nothin the filter will be work as from date and todate
+        '    ElseIf cmbOperatorQua.SelectedItem = Nothing AndAlso CmbBillTypeQua.SelectedItem = Nothing AndAlso cmbPermissionQua.SelectedItem = Nothing AndAlso cmbDishName.SelectedItem = Nothing Then
+        '        all_print_qua()
 
-                'it is check all value cmboperator except all
-            ElseIf cmbOperatorQua.SelectedItem <> Nothing AndAlso cmbOperatorQua.SelectedItem.ToString() <> "All" Then
-                Dim CN As New SqlConnection(connection)
-                CN.Open()
-                Dim MyCommand1 As New SqlCommand()
-                Dim myDA1 As New SqlDataAdapter()
-                Dim ds As New DataSet ' The DataSet you created.
+        '        'it is check all value cmboperator except all
+        '    ElseIf cmbOperatorQua.SelectedItem <> Nothing AndAlso cmbOperatorQua.SelectedItem.ToString() <> "All" Then
+        '        Dim CN As New SqlConnection(connection)
+        '        CN.Open()
+        '        Dim MyCommand1 As New SqlCommand()
+        '        Dim myDA1 As New SqlDataAdapter()
+        '        Dim ds As New DataSet ' The DataSet you created.
 
-                MyCommand1.Connection = CN
-                MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
-                                "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
-                                "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
-                MyCommand1.CommandType = CommandType.Text
-                myDA1.SelectCommand = MyCommand1
-                myDA1.Fill(ds, "Hotel")
-                ' Call the stored procedure
-                Dim operator1 As String = cmbOperatorQua.SelectedItem.ToString()
-                Dim cmd2 As New SqlCommand("GetQtyChangeLogByOperatorAndDateRange", CN)
-                cmd2.CommandType = CommandType.StoredProcedure
-                cmd2.Parameters.AddWithValue("@FromDate", fromDate)
-                cmd2.Parameters.AddWithValue("@ToDate", toDate)
-                cmd2.Parameters.AddWithValue("@OperatorName", operator1)
-                Dim adapter2 As New SqlDataAdapter(cmd2)
-                Dim datatable2 As New DataTable
-                adapter2.Fill(ds, "QtyChangeLog")
-                ' Merge the new DataTable into the existing DataSet
-                'ds.Tables.Add(datatable.Copy())
+        '        MyCommand1.Connection = CN
+        '        MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
+        '                        "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
+        '                        "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
+        '        MyCommand1.CommandType = CommandType.Text
+        '        myDA1.SelectCommand = MyCommand1
+        '        myDA1.Fill(ds, "Hotel")
+        '        ' Call the stored procedure
+        '        Dim operator1 As String = cmbOperatorQua.SelectedItem.ToString()
+        '        Dim cmd2 As New SqlCommand("GetQtyChangeLogByOperatorAndDateRange", CN)
+        '        cmd2.CommandType = CommandType.StoredProcedure
+        '        cmd2.Parameters.AddWithValue("@FromDate", fromDate)
+        '        cmd2.Parameters.AddWithValue("@ToDate", toDate)
+        '        cmd2.Parameters.AddWithValue("@OperatorName", operator1)
+        '        Dim adapter2 As New SqlDataAdapter(cmd2)
+        '        Dim datatable2 As New DataTable
+        '        adapter2.Fill(ds, "QtyChangeLog")
+        '        ' Merge the new DataTable into the existing DataSet
+        '        'ds.Tables.Add(datatable.Copy())
 
-                ' Load the Crystal Report
-                Dim rpt2 As New RptQtychangeLog
-                rpt2.Load(Application.StartupPath & "\Reports\RptQtychangeLog.rpt")
+        '        ' Load the Crystal Report
+        '        Dim rpt2 As New RptQtychangeLog
+        '        rpt2.Load(Application.StartupPath & "\Reports\RptQtychangeLog.rpt")
 
-                ' Set the DataSource of the Crystal Report to the DataTable
-                'rpt.SetDataSource(dataTable)
-                rpt2.SetDataSource(ds)
-                ' Show the report
-                frmReport.CrystalReportViewer1.ReportSource = rpt2
-                frmReport.ShowDialog()
+        '        ' Set the DataSource of the Crystal Report to the DataTable
+        '        'rpt.SetDataSource(dataTable)
+        '        rpt2.SetDataSource(ds)
+        '        ' Show the report
+        '        frmReport.CrystalReportViewer1.ReportSource = rpt2
+        '        frmReport.ShowDialog()
 
-                ' Clean up
-                rpt2.Close()
-                rpt2.Dispose()
-                CN.Close()
+        '        ' Clean up
+        '        rpt2.Close()
+        '        rpt2.Dispose()
+        '        CN.Close()
 
-            ElseIf CmbBillTypeQua.SelectedItem <> Nothing AndAlso CmbBillTypeQua.SelectedItem.ToString() <> "All" Then
-                Dim CN As New SqlConnection(connection)
-                CN.Open()
-                Dim MyCommand1 As New SqlCommand()
-                Dim myDA1 As New SqlDataAdapter()
-                Dim ds As New DataSet ' The DataSet you created.
+        '    ElseIf CmbBillTypeQua.SelectedItem <> Nothing AndAlso CmbBillTypeQua.SelectedItem.ToString() <> "All" Then
+        '        Dim CN As New SqlConnection(connection)
+        '        CN.Open()
+        '        Dim MyCommand1 As New SqlCommand()
+        '        Dim myDA1 As New SqlDataAdapter()
+        '        Dim ds As New DataSet ' The DataSet you created.
 
-                MyCommand1.Connection = CN
-                MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
-                                "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
-                                "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
-                MyCommand1.CommandType = CommandType.Text
-                myDA1.SelectCommand = MyCommand1
-                myDA1.Fill(ds, "Hotel")
+        '        MyCommand1.Connection = CN
+        '        MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
+        '                        "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
+        '                        "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
+        '        MyCommand1.CommandType = CommandType.Text
+        '        myDA1.SelectCommand = MyCommand1
+        '        myDA1.Fill(ds, "Hotel")
 
-                ' Call the stored procedure
-                Dim bill_type As String = CmbBillTypeQua.SelectedItem.ToString()
-                If bill_type = "Dine In" Then
-                    bill_type = "DI"
-                End If
-                If bill_type = "Take Away" Then
-                    bill_type = "TA"
-                End If
-                If bill_type = "Home Delivery" Then
-                    bill_type = "HD"
-                End If
-                If bill_type = "Third Party" Then
-                    bill_type = "TP"
-                End If
-                If bill_type = "Express Bill" Then
-                    bill_type = "TAEB"
-                End If
-                Dim cmd2 As New SqlCommand("GetQtyChangeLogByBillTypeAndDateRange", CN)
-                cmd2.CommandType = CommandType.StoredProcedure
-                cmd2.Parameters.AddWithValue("@FromDate", fromDate)
-                cmd2.Parameters.AddWithValue("@ToDate", toDate)
-                cmd2.Parameters.AddWithValue("@BillType", bill_type)
-                Dim adapter2 As New SqlDataAdapter(cmd2)
-                Dim datatable2 As New DataTable
-                adapter2.Fill(ds, "QtyChangeLog")
-                ' Merge the new DataTable into the existing DataSet
-                'ds.Tables.Add(datatable.Copy())
+        '        ' Call the stored procedure
+        '        Dim bill_type As String = CmbBillTypeQua.SelectedItem.ToString()
+        '        If bill_type = "Dine In" Then
+        '            bill_type = "DI"
+        '        End If
+        '        If bill_type = "Take Away" Then
+        '            bill_type = "TA"
+        '        End If
+        '        If bill_type = "Home Delivery" Then
+        '            bill_type = "HD"
+        '        End If
+        '        If bill_type = "Third Party" Then
+        '            bill_type = "TP"
+        '        End If
+        '        If bill_type = "Express Bill" Then
+        '            bill_type = "TAEB"
+        '        End If
+        '        Dim cmd2 As New SqlCommand("GetQtyChangeLogByBillTypeAndDateRange", CN)
+        '        cmd2.CommandType = CommandType.StoredProcedure
+        '        cmd2.Parameters.AddWithValue("@FromDate", fromDate)
+        '        cmd2.Parameters.AddWithValue("@ToDate", toDate)
+        '        cmd2.Parameters.AddWithValue("@BillType", bill_type)
+        '        Dim adapter2 As New SqlDataAdapter(cmd2)
+        '        Dim datatable2 As New DataTable
+        '        adapter2.Fill(ds, "QtyChangeLog")
+        '        ' Merge the new DataTable into the existing DataSet
+        '        'ds.Tables.Add(datatable.Copy())
 
-                ' Load the Crystal Report
-                Dim rpt2 As New RptQtychangeLog
-                rpt2.Load(Application.StartupPath & "\Reports\RptQtychangeLog.rpt")
+        '        ' Load the Crystal Report
+        '        Dim rpt2 As New RptQtychangeLog
+        '        rpt2.Load(Application.StartupPath & "\Reports\RptQtychangeLog.rpt")
 
-                ' Set the DataSource of the Crystal Report to the DataTable
-                'rpt.SetDataSource(dataTable)
-                rpt2.SetDataSource(ds)
-                ' Show the report
-                frmReport.CrystalReportViewer1.ReportSource = rpt2
-                frmReport.ShowDialog()
+        '        ' Set the DataSource of the Crystal Report to the DataTable
+        '        'rpt.SetDataSource(dataTable)
+        '        rpt2.SetDataSource(ds)
+        '        ' Show the report
+        '        frmReport.CrystalReportViewer1.ReportSource = rpt2
+        '        frmReport.ShowDialog()
 
-                ' Clean up
-                rpt2.Close()
-                rpt2.Dispose()
-                CN.Close()
+        '        ' Clean up
+        '        rpt2.Close()
+        '        rpt2.Dispose()
+        '        CN.Close()
 
-            ElseIf cmbPermissionQua.SelectedItem <> Nothing AndAlso cmbPermissionQua.SelectedItem <> "All" Then
-                Dim CN As New SqlConnection(connection)
-                CN.Open()
-                Dim MyCommand1 As New SqlCommand()
-                Dim myDA1 As New SqlDataAdapter()
-                Dim ds As New DataSet ' The DataSet you created.
+        '    ElseIf cmbPermissionQua.SelectedItem <> Nothing AndAlso cmbPermissionQua.SelectedItem <> "All" Then
+        '        Dim CN As New SqlConnection(connection)
+        '        CN.Open()
+        '        Dim MyCommand1 As New SqlCommand()
+        '        Dim myDA1 As New SqlDataAdapter()
+        '        Dim ds As New DataSet ' The DataSet you created.
 
-                MyCommand1.Connection = CN
-                MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
-                                "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
-                                "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
-                MyCommand1.CommandType = CommandType.Text
-                myDA1.SelectCommand = MyCommand1
-                myDA1.Fill(ds, "Hotel")
-                ' Call the stored procedure
-                Dim permission As String = cmbPermissionQua.SelectedItem.ToString()
-                Dim cmd2 As New SqlCommand("GetQtyChangeLogByPermissionAndDateRange", CN)
-                cmd2.CommandType = CommandType.StoredProcedure
-                cmd2.Parameters.AddWithValue("@FromDate", fromDate)
-                cmd2.Parameters.AddWithValue("@ToDate", toDate)
-                cmd2.Parameters.AddWithValue("@PermissionGrant", permission)
-                Dim adapter2 As New SqlDataAdapter(cmd2)
-                Dim datatable2 As New DataTable
-                adapter2.Fill(ds, "QtyChangeLog")
-                ' Merge the new DataTable into the existing DataSet
-                'ds.Tables.Add(datatable.Copy())
+        '        MyCommand1.Connection = CN
+        '        MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
+        '                        "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
+        '                        "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
+        '        MyCommand1.CommandType = CommandType.Text
+        '        myDA1.SelectCommand = MyCommand1
+        '        myDA1.Fill(ds, "Hotel")
+        '        ' Call the stored procedure
+        '        Dim permission As String = cmbPermissionQua.SelectedItem.ToString()
+        '        Dim cmd2 As New SqlCommand("GetQtyChangeLogByPermissionAndDateRange", CN)
+        '        cmd2.CommandType = CommandType.StoredProcedure
+        '        cmd2.Parameters.AddWithValue("@FromDate", fromDate)
+        '        cmd2.Parameters.AddWithValue("@ToDate", toDate)
+        '        cmd2.Parameters.AddWithValue("@PermissionGrant", permission)
+        '        Dim adapter2 As New SqlDataAdapter(cmd2)
+        '        Dim datatable2 As New DataTable
+        '        adapter2.Fill(ds, "QtyChangeLog")
+        '        ' Merge the new DataTable into the existing DataSet
+        '        'ds.Tables.Add(datatable.Copy())
 
-                ' Load the Crystal Report
-                Dim rpt2 As New RptQtychangeLog
-                rpt2.Load(Application.StartupPath & "\Reports\RptQtychangeLog.rpt")
+        '        ' Load the Crystal Report
+        '        Dim rpt2 As New RptQtychangeLog
+        '        rpt2.Load(Application.StartupPath & "\Reports\RptQtychangeLog.rpt")
 
-                ' Set the DataSource of the Crystal Report to the DataTable
-                'rpt.SetDataSource(dataTable)
-                rpt2.SetDataSource(ds)
-                ' Show the report
-                frmReport.CrystalReportViewer1.ReportSource = rpt2
-                frmReport.ShowDialog()
+        '        ' Set the DataSource of the Crystal Report to the DataTable
+        '        'rpt.SetDataSource(dataTable)
+        '        rpt2.SetDataSource(ds)
+        '        ' Show the report
+        '        frmReport.CrystalReportViewer1.ReportSource = rpt2
+        '        frmReport.ShowDialog()
 
-                ' Clean up
-                rpt2.Close()
-                rpt2.Dispose()
-                CN.Close()
+        '        ' Clean up
+        '        rpt2.Close()
+        '        rpt2.Dispose()
+        '        CN.Close()
 
-            ElseIf CmbDishNameQua.SelectedItem <> Nothing AndAlso CmbDishNameQua.SelectedItem.ToString() <> "All" Then
-                Dim CN As New SqlConnection(connection)
-                CN.Open()
-                Dim MyCommand1 As New SqlCommand()
-                Dim myDA1 As New SqlDataAdapter()
-                Dim ds As New DataSet ' The DataSet you created.
+        '    ElseIf CmbDishNameQua.SelectedItem <> Nothing AndAlso CmbDishNameQua.SelectedItem.ToString() <> "All" Then
+        '        Dim CN As New SqlConnection(connection)
+        '        CN.Open()
+        '        Dim MyCommand1 As New SqlCommand()
+        '        Dim myDA1 As New SqlDataAdapter()
+        '        Dim ds As New DataSet ' The DataSet you created.
 
-                MyCommand1.Connection = CN
-                MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
-                                "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
-                                "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
-                MyCommand1.CommandType = CommandType.Text
-                myDA1.SelectCommand = MyCommand1
-                myDA1.Fill(ds, "Hotel")
-                ' Call the stored procedure
-                Dim dish As String = CmbDishNameQua.SelectedItem.ToString()
-                Dim cmd2 As New SqlCommand("GetQtyChangeLogByDishnameAndDateRange", CN)
-                cmd2.CommandType = CommandType.StoredProcedure
-                cmd2.Parameters.AddWithValue("@FromDate", fromDate)
-                cmd2.Parameters.AddWithValue("@ToDate", toDate)
-                cmd2.Parameters.AddWithValue("@Dishname ", dish)
-                Dim adapter2 As New SqlDataAdapter(cmd2)
-                Dim datatable2 As New DataTable
-                adapter2.Fill(ds, "QtyChangeLog")
-                ' Merge the new DataTable into the existing DataSet
-                'ds.Tables.Add(datatable.Copy())
+        '        MyCommand1.Connection = CN
+        '        MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
+        '                        "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
+        '                        "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
+        '        MyCommand1.CommandType = CommandType.Text
+        '        myDA1.SelectCommand = MyCommand1
+        '        myDA1.Fill(ds, "Hotel")
+        '        ' Call the stored procedure
+        '        Dim dish As String = CmbDishNameQua.SelectedItem.ToString()
+        '        Dim cmd2 As New SqlCommand("GetQtyChangeLogByDishnameAndDateRange", CN)
+        '        cmd2.CommandType = CommandType.StoredProcedure
+        '        cmd2.Parameters.AddWithValue("@FromDate", fromDate)
+        '        cmd2.Parameters.AddWithValue("@ToDate", toDate)
+        '        cmd2.Parameters.AddWithValue("@Dishname ", dish)
+        '        Dim adapter2 As New SqlDataAdapter(cmd2)
+        '        Dim datatable2 As New DataTable
+        '        adapter2.Fill(ds, "QtyChangeLog")
+        '        ' Merge the new DataTable into the existing DataSet
+        '        'ds.Tables.Add(datatable.Copy())
 
-                ' Load the Crystal Report
-                Dim rpt2 As New RptQtychangeLog
-                rpt2.Load(Application.StartupPath & "\Reports\RptQtychangeLog.rpt")
+        '        ' Load the Crystal Report
+        '        Dim rpt2 As New RptQtychangeLog
+        '        rpt2.Load(Application.StartupPath & "\Reports\RptQtychangeLog.rpt")
 
-                ' Set the DataSource of the Crystal Report to the DataTable
-                'rpt.SetDataSource(dataTable)
-                rpt2.SetDataSource(ds)
-                ' Show the report
-                frmReport.CrystalReportViewer1.ReportSource = rpt2
-                frmReport.ShowDialog()
+        '        ' Set the DataSource of the Crystal Report to the DataTable
+        '        'rpt.SetDataSource(dataTable)
+        '        rpt2.SetDataSource(ds)
+        '        ' Show the report
+        '        frmReport.CrystalReportViewer1.ReportSource = rpt2
+        '        frmReport.ShowDialog()
 
-                ' Clean up
-                rpt2.Close()
-                rpt2.Dispose()
-                CN.Close()
-            End If
+        '        ' Clean up
+        '        rpt2.Close()
+        '        rpt2.Dispose()
+        '        CN.Close()
+        '    End If
 
-        Else
-            Dim CN As New SqlConnection(connection)
-            CN.Open()
-            Dim MyCommand1 As New SqlCommand()
-            Dim myDA1 As New SqlDataAdapter()
-            Dim ds As New DataSet ' The DataSet you created.
+        'Else
+        '    Dim CN As New SqlConnection(connection)
+        '    CN.Open()
+        '    Dim MyCommand1 As New SqlCommand()
+        '    Dim myDA1 As New SqlDataAdapter()
+        '    Dim ds As New DataSet ' The DataSet you created.
 
-            MyCommand1.Connection = CN
-            MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
-                                "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
-                                "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
-            MyCommand1.CommandType = CommandType.Text
-            myDA1.SelectCommand = MyCommand1
-            myDA1.Fill(ds, "Hotel")
-            ' Call the stored procedure
+        '    MyCommand1.Connection = CN
+        '    MyCommand1.CommandText = "SELECT ID, HotelName, LocalName AS AddressLine1, Address AS AddressLine2, " &
+        '                        "LocalAddress AS AddressLine3, ContactNo, EmailID, TIN, STNo, CIN, Logo, " &
+        '                        "BaseCurrency, CurrencyCode, TicketFooterMessage, ShowLogo FROM Hotel"
+        '    MyCommand1.CommandType = CommandType.Text
+        '    myDA1.SelectCommand = MyCommand1
+        '    myDA1.Fill(ds, "Hotel")
+        '    ' Call the stored procedure
 
-            Dim cmd2 As New SqlCommand("SearchQtyChangeLogByBillNo", CN)
-            cmd2.CommandType = CommandType.StoredProcedure
-            Dim searchquery As String = txtBillNumberQua.Text.Trim()
-            cmd2.Parameters.AddWithValue("@SearchQuery", searchquery)
-            Dim adapter2 As New SqlDataAdapter(cmd2)
-            Dim datatable2 As New DataTable
-            adapter2.Fill(ds, "QtyChangeLog")
-            ' Merge the new DataTable into the existing DataSet
-            'ds.Tables.Add(datatable.Copy())
+        '    Dim cmd2 As New SqlCommand("SearchQtyChangeLogByBillNo", CN)
+        '    cmd2.CommandType = CommandType.StoredProcedure
+        '    Dim searchquery As String = txtBillNumberQua.Text.Trim()
+        '    cmd2.Parameters.AddWithValue("@SearchQuery", searchquery)
+        '    Dim adapter2 As New SqlDataAdapter(cmd2)
+        '    Dim datatable2 As New DataTable
+        '    adapter2.Fill(ds, "QtyChangeLog")
+        '    ' Merge the new DataTable into the existing DataSet
+        '    'ds.Tables.Add(datatable.Copy())
 
-            ' Load the Crystal Report
-            Dim rpt2 As New RptQtychangeLog
-            rpt2.Load(Application.StartupPath & "\Reports\RptQtychangeLog.rpt")
+        '    ' Load the Crystal Report
+        '    Dim rpt2 As New RptQtychangeLog
+        '    rpt2.Load(Application.StartupPath & "\Reports\RptQtychangeLog.rpt")
 
-            ' Set the DataSource of the Crystal Report to the DataTable
-            'rpt.SetDataSource(dataTable)
-            rpt2.SetDataSource(ds)
-            ' Show the report
-            frmReport.CrystalReportViewer1.ReportSource = rpt2
-            frmReport.ShowDialog()
+        '    ' Set the DataSource of the Crystal Report to the DataTable
+        '    'rpt.SetDataSource(dataTable)
+        '    rpt2.SetDataSource(ds)
+        '    ' Show the report
+        '    frmReport.CrystalReportViewer1.ReportSource = rpt2
+        '    frmReport.ShowDialog()
 
-            ' Clean up
-            rpt2.Close()
-            rpt2.Dispose()
-            CN.Close()
-        End If
+        '    ' Clean up
+        '    rpt2.Close()
+        '    rpt2.Dispose()
+        '    CN.Close()
+        'End If
     End Sub
 
     Private Sub BtnPrintqua1_Click(sender As Object, e As EventArgs)
 
+    End Sub
+
+    Private Sub cmbOperator1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbOperator1.SelectedIndexChanged
+        filter_rate_change()
+    End Sub
+
+    Private Sub cmbpermission1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbpermission1.SelectedIndexChanged
+        filter_rate_change()
+    End Sub
+
+    Private Sub cmbDishName1_SelectedIndexChanged(sender As Object, e As EventArgs)
+        filter_rate_change()
+    End Sub
+
+
+
+    Private Sub cmbOperator3_SelectedIndexChanged(sender As Object, e As EventArgs)
+        filter_rate_change()
     End Sub
 End Class

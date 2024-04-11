@@ -22,13 +22,17 @@ Partial Class frmRateQtyItemLog
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmRateQtyItemLog))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmRateQtyItemLog))
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.tbRateChange = New System.Windows.Forms.TabPage()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.cmbpermission1 = New System.Windows.Forms.ComboBox()
+        Me.cmbOperator1 = New System.Windows.Forms.ComboBox()
         Me.cmbDishName = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -42,9 +46,11 @@ Partial Class frmRateQtyItemLog
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.cmbOperator = New System.Windows.Forms.ComboBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.btnReset = New System.Windows.Forms.Button()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.btnExportExcel = New System.Windows.Forms.Button()
+        Me.BtnPrint = New System.Windows.Forms.Button()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.txtChangeRateSum = New System.Windows.Forms.TextBox()
         Me.txtRateDiffSum = New System.Windows.Forms.TextBox()
@@ -80,8 +86,11 @@ Partial Class frmRateQtyItemLog
         Me.Label4Qua = New System.Windows.Forms.Label()
         Me.txtBillNumberQua = New System.Windows.Forms.TextBox()
         Me.Panel1Qua = New System.Windows.Forms.Panel()
+        Me.BtnPrintqua = New System.Windows.Forms.Button()
+        Me.btnExportExcelqua = New System.Windows.Forms.Button()
         Me.Label7Qua = New System.Windows.Forms.Label()
         Me.txtChangedQtyCount = New System.Windows.Forms.TextBox()
+        Me.btnResetqua = New System.Windows.Forms.Button()
         Me.DatagridViewQty = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -114,8 +123,11 @@ Partial Class frmRateQtyItemLog
         Me.Label4del = New System.Windows.Forms.Label()
         Me.txtBillNumberdl = New System.Windows.Forms.TextBox()
         Me.Panel1del = New System.Windows.Forms.Panel()
+        Me.BtnPrintdl = New System.Windows.Forms.Button()
+        Me.btnExportExceldl = New System.Windows.Forms.Button()
         Me.txtGrandTotaldl = New System.Windows.Forms.TextBox()
         Me.Label7del = New System.Windows.Forms.Label()
+        Me.btnResetdl = New System.Windows.Forms.Button()
         Me.DatagridViewItemDel = New System.Windows.Forms.DataGridView()
         Me.colID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.BillNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -130,15 +142,6 @@ Partial Class frmRateQtyItemLog
         Me.Remarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colComapnyId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colBranchId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.btnReset = New System.Windows.Forms.Button()
-        Me.btnExportExcel = New System.Windows.Forms.Button()
-        Me.BtnPrint = New System.Windows.Forms.Button()
-        Me.BtnPrintqua = New System.Windows.Forms.Button()
-        Me.btnExportExcelqua = New System.Windows.Forms.Button()
-        Me.btnResetqua = New System.Windows.Forms.Button()
-        Me.BtnPrintdl = New System.Windows.Forms.Button()
-        Me.btnExportExceldl = New System.Windows.Forms.Button()
-        Me.btnResetdl = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.tbRateChange.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -185,6 +188,8 @@ Partial Class frmRateQtyItemLog
         Me.Panel2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.cmbpermission1)
+        Me.Panel2.Controls.Add(Me.cmbOperator1)
         Me.Panel2.Controls.Add(Me.cmbDishName)
         Me.Panel2.Controls.Add(Me.Label1)
         Me.Panel2.Controls.Add(Me.Label9)
@@ -198,11 +203,28 @@ Partial Class frmRateQtyItemLog
         Me.Panel2.Controls.Add(Me.Label5)
         Me.Panel2.Controls.Add(Me.Label4)
         Me.Panel2.Controls.Add(Me.Label2)
-        Me.Panel2.Controls.Add(Me.cmbOperator)
         Me.Panel2.Location = New System.Drawing.Point(4, 3)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(950, 76)
         Me.Panel2.TabIndex = 10
+        '
+        'cmbpermission1
+        '
+        Me.cmbpermission1.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbpermission1.FormattingEnabled = True
+        Me.cmbpermission1.Location = New System.Drawing.Point(558, 6)
+        Me.cmbpermission1.Name = "cmbpermission1"
+        Me.cmbpermission1.Size = New System.Drawing.Size(145, 22)
+        Me.cmbpermission1.TabIndex = 146
+        '
+        'cmbOperator1
+        '
+        Me.cmbOperator1.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbOperator1.FormattingEnabled = True
+        Me.cmbOperator1.Location = New System.Drawing.Point(306, 47)
+        Me.cmbOperator1.Name = "cmbOperator1"
+        Me.cmbOperator1.Size = New System.Drawing.Size(145, 22)
+        Me.cmbOperator1.TabIndex = 145
         '
         'cmbDishName
         '
@@ -336,15 +358,6 @@ Partial Class frmRateQtyItemLog
         Me.Label2.TabIndex = 132
         Me.Label2.Text = "To"
         '
-        'cmbOperator
-        '
-        Me.cmbOperator.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmbOperator.FormattingEnabled = True
-        Me.cmbOperator.Location = New System.Drawing.Point(306, 44)
-        Me.cmbOperator.Name = "cmbOperator"
-        Me.cmbOperator.Size = New System.Drawing.Size(145, 22)
-        Me.cmbOperator.TabIndex = 134
-        '
         'Panel1
         '
         Me.Panel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
@@ -363,6 +376,22 @@ Partial Class frmRateQtyItemLog
         Me.Panel1.Size = New System.Drawing.Size(955, 60)
         Me.Panel1.TabIndex = 8
         '
+        'btnReset
+        '
+        Me.btnReset.BackColor = System.Drawing.SystemColors.Control
+        Me.btnReset.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnReset.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReset.ForeColor = System.Drawing.Color.Black
+        Me.btnReset.Image = CType(resources.GetObject("btnReset.Image"), System.Drawing.Image)
+        Me.btnReset.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnReset.Location = New System.Drawing.Point(5, 10)
+        Me.btnReset.Name = "btnReset"
+        Me.btnReset.Size = New System.Drawing.Size(106, 38)
+        Me.btnReset.TabIndex = 133
+        Me.btnReset.Text = "Reset"
+        Me.btnReset.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnReset.UseVisualStyleBackColor = False
+        '
         'Label7
         '
         Me.Label7.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -373,6 +402,35 @@ Partial Class frmRateQtyItemLog
         Me.Label7.Size = New System.Drawing.Size(102, 14)
         Me.Label7.TabIndex = 7
         Me.Label7.Text = "Changed Rate Total"
+        '
+        'btnExportExcel
+        '
+        Me.btnExportExcel.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnExportExcel.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExportExcel.ForeColor = System.Drawing.SystemColors.InfoText
+        Me.btnExportExcel.Image = CType(resources.GetObject("btnExportExcel.Image"), System.Drawing.Image)
+        Me.btnExportExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnExportExcel.Location = New System.Drawing.Point(118, 10)
+        Me.btnExportExcel.Name = "btnExportExcel"
+        Me.btnExportExcel.Size = New System.Drawing.Size(106, 38)
+        Me.btnExportExcel.TabIndex = 140
+        Me.btnExportExcel.Text = "Export Excel"
+        Me.btnExportExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnExportExcel.UseVisualStyleBackColor = True
+        '
+        'BtnPrint
+        '
+        Me.BtnPrint.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnPrint.ForeColor = System.Drawing.Color.Black
+        Me.BtnPrint.Image = CType(resources.GetObject("BtnPrint.Image"), System.Drawing.Image)
+        Me.BtnPrint.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BtnPrint.Location = New System.Drawing.Point(231, 10)
+        Me.BtnPrint.Name = "BtnPrint"
+        Me.BtnPrint.Size = New System.Drawing.Size(106, 38)
+        Me.BtnPrint.TabIndex = 130
+        Me.BtnPrint.Text = "Print"
+        Me.BtnPrint.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.BtnPrint.UseVisualStyleBackColor = True
         '
         'Label8
         '
@@ -421,6 +479,14 @@ Partial Class frmRateQtyItemLog
         Me.DatagridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DatagridView1.ColumnHeadersHeight = 40
         Me.DatagridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn10, Me.colBillNumber, Me.colDishName, Me.colChangedDate, Me.colOriginalRate, Me.colChangedRate, Me.colDiffrence, Me.colStatus, Me.colBillType, Me.colOperator, Me.colPermission, Me.colRemarks, Me.DataGridViewTextBoxColumn11, Me.DataGridViewTextBoxColumn12})
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DatagridView1.DefaultCellStyle = DataGridViewCellStyle2
         Me.DatagridView1.EnableHeadersVisualStyles = False
         Me.DatagridView1.Location = New System.Drawing.Point(4, 82)
         Me.DatagridView1.Name = "DatagridView1"
@@ -649,7 +715,7 @@ Partial Class frmRateQtyItemLog
         '
         Me.cmbOperatorQua.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbOperatorQua.FormattingEnabled = True
-        Me.cmbOperatorQua.Location = New System.Drawing.Point(306, 44)
+        Me.cmbOperatorQua.Location = New System.Drawing.Point(306, 48)
         Me.cmbOperatorQua.Name = "cmbOperatorQua"
         Me.cmbOperatorQua.Size = New System.Drawing.Size(145, 22)
         Me.cmbOperatorQua.TabIndex = 147
@@ -710,6 +776,36 @@ Partial Class frmRateQtyItemLog
         Me.Panel1Qua.Size = New System.Drawing.Size(955, 60)
         Me.Panel1Qua.TabIndex = 3
         '
+        'BtnPrintqua
+        '
+        Me.BtnPrintqua.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.BtnPrintqua.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnPrintqua.ForeColor = System.Drawing.SystemColors.InfoText
+        Me.BtnPrintqua.Image = CType(resources.GetObject("BtnPrintqua.Image"), System.Drawing.Image)
+        Me.BtnPrintqua.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BtnPrintqua.Location = New System.Drawing.Point(231, 10)
+        Me.BtnPrintqua.Name = "BtnPrintqua"
+        Me.BtnPrintqua.Size = New System.Drawing.Size(106, 38)
+        Me.BtnPrintqua.TabIndex = 153
+        Me.BtnPrintqua.Text = "Print"
+        Me.BtnPrintqua.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.BtnPrintqua.UseVisualStyleBackColor = True
+        '
+        'btnExportExcelqua
+        '
+        Me.btnExportExcelqua.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnExportExcelqua.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExportExcelqua.ForeColor = System.Drawing.SystemColors.InfoText
+        Me.btnExportExcelqua.Image = CType(resources.GetObject("btnExportExcelqua.Image"), System.Drawing.Image)
+        Me.btnExportExcelqua.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnExportExcelqua.Location = New System.Drawing.Point(118, 10)
+        Me.btnExportExcelqua.Name = "btnExportExcelqua"
+        Me.btnExportExcelqua.Size = New System.Drawing.Size(106, 38)
+        Me.btnExportExcelqua.TabIndex = 152
+        Me.btnExportExcelqua.Text = "Export Excel"
+        Me.btnExportExcelqua.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnExportExcelqua.UseVisualStyleBackColor = True
+        '
         'Label7Qua
         '
         Me.Label7Qua.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -732,6 +828,22 @@ Partial Class frmRateQtyItemLog
         Me.txtChangedQtyCount.Size = New System.Drawing.Size(154, 22)
         Me.txtChangedQtyCount.TabIndex = 0
         '
+        'btnResetqua
+        '
+        Me.btnResetqua.BackColor = System.Drawing.SystemColors.Control
+        Me.btnResetqua.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnResetqua.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnResetqua.ForeColor = System.Drawing.Color.Black
+        Me.btnResetqua.Image = CType(resources.GetObject("btnResetqua.Image"), System.Drawing.Image)
+        Me.btnResetqua.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnResetqua.Location = New System.Drawing.Point(5, 10)
+        Me.btnResetqua.Name = "btnResetqua"
+        Me.btnResetqua.Size = New System.Drawing.Size(106, 38)
+        Me.btnResetqua.TabIndex = 151
+        Me.btnResetqua.Text = "Reset"
+        Me.btnResetqua.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnResetqua.UseVisualStyleBackColor = False
+        '
         'DatagridViewQty
         '
         Me.DatagridViewQty.AllowUserToAddRows = False
@@ -740,16 +852,24 @@ Partial Class frmRateQtyItemLog
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DatagridViewQty.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DatagridViewQty.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DatagridViewQty.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DatagridViewQty.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.DatagridViewQty.ColumnHeadersHeight = 40
         Me.DatagridViewQty.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.Changed_Date, Me.Original_Quantity, Me.Changed_Quantity, Me.Diffrence, Me.Rate_Status, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7, Me.DataGridViewTextBoxColumn8, Me.DataGridViewTextBoxColumn9})
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DatagridViewQty.DefaultCellStyle = DataGridViewCellStyle4
         Me.DatagridViewQty.EnableHeadersVisualStyles = False
         Me.DatagridViewQty.Location = New System.Drawing.Point(4, 82)
         Me.DatagridViewQty.Name = "DatagridViewQty"
@@ -1040,6 +1160,35 @@ Partial Class frmRateQtyItemLog
         Me.Panel1del.Size = New System.Drawing.Size(951, 54)
         Me.Panel1del.TabIndex = 5
         '
+        'BtnPrintdl
+        '
+        Me.BtnPrintdl.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnPrintdl.ForeColor = System.Drawing.Color.Black
+        Me.BtnPrintdl.Image = CType(resources.GetObject("BtnPrintdl.Image"), System.Drawing.Image)
+        Me.BtnPrintdl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BtnPrintdl.Location = New System.Drawing.Point(229, 10)
+        Me.BtnPrintdl.Name = "BtnPrintdl"
+        Me.BtnPrintdl.Size = New System.Drawing.Size(106, 38)
+        Me.BtnPrintdl.TabIndex = 150
+        Me.BtnPrintdl.Text = "Print"
+        Me.BtnPrintdl.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.BtnPrintdl.UseVisualStyleBackColor = True
+        '
+        'btnExportExceldl
+        '
+        Me.btnExportExceldl.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnExportExceldl.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExportExceldl.ForeColor = System.Drawing.SystemColors.InfoText
+        Me.btnExportExceldl.Image = CType(resources.GetObject("btnExportExceldl.Image"), System.Drawing.Image)
+        Me.btnExportExceldl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnExportExceldl.Location = New System.Drawing.Point(117, 10)
+        Me.btnExportExceldl.Name = "btnExportExceldl"
+        Me.btnExportExceldl.Size = New System.Drawing.Size(106, 38)
+        Me.btnExportExceldl.TabIndex = 152
+        Me.btnExportExceldl.Text = "Export Excel"
+        Me.btnExportExceldl.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnExportExceldl.UseVisualStyleBackColor = True
+        '
         'txtGrandTotaldl
         '
         Me.txtGrandTotaldl.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -1061,6 +1210,22 @@ Partial Class frmRateQtyItemLog
         Me.Label7del.TabIndex = 4
         Me.Label7del.Text = "Grand Total"
         '
+        'btnResetdl
+        '
+        Me.btnResetdl.BackColor = System.Drawing.SystemColors.Control
+        Me.btnResetdl.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnResetdl.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnResetdl.ForeColor = System.Drawing.Color.Black
+        Me.btnResetdl.Image = CType(resources.GetObject("btnResetdl.Image"), System.Drawing.Image)
+        Me.btnResetdl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnResetdl.Location = New System.Drawing.Point(5, 10)
+        Me.btnResetdl.Name = "btnResetdl"
+        Me.btnResetdl.Size = New System.Drawing.Size(106, 38)
+        Me.btnResetdl.TabIndex = 151
+        Me.btnResetdl.Text = "Reset"
+        Me.btnResetdl.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnResetdl.UseVisualStyleBackColor = False
+        '
         'DatagridViewItemDel
         '
         Me.DatagridViewItemDel.AllowUserToAddRows = False
@@ -1069,14 +1234,14 @@ Partial Class frmRateQtyItemLog
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DatagridViewItemDel.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DatagridViewItemDel.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DatagridViewItemDel.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DatagridViewItemDel.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
         Me.DatagridViewItemDel.ColumnHeadersHeight = 40
         Me.DatagridViewItemDel.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colID, Me.BillNumber, Me.DishName, Me.Kot_Date, Me.table_No, Me.Quantity, Me.Rate, Me.Bill_Type, Me.Operator_, Me.Permission_Granted, Me.Remarks, Me.colComapnyId, Me.colBranchId})
         Me.DatagridViewItemDel.EnableHeadersVisualStyles = False
@@ -1168,142 +1333,6 @@ Partial Class frmRateQtyItemLog
         Me.colBranchId.Name = "colBranchId"
         Me.colBranchId.ReadOnly = True
         Me.colBranchId.Visible = False
-        '
-        'btnReset
-        '
-        Me.btnReset.BackColor = System.Drawing.SystemColors.Control
-        Me.btnReset.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnReset.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnReset.ForeColor = System.Drawing.Color.Black
-        Me.btnReset.Image = CType(resources.GetObject("btnReset.Image"), System.Drawing.Image)
-        Me.btnReset.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReset.Location = New System.Drawing.Point(5, 10)
-        Me.btnReset.Name = "btnReset"
-        Me.btnReset.Size = New System.Drawing.Size(106, 38)
-        Me.btnReset.TabIndex = 133
-        Me.btnReset.Text = "Reset"
-        Me.btnReset.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnReset.UseVisualStyleBackColor = False
-        '
-        'btnExportExcel
-        '
-        Me.btnExportExcel.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnExportExcel.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnExportExcel.ForeColor = System.Drawing.SystemColors.InfoText
-        Me.btnExportExcel.Image = CType(resources.GetObject("btnExportExcel.Image"), System.Drawing.Image)
-        Me.btnExportExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnExportExcel.Location = New System.Drawing.Point(118, 10)
-        Me.btnExportExcel.Name = "btnExportExcel"
-        Me.btnExportExcel.Size = New System.Drawing.Size(106, 38)
-        Me.btnExportExcel.TabIndex = 140
-        Me.btnExportExcel.Text = "Export Excel"
-        Me.btnExportExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnExportExcel.UseVisualStyleBackColor = True
-        '
-        'BtnPrint
-        '
-        Me.BtnPrint.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnPrint.ForeColor = System.Drawing.Color.Black
-        Me.BtnPrint.Image = CType(resources.GetObject("BtnPrint.Image"), System.Drawing.Image)
-        Me.BtnPrint.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BtnPrint.Location = New System.Drawing.Point(231, 10)
-        Me.BtnPrint.Name = "BtnPrint"
-        Me.BtnPrint.Size = New System.Drawing.Size(106, 38)
-        Me.BtnPrint.TabIndex = 130
-        Me.BtnPrint.Text = "Print"
-        Me.BtnPrint.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.BtnPrint.UseVisualStyleBackColor = True
-        '
-        'BtnPrintqua
-        '
-        Me.BtnPrintqua.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.BtnPrintqua.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnPrintqua.ForeColor = System.Drawing.SystemColors.InfoText
-        Me.BtnPrintqua.Image = CType(resources.GetObject("BtnPrintqua.Image"), System.Drawing.Image)
-        Me.BtnPrintqua.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BtnPrintqua.Location = New System.Drawing.Point(231, 10)
-        Me.BtnPrintqua.Name = "BtnPrintqua"
-        Me.BtnPrintqua.Size = New System.Drawing.Size(106, 38)
-        Me.BtnPrintqua.TabIndex = 153
-        Me.BtnPrintqua.Text = "Print"
-        Me.BtnPrintqua.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.BtnPrintqua.UseVisualStyleBackColor = True
-        '
-        'btnExportExcelqua
-        '
-        Me.btnExportExcelqua.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnExportExcelqua.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnExportExcelqua.ForeColor = System.Drawing.SystemColors.InfoText
-        Me.btnExportExcelqua.Image = CType(resources.GetObject("btnExportExcelqua.Image"), System.Drawing.Image)
-        Me.btnExportExcelqua.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnExportExcelqua.Location = New System.Drawing.Point(118, 10)
-        Me.btnExportExcelqua.Name = "btnExportExcelqua"
-        Me.btnExportExcelqua.Size = New System.Drawing.Size(106, 38)
-        Me.btnExportExcelqua.TabIndex = 152
-        Me.btnExportExcelqua.Text = "Export Excel"
-        Me.btnExportExcelqua.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnExportExcelqua.UseVisualStyleBackColor = True
-        '
-        'btnResetqua
-        '
-        Me.btnResetqua.BackColor = System.Drawing.SystemColors.Control
-        Me.btnResetqua.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnResetqua.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnResetqua.ForeColor = System.Drawing.Color.Black
-        Me.btnResetqua.Image = CType(resources.GetObject("btnResetqua.Image"), System.Drawing.Image)
-        Me.btnResetqua.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnResetqua.Location = New System.Drawing.Point(5, 10)
-        Me.btnResetqua.Name = "btnResetqua"
-        Me.btnResetqua.Size = New System.Drawing.Size(106, 38)
-        Me.btnResetqua.TabIndex = 151
-        Me.btnResetqua.Text = "Reset"
-        Me.btnResetqua.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnResetqua.UseVisualStyleBackColor = False
-        '
-        'BtnPrintdl
-        '
-        Me.BtnPrintdl.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnPrintdl.ForeColor = System.Drawing.Color.Black
-        Me.BtnPrintdl.Image = CType(resources.GetObject("BtnPrintdl.Image"), System.Drawing.Image)
-        Me.BtnPrintdl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BtnPrintdl.Location = New System.Drawing.Point(229, 10)
-        Me.BtnPrintdl.Name = "BtnPrintdl"
-        Me.BtnPrintdl.Size = New System.Drawing.Size(106, 38)
-        Me.BtnPrintdl.TabIndex = 150
-        Me.BtnPrintdl.Text = "Print"
-        Me.BtnPrintdl.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.BtnPrintdl.UseVisualStyleBackColor = True
-        '
-        'btnExportExceldl
-        '
-        Me.btnExportExceldl.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnExportExceldl.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnExportExceldl.ForeColor = System.Drawing.SystemColors.InfoText
-        Me.btnExportExceldl.Image = CType(resources.GetObject("btnExportExceldl.Image"), System.Drawing.Image)
-        Me.btnExportExceldl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnExportExceldl.Location = New System.Drawing.Point(117, 10)
-        Me.btnExportExceldl.Name = "btnExportExceldl"
-        Me.btnExportExceldl.Size = New System.Drawing.Size(106, 38)
-        Me.btnExportExceldl.TabIndex = 152
-        Me.btnExportExceldl.Text = "Export Excel"
-        Me.btnExportExceldl.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnExportExceldl.UseVisualStyleBackColor = True
-        '
-        'btnResetdl
-        '
-        Me.btnResetdl.BackColor = System.Drawing.SystemColors.Control
-        Me.btnResetdl.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnResetdl.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnResetdl.ForeColor = System.Drawing.Color.Black
-        Me.btnResetdl.Image = CType(resources.GetObject("btnResetdl.Image"), System.Drawing.Image)
-        Me.btnResetdl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnResetdl.Location = New System.Drawing.Point(5, 10)
-        Me.btnResetdl.Name = "btnResetdl"
-        Me.btnResetdl.Size = New System.Drawing.Size(106, 38)
-        Me.btnResetdl.TabIndex = 151
-        Me.btnResetdl.Text = "Reset"
-        Me.btnResetdl.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnResetdl.UseVisualStyleBackColor = False
         '
         'frmRateQtyItemLog
         '
@@ -1414,7 +1443,6 @@ Partial Class frmRateQtyItemLog
     Friend WithEvents Label2 As Label
     Friend WithEvents BtnPrint As Button
     Friend WithEvents btnReset As Button
-    Friend WithEvents cmbOperator As ComboBox
     Friend WithEvents Label4 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents dtpDateTo As DateTimePicker
@@ -1451,4 +1479,6 @@ Partial Class frmRateQtyItemLog
     Friend WithEvents Panel3 As Panel
     Friend WithEvents Panel4 As Panel
     Friend WithEvents BtnPrintqua As Button
+    Friend WithEvents cmbOperator1 As ComboBox
+    Friend WithEvents cmbpermission1 As ComboBox
 End Class

@@ -180,6 +180,7 @@ Public Class frmRateQtyItemLog
         'cmbOperator1.DataSource = dtable
 
         'con.Close()
+        CmbBillTypedl.Items.Clear()
         CmbBillTypedl.Items.Add("Dine In")
         CmbBillTypedl.Items.Add("Take Away")
         CmbBillTypedl.Items.Add("Home Delivery")
@@ -280,14 +281,7 @@ Public Class frmRateQtyItemLog
                 Reset_dl()
                 ' load_combobox_dl()
                 'check gridview column function if it zero rows the print button and export excel will be disabled
-                fillOperatorDl()
-                fill_bill_type_Dl()
-                fill_permission_Dl()
-                fill_dish_Dl()
-                cmbOperatordl.SelectedIndex = 0
-                CmbBillTypedl.SelectedIndex = 0
-                cmbPermissiondl.SelectedIndex = 0
-                cmbDishNameDl.SelectedIndex = 0
+
                 print_dl_en_dis()
         End Select
     End Sub
@@ -1105,15 +1099,16 @@ Public Class frmRateQtyItemLog
         'cmbOperator.SelectedIndex = 0
         txtBillNumberdl.Text = ""
         DatagridViewItemDel.Rows.Clear()
-        cmd_operator_select = False
-        cmb_bill_select = False
-        cmb_permission_select = False
-        cmbPermissiondl.SelectedItem = Nothing
-        cmbOperatordl.SelectedItem = Nothing
-        CmbBillTypedl.SelectedItem = Nothing
-        cmbDishNameDl.SelectedItem = Nothing
         BtnPrintdl.Enabled = False
         txtGrandTotaldl.Text = ""
+        fillOperatorDl()
+        fill_bill_type_Dl()
+        fill_permission_Dl()
+        fill_dish_Dl()
+        cmbOperatordl.SelectedIndex = 0
+        CmbBillTypedl.SelectedIndex = 0
+        cmbPermissiondl.SelectedIndex = 0
+        cmbDishNameDl.SelectedIndex = 0
     End Sub
 
     Private Sub btnResetdl_Click(sender As Object, e As EventArgs) Handles btnResetdl.Click
@@ -1827,7 +1822,8 @@ Public Class frmRateQtyItemLog
                     status = "Equal"
                 End If
                 changed_qty_count = changed_qty_count + chng_qty
-                DatagridViewQty.Rows.Add(rdr(0), rdr(1), rdr(2), rdr(3), rdr(4), rdr(5), Math.Abs(result), status, rdr(6), rdr(7), rdr(8), rdr(9), rdr(10), rdr(11))
+                Dim changedDate As Date = CDate(rdr(3))
+                DatagridViewQty.Rows.Add(rdr(0), rdr(1), rdr(2), changedDate.ToShortDateString(), rdr(4), rdr(5), Math.Abs(result), status, rdr(6), rdr(7), rdr(8), rdr(9), rdr(10), rdr(11))
             End While
 
             'txtRateDiffSum.Text = rate_diff_sum
@@ -1843,35 +1839,62 @@ Public Class frmRateQtyItemLog
 
 
     Public Sub filter_item_del()
-        con = New SqlConnection(cs)
-        con.Open()
-        Dim SQL As String = ""
-        SQL = "exec Proc_itemDeleted @d1,@d2,@Operator,@BillNo,@BillType,@Permission ,@Dish"
-        cmd = New SqlCommand(SQL, con)
-        cmd.Parameters.Add("@d1", SqlDbType.DateTime, 30, "DateFrom").Value = dtpDateFromdl.Value.Date.AddHours(_startTime)
-        cmd.Parameters.Add("@d2", SqlDbType.DateTime, 30, "DateTo").Value = dtpDateTodl.Value.Date.AddDays(1).AddHours(_endTime)
-        cmd.Parameters.Add("@Operator", SqlDbType.Int).Value = CInt(cmbOperatordl.SelectedValue)
-        cmd.Parameters.Add("@BillNo", SqlDbType.NVarChar, 50, "BillNo").Value = txtBillNumberdl.Text
-        cmd.Parameters.Add("@BillType", SqlDbType.NVarChar, 50, "BillType").Value = CmbBillTypedl.Text
-        cmd.Parameters.Add("@Permission", SqlDbType.Int).Value = CInt(cmbPermissiondl.SelectedValue)
-        cmd.Parameters.Add("@Dish", SqlDbType.Int).Value = CInt(cmbDishNameDl.SelectedValue)
-        rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection)
-        DatagridViewItemDel.Rows.Clear()
+        Try
+            Dim bill_type As String = ""
+            If CmbBillTypedl.SelectedItem IsNot Nothing Then
+                bill_type = CmbBillTypedl.SelectedItem.ToString()
+                Select Case bill_type
+                    Case "Dine In"
+                        bill_type = "DI"
+                    Case "Take Away"
+                        bill_type = "TA"
+                    Case "Home Delivery"
+                        bill_type = "HD"
+                    Case "Third Party"
+                        bill_type = "TP"
+                    Case "Express Bill"
+                        bill_type = "TAEB"
+                    Case Else
+                        bill_type = "All"
+                End Select
+            End If
 
-        Dim amount As Decimal = 0
-        Dim grand_tot As Decimal = 0
-        txtGrandTotaldl.Text = grand_tot
-        While (rdr.Read())
-            amount = CDec(rdr("Quantity")) * CDec(rdr("Rate"))
-            grand_tot = grand_tot + amount
-            DatagridViewItemDel.Rows.Add(rdr("ID"), rdr("BillNo"), rdr("DishName"), rdr("Kotdate"), rdr("TableNo"), rdr("Quantity"), rdr("Rate"), rdr("BillType"),
-                            rdr("OperatorName"), rdr("PermissionGrantedName"), rdr("Remarks"), rdr("companyId"), rdr("Branchid"))
-        End While
-        rdr.Close()
-        con.Close()
-        txtGrandTotaldl.Text = grand_tot
+            con = New SqlConnection(cs)
+            con.Open()
+            Dim SQL As String = ""
+            SQL = "exec Proc_itemDeleted @d1,@d2,@Operator,@BillNo,@BillType,@Permission ,@Dish"
+            cmd = New SqlCommand(SQL, con)
+            cmd.Parameters.Add("@d1", SqlDbType.DateTime, 30, "DateFrom").Value = dtpDateFromdl.Value.Date.AddHours(_startTime)
+            cmd.Parameters.Add("@d2", SqlDbType.DateTime, 30, "DateTo").Value = dtpDateTodl.Value.Date.AddDays(1).AddHours(_endTime)
+            cmd.Parameters.Add("@Operator", SqlDbType.Int).Value = CInt(cmbOperatordl.SelectedValue)
+            cmd.Parameters.Add("@BillNo", SqlDbType.NVarChar, 50, "BillNo").Value = txtBillNumberdl.Text
+            cmd.Parameters.Add("@BillType", SqlDbType.NVarChar, 50, "BillType").Value = bill_type
+            cmd.Parameters.Add("@Permission", SqlDbType.Int).Value = CInt(cmbPermissiondl.SelectedValue)
+            cmd.Parameters.Add("@Dish", SqlDbType.Int).Value = CInt(cmbDishNameDl.SelectedValue)
+            rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection)
+            DatagridViewItemDel.Rows.Clear()
+
+            Dim amount As Decimal = 0
+            Dim grand_tot As Decimal = 0
+            txtGrandTotaldl.Text = grand_tot
+
+            While (rdr.Read())
+                amount = CDec(rdr("Quantity")) * CDec(rdr("Rate"))
+                grand_tot = grand_tot + amount
+                Dim changedDate As Date = CDate(rdr(3))
+                DatagridViewItemDel.Rows.Add(rdr("ID"), rdr("BillNo"), rdr("DishName"), changedDate.ToShortDateString(), rdr("TableNo"), rdr("Quantity"), rdr("Rate"), rdr("BillType"),
+                                rdr("OperatorName"), rdr("PermissionGrantedName"), rdr("Remarks"), rdr("companyId"), rdr("Branchid"))
+            End While
+
+            txtGrandTotaldl.Text = grand_tot
+
+        Catch ex As Exception
+
+        Finally
+            rdr.Close()
+            con.Close()
+        End Try
         print_dl_en_dis()
-
     End Sub
 
 
@@ -2649,7 +2672,7 @@ Public Class frmRateQtyItemLog
         'cmbOperator1.DataSource = dtable
 
         'con.Close()
-
+        CmbBillType.Items.Clear()
         CmbBillType.Items.Add("Dine In")
         CmbBillType.Items.Add("Take Away")
         CmbBillType.Items.Add("Home Delivery")
@@ -2760,6 +2783,7 @@ Public Class frmRateQtyItemLog
         'cmbOperator1.DataSource = dtable
 
         'con.Close()
+        CmbBillTypeQua.Items.Clear()
         CmbBillTypeQua.Items.Add("Dine In")
         CmbBillTypeQua.Items.Add("Take Away")
         CmbBillTypeQua.Items.Add("Home Delivery")
@@ -2920,7 +2944,9 @@ Public Class frmRateQtyItemLog
                 ElseIf value1 = value2 Then
                     status = "Equal"
                 End If
-                DatagridView1.Rows.Add(rdr(0), rdr(1), rdr(2), rdr(3), rdr(4), rdr(5), Math.Abs(result), status, rdr(6), rdr(7), rdr(8), rdr(9), rdr(10), rdr(11))
+                ' Extracting only the date part from ChangedDate
+                Dim changedDate As Date = CDate(rdr(3))
+                DatagridView1.Rows.Add(rdr(0), rdr(1), rdr(2), changedDate.ToShortDateString(), rdr(4), rdr(5), Math.Abs(result), status, rdr(6), rdr(7), rdr(8), rdr(9), rdr(10), rdr(11))
             End While
             txtRateDiffSum.Text = rate_diff_sum
             txtChangeRateSum.Text = changed_rate_sum
@@ -2998,6 +3024,28 @@ Public Class frmRateQtyItemLog
 
     Public Sub filter_rate_change_print()
         Try
+            Dim bill_type As String
+            If CmbBillType.SelectedItem IsNot Nothing Then
+                bill_type = CStr(CmbBillType.SelectedItem)
+                If bill_type = "Dine In" Then
+                    bill_type = "DI"
+                End If
+                If bill_type = "Take Away" Then
+                    bill_type = "TA"
+                End If
+                If bill_type = "Home Delivery" Then
+                    bill_type = "HD"
+                End If
+                If bill_type = "Third Party" Then
+                    bill_type = "TP"
+                End If
+                If bill_type = "Express Bill" Then
+                    bill_type = "TAEB"
+                End If
+                If bill_type = "All" Then
+                    bill_type = "All"
+                End If
+            End If
             Using CN As New SqlConnection(connection)
                 CN.Open()
 
@@ -3017,7 +3065,7 @@ Public Class frmRateQtyItemLog
                 cmd.Parameters.Add("@d2", SqlDbType.DateTime).Value = dtpDateTo.Value.Date.AddDays(1).AddHours(_endTime)
                 cmd.Parameters.Add("@Operator", SqlDbType.Int).Value = CInt(cmbOperator1.SelectedValue)
                 cmd.Parameters.Add("@BillNo", SqlDbType.NVarChar, 50).Value = txtBillNumber.Text
-                cmd.Parameters.Add("@BillType", SqlDbType.NVarChar, 50).Value = CmbBillType.Text
+                cmd.Parameters.Add("@BillType", SqlDbType.NVarChar, 50).Value = bill_type
                 cmd.Parameters.Add("@Permission", SqlDbType.Int).Value = CInt(cmbpermission1.SelectedValue)
                 cmd.Parameters.Add("@Dish", SqlDbType.Int).Value = CInt(cmbDishName.SelectedValue)
 
@@ -3049,6 +3097,24 @@ Public Class frmRateQtyItemLog
 
     Public Sub filter_qty_change_print()
         Try
+            Dim bill_type As String = ""
+            If CmbBillTypeQua.SelectedItem IsNot Nothing Then
+                bill_type = CmbBillTypeQua.SelectedItem.ToString()
+                Select Case bill_type
+                    Case "Dine In"
+                        bill_type = "DI"
+                    Case "Take Away"
+                        bill_type = "TA"
+                    Case "Home Delivery"
+                        bill_type = "HD"
+                    Case "Third Party"
+                        bill_type = "TP"
+                    Case "Express Bill"
+                        bill_type = "TAEB"
+                    Case Else
+                        bill_type = "All"
+                End Select
+            End If
             Using CN As New SqlConnection(connection)
                 CN.Open()
 
@@ -3068,7 +3134,7 @@ Public Class frmRateQtyItemLog
                 cmd.Parameters.Add("@d2", SqlDbType.DateTime).Value = dtpDateToQua.Value.Date.AddDays(1).AddHours(_endTime)
                 cmd.Parameters.Add("@Operator", SqlDbType.Int).Value = CInt(cmbOperatorQua.SelectedValue)
                 cmd.Parameters.Add("@BillNo", SqlDbType.NVarChar, 50).Value = txtBillNumberQua.Text
-                cmd.Parameters.Add("@BillType", SqlDbType.NVarChar, 50).Value = CmbBillTypeQua.Text
+                cmd.Parameters.Add("@BillType", SqlDbType.NVarChar, 50).Value = bill_type
                 cmd.Parameters.Add("@Permission", SqlDbType.Int).Value = CInt(cmbPermissionQua.SelectedValue)
                 cmd.Parameters.Add("@Dish", SqlDbType.Int).Value = CInt(CmbDishNameQua.SelectedValue)
 
@@ -3099,6 +3165,25 @@ Public Class frmRateQtyItemLog
 
     Public Sub filter_item_del_print()
         Try
+            Dim bill_type As String = ""
+            If CmbBillTypedl.SelectedItem IsNot Nothing Then
+                bill_type = CmbBillTypedl.SelectedItem.ToString()
+                Select Case bill_type
+                    Case "Dine In"
+                        bill_type = "DI"
+                    Case "Take Away"
+                        bill_type = "TA"
+                    Case "Home Delivery"
+                        bill_type = "HD"
+                    Case "Third Party"
+                        bill_type = "TP"
+                    Case "Express Bill"
+                        bill_type = "TAEB"
+                    Case Else
+                        bill_type = "All"
+                End Select
+            End If
+
             Using con As New SqlConnection(connection)
                 con.Open()
 
@@ -3118,7 +3203,7 @@ Public Class frmRateQtyItemLog
                 cmd.Parameters.Add("@d2", SqlDbType.DateTime).Value = dtpDateTodl.Value.Date.AddDays(1).AddHours(_endTime)
                 cmd.Parameters.Add("@Operator", SqlDbType.Int).Value = CInt(cmbOperatordl.SelectedValue)
                 cmd.Parameters.Add("@BillNo", SqlDbType.NVarChar, 50).Value = txtBillNumberdl.Text
-                cmd.Parameters.Add("@BillType", SqlDbType.NVarChar, 50).Value = CmbBillTypedl.Text
+                cmd.Parameters.Add("@BillType", SqlDbType.NVarChar, 50).Value = bill_type
                 cmd.Parameters.Add("@Permission", SqlDbType.Int).Value = CInt(cmbPermissiondl.SelectedValue)
                 cmd.Parameters.Add("@Dish", SqlDbType.Int).Value = CInt(cmbDishNameDl.SelectedValue)
 

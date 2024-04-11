@@ -22,9 +22,9 @@ Partial Class frm_Display_sub_cat_dish
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DgwDisplaySubCatDish = New System.Windows.Forms.DataGridView()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.bttnUpdate = New System.Windows.Forms.Button()
@@ -47,37 +47,39 @@ Partial Class frm_Display_sub_cat_dish
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DgwDisplaySubCatDish.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.DgwDisplaySubCatDish.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DgwDisplaySubCatDish.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DgwDisplaySubCatDish.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgwDisplaySubCatDish.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DgwDisplaySubCatDish.ColumnHeadersHeight = 35
         Me.DgwDisplaySubCatDish.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.subCatId_2, Me.DishId_2, Me.IsActive__2, Me.DisplayOrder__2, Me.IsDelete, Me.Remove_})
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DgwDisplaySubCatDish.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgwDisplaySubCatDish.DefaultCellStyle = DataGridViewCellStyle2
         Me.DgwDisplaySubCatDish.EnableHeadersVisualStyles = False
         Me.DgwDisplaySubCatDish.Location = New System.Drawing.Point(0, 0)
         Me.DgwDisplaySubCatDish.Name = "DgwDisplaySubCatDish"
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DgwDisplaySubCatDish.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgwDisplaySubCatDish.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.DgwDisplaySubCatDish.RowHeadersVisible = False
+        Me.DgwDisplaySubCatDish.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DgwDisplaySubCatDish.Size = New System.Drawing.Size(798, 392)
         Me.DgwDisplaySubCatDish.TabIndex = 2
         '
@@ -114,37 +116,41 @@ Partial Class frm_Display_sub_cat_dish
         Me.subCatId_2.HeaderText = "Subcategory"
         Me.subCatId_2.Name = "subCatId_2"
         Me.subCatId_2.ReadOnly = True
+        Me.subCatId_2.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         '
         'DishId_2
         '
         Me.DishId_2.HeaderText = "Dish"
         Me.DishId_2.Name = "DishId_2"
         Me.DishId_2.ReadOnly = True
+        Me.DishId_2.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         '
         'IsActive__2
         '
         Me.IsActive__2.HeaderText = "IsActive"
         Me.IsActive__2.Name = "IsActive__2"
-        Me.IsActive__2.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.IsActive__2.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.IsActive__2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
         'DisplayOrder__2
         '
         Me.DisplayOrder__2.HeaderText = "Display Order"
         Me.DisplayOrder__2.Name = "DisplayOrder__2"
+        Me.DisplayOrder__2.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         '
         'IsDelete
         '
         Me.IsDelete.HeaderText = "IsDelete"
         Me.IsDelete.Name = "IsDelete"
         Me.IsDelete.ReadOnly = True
+        Me.IsDelete.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.IsDelete.Visible = False
         '
         'Remove_
         '
         Me.Remove_.HeaderText = "Remove"
         Me.Remove_.Name = "Remove_"
-        Me.Remove_.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Remove_.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.Remove_.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
         'frm_Display_sub_cat_dish

@@ -424,6 +424,7 @@ Public Class frmDisplayCategoryAndSubCategory
                 pictboxSubCat.Image.Save(Application.StartupPath & imagePath)
 
                 MessageBox.Show("SubCategory Added Successfully")
+                Reset_subCat()
             End Using
         Catch ex As Exception
             MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)

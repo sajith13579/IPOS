@@ -53,6 +53,12 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.DgvCategory = New System.Windows.Forms.DataGridView()
+        Me.Col_Cat_ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Col_Category = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Col_Category_Local = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Col_Cat_IsActive = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.Col_Category_Image = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Col_Display_Order = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.SubCategory = New System.Windows.Forms.TabPage()
@@ -98,13 +104,19 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.bttnAddToGrid = New System.Windows.Forms.Button()
         Me.DgwDisplaySubCatDish = New System.Windows.Forms.DataGridView()
+        Me.subCatId_2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DishId_2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.subCatName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DishName__2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DisplayOrder__2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.IsActive__2 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.Remove_ = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.DgwListDish = New System.Windows.Forms.DataGridView()
-        Me.Col_Cat_ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Col_Category = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Col_Category_Local = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Col_Cat_IsActive = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.Col_Category_Image = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Col_Display_Order = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DishId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DishName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DishNameLocal = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DisplayOrderDish = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Check = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Sub_Category = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SubCategoryLocal = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -113,18 +125,6 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.SubCatImage = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DisplayOrder = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.category_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DishId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DishName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DishNameLocal = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DisplayOrderDish = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Check = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.subCatId_2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DishId_2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.subCatName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DishName__2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DisplayOrder__2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.IsActive__2 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.Remove_ = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.TabControl1.SuspendLayout()
         Me.Category.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -441,6 +441,52 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.DgvCategory.Size = New System.Drawing.Size(716, 374)
         Me.DgvCategory.TabIndex = 19
         '
+        'Col_Cat_ID
+        '
+        Me.Col_Cat_ID.HeaderText = "ID"
+        Me.Col_Cat_ID.Name = "Col_Cat_ID"
+        Me.Col_Cat_ID.ReadOnly = True
+        Me.Col_Cat_ID.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Col_Cat_ID.Visible = False
+        '
+        'Col_Category
+        '
+        Me.Col_Category.HeaderText = "Category"
+        Me.Col_Category.Name = "Col_Category"
+        Me.Col_Category.ReadOnly = True
+        Me.Col_Category.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'Col_Category_Local
+        '
+        Me.Col_Category_Local.HeaderText = "Category Local"
+        Me.Col_Category_Local.Name = "Col_Category_Local"
+        Me.Col_Category_Local.ReadOnly = True
+        Me.Col_Category_Local.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'Col_Cat_IsActive
+        '
+        Me.Col_Cat_IsActive.HeaderText = "IsActive"
+        Me.Col_Cat_IsActive.Name = "Col_Cat_IsActive"
+        Me.Col_Cat_IsActive.ReadOnly = True
+        Me.Col_Cat_IsActive.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'Col_Category_Image
+        '
+        Me.Col_Category_Image.HeaderText = "Category_Image"
+        Me.Col_Category_Image.Name = "Col_Category_Image"
+        Me.Col_Category_Image.ReadOnly = True
+        Me.Col_Category_Image.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.Col_Category_Image.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Col_Category_Image.Visible = False
+        '
+        'Col_Display_Order
+        '
+        Me.Col_Display_Order.HeaderText = "Display Order"
+        Me.Col_Display_Order.Name = "Col_Display_Order"
+        Me.Col_Display_Order.ReadOnly = True
+        Me.Col_Display_Order.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.Col_Display_Order.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
         'Panel2
         '
         Me.Panel2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -674,7 +720,7 @@ Partial Class frmDisplayCategoryAndSubCategory
         '
         'cmbCatName
         '
-        Me.cmbCatName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.cmbCatName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cmbCatName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbCatName.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbCatName.FormattingEnabled = True
@@ -930,7 +976,7 @@ Partial Class frmDisplayCategoryAndSubCategory
         '
         'cmbSub2CategoryNam
         '
-        Me.cmbSub2CategoryNam.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.cmbSub2CategoryNam.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cmbSub2CategoryNam.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbSub2CategoryNam.FormattingEnabled = True
         Me.cmbSub2CategoryNam.Location = New System.Drawing.Point(120, 12)
@@ -1044,190 +1090,6 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.DgwDisplaySubCatDish.Size = New System.Drawing.Size(553, 292)
         Me.DgwDisplaySubCatDish.TabIndex = 12
         '
-        'DgwListDish
-        '
-        Me.DgwListDish.AllowUserToAddRows = False
-        Me.DgwListDish.AllowUserToDeleteRows = False
-        Me.DgwListDish.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.DgwListDish.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.DgwListDish.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
-        Me.DgwListDish.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DgwListDish.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle8
-        Me.DgwListDish.ColumnHeadersHeight = 35
-        Me.DgwListDish.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DishId, Me.DishName, Me.DishNameLocal, Me.DisplayOrderDish, Me.Check})
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle10.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DgwListDish.DefaultCellStyle = DataGridViewCellStyle10
-        Me.DgwListDish.EnableHeadersVisualStyles = False
-        Me.DgwListDish.Location = New System.Drawing.Point(1, 135)
-        Me.DgwListDish.MinimumSize = New System.Drawing.Size(4, 4)
-        Me.DgwListDish.Name = "DgwListDish"
-        Me.DgwListDish.RowHeadersVisible = False
-        Me.DgwListDish.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DgwListDish.Size = New System.Drawing.Size(508, 292)
-        Me.DgwListDish.TabIndex = 6
-        '
-        'Col_Cat_ID
-        '
-        Me.Col_Cat_ID.HeaderText = "ID"
-        Me.Col_Cat_ID.Name = "Col_Cat_ID"
-        Me.Col_Cat_ID.ReadOnly = True
-        Me.Col_Cat_ID.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Col_Cat_ID.Visible = False
-        '
-        'Col_Category
-        '
-        Me.Col_Category.HeaderText = "Category"
-        Me.Col_Category.Name = "Col_Category"
-        Me.Col_Category.ReadOnly = True
-        Me.Col_Category.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'Col_Category_Local
-        '
-        Me.Col_Category_Local.HeaderText = "Category Local"
-        Me.Col_Category_Local.Name = "Col_Category_Local"
-        Me.Col_Category_Local.ReadOnly = True
-        Me.Col_Category_Local.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'Col_Cat_IsActive
-        '
-        Me.Col_Cat_IsActive.HeaderText = "IsActive"
-        Me.Col_Cat_IsActive.Name = "Col_Cat_IsActive"
-        Me.Col_Cat_IsActive.ReadOnly = True
-        Me.Col_Cat_IsActive.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'Col_Category_Image
-        '
-        Me.Col_Category_Image.HeaderText = "Category_Image"
-        Me.Col_Category_Image.Name = "Col_Category_Image"
-        Me.Col_Category_Image.ReadOnly = True
-        Me.Col_Category_Image.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.Col_Category_Image.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Col_Category_Image.Visible = False
-        '
-        'Col_Display_Order
-        '
-        Me.Col_Display_Order.HeaderText = "Display Order"
-        Me.Col_Display_Order.Name = "Col_Display_Order"
-        Me.Col_Display_Order.ReadOnly = True
-        Me.Col_Display_Order.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.Col_Display_Order.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'ID
-        '
-        Me.ID.HeaderText = "ID"
-        Me.ID.Name = "ID"
-        Me.ID.ReadOnly = True
-        Me.ID.Visible = False
-        '
-        'Sub_Category
-        '
-        Me.Sub_Category.HeaderText = "Sub Category"
-        Me.Sub_Category.Name = "Sub_Category"
-        Me.Sub_Category.ReadOnly = True
-        Me.Sub_Category.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'SubCategoryLocal
-        '
-        Me.SubCategoryLocal.HeaderText = "Sub Category Local"
-        Me.SubCategoryLocal.Name = "SubCategoryLocal"
-        Me.SubCategoryLocal.ReadOnly = True
-        Me.SubCategoryLocal.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'IsActive
-        '
-        Me.IsActive.HeaderText = "IsActive"
-        Me.IsActive.Name = "IsActive"
-        Me.IsActive.ReadOnly = True
-        Me.IsActive.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'CategoryName
-        '
-        Me.CategoryName.HeaderText = "Category Name"
-        Me.CategoryName.Name = "CategoryName"
-        Me.CategoryName.ReadOnly = True
-        Me.CategoryName.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.CategoryName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'SubCatImage
-        '
-        Me.SubCatImage.HeaderText = "SubCatImage"
-        Me.SubCatImage.Name = "SubCatImage"
-        Me.SubCatImage.ReadOnly = True
-        Me.SubCatImage.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.SubCatImage.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'DisplayOrder
-        '
-        Me.DisplayOrder.HeaderText = "DisplayOrder"
-        Me.DisplayOrder.Name = "DisplayOrder"
-        Me.DisplayOrder.ReadOnly = True
-        Me.DisplayOrder.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DisplayOrder.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'category_id
-        '
-        Me.category_id.HeaderText = "category_id"
-        Me.category_id.Name = "category_id"
-        Me.category_id.ReadOnly = True
-        Me.category_id.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.category_id.Visible = False
-        '
-        'DishId
-        '
-        DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
-        Me.DishId.DefaultCellStyle = DataGridViewCellStyle9
-        Me.DishId.HeaderText = "Dish ID"
-        Me.DishId.Name = "DishId"
-        Me.DishId.Visible = False
-        '
-        'DishName
-        '
-        Me.DishName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.DishName.FillWeight = 26.11486!
-        Me.DishName.HeaderText = "Dish "
-        Me.DishName.Name = "DishName"
-        Me.DishName.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DishName.Width = 170
-        '
-        'DishNameLocal
-        '
-        Me.DishNameLocal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.DishNameLocal.FillWeight = 334.2703!
-        Me.DishNameLocal.HeaderText = "Dish  Local"
-        Me.DishNameLocal.Name = "DishNameLocal"
-        Me.DishNameLocal.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DishNameLocal.Width = 186
-        '
-        'DisplayOrderDish
-        '
-        Me.DisplayOrderDish.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.DisplayOrderDish.FillWeight = 19.3103!
-        Me.DisplayOrderDish.HeaderText = "Display Order"
-        Me.DisplayOrderDish.Name = "DisplayOrderDish"
-        Me.DisplayOrderDish.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'Check
-        '
-        Me.Check.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.Check.FillWeight = 20.30457!
-        Me.Check.HeaderText = "check"
-        Me.Check.Name = "Check"
-        Me.Check.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
         'subCatId_2
         '
         Me.subCatId_2.HeaderText = "subCatID"
@@ -1273,6 +1135,145 @@ Partial Class frmDisplayCategoryAndSubCategory
         Me.Remove_.Name = "Remove_"
         Me.Remove_.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.Remove_.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        '
+        'DgwListDish
+        '
+        Me.DgwListDish.AllowUserToAddRows = False
+        Me.DgwListDish.AllowUserToDeleteRows = False
+        Me.DgwListDish.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.DgwListDish.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.DgwListDish.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.DgwListDish.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgwListDish.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle8
+        Me.DgwListDish.ColumnHeadersHeight = 35
+        Me.DgwListDish.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DishId, Me.DishName, Me.DishNameLocal, Me.DisplayOrderDish, Me.Check})
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgwListDish.DefaultCellStyle = DataGridViewCellStyle10
+        Me.DgwListDish.EnableHeadersVisualStyles = False
+        Me.DgwListDish.Location = New System.Drawing.Point(1, 135)
+        Me.DgwListDish.MinimumSize = New System.Drawing.Size(4, 4)
+        Me.DgwListDish.Name = "DgwListDish"
+        Me.DgwListDish.RowHeadersVisible = False
+        Me.DgwListDish.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DgwListDish.Size = New System.Drawing.Size(508, 292)
+        Me.DgwListDish.TabIndex = 6
+        '
+        'DishId
+        '
+        DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
+        Me.DishId.DefaultCellStyle = DataGridViewCellStyle9
+        Me.DishId.HeaderText = "Dish ID"
+        Me.DishId.Name = "DishId"
+        Me.DishId.Visible = False
+        '
+        'DishName
+        '
+        Me.DishName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.DishName.FillWeight = 26.11486!
+        Me.DishName.HeaderText = "Dish "
+        Me.DishName.Name = "DishName"
+        Me.DishName.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DishName.Width = 170
+        '
+        'DishNameLocal
+        '
+        Me.DishNameLocal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.DishNameLocal.FillWeight = 334.2703!
+        Me.DishNameLocal.HeaderText = "Dish  Local"
+        Me.DishNameLocal.Name = "DishNameLocal"
+        Me.DishNameLocal.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DishNameLocal.Width = 186
+        '
+        'DisplayOrderDish
+        '
+        Me.DisplayOrderDish.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DisplayOrderDish.FillWeight = 19.3103!
+        Me.DisplayOrderDish.HeaderText = "Display Order"
+        Me.DisplayOrderDish.Name = "DisplayOrderDish"
+        Me.DisplayOrderDish.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'Check
+        '
+        Me.Check.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Check.FillWeight = 20.30457!
+        Me.Check.HeaderText = "check"
+        Me.Check.Name = "Check"
+        Me.Check.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'ID
+        '
+        Me.ID.HeaderText = "ID"
+        Me.ID.Name = "ID"
+        Me.ID.ReadOnly = True
+        Me.ID.Visible = False
+        '
+        'Sub_Category
+        '
+        Me.Sub_Category.HeaderText = "Sub Category"
+        Me.Sub_Category.Name = "Sub_Category"
+        Me.Sub_Category.ReadOnly = True
+        Me.Sub_Category.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'SubCategoryLocal
+        '
+        Me.SubCategoryLocal.HeaderText = "Sub Category Local"
+        Me.SubCategoryLocal.Name = "SubCategoryLocal"
+        Me.SubCategoryLocal.ReadOnly = True
+        Me.SubCategoryLocal.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'IsActive
+        '
+        Me.IsActive.HeaderText = "IsActive"
+        Me.IsActive.Name = "IsActive"
+        Me.IsActive.ReadOnly = True
+        Me.IsActive.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'CategoryName
+        '
+        Me.CategoryName.HeaderText = "Category Name"
+        Me.CategoryName.Name = "CategoryName"
+        Me.CategoryName.ReadOnly = True
+        Me.CategoryName.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.CategoryName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'SubCatImage
+        '
+        Me.SubCatImage.HeaderText = "SubCatImage"
+        Me.SubCatImage.Name = "SubCatImage"
+        Me.SubCatImage.ReadOnly = True
+        Me.SubCatImage.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.SubCatImage.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.SubCatImage.Visible = False
+        '
+        'DisplayOrder
+        '
+        Me.DisplayOrder.HeaderText = "DisplayOrder"
+        Me.DisplayOrder.Name = "DisplayOrder"
+        Me.DisplayOrder.ReadOnly = True
+        Me.DisplayOrder.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DisplayOrder.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'category_id
+        '
+        Me.category_id.HeaderText = "category_id"
+        Me.category_id.Name = "category_id"
+        Me.category_id.ReadOnly = True
+        Me.category_id.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.category_id.Visible = False
         '
         'frmDisplayCategoryAndSubCategory
         '
@@ -1392,14 +1393,6 @@ Partial Class frmDisplayCategoryAndSubCategory
     Friend WithEvents Col_Cat_IsActive As DataGridViewCheckBoxColumn
     Friend WithEvents Col_Category_Image As DataGridViewTextBoxColumn
     Friend WithEvents Col_Display_Order As DataGridViewTextBoxColumn
-    Friend WithEvents ID As DataGridViewTextBoxColumn
-    Friend WithEvents Sub_Category As DataGridViewTextBoxColumn
-    Friend WithEvents SubCategoryLocal As DataGridViewTextBoxColumn
-    Friend WithEvents IsActive As DataGridViewCheckBoxColumn
-    Friend WithEvents CategoryName As DataGridViewTextBoxColumn
-    Friend WithEvents SubCatImage As DataGridViewTextBoxColumn
-    Friend WithEvents DisplayOrder As DataGridViewTextBoxColumn
-    Friend WithEvents category_id As DataGridViewTextBoxColumn
     Friend WithEvents subCatId_2 As DataGridViewTextBoxColumn
     Friend WithEvents DishId_2 As DataGridViewTextBoxColumn
     Friend WithEvents subCatName As DataGridViewTextBoxColumn
@@ -1412,4 +1405,12 @@ Partial Class frmDisplayCategoryAndSubCategory
     Friend WithEvents DishNameLocal As DataGridViewTextBoxColumn
     Friend WithEvents DisplayOrderDish As DataGridViewTextBoxColumn
     Friend WithEvents Check As DataGridViewCheckBoxColumn
+    Friend WithEvents ID As DataGridViewTextBoxColumn
+    Friend WithEvents Sub_Category As DataGridViewTextBoxColumn
+    Friend WithEvents SubCategoryLocal As DataGridViewTextBoxColumn
+    Friend WithEvents IsActive As DataGridViewCheckBoxColumn
+    Friend WithEvents CategoryName As DataGridViewTextBoxColumn
+    Friend WithEvents SubCatImage As DataGridViewTextBoxColumn
+    Friend WithEvents DisplayOrder As DataGridViewTextBoxColumn
+    Friend WithEvents category_id As DataGridViewTextBoxColumn
 End Class

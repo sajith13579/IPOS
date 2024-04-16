@@ -23,12 +23,12 @@ Partial Class frmRateQtyItemLog
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmRateQtyItemLog))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.tbRateChange = New System.Windows.Forms.TabPage()
         Me.Panel2 = New System.Windows.Forms.Panel()
@@ -56,6 +56,20 @@ Partial Class frmRateQtyItemLog
         Me.txtChangeRateSum = New System.Windows.Forms.TextBox()
         Me.txtRateDiffSum = New System.Windows.Forms.TextBox()
         Me.DatagridView1 = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colBillNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colDishName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colChangedDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colOriginalRate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colChangedRate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colDiffrence = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colBillType = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colOperator = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colPermission = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colRemarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tbQuantityChange = New System.Windows.Forms.TabPage()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.CmbDishNameQua = New System.Windows.Forms.ComboBox()
@@ -79,6 +93,20 @@ Partial Class frmRateQtyItemLog
         Me.txtChangedQtyCount = New System.Windows.Forms.TextBox()
         Me.btnResetqua = New System.Windows.Forms.Button()
         Me.DatagridViewQty = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Changed_Date = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Original_Quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Changed_Quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Diffrence = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Rate_Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tbItemDeleted = New System.Windows.Forms.TabPage()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.cmbDishNameDl = New System.Windows.Forms.ComboBox()
@@ -102,34 +130,6 @@ Partial Class frmRateQtyItemLog
         Me.Label7del = New System.Windows.Forms.Label()
         Me.btnResetdl = New System.Windows.Forms.Button()
         Me.DatagridViewItemDel = New System.Windows.Forms.DataGridView()
-        Me.DataGridViewTextBoxColumn10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colBillNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colDishName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colChangedDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colOriginalRate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colChangedRate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colDiffrence = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colBillType = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colOperator = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colPermission = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colRemarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Changed_Date = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Original_Quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Changed_Quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Diffrence = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Rate_Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.BillNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DishName = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -211,6 +211,8 @@ Partial Class frmRateQtyItemLog
         '
         'cmbpermission1
         '
+        Me.cmbpermission1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbpermission1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbpermission1.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbpermission1.FormattingEnabled = True
         Me.cmbpermission1.Location = New System.Drawing.Point(558, 6)
@@ -220,6 +222,8 @@ Partial Class frmRateQtyItemLog
         '
         'cmbOperator1
         '
+        Me.cmbOperator1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbOperator1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbOperator1.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbOperator1.FormattingEnabled = True
         Me.cmbOperator1.Location = New System.Drawing.Point(306, 47)
@@ -229,6 +233,8 @@ Partial Class frmRateQtyItemLog
         '
         'cmbDishName
         '
+        Me.cmbDishName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbDishName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbDishName.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbDishName.FormattingEnabled = True
         Me.cmbDishName.Location = New System.Drawing.Point(558, 44)
@@ -309,6 +315,8 @@ Partial Class frmRateQtyItemLog
         '
         'CmbBillType
         '
+        Me.CmbBillType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.CmbBillType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.CmbBillType.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CmbBillType.FormattingEnabled = True
         Me.CmbBillType.Location = New System.Drawing.Point(791, 6)
@@ -471,24 +479,24 @@ Partial Class frmRateQtyItemLog
         Me.DatagridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DatagridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DatagridView1.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DatagridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
+        DataGridViewCellStyle19.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle19.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DatagridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle19
         Me.DatagridView1.ColumnHeadersHeight = 40
         Me.DatagridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn10, Me.colBillNumber, Me.colDishName, Me.colChangedDate, Me.colOriginalRate, Me.colChangedRate, Me.colDiffrence, Me.colStatus, Me.colBillType, Me.colOperator, Me.colPermission, Me.colRemarks, Me.DataGridViewTextBoxColumn11, Me.DataGridViewTextBoxColumn12})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DatagridView1.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle20.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DatagridView1.DefaultCellStyle = DataGridViewCellStyle20
         Me.DatagridView1.EnableHeadersVisualStyles = False
         Me.DatagridView1.Location = New System.Drawing.Point(4, 82)
         Me.DatagridView1.Name = "DatagridView1"
@@ -498,6 +506,104 @@ Partial Class frmRateQtyItemLog
         Me.DatagridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DatagridView1.Size = New System.Drawing.Size(955, 400)
         Me.DatagridView1.TabIndex = 3
+        '
+        'DataGridViewTextBoxColumn10
+        '
+        Me.DataGridViewTextBoxColumn10.HeaderText = "ID"
+        Me.DataGridViewTextBoxColumn10.Name = "DataGridViewTextBoxColumn10"
+        Me.DataGridViewTextBoxColumn10.ReadOnly = True
+        Me.DataGridViewTextBoxColumn10.Visible = False
+        '
+        'colBillNumber
+        '
+        Me.colBillNumber.HeaderText = "Bill Number"
+        Me.colBillNumber.Name = "colBillNumber"
+        Me.colBillNumber.ReadOnly = True
+        Me.colBillNumber.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'colDishName
+        '
+        Me.colDishName.HeaderText = "Dish Name"
+        Me.colDishName.Name = "colDishName"
+        Me.colDishName.ReadOnly = True
+        Me.colDishName.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'colChangedDate
+        '
+        Me.colChangedDate.HeaderText = "Changed Date"
+        Me.colChangedDate.Name = "colChangedDate"
+        Me.colChangedDate.ReadOnly = True
+        Me.colChangedDate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'colOriginalRate
+        '
+        Me.colOriginalRate.HeaderText = "Original Rate"
+        Me.colOriginalRate.Name = "colOriginalRate"
+        Me.colOriginalRate.ReadOnly = True
+        Me.colOriginalRate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'colChangedRate
+        '
+        Me.colChangedRate.HeaderText = "Changed Rate"
+        Me.colChangedRate.Name = "colChangedRate"
+        Me.colChangedRate.ReadOnly = True
+        Me.colChangedRate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'colDiffrence
+        '
+        Me.colDiffrence.HeaderText = "Diffrence"
+        Me.colDiffrence.Name = "colDiffrence"
+        Me.colDiffrence.ReadOnly = True
+        Me.colDiffrence.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'colStatus
+        '
+        Me.colStatus.HeaderText = "Rate Status"
+        Me.colStatus.Name = "colStatus"
+        Me.colStatus.ReadOnly = True
+        Me.colStatus.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'colBillType
+        '
+        Me.colBillType.HeaderText = "Bill Type"
+        Me.colBillType.Name = "colBillType"
+        Me.colBillType.ReadOnly = True
+        Me.colBillType.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'colOperator
+        '
+        Me.colOperator.HeaderText = "Operator"
+        Me.colOperator.Name = "colOperator"
+        Me.colOperator.ReadOnly = True
+        Me.colOperator.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'colPermission
+        '
+        Me.colPermission.HeaderText = "Permission Granted"
+        Me.colPermission.Name = "colPermission"
+        Me.colPermission.ReadOnly = True
+        Me.colPermission.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'colRemarks
+        '
+        Me.colRemarks.HeaderText = "Remarks"
+        Me.colRemarks.Name = "colRemarks"
+        Me.colRemarks.ReadOnly = True
+        Me.colRemarks.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'DataGridViewTextBoxColumn11
+        '
+        Me.DataGridViewTextBoxColumn11.HeaderText = "comp_Id"
+        Me.DataGridViewTextBoxColumn11.Name = "DataGridViewTextBoxColumn11"
+        Me.DataGridViewTextBoxColumn11.ReadOnly = True
+        Me.DataGridViewTextBoxColumn11.Visible = False
+        '
+        'DataGridViewTextBoxColumn12
+        '
+        Me.DataGridViewTextBoxColumn12.HeaderText = "Branch_ID"
+        Me.DataGridViewTextBoxColumn12.Name = "DataGridViewTextBoxColumn12"
+        Me.DataGridViewTextBoxColumn12.ReadOnly = True
+        Me.DataGridViewTextBoxColumn12.Visible = False
         '
         'tbQuantityChange
         '
@@ -538,6 +644,8 @@ Partial Class frmRateQtyItemLog
         '
         'CmbDishNameQua
         '
+        Me.CmbDishNameQua.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.CmbDishNameQua.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.CmbDishNameQua.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CmbDishNameQua.FormattingEnabled = True
         Me.CmbDishNameQua.Location = New System.Drawing.Point(558, 45)
@@ -568,6 +676,8 @@ Partial Class frmRateQtyItemLog
         '
         'CmbBillTypeQua
         '
+        Me.CmbBillTypeQua.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.CmbBillTypeQua.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.CmbBillTypeQua.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CmbBillTypeQua.FormattingEnabled = True
         Me.CmbBillTypeQua.Location = New System.Drawing.Point(791, 6)
@@ -620,6 +730,8 @@ Partial Class frmRateQtyItemLog
         '
         'cmbPermissionQua
         '
+        Me.cmbPermissionQua.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbPermissionQua.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbPermissionQua.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbPermissionQua.FormattingEnabled = True
         Me.cmbPermissionQua.Location = New System.Drawing.Point(558, 6)
@@ -629,6 +741,8 @@ Partial Class frmRateQtyItemLog
         '
         'cmbOperatorQua
         '
+        Me.cmbOperatorQua.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbOperatorQua.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbOperatorQua.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbOperatorQua.FormattingEnabled = True
         Me.cmbOperatorQua.Location = New System.Drawing.Point(306, 48)
@@ -769,24 +883,24 @@ Partial Class frmRateQtyItemLog
         Me.DatagridViewQty.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DatagridViewQty.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DatagridViewQty.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DatagridViewQty.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle21.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
+        DataGridViewCellStyle21.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle21.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DatagridViewQty.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle21
         Me.DatagridViewQty.ColumnHeadersHeight = 40
         Me.DatagridViewQty.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.Changed_Date, Me.Original_Quantity, Me.Changed_Quantity, Me.Diffrence, Me.Rate_Status, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7, Me.DataGridViewTextBoxColumn8, Me.DataGridViewTextBoxColumn9})
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DatagridViewQty.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle22.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DatagridViewQty.DefaultCellStyle = DataGridViewCellStyle22
         Me.DatagridViewQty.EnableHeadersVisualStyles = False
         Me.DatagridViewQty.Location = New System.Drawing.Point(4, 82)
         Me.DatagridViewQty.Name = "DatagridViewQty"
@@ -795,6 +909,104 @@ Partial Class frmRateQtyItemLog
         Me.DatagridViewQty.RowTemplate.Height = 25
         Me.DatagridViewQty.Size = New System.Drawing.Size(950, 400)
         Me.DatagridViewQty.TabIndex = 2
+        '
+        'DataGridViewTextBoxColumn1
+        '
+        Me.DataGridViewTextBoxColumn1.HeaderText = "ID"
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        Me.DataGridViewTextBoxColumn1.ReadOnly = True
+        Me.DataGridViewTextBoxColumn1.Visible = False
+        '
+        'DataGridViewTextBoxColumn2
+        '
+        Me.DataGridViewTextBoxColumn2.HeaderText = "Bill Number"
+        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        Me.DataGridViewTextBoxColumn2.ReadOnly = True
+        Me.DataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'DataGridViewTextBoxColumn3
+        '
+        Me.DataGridViewTextBoxColumn3.HeaderText = "Dish Name"
+        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+        Me.DataGridViewTextBoxColumn3.ReadOnly = True
+        Me.DataGridViewTextBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'Changed_Date
+        '
+        Me.Changed_Date.HeaderText = "Changed Date"
+        Me.Changed_Date.Name = "Changed_Date"
+        Me.Changed_Date.ReadOnly = True
+        Me.Changed_Date.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'Original_Quantity
+        '
+        Me.Original_Quantity.HeaderText = "Original Qty"
+        Me.Original_Quantity.Name = "Original_Quantity"
+        Me.Original_Quantity.ReadOnly = True
+        Me.Original_Quantity.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'Changed_Quantity
+        '
+        Me.Changed_Quantity.HeaderText = "Changed Qty"
+        Me.Changed_Quantity.Name = "Changed_Quantity"
+        Me.Changed_Quantity.ReadOnly = True
+        Me.Changed_Quantity.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'Diffrence
+        '
+        Me.Diffrence.HeaderText = "Diffrence"
+        Me.Diffrence.Name = "Diffrence"
+        Me.Diffrence.ReadOnly = True
+        Me.Diffrence.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'Rate_Status
+        '
+        Me.Rate_Status.HeaderText = "Rate Status"
+        Me.Rate_Status.Name = "Rate_Status"
+        Me.Rate_Status.ReadOnly = True
+        Me.Rate_Status.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'DataGridViewTextBoxColumn4
+        '
+        Me.DataGridViewTextBoxColumn4.HeaderText = "Bill Type"
+        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
+        Me.DataGridViewTextBoxColumn4.ReadOnly = True
+        Me.DataGridViewTextBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'DataGridViewTextBoxColumn5
+        '
+        Me.DataGridViewTextBoxColumn5.HeaderText = "Operator"
+        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
+        Me.DataGridViewTextBoxColumn5.ReadOnly = True
+        Me.DataGridViewTextBoxColumn5.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'DataGridViewTextBoxColumn6
+        '
+        Me.DataGridViewTextBoxColumn6.HeaderText = "Permission Granted"
+        Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
+        Me.DataGridViewTextBoxColumn6.ReadOnly = True
+        Me.DataGridViewTextBoxColumn6.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'DataGridViewTextBoxColumn7
+        '
+        Me.DataGridViewTextBoxColumn7.HeaderText = "Remarks"
+        Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
+        Me.DataGridViewTextBoxColumn7.ReadOnly = True
+        Me.DataGridViewTextBoxColumn7.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'DataGridViewTextBoxColumn8
+        '
+        Me.DataGridViewTextBoxColumn8.HeaderText = "comp_Id"
+        Me.DataGridViewTextBoxColumn8.Name = "DataGridViewTextBoxColumn8"
+        Me.DataGridViewTextBoxColumn8.ReadOnly = True
+        Me.DataGridViewTextBoxColumn8.Visible = False
+        '
+        'DataGridViewTextBoxColumn9
+        '
+        Me.DataGridViewTextBoxColumn9.HeaderText = "Branch_ID"
+        Me.DataGridViewTextBoxColumn9.Name = "DataGridViewTextBoxColumn9"
+        Me.DataGridViewTextBoxColumn9.ReadOnly = True
+        Me.DataGridViewTextBoxColumn9.Visible = False
         '
         'tbItemDeleted
         '
@@ -835,6 +1047,8 @@ Partial Class frmRateQtyItemLog
         '
         'cmbDishNameDl
         '
+        Me.cmbDishNameDl.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbDishNameDl.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbDishNameDl.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbDishNameDl.FormattingEnabled = True
         Me.cmbDishNameDl.Location = New System.Drawing.Point(558, 44)
@@ -865,6 +1079,8 @@ Partial Class frmRateQtyItemLog
         '
         'CmbBillTypedl
         '
+        Me.CmbBillTypedl.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.CmbBillTypedl.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.CmbBillTypedl.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CmbBillTypedl.FormattingEnabled = True
         Me.CmbBillTypedl.Location = New System.Drawing.Point(791, 6)
@@ -917,6 +1133,8 @@ Partial Class frmRateQtyItemLog
         '
         'cmbPermissiondl
         '
+        Me.cmbPermissiondl.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbPermissiondl.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbPermissiondl.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbPermissiondl.FormattingEnabled = True
         Me.cmbPermissiondl.Location = New System.Drawing.Point(558, 6)
@@ -926,6 +1144,8 @@ Partial Class frmRateQtyItemLog
         '
         'cmbOperatordl
         '
+        Me.cmbOperatordl.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbOperatordl.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbOperatordl.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbOperatordl.FormattingEnabled = True
         Me.cmbOperatordl.Location = New System.Drawing.Point(306, 44)
@@ -1065,24 +1285,24 @@ Partial Class frmRateQtyItemLog
         Me.DatagridViewItemDel.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DatagridViewItemDel.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DatagridViewItemDel.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DatagridViewItemDel.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
+        DataGridViewCellStyle23.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle23.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DatagridViewItemDel.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle23
         Me.DatagridViewItemDel.ColumnHeadersHeight = 40
         Me.DatagridViewItemDel.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colID, Me.BillNumber, Me.DishName, Me.Kot_Date, Me.table_No, Me.Quantity, Me.Rate, Me.Bill_Type, Me.Operator_, Me.Permission_Granted, Me.Remarks, Me.colComapnyId, Me.colBranchId})
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DatagridViewItemDel.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle24.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DatagridViewItemDel.DefaultCellStyle = DataGridViewCellStyle24
         Me.DatagridViewItemDel.EnableHeadersVisualStyles = False
         Me.DatagridViewItemDel.Location = New System.Drawing.Point(3, 82)
         Me.DatagridViewItemDel.Name = "DatagridViewItemDel"
@@ -1091,202 +1311,6 @@ Partial Class frmRateQtyItemLog
         Me.DatagridViewItemDel.RowTemplate.Height = 25
         Me.DatagridViewItemDel.Size = New System.Drawing.Size(951, 402)
         Me.DatagridViewItemDel.TabIndex = 2
-        '
-        'DataGridViewTextBoxColumn10
-        '
-        Me.DataGridViewTextBoxColumn10.HeaderText = "ID"
-        Me.DataGridViewTextBoxColumn10.Name = "DataGridViewTextBoxColumn10"
-        Me.DataGridViewTextBoxColumn10.ReadOnly = True
-        Me.DataGridViewTextBoxColumn10.Visible = False
-        '
-        'colBillNumber
-        '
-        Me.colBillNumber.HeaderText = "Bill Number"
-        Me.colBillNumber.Name = "colBillNumber"
-        Me.colBillNumber.ReadOnly = True
-        Me.colBillNumber.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'colDishName
-        '
-        Me.colDishName.HeaderText = "Dish Name"
-        Me.colDishName.Name = "colDishName"
-        Me.colDishName.ReadOnly = True
-        Me.colDishName.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'colChangedDate
-        '
-        Me.colChangedDate.HeaderText = "Changed Date"
-        Me.colChangedDate.Name = "colChangedDate"
-        Me.colChangedDate.ReadOnly = True
-        Me.colChangedDate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'colOriginalRate
-        '
-        Me.colOriginalRate.HeaderText = "Original Rate"
-        Me.colOriginalRate.Name = "colOriginalRate"
-        Me.colOriginalRate.ReadOnly = True
-        Me.colOriginalRate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'colChangedRate
-        '
-        Me.colChangedRate.HeaderText = "Changed Rate"
-        Me.colChangedRate.Name = "colChangedRate"
-        Me.colChangedRate.ReadOnly = True
-        Me.colChangedRate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'colDiffrence
-        '
-        Me.colDiffrence.HeaderText = "Diffrence"
-        Me.colDiffrence.Name = "colDiffrence"
-        Me.colDiffrence.ReadOnly = True
-        Me.colDiffrence.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'colStatus
-        '
-        Me.colStatus.HeaderText = "Rate Status"
-        Me.colStatus.Name = "colStatus"
-        Me.colStatus.ReadOnly = True
-        Me.colStatus.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'colBillType
-        '
-        Me.colBillType.HeaderText = "Bill Type"
-        Me.colBillType.Name = "colBillType"
-        Me.colBillType.ReadOnly = True
-        Me.colBillType.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'colOperator
-        '
-        Me.colOperator.HeaderText = "Operator"
-        Me.colOperator.Name = "colOperator"
-        Me.colOperator.ReadOnly = True
-        Me.colOperator.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'colPermission
-        '
-        Me.colPermission.HeaderText = "Permission Granted"
-        Me.colPermission.Name = "colPermission"
-        Me.colPermission.ReadOnly = True
-        Me.colPermission.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'colRemarks
-        '
-        Me.colRemarks.HeaderText = "Remarks"
-        Me.colRemarks.Name = "colRemarks"
-        Me.colRemarks.ReadOnly = True
-        Me.colRemarks.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'DataGridViewTextBoxColumn11
-        '
-        Me.DataGridViewTextBoxColumn11.HeaderText = "comp_Id"
-        Me.DataGridViewTextBoxColumn11.Name = "DataGridViewTextBoxColumn11"
-        Me.DataGridViewTextBoxColumn11.ReadOnly = True
-        Me.DataGridViewTextBoxColumn11.Visible = False
-        '
-        'DataGridViewTextBoxColumn12
-        '
-        Me.DataGridViewTextBoxColumn12.HeaderText = "Branch_ID"
-        Me.DataGridViewTextBoxColumn12.Name = "DataGridViewTextBoxColumn12"
-        Me.DataGridViewTextBoxColumn12.ReadOnly = True
-        Me.DataGridViewTextBoxColumn12.Visible = False
-        '
-        'DataGridViewTextBoxColumn1
-        '
-        Me.DataGridViewTextBoxColumn1.HeaderText = "ID"
-        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-        Me.DataGridViewTextBoxColumn1.ReadOnly = True
-        Me.DataGridViewTextBoxColumn1.Visible = False
-        '
-        'DataGridViewTextBoxColumn2
-        '
-        Me.DataGridViewTextBoxColumn2.HeaderText = "Bill Number"
-        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
-        Me.DataGridViewTextBoxColumn2.ReadOnly = True
-        Me.DataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'DataGridViewTextBoxColumn3
-        '
-        Me.DataGridViewTextBoxColumn3.HeaderText = "Dish Name"
-        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
-        Me.DataGridViewTextBoxColumn3.ReadOnly = True
-        Me.DataGridViewTextBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'Changed_Date
-        '
-        Me.Changed_Date.HeaderText = "Changed Date"
-        Me.Changed_Date.Name = "Changed_Date"
-        Me.Changed_Date.ReadOnly = True
-        Me.Changed_Date.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'Original_Quantity
-        '
-        Me.Original_Quantity.HeaderText = "Original Qty"
-        Me.Original_Quantity.Name = "Original_Quantity"
-        Me.Original_Quantity.ReadOnly = True
-        Me.Original_Quantity.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'Changed_Quantity
-        '
-        Me.Changed_Quantity.HeaderText = "Changed Qty"
-        Me.Changed_Quantity.Name = "Changed_Quantity"
-        Me.Changed_Quantity.ReadOnly = True
-        Me.Changed_Quantity.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'Diffrence
-        '
-        Me.Diffrence.HeaderText = "Diffrence"
-        Me.Diffrence.Name = "Diffrence"
-        Me.Diffrence.ReadOnly = True
-        Me.Diffrence.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'Rate_Status
-        '
-        Me.Rate_Status.HeaderText = "Rate Status"
-        Me.Rate_Status.Name = "Rate_Status"
-        Me.Rate_Status.ReadOnly = True
-        Me.Rate_Status.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'DataGridViewTextBoxColumn4
-        '
-        Me.DataGridViewTextBoxColumn4.HeaderText = "Bill Type"
-        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
-        Me.DataGridViewTextBoxColumn4.ReadOnly = True
-        Me.DataGridViewTextBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'DataGridViewTextBoxColumn5
-        '
-        Me.DataGridViewTextBoxColumn5.HeaderText = "Operator"
-        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
-        Me.DataGridViewTextBoxColumn5.ReadOnly = True
-        Me.DataGridViewTextBoxColumn5.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'DataGridViewTextBoxColumn6
-        '
-        Me.DataGridViewTextBoxColumn6.HeaderText = "Permission Granted"
-        Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
-        Me.DataGridViewTextBoxColumn6.ReadOnly = True
-        Me.DataGridViewTextBoxColumn6.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'DataGridViewTextBoxColumn7
-        '
-        Me.DataGridViewTextBoxColumn7.HeaderText = "Remarks"
-        Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
-        Me.DataGridViewTextBoxColumn7.ReadOnly = True
-        Me.DataGridViewTextBoxColumn7.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'DataGridViewTextBoxColumn8
-        '
-        Me.DataGridViewTextBoxColumn8.HeaderText = "comp_Id"
-        Me.DataGridViewTextBoxColumn8.Name = "DataGridViewTextBoxColumn8"
-        Me.DataGridViewTextBoxColumn8.ReadOnly = True
-        Me.DataGridViewTextBoxColumn8.Visible = False
-        '
-        'DataGridViewTextBoxColumn9
-        '
-        Me.DataGridViewTextBoxColumn9.HeaderText = "Branch_ID"
-        Me.DataGridViewTextBoxColumn9.Name = "DataGridViewTextBoxColumn9"
-        Me.DataGridViewTextBoxColumn9.ReadOnly = True
-        Me.DataGridViewTextBoxColumn9.Visible = False
         '
         'colID
         '

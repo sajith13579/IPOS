@@ -53,20 +53,28 @@ Public Class frmKotAmontReport
 
     Public Sub GetKotAmountReport()
         Dim con As New SqlConnection(connection)
-        con.Open()
-        Dim query As String = "exec Proc_WithKotAmount @d1,@d2,@mode "
-        Dim cmd As New SqlCommand(query, con)
-        cmd.Parameters.Add("@d1", SqlDbType.DateTime, 30, "Date").Value = dtpDateFrom.Value.Date.AddHours(_startTime)
-        cmd.Parameters.Add("@d2", SqlDbType.DateTime, 30, "Date").Value = dtpDateTo.Value.Date.AddDays(1).AddHours(_endTime)
-        cmd.Parameters.Add("@mode", SqlDbType.VarChar, 20, "FoodTime").Value = "All"
-        Dim reader As SqlDataReader = cmd.ExecuteReader()
-        DgwKotAmountReport.Rows.Clear()
-        While reader.Read()
-            Dim billDate As Date = CDate(reader("BillDate"))
-            DgwKotAmountReport.Rows.Add(billDate.ToShortDateString(), reader("DineIN"), reader("TakeAway"), reader("HomeDelivery"), reader("ThirdParty"), reader("Amount"))
-        End While
-        reader.Close()
-        con.Close()
+        Dim reader As SqlDataReader = Nothing
+        Try
+            con.Open()
+            Dim query As String = "exec Proc_WithKotAmount3 @d1,@d2,@operator ,@foodtime"
+            Dim cmd As New SqlCommand(query, con)
+            cmd.Parameters.Add("@d1", SqlDbType.DateTime, 30, "Date").Value = dtpDateFrom.Value.Date.AddHours(_startTime)
+            cmd.Parameters.Add("@d2", SqlDbType.DateTime, 30, "Date").Value = dtpDateTo.Value.Date.AddDays(1).AddHours(_endTime)
+            cmd.Parameters.Add("@operator", SqlDbType.NVarChar, 50, "operator").Value = cmbOperator.Text()
+            cmd.Parameters.Add("@foodtime ", SqlDbType.NVarChar, 50, "foodtime ").Value = cmbFoodTime.Text()
+            ' cmd.Parameters.Add("@mode", SqlDbType.VarChar, 20, "FoodTime").Value = "All"
+            reader = cmd.ExecuteReader()
+            DgwKotAmountReport.Rows.Clear()
+            While reader.Read()
+                Dim billDate As String = CDate(reader("BillDate")).ToString("d/MMM/yyyy")
+                DgwKotAmountReport.Rows.Add(reader("Operator"), billDate, reader("DineIN"), reader("TakeAway"), reader("HomeDelivery"), reader("ThirdParty"), reader("Amount"))
+            End While
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        Finally
+            reader.Close()
+            con.Close()
+        End Try
     End Sub
 
     Private Sub dtpDateFrom_ValueChanged(sender As Object, e As EventArgs) Handles dtpDateFrom.ValueChanged
@@ -77,11 +85,58 @@ Public Class frmKotAmontReport
         GetKotAmountReport()
     End Sub
 
-    Private Sub frmKotAmontReport_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Public Sub operator_load()
+        Try
+            Dim query As String = "SELECT DISTINCT EmpId, EmployeeName FROM EmployeeRegistration UNION SELECT 0 AS EmpId, 'All' AS EmployeeName"
+            Using conn As New SqlConnection(connection)
+                conn.Open()
+                Dim adapte As New SqlDataAdapter(query, conn)
+                Dim ds As New DataSet()
+                adapte.Fill(ds)
+                Dim dt As DataTable = ds.Tables(0)
+                cmbOperator.DisplayMember = "EmployeeName"
+                cmbOperator.ValueMember = "EmpId"
+                cmbOperator.DataSource = dt
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error loading operators: " & ex.Message)
+        End Try
+    End Sub
 
+    Public Sub foodtime_load()
+        cmbFoodTime.Items.Add("Breakfast")
+        cmbFoodTime.Items.Add("Lunch")
+        cmbFoodTime.Items.Add("TeaTime")
+        cmbFoodTime.Items.Add("Dinner")
+        cmbFoodTime.Items.Insert(0, "All")
+        cmbFoodTime.SelectedIndex = 0
+    End Sub
+
+    Private Sub frmKotAmontReport_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        operator_load()
+        foodtime_load()
     End Sub
 
     Private Sub bntClose_Click(sender As Object, e As EventArgs) Handles bntClose.Click
         Dispose()
+    End Sub
+
+    Private Sub cmbOperator_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbOperator.SelectedIndexChanged
+        GetKotAmountReport()
+    End Sub
+
+    Private Sub cmbFoodTime_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbFoodTime.SelectedIndexChanged
+        GetKotAmountReport()
+    End Sub
+
+    Private Sub btnExportExcel_Click(sender As Object, e As EventArgs) Handles btnExportExcel.Click
+        If DgwKotAmountReport.Rows.Count = 0 Then
+            MessageBox.Show("Sorry...No record found", "", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Cursor = Cursors.Default
+            Return
+        Else
+            ToExcel2(DgwKotAmountReport)
+        End If
+
     End Sub
 End Class

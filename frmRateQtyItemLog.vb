@@ -1116,7 +1116,7 @@ Public Class frmRateQtyItemLog
     End Sub
 
     Private Sub btnExportExceldl_Click(sender As Object, e As EventArgs) Handles btnExportExceldl.Click
-        ToExcel1(DatagridViewItemDel)
+        ToExcel2(DatagridViewItemDel)
     End Sub
 
     Private Sub dtpDateTodl_ValueChanged(sender As Object, e As EventArgs) Handles dtpDateTodl.ValueChanged
@@ -3493,11 +3493,11 @@ Public Class frmRateQtyItemLog
     End Sub
 
     Private Sub btnExportExcel_Click(sender As Object, e As EventArgs) Handles btnExportExcel.Click
-        ToExcel1(DatagridView1)
+        ToExcel2(DatagridView1)
     End Sub
 
     Private Sub btnExportExcelqua_Click(sender As Object, e As EventArgs) Handles btnExportExcelqua.Click
-        ToExcel1(DatagridViewQty)
+        ToExcel2(DatagridViewQty)
     End Sub
 
     Private Sub cmbDishName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDishName.SelectedIndexChanged

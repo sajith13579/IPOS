@@ -176,42 +176,49 @@ Partial Class frmStockEntryReports
         Me.ItemName.HeaderText = "Item Name"
         Me.ItemName.Name = "ItemName"
         Me.ItemName.ReadOnly = True
+        Me.ItemName.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         '
         'Quantity
         '
         Me.Quantity.HeaderText = "Quantity"
         Me.Quantity.Name = "Quantity"
         Me.Quantity.ReadOnly = True
+        Me.Quantity.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         '
         'Staff
         '
         Me.Staff.HeaderText = "Staff"
         Me.Staff.Name = "Staff"
         Me.Staff.ReadOnly = True
+        Me.Staff.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         '
         'Management
         '
         Me.Management.HeaderText = "Management"
         Me.Management.Name = "Management"
         Me.Management.ReadOnly = True
+        Me.Management.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         '
         'Complimentary
         '
         Me.Complimentary.HeaderText = "Complimentary"
         Me.Complimentary.Name = "Complimentary"
         Me.Complimentary.ReadOnly = True
+        Me.Complimentary.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         '
         'Dispose_
         '
         Me.Dispose_.HeaderText = "Dispose"
         Me.Dispose_.Name = "Dispose_"
         Me.Dispose_.ReadOnly = True
+        Me.Dispose_.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         '
         'Balance
         '
         Me.Balance.HeaderText = "Balance"
         Me.Balance.Name = "Balance"
         Me.Balance.ReadOnly = True
+        Me.Balance.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         '
         'frmStockEntryReports
         '

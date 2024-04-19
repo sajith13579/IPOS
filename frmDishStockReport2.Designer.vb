@@ -22,10 +22,18 @@ Partial Class frmDishStockReport2
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDishStockReport2))
         Me.DatagridViewstock = New System.Windows.Forms.DataGridView()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.dtpDateFrom = New System.Windows.Forms.DateTimePicker()
+        Me.BtnPrint = New System.Windows.Forms.Button()
+        Me.Label1Qua = New System.Windows.Forms.Label()
+        Me.Label2Qua = New System.Windows.Forms.Label()
+        Me.dtpDateTo = New System.Windows.Forms.DateTimePicker()
+        Me.bntClose = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.BillDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Qty = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -39,14 +47,6 @@ Partial Class frmDishStockReport2
         Me.HD = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TP = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Balance = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.dtpDateFrom = New System.Windows.Forms.DateTimePicker()
-        Me.BtnPrint = New System.Windows.Forms.Button()
-        Me.Label1Qua = New System.Windows.Forms.Label()
-        Me.Label2Qua = New System.Windows.Forms.Label()
-        Me.dtpDateTo = New System.Windows.Forms.DateTimePicker()
-        Me.bntClose = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
         CType(Me.DatagridViewstock, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel3.SuspendLayout()
         Me.SuspendLayout()
@@ -60,24 +60,24 @@ Partial Class frmDishStockReport2
         Me.DatagridViewstock.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DatagridViewstock.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DatagridViewstock.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DatagridViewstock.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(121, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DatagridViewstock.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DatagridViewstock.ColumnHeadersHeight = 40
         Me.DatagridViewstock.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.BillDate, Me.DataGridViewTextBoxColumn3, Me.Qty, Me.Staff, Me.Management, Me.OtherStaff, Me.Complimtry, Me.Dispose_, Me.DI, Me.TA, Me.HD, Me.TP, Me.Balance})
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DatagridViewstock.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DatagridViewstock.DefaultCellStyle = DataGridViewCellStyle2
         Me.DatagridViewstock.EnableHeadersVisualStyles = False
         Me.DatagridViewstock.Location = New System.Drawing.Point(1, 100)
         Me.DatagridViewstock.Name = "DatagridViewstock"
@@ -86,94 +86,6 @@ Partial Class frmDishStockReport2
         Me.DatagridViewstock.RowTemplate.Height = 25
         Me.DatagridViewstock.Size = New System.Drawing.Size(896, 352)
         Me.DatagridViewstock.TabIndex = 13
-        '
-        'BillDate
-        '
-        Me.BillDate.HeaderText = "Bill Date"
-        Me.BillDate.Name = "BillDate"
-        Me.BillDate.ReadOnly = True
-        Me.BillDate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'DataGridViewTextBoxColumn3
-        '
-        Me.DataGridViewTextBoxColumn3.HeaderText = "Dish Name"
-        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
-        Me.DataGridViewTextBoxColumn3.ReadOnly = True
-        Me.DataGridViewTextBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'Qty
-        '
-        Me.Qty.HeaderText = "Qty"
-        Me.Qty.Name = "Qty"
-        Me.Qty.ReadOnly = True
-        Me.Qty.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'Staff
-        '
-        Me.Staff.HeaderText = "Staff"
-        Me.Staff.Name = "Staff"
-        Me.Staff.ReadOnly = True
-        Me.Staff.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'Management
-        '
-        Me.Management.HeaderText = "Management"
-        Me.Management.Name = "Management"
-        Me.Management.ReadOnly = True
-        Me.Management.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'OtherStaff
-        '
-        Me.OtherStaff.HeaderText = "Other Staff"
-        Me.OtherStaff.Name = "OtherStaff"
-        Me.OtherStaff.ReadOnly = True
-        Me.OtherStaff.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'Complimtry
-        '
-        Me.Complimtry.HeaderText = "Complimtry"
-        Me.Complimtry.Name = "Complimtry"
-        Me.Complimtry.ReadOnly = True
-        Me.Complimtry.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'Dispose_
-        '
-        Me.Dispose_.HeaderText = "Dispose"
-        Me.Dispose_.Name = "Dispose_"
-        Me.Dispose_.ReadOnly = True
-        Me.Dispose_.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'DI
-        '
-        Me.DI.HeaderText = "DI"
-        Me.DI.Name = "DI"
-        Me.DI.ReadOnly = True
-        Me.DI.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'TA
-        '
-        Me.TA.HeaderText = "TA"
-        Me.TA.Name = "TA"
-        Me.TA.ReadOnly = True
-        Me.TA.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'HD
-        '
-        Me.HD.HeaderText = "HD"
-        Me.HD.Name = "HD"
-        Me.HD.ReadOnly = True
-        '
-        'TP
-        '
-        Me.TP.HeaderText = "TP"
-        Me.TP.Name = "TP"
-        Me.TP.ReadOnly = True
-        '
-        'Balance
-        '
-        Me.Balance.HeaderText = "Balance"
-        Me.Balance.Name = "Balance"
-        Me.Balance.ReadOnly = True
         '
         'Panel3
         '
@@ -275,6 +187,96 @@ Partial Class frmDishStockReport2
         Me.Label1.Text = "Dish Stock Report"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'BillDate
+        '
+        Me.BillDate.HeaderText = "Bill Date"
+        Me.BillDate.Name = "BillDate"
+        Me.BillDate.ReadOnly = True
+        Me.BillDate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'DataGridViewTextBoxColumn3
+        '
+        Me.DataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.DataGridViewTextBoxColumn3.HeaderText = "Dish Name"
+        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+        Me.DataGridViewTextBoxColumn3.ReadOnly = True
+        Me.DataGridViewTextBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewTextBoxColumn3.Width = 80
+        '
+        'Qty
+        '
+        Me.Qty.HeaderText = "Qty"
+        Me.Qty.Name = "Qty"
+        Me.Qty.ReadOnly = True
+        Me.Qty.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'Staff
+        '
+        Me.Staff.HeaderText = "Staff"
+        Me.Staff.Name = "Staff"
+        Me.Staff.ReadOnly = True
+        Me.Staff.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'Management
+        '
+        Me.Management.HeaderText = "Management"
+        Me.Management.Name = "Management"
+        Me.Management.ReadOnly = True
+        Me.Management.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'OtherStaff
+        '
+        Me.OtherStaff.HeaderText = "Other Staff"
+        Me.OtherStaff.Name = "OtherStaff"
+        Me.OtherStaff.ReadOnly = True
+        Me.OtherStaff.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'Complimtry
+        '
+        Me.Complimtry.HeaderText = "Complimtry"
+        Me.Complimtry.Name = "Complimtry"
+        Me.Complimtry.ReadOnly = True
+        Me.Complimtry.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'Dispose_
+        '
+        Me.Dispose_.HeaderText = "Dispose"
+        Me.Dispose_.Name = "Dispose_"
+        Me.Dispose_.ReadOnly = True
+        Me.Dispose_.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'DI
+        '
+        Me.DI.HeaderText = "DI"
+        Me.DI.Name = "DI"
+        Me.DI.ReadOnly = True
+        Me.DI.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'TA
+        '
+        Me.TA.HeaderText = "TA"
+        Me.TA.Name = "TA"
+        Me.TA.ReadOnly = True
+        Me.TA.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'HD
+        '
+        Me.HD.HeaderText = "HD"
+        Me.HD.Name = "HD"
+        Me.HD.ReadOnly = True
+        '
+        'TP
+        '
+        Me.TP.HeaderText = "TP"
+        Me.TP.Name = "TP"
+        Me.TP.ReadOnly = True
+        '
+        'Balance
+        '
+        Me.Balance.HeaderText = "Balance"
+        Me.Balance.Name = "Balance"
+        Me.Balance.ReadOnly = True
+        '
         'frmDishStockReport2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -295,6 +297,14 @@ Partial Class frmDishStockReport2
 
     End Sub
     Friend WithEvents DatagridViewstock As DataGridView
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents dtpDateFrom As DateTimePicker
+    Friend WithEvents BtnPrint As Button
+    Friend WithEvents Label1Qua As Label
+    Friend WithEvents Label2Qua As Label
+    Friend WithEvents dtpDateTo As DateTimePicker
+    Friend WithEvents bntClose As Button
+    Friend WithEvents Label1 As Label
     Friend WithEvents BillDate As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
     Friend WithEvents Qty As DataGridViewTextBoxColumn
@@ -308,12 +318,4 @@ Partial Class frmDishStockReport2
     Friend WithEvents HD As DataGridViewTextBoxColumn
     Friend WithEvents TP As DataGridViewTextBoxColumn
     Friend WithEvents Balance As DataGridViewTextBoxColumn
-    Friend WithEvents Panel3 As Panel
-    Friend WithEvents dtpDateFrom As DateTimePicker
-    Friend WithEvents BtnPrint As Button
-    Friend WithEvents Label1Qua As Label
-    Friend WithEvents Label2Qua As Label
-    Friend WithEvents dtpDateTo As DateTimePicker
-    Friend WithEvents bntClose As Button
-    Friend WithEvents Label1 As Label
 End Class

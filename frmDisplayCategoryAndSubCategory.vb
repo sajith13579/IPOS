@@ -139,7 +139,7 @@ Public Class frmDisplayCategoryAndSubCategory
                 Using cmd As New SqlCommand(query, conn)
                     conn.Open()
                     adpt = New SqlDataAdapter()
-                    adpt.SelectCommand = New SqlCommand("SELECT Category, ID FROM DisplayCategory ", con)
+                    adpt.SelectCommand = New SqlCommand("SELECT Category, ID FROM DisplayCategory ", conn)
                     ds = New DataSet("ds")
                     adpt.Fill(ds)
                     Dim dtable = ds.Tables(0)
@@ -858,8 +858,9 @@ Public Class frmDisplayCategoryAndSubCategory
             cmd.Parameters.AddWithValue("@s5", "False")
             cmd.ExecuteNonQuery()
             con.Close()
-            MessageBox.Show("inserted successfully")
+
         Next
+        MessageBox.Show("inserted successfully")
         DgwDisplaySubCatDish.Rows.Clear()
     End Sub
 
@@ -945,5 +946,9 @@ Public Class frmDisplayCategoryAndSubCategory
             lblCatImagePath.Text = selectedRow.Cells("Col_Category_Image").Value.ToString()
             PictBoxCat.ImageLocation = Application.StartupPath & "\" & lblCatImagePath.Text
         End If
+    End Sub
+
+    Private Sub cmbCatName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbCatName.SelectedIndexChanged
+
     End Sub
 End Class
